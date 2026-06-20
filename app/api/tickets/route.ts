@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { logAudit } from "@/lib/audit";
 
 async function generateTicketNo(): Promise<string> {
   const year = new Date().getFullYear();
@@ -84,13 +85,12 @@ export async function POST(req: NextRequest) {
     },
   });
 
-  await prisma.notification.create({
-    data: {
-      userId: session.user.id,
-      ticketId: ticket.id,
-      message: `تم إنشاء تذكرتك ${ticketNo} بنجاح`,
-    },
-  });
+  await Promise.all([
+    prisma.notification.create({
+      data: { userId: session.user.id, ticketId: ticket.id, message: `تم إنشاء تذكرتك ${ticketNo} بنجاح` },
+    }),
+    logAudit(ticket.id, "إنشاء التذكرة", `بواسطة ${session.user.name}`, session.user.id),
+  ]);
 
   return NextResponse.json(ticket, { status: 201 });
 }

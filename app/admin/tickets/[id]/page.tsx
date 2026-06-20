@@ -6,6 +6,7 @@ import { StatusBadge, PriorityBadge } from "@/components/tickets/StatusBadge";
 import TicketComments from "@/components/tickets/TicketComments";
 import AdminTicketActions from "@/components/tickets/AdminTicketActions";
 import TicketAttachments from "@/components/tickets/TicketAttachments";
+import TicketAuditLog from "@/components/tickets/TicketAuditLog";
 
 export default async function AdminTicketDetail({ params }: { params: { id: string } }) {
   const session = await auth();
@@ -80,6 +81,8 @@ export default async function AdminTicketDetail({ params }: { params: { id: stri
         attachments={ticket.attachments as any}
         canUpload={false}
       />
+
+      <TicketAuditLog ticketId={ticket.id} />
 
       <TicketComments
         ticketId={ticket.id}

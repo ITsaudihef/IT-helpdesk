@@ -27,7 +27,7 @@ export default function Header({ title }: { title: string }) {
   };
 
   return (
-    <header className="h-16 bg-white border-b border-gray-100 flex items-center justify-between px-6 sticky top-0 z-20 shadow-sm">
+    <header className="h-16 bg-white border-b border-gray-100 flex items-center justify-between pr-16 lg:pr-6 pl-6 sticky top-0 z-20 shadow-sm">
       <h2 className="font-bold text-gray-900">{title}</h2>
 
       <div className="relative">

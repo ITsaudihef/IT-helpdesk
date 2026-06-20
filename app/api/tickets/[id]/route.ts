@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { sendStatusNotification } from "@/lib/email";
 import { statusLabel } from "@/lib/utils";
+import { logAudit } from "@/lib/audit";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await auth();
@@ -76,25 +77,43 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     },
   });
 
-  if (status && status !== ticket.status) {
-    await prisma.notification.create({
-      data: {
-        userId: ticket.createdById,
-        ticketId: ticket.id,
-        message: `تم تحديث حالة تذكرتك ${ticket.ticketNo} إلى: ${statusLabel[status] || status}`,
-      },
-    });
+  const auditTasks: Promise<any>[] = [];
 
+  if (status && status !== ticket.status) {
+    const label = statusLabel[status] || status;
+    auditTasks.push(
+      prisma.notification.create({
+        data: {
+          userId: ticket.createdById,
+          ticketId: ticket.id,
+          message: `تم تحديث حالة تذكرتك ${ticket.ticketNo} إلى: ${label}`,
+        },
+      }),
+      logAudit(ticket.id, "تغيير الحالة", `من "${statusLabel[ticket.status] || ticket.status}" إلى "${label}"`, session.user.id)
+    );
     if (ticket.createdBy.email) {
-      await sendStatusNotification(
-        ticket.createdBy.email,
-        ticket.ticketNo,
-        ticket.title,
-        status,
-        statusLabel[status] || status
-      );
+      auditTasks.push(sendStatusNotification(ticket.createdBy.email, ticket.ticketNo, ticket.title, status, label));
     }
   }
+
+  if (assignedToId !== undefined && assignedToId !== ticket.assignedToId) {
+    const assignee = assignedToId
+      ? await prisma.user.findUnique({ where: { id: assignedToId }, select: { name: true } })
+      : null;
+    auditTasks.push(
+      logAudit(ticket.id, "تغيير التكليف", assignee ? `تم التكليف إلى ${assignee.name}` : "تم إلغاء التكليف", session.user.id)
+    );
+  }
+
+  if (priority && priority !== ticket.priority) {
+    auditTasks.push(logAudit(ticket.id, "تغيير الأولوية", `إلى "${priority}"`, session.user.id));
+  }
+
+  if (rating) {
+    auditTasks.push(logAudit(ticket.id, "تقييم التذكرة", `${rating} نجوم`, session.user.id));
+  }
+
+  if (auditTasks.length) await Promise.all(auditTasks);
 
   return NextResponse.json(updated);
 }

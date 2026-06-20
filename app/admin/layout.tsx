@@ -15,7 +15,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         userName={session.user.name}
         userEmail={session.user.email}
       />
-      <div className="mr-64">
+      <div className="lg:mr-64">
         <Header title="لوحة الإدارة" />
         <main className="p-6">{children}</main>
       </div>

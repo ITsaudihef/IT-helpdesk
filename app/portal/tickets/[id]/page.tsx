@@ -6,6 +6,7 @@ import { StatusBadge, PriorityBadge } from "@/components/tickets/StatusBadge";
 import TicketComments from "@/components/tickets/TicketComments";
 import TicketRating from "@/components/tickets/TicketRating";
 import TicketAttachments from "@/components/tickets/TicketAttachments";
+import TicketAuditLog from "@/components/tickets/TicketAuditLog";
 
 export default async function TicketDetailPage({ params }: { params: { id: string } }) {
   const session = await auth();
@@ -97,6 +98,9 @@ export default async function TicketDetailPage({ params }: { params: { id: strin
       {(ticket.status === "RESOLVED" || ticket.status === "CLOSED") && (
         <TicketRating ticketId={ticket.id} currentRating={ticket.rating} />
       )}
+
+      {/* Audit Log */}
+      <TicketAuditLog ticketId={ticket.id} />
 
       {/* Comments */}
       <TicketComments

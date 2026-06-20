@@ -7,7 +7,7 @@ import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, Ticket, Users, BarChart3, Settings,
-  LogOut, HeadphonesIcon, PlusCircle, List, KeyRound, Eye, EyeOff,
+  LogOut, HeadphonesIcon, PlusCircle, List, KeyRound, Eye, EyeOff, Menu, X,
 } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -36,14 +36,15 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
   const nav = role === "ADMIN" ? adminNav : role === "SUPPORT" ? supportNav : userNav;
   const roleLabel = role === "ADMIN" ? "مدير النظام" : role === "SUPPORT" ? "موظف الدعم" : "مستخدم";
 
-  const [showModal, setShowModal]         = useState(false);
-  const [currentPw, setCurrentPw]         = useState("");
-  const [newPw,     setNewPw]             = useState("");
-  const [confirmPw, setConfirmPw]         = useState("");
-  const [showCur,   setShowCur]           = useState(false);
-  const [showNew,   setShowNew]           = useState(false);
-  const [showCon,   setShowCon]           = useState(false);
-  const [saving,    setSaving]            = useState(false);
+  const [mobileOpen, setMobileOpen]         = useState(false);
+  const [showModal, setShowModal]           = useState(false);
+  const [currentPw, setCurrentPw]           = useState("");
+  const [newPw,     setNewPw]               = useState("");
+  const [confirmPw, setConfirmPw]           = useState("");
+  const [showCur,   setShowCur]             = useState(false);
+  const [showNew,   setShowNew]             = useState(false);
+  const [showCon,   setShowCon]             = useState(false);
+  const [saving,    setSaving]              = useState(false);
 
   const closeModal = () => {
     setShowModal(false);
@@ -71,10 +72,10 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
     }
   };
 
-  return (
-    <div className="flex flex-col h-full bg-white border-l border-gray-200 w-64 fixed right-0 top-0 z-30 shadow-sm">
+  const sidebarContent = (
+    <div className="flex flex-col h-full bg-white border-l border-gray-200 w-64 shadow-sm">
       {/* Logo */}
-      <div className="p-5 border-b border-gray-100">
+      <div className="p-5 border-b border-gray-100 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #6fb54a, #00805b)" }}>
             <HeadphonesIcon className="w-5 h-5 text-white" />
@@ -84,6 +85,10 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
             <p className="text-xs text-gray-400">صندوق الوقف الصحي</p>
           </div>
         </div>
+        {/* Close button — mobile only */}
+        <button className="lg:hidden p-1 rounded-lg text-gray-400 hover:text-gray-600" onClick={() => setMobileOpen(false)}>
+          <X className="w-5 h-5" />
+        </button>
       </div>
 
       {/* Nav */}
@@ -95,11 +100,10 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => setMobileOpen(false)}
               className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all",
-                isActive
-                  ? "text-white shadow-sm"
-                  : "text-gray-600 hover:bg-green-50 hover:text-green-700"
+                isActive ? "text-white shadow-sm" : "text-gray-600 hover:bg-green-50 hover:text-green-700"
               )}
               style={isActive ? { background: "linear-gradient(135deg, #6fb54a, #00805b)" } : {}}
             >
@@ -113,7 +117,7 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
       {/* User */}
       <div className="p-4 border-t border-gray-100">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white" style={{ background: "#6fb54a" }}>
+          <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0" style={{ background: "#6fb54a" }}>
             {userName.charAt(0)}
           </div>
           <div className="flex-1 min-w-0">
@@ -124,7 +128,7 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
           </div>
         </div>
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => { setShowModal(true); setMobileOpen(false); }}
           className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors mb-1"
         >
           <KeyRound className="w-4 h-4" />
@@ -138,8 +142,41 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
           تسجيل الخروج
         </button>
       </div>
+    </div>
+  );
 
-      {/* Change Password Modal */}
+  return (
+    <>
+      {/* ── Desktop sidebar (fixed) ── */}
+      <div className="hidden lg:flex fixed right-0 top-0 h-full z-30">
+        {sidebarContent}
+      </div>
+
+      {/* ── Mobile hamburger button ── */}
+      <button
+        className="lg:hidden fixed top-4 right-4 z-40 p-2 bg-white border border-gray-200 rounded-xl shadow-md"
+        onClick={() => setMobileOpen(true)}
+        aria-label="فتح القائمة"
+      >
+        <Menu className="w-5 h-5 text-gray-700" />
+      </button>
+
+      {/* ── Mobile overlay + drawer ── */}
+      {mobileOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="lg:hidden fixed inset-0 bg-black/40 z-40"
+            onClick={() => setMobileOpen(false)}
+          />
+          {/* Drawer */}
+          <div className="lg:hidden fixed right-0 top-0 h-full z-50 w-64">
+            {sidebarContent}
+          </div>
+        </>
+      )}
+
+      {/* ── Change Password Modal ── */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" dir="rtl">
           <div className="bg-white rounded-2xl p-6 w-full max-w-sm mx-4 shadow-xl">
@@ -151,9 +188,9 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
             </div>
             <form onSubmit={handleChangePassword} className="space-y-4">
               {[
-                { label: "كلمة المرور الحالية",   val: currentPw, set: setCurrentPw, show: showCur, toggle: () => setShowCur(v => !v) },
-                { label: "كلمة المرور الجديدة",   val: newPw,     set: setNewPw,     show: showNew, toggle: () => setShowNew(v => !v) },
-                { label: "تأكيد كلمة المرور",     val: confirmPw, set: setConfirmPw, show: showCon, toggle: () => setShowCon(v => !v) },
+                { label: "كلمة المرور الحالية", val: currentPw, set: setCurrentPw, show: showCur, toggle: () => setShowCur(v => !v) },
+                { label: "كلمة المرور الجديدة", val: newPw,     set: setNewPw,     show: showNew, toggle: () => setShowNew(v => !v) },
+                { label: "تأكيد كلمة المرور",   val: confirmPw, set: setConfirmPw, show: showCon, toggle: () => setShowCon(v => !v) },
               ].map(f => (
                 <div key={f.label}>
                   <label className="block text-sm font-medium text-gray-700 mb-1">{f.label}</label>
@@ -162,8 +199,7 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
                       type={f.show ? "text" : "password"}
                       value={f.val}
                       onChange={e => f.set(e.target.value)}
-                      required
-                      minLength={6}
+                      required minLength={6}
                       className="w-full pr-3 pl-10 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2"
                       style={{ "--tw-ring-color": "#6fb54a" } as any}
                     />
@@ -189,6 +225,6 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

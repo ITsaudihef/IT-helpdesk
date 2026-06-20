@@ -20,6 +20,7 @@ model User {
   ticketsAssigned Ticket[]       @relation("TicketAssignee")
   comments        Comment[]
   notifications   Notification[]
+  auditLogs       AuditLog[]
 
   @@map("users")
 }
@@ -47,6 +48,7 @@ model Ticket {
   comments      Comment[]
   attachments   Attachment[]
   notifications Notification[]
+  auditLogs     AuditLog[]
 
   @@map("tickets")
 }
@@ -73,6 +75,19 @@ model Attachment {
   uploadedAt DateTime @default(now())
 
   @@map("attachments")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  actorId   String?
+  actor     User?    @relation(fields: [actorId], references: [id])
+  action    String
+  detail    String?
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
 }
 
 model Notification {

@@ -110,26 +110,6 @@ export default function LoginPage() {
               </button>
             </form>
 
-            {/* Demo accounts */}
-            <div className="mt-6 pt-5 border-t border-gray-100">
-              <p className="text-xs text-gray-400 mb-3 text-center">حسابات تجريبية للعرض</p>
-              <div className="grid grid-cols-3 gap-2">
-                {[
-                  { label: "مدير",    email: "admin@helpdesk.com",    password: "admin123" },
-                  { label: "دعم",     email: "support1@helpdesk.com", password: "support123" },
-                  { label: "مستخدم", email: "user1@helpdesk.com",    password: "user123" },
-                ].map((acc) => (
-                  <button key={acc.email} type="button"
-                    onClick={() => { setEmail(acc.email); setPassword(acc.password); }}
-                    className="text-xs border rounded-lg py-2 px-3 text-center transition-colors hover:text-white font-medium"
-                    style={{ borderColor: "#6fb54a", color: "#6fb54a" }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#6fb54a"; (e.currentTarget as HTMLElement).style.color = "#fff"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = ""; (e.currentTarget as HTMLElement).style.color = "#6fb54a"; }}>
-                    {acc.label}
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
 
           <p className="text-center text-xs text-gray-400 mt-6">

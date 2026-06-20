@@ -15,7 +15,7 @@ export default async function PortalLayout({ children }: { children: React.React
         userName={session.user.name}
         userEmail={session.user.email}
       />
-      <div className="mr-64">
+      <div className="lg:mr-64">
         <Header title="بوابة المستخدم" />
         <main className="p-6">{children}</main>
       </div>
