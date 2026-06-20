@@ -6,7 +6,7 @@ const USERS = [
     id: "cmqh5aqbt000011waqbp5qkik",
     name: "عبدالله الصقير",
     email: "admin@helpdesk.com",
-    passwordHash: "$2b$10$w990vz705rzjKwYvclqwteFI11wy8xUjfeMkKeCdKQ0nNfUpBemzi",
+    passwordHash: "$2b$12$lcMs5nb0SOhh5yA5atJ1aeepgo2VsE3zzCbPyjR.EwvpREU5woHe2",
     role: "ADMIN",
     department: "تقنية المعلومات",
   },
@@ -30,13 +30,12 @@ const USERS = [
 
 async function main() {
   for (const user of USERS) {
-    const exists = await prisma.user.findUnique({ where: { email: user.email } });
-    if (!exists) {
-      await prisma.user.create({ data: user });
-      console.log(`✓ Created: ${user.name} (${user.email})`);
-    } else {
-      console.log(`→ Already exists: ${user.email}`);
-    }
+    await prisma.user.upsert({
+      where: { email: user.email },
+      update: { passwordHash: user.passwordHash },
+      create: user,
+    });
+    console.log(`✓ Synced: ${user.email}`);
   }
 }
 
