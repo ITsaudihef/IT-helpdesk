@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 export async function GET() {
   const session = await auth();
   if (!session || session.user.role !== "ADMIN") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    return NextResponse.json({ error: "Forbidden", build: "v2" }, { status: 403 });
   }
 
   const users = await prisma.user.findMany({
