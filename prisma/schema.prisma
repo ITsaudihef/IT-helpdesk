@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("USER")
+  department   String?
+  createdAt    DateTime @default(now())
+
+  ticketsCreated  Ticket[]       @relation("TicketCreator")
+  ticketsAssigned Ticket[]       @relation("TicketAssignee")
+  comments        Comment[]
+  notifications   Notification[]
+
+  @@map("users")
+}
+
+model Ticket {
+  id               String   @id @default(cuid())
+  ticketNo         String   @unique
+  title            String
+  description      String
+  type             String
+  priority         String   @default("MEDIUM")
+  status           String   @default("OPEN")
+  requiresApproval Boolean  @default(false)
+  rating           Int?
+
+  createdById  String
+  createdBy    User    @relation("TicketCreator", fields: [createdById], references: [id])
+  assignedToId String?
+  assignedTo   User?   @relation("TicketAssignee", fields: [assignedToId], references: [id])
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  resolvedAt DateTime?
+
+  comments      Comment[]
+  attachments   Attachment[]
+  notifications Notification[]
+
+  @@map("tickets")
+}
+
+model Comment {
+  id         String   @id @default(cuid())
+  ticketId   String
+  ticket     Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  authorId   String
+  author     User     @relation(fields: [authorId], references: [id])
+  body       String
+  isInternal Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@map("comments")
+}
+
+model Attachment {
+  id         String   @id @default(cuid())
+  ticketId   String
+  ticket     Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  fileName   String
+  fileUrl    String
+  uploadedAt DateTime @default(now())
+
+  @@map("attachments")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ticketId  String?
+  ticket    Ticket?  @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}

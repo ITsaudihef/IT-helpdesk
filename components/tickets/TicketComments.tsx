@@ -1,0 +1,96 @@
+"use client";
+
+import { useState } from "react";
+import { Send, Lock } from "lucide-react";
+import { cn, formatDate } from "@/lib/utils";
+import toast from "react-hot-toast";
+
+interface Comment {
+  id: string; body: string; isInternal: boolean; createdAt: string;
+  author: { name: string; role: string };
+}
+interface Props { ticketId: string; comments: Comment[]; currentUserId: string; userRole: string; }
+
+export default function TicketComments({ ticketId, comments: initial, currentUserId, userRole }: Props) {
+  const [comments, setComments] = useState(initial);
+  const [body, setBody] = useState("");
+  const [isInternal, setIsInternal] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!body.trim()) return;
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/tickets/${ticketId}/comments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ body, isInternal }),
+      });
+      if (!res.ok) throw new Error();
+      const comment = await res.json();
+      setComments((prev) => [...prev, comment]);
+      setBody("");
+      toast.success("تم إضافة التعليق");
+    } catch { toast.error("حدث خطأ"); }
+    finally { setLoading(false); }
+  };
+
+  return (
+    <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+      <h2 className="font-bold text-gray-900 mb-4">التعليقات ({comments.length})</h2>
+
+      <div className="space-y-4 mb-6">
+        {comments.length === 0 && (
+          <p className="text-sm text-gray-400 text-center py-4">لا توجد تعليقات بعد</p>
+        )}
+        {comments.map((c) => (
+          <div key={c.id} className="rounded-xl p-4 border"
+            style={c.isInternal
+              ? { background: "#fefce8", borderColor: "#fde047" }
+              : { background: "#f4f4f5", borderColor: "#e4e4e7" }}>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white"
+                  style={{ background: "#6fb54a" }}>
+                  {c.author.name.charAt(0)}
+                </div>
+                <span className="text-sm font-semibold text-gray-900">{c.author.name}</span>
+                {c.isInternal && (
+                  <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full"
+                    style={{ background: "#fef9c3", color: "#a16207" }}>
+                    <Lock className="w-3 h-3" />داخلي
+                  </span>
+                )}
+              </div>
+              <span className="text-xs text-gray-400">{formatDate(c.createdAt)}</span>
+            </div>
+            <p className="text-sm text-gray-700 leading-relaxed">{c.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <form onSubmit={submit} className="space-y-3">
+        <textarea value={body} onChange={(e) => setBody(e.target.value)}
+          placeholder="اكتب تعليقك هنا..." rows={3}
+          className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 resize-none"
+          style={{ "--tw-ring-color": "#6fb54a" } as any} />
+        <div className="flex items-center justify-between">
+          {(userRole === "ADMIN" || userRole === "SUPPORT") && (
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" checked={isInternal} onChange={(e) => setIsInternal(e.target.checked)}
+                className="w-4 h-4 rounded" style={{ accentColor: "#6fb54a" }} />
+              <span className="text-sm text-gray-600">تعليق داخلي</span>
+            </label>
+          )}
+          <button type="submit" disabled={loading || !body.trim()}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 mr-auto"
+            style={{ background: "#6fb54a" }}>
+            <Send className="w-4 h-4" />
+            {loading ? "جارٍ الإرسال..." : "إرسال"}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
