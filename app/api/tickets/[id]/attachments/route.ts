@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 
-const MAX_SIZE = 2 * 1024 * 1024; // 1 MB
+const MAX_SIZE = 2 * 1024 * 1024; // 2 MB
 const ALLOWED  = ["image/jpeg","image/png","image/gif","image/webp","application/pdf",
   "application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   "application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
@@ -19,6 +19,10 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   // Users can only upload to their own tickets; support/admin can upload to any
   if (session.user.role === "USER" && ticket.createdById !== session.user.id)
     return NextResponse.json({ error: "غير مصرح" }, { status: 403 });
+
+  const contentLength = Number(req.headers.get("content-length") || 0);
+  if (contentLength > MAX_SIZE * 3) // rough guard for multipart overhead
+    return NextResponse.json({ error: "حجم الطلب يتجاوز الحد المسموح" }, { status: 413 });
 
   const formData = await req.formData();
   const files = formData.getAll("files") as File[];
