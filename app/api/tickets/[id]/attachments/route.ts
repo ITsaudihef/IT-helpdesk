@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 
-const MAX_SIZE = 10 * 1024 * 1024; // 10 MB
+const MAX_SIZE = 1 * 1024 * 1024; // 1 MB
 const ALLOWED  = ["image/jpeg","image/png","image/gif","image/webp","application/pdf",
   "application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   "application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   const created = [];
   for (const file of files) {
     if (file.size > MAX_SIZE)
-      return NextResponse.json({ error: `الملف ${file.name} يتجاوز الحد الأقصى 10MB` }, { status: 400 });
+      return NextResponse.json({ error: `الملف ${file.name} يتجاوز الحد الأقصى 1MB` }, { status: 400 });
     if (!ALLOWED.includes(file.type))
       return NextResponse.json({ error: `نوع الملف ${file.name} غير مدعوم` }, { status: 400 });
 
