@@ -33,7 +33,7 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
     if (!fl) return;
     const valid: File[] = [];
     Array.from(fl).forEach(f => {
-      if (f.size > 1 * 1024 * 1024) { toast.error(`${f.name}: الحجم أكبر من 1MB`); return; }
+      if (f.size > 2 * 1024 * 1024) { toast.error(`${f.name}: الحجم أكبر من 2MB`); return; }
       valid.push(f);
     });
     setPending(p => [...p, ...valid]);
@@ -100,7 +100,7 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
             style={{ borderColor: "#6fb54a" }}>
             <Upload className="w-6 h-6 mx-auto mb-1" style={{ color: "#6fb54a" }} />
             <p className="text-xs text-gray-600">اسحب ملفات أو اضغط للاختيار</p>
-            <p className="text-xs text-gray-400 mt-1">الحد الأقصى للملف: 1MB</p>
+            <p className="text-xs text-gray-400 mt-1">الحد الأقصى للملف: 2MB</p>
             <input ref={fileRef} type="file" multiple className="hidden" accept={ALLOWED}
               onChange={e => addFiles(e.target.files)} />
           </div>
