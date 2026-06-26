@@ -60,13 +60,22 @@ export const priorityLabel: Record<string, string> = {
 };
 
 export const typeLabel: Record<string, string> = {
-  SUPPORT:       "دعم فني",
-  SHIFA_SUPPORT: "دعم فني - شفاء",
-  DEVELOPMENT:   "تطوير",
+  SUPPORT:              "دعم فني",
+  SHIFA_SUPPORT:        "دعم فني - شفاء",
+  DEVELOPMENT:          "تطوير",
+  INSTITUTIONAL_COMM:   "تواصل مؤسسي",
   // legacy values kept for existing tickets
   HARDWARE: "أجهزة",
   SOFTWARE: "برمجيات",
   NETWORK:  "شبكة",
   ACCESS:   "صلاحيات",
   OTHER:    "أخرى",
+};
+
+export const roleLabel: Record<string, string> = {
+  ADMIN:        "مدير النظام",
+  SUPPORT:      "موظف الدعم",
+  USER:         "مستخدم",
+  COMM_SUPPORT: "دعم فني - التواصل",
+  COMM_ADMIN:   "ادمن التواصل",
 };

@@ -12,11 +12,13 @@ export default auth((req) => {
   }
 
   if (session) {
-    const role = session.user.role;
+    const role = (session.user as any).role;
 
     if (pathname === "/dashboard") {
-      if (role === "ADMIN") return NextResponse.redirect(new URL("/admin", req.url));
-      if (role === "SUPPORT") return NextResponse.redirect(new URL("/support", req.url));
+      if (role === "ADMIN")        return NextResponse.redirect(new URL("/admin",        req.url));
+      if (role === "SUPPORT")      return NextResponse.redirect(new URL("/support",      req.url));
+      if (role === "COMM_SUPPORT") return NextResponse.redirect(new URL("/comm-support", req.url));
+      if (role === "COMM_ADMIN")   return NextResponse.redirect(new URL("/comm-admin",   req.url));
       return NextResponse.redirect(new URL("/portal", req.url));
     }
 
@@ -28,7 +30,15 @@ export default auth((req) => {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 
-    if (pathname === "/login" && session) {
+    if (pathname.startsWith("/comm-support") && role !== "COMM_SUPPORT" && role !== "ADMIN") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+
+    if (pathname.startsWith("/comm-admin") && role !== "COMM_ADMIN" && role !== "ADMIN") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+
+    if (pathname === "/login") {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
   }

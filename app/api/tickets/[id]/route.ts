@@ -48,16 +48,19 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
   const updateData: any = {};
 
-  if (status && (session.user.role === "ADMIN" || session.user.role === "SUPPORT")) {
+  const isStaff = ["ADMIN","SUPPORT","COMM_SUPPORT","COMM_ADMIN"].includes(session.user.role);
+  const isAdmin = ["ADMIN","COMM_ADMIN"].includes(session.user.role);
+
+  if (status && isStaff) {
     updateData.status = status;
     if (status === "RESOLVED") updateData.resolvedAt = new Date();
   }
 
-  if (assignedToId !== undefined && (session.user.role === "ADMIN" || session.user.role === "SUPPORT")) {
+  if (assignedToId !== undefined && isStaff) {
     updateData.assignedToId = assignedToId;
   }
 
-  if (priority && session.user.role === "ADMIN") {
+  if (priority && isAdmin) {
     updateData.priority = priority;
   }
 

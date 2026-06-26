@@ -28,13 +28,31 @@ const userNav: NavItem[] = [
   { href: "/portal/new",     label: "تذكرة جديدة", icon: PlusCircle },
   { href: "/portal/tickets", label: "تذاكري",      icon: List },
 ];
+const commSupportNav: NavItem[] = [
+  { href: "/comm-support",         label: "التذاكر الواردة", icon: HeadphonesIcon },
+  { href: "/comm-support/new",     label: "تذكرة جديدة",     icon: PlusCircle },
+  { href: "/comm-support/tickets", label: "تذاكري المرفوعة", icon: List },
+];
+const commAdminNav: NavItem[] = [
+  { href: "/comm-admin",         label: "بانتظار الاعتماد", icon: LayoutDashboard },
+  { href: "/comm-admin/new",     label: "تذكرة جديدة",      icon: PlusCircle },
+  { href: "/comm-admin/tickets", label: "جميع التذاكر",     icon: Ticket },
+];
 
 interface SidebarProps { role: string; userName: string; userEmail: string; }
 
 export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
   const pathname = usePathname();
-  const nav = role === "ADMIN" ? adminNav : role === "SUPPORT" ? supportNav : userNav;
-  const roleLabel = role === "ADMIN" ? "مدير النظام" : role === "SUPPORT" ? "موظف الدعم" : "مستخدم";
+  const nav =
+    role === "ADMIN"        ? adminNav        :
+    role === "SUPPORT"      ? supportNav      :
+    role === "COMM_SUPPORT" ? commSupportNav  :
+    role === "COMM_ADMIN"   ? commAdminNav    : userNav;
+  const roleLabelMap: Record<string,string> = {
+    ADMIN: "مدير النظام", SUPPORT: "موظف الدعم", USER: "مستخدم",
+    COMM_SUPPORT: "دعم فني - التواصل", COMM_ADMIN: "ادمن التواصل",
+  };
+  const roleLabel = roleLabelMap[role] ?? "مستخدم";
 
   const [mobileOpen, setMobileOpen]         = useState(false);
   const [showModal, setShowModal]           = useState(false);

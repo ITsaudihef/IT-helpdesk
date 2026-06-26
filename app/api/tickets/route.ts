@@ -27,6 +27,11 @@ export async function GET(req: NextRequest) {
     where.createdById = session.user.id;
   } else if (session.user.role === "SUPPORT") {
     where.assignedToId = session.user.id;
+  } else if (session.user.role === "COMM_SUPPORT") {
+    where.assignedToId = session.user.id;
+    where.type = "INSTITUTIONAL_COMM";
+  } else if (session.user.role === "COMM_ADMIN") {
+    where.type = "INSTITUTIONAL_COMM";
   }
 
   if (status) where.status = status;
@@ -69,6 +74,8 @@ export async function POST(req: NextRequest) {
 
   const ticketNo = await generateTicketNo();
 
+  const needsApproval = requiresApproval || type === "INSTITUTIONAL_COMM";
+
   const ticket = await prisma.ticket.create({
     data: {
       ticketNo,
@@ -76,8 +83,8 @@ export async function POST(req: NextRequest) {
       description,
       type,
       priority: priority || "MEDIUM",
-      requiresApproval: requiresApproval || false,
-      status: requiresApproval ? "PENDING_APPROVAL" : "OPEN",
+      requiresApproval: needsApproval,
+      status: needsApproval ? "PENDING_APPROVAL" : "OPEN",
       createdById: session.user.id,
     },
     include: {
