@@ -8,10 +8,9 @@ import { ChevronLeft, ChevronRight, Check, Upload, X, FileText } from "lucide-re
 const steps = ["تفاصيل التذكرة", "المرفقات", "التأكيد"];
 
 const typeOptions = [
-  { value: "SUPPORT",             label: "دعم فني",           icon: "🛠️", desc: "مشاكل تقنية، أجهزة، شبكة", needsApproval: false },
-  { value: "SHIFA_SUPPORT",       label: "دعم فني - شفاء",    icon: "🏥", desc: "طلبات فريق شفاء", needsApproval: false },
-  { value: "DEVELOPMENT",         label: "تطوير",              icon: "💻", desc: "تطوير أنظمة أو برمجيات", needsApproval: true },
-  { value: "INSTITUTIONAL_COMM",  label: "تواصل مؤسسي",       icon: "📢", desc: "يتطلب اعتماد ادمن التواصل", needsApproval: true },
+  { value: "SUPPORT",       label: "دعم فني",        icon: "🛠️", desc: "مشاكل تقنية، أجهزة، شبكة",     needsApproval: false },
+  { value: "SHIFA_SUPPORT", label: "دعم فني - شفاء", icon: "🏥", desc: "طلبات فريق شفاء",               needsApproval: false },
+  { value: "DEVELOPMENT",   label: "تطوير",           icon: "💻", desc: "تطوير أنظمة أو برمجيات",        needsApproval: true },
 ];
 
 const priorityOptions = [

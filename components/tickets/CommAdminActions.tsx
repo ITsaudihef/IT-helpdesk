@@ -20,7 +20,7 @@ export default function CommAdminActions({ ticketId, status, commSupportUsers }:
   const isPending = status === "PENDING_APPROVAL";
 
   const approve = async () => {
-    if (!assignedToId) { toast.error("اختر موظف دعم التواصل أولاً"); return; }
+    if (!assignedToId) { toast.error("اختر موظف دعم الاتصال المؤسسي أولاً"); return; }
     setLoading("approve");
     try {
       const res = await fetch(`/api/tickets/${ticketId}`, {
@@ -66,7 +66,7 @@ export default function CommAdminActions({ ticketId, status, commSupportUsers }:
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">تكليف إلى موظف دعم التواصل</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">تكليف إلى موظف دعم الاتصال المؤسسي</label>
         <select value={assignedToId} onChange={e => setAssignedToId(e.target.value)}
           className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 bg-white">
           <option value="">— اختر موظفاً —</option>

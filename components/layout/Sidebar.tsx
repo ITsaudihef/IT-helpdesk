@@ -50,7 +50,7 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
     role === "COMM_ADMIN"   ? commAdminNav    : userNav;
   const roleLabelMap: Record<string,string> = {
     ADMIN: "مدير النظام", SUPPORT: "موظف الدعم", USER: "مستخدم",
-    COMM_SUPPORT: "دعم فني - التواصل", COMM_ADMIN: "ادمن التواصل",
+    COMM_SUPPORT: "دعم الاتصال المؤسسي", COMM_ADMIN: "ادمن الاتصال المؤسسي",
   };
   const roleLabel = roleLabelMap[role] ?? "مستخدم";
 

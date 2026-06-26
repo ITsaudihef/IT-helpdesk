@@ -38,7 +38,7 @@ export default async function CommAdminTicketPage({ params }: { params: { id: st
       <div className="bg-white rounded-2xl border border-gray-200 p-6">
         <div className="flex items-start justify-between gap-4 mb-4">
           <div>
-            <p className="text-sm text-gray-500 mb-1">{ticket.ticketNo} · تواصل مؤسسي</p>
+            <p className="text-sm text-gray-500 mb-1">{ticket.ticketNo} · طلب تصميم</p>
             <h1 className="text-xl font-bold text-gray-900">{ticket.title}</h1>
           </div>
           <div className="flex flex-col items-end gap-2">

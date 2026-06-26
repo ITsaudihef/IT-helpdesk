@@ -63,7 +63,7 @@ export const typeLabel: Record<string, string> = {
   SUPPORT:              "دعم فني",
   SHIFA_SUPPORT:        "دعم فني - شفاء",
   DEVELOPMENT:          "تطوير",
-  INSTITUTIONAL_COMM:   "تواصل مؤسسي",
+  INSTITUTIONAL_COMM:   "طلب تصميم",
   // legacy values kept for existing tickets
   HARDWARE: "أجهزة",
   SOFTWARE: "برمجيات",
@@ -76,6 +76,6 @@ export const roleLabel: Record<string, string> = {
   ADMIN:        "مدير النظام",
   SUPPORT:      "موظف الدعم",
   USER:         "مستخدم",
-  COMM_SUPPORT: "دعم فني - التواصل",
-  COMM_ADMIN:   "ادمن التواصل",
+  COMM_SUPPORT: "دعم الاتصال المؤسسي",
+  COMM_ADMIN:   "ادمن الاتصال المؤسسي",
 };

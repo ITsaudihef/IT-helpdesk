@@ -4,7 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { UserPlus, Pencil, Trash2 } from "lucide-react";
 
-const roleLabel: Record<string,string> = { ADMIN: "مدير", SUPPORT: "موظف دعم", USER: "مستخدم", COMM_SUPPORT: "دعم التواصل", COMM_ADMIN: "ادمن التواصل" };
+const roleLabel: Record<string,string> = { ADMIN: "مدير", SUPPORT: "موظف دعم", USER: "مستخدم", COMM_SUPPORT: "دعم الاتصال المؤسسي", COMM_ADMIN: "ادمن الاتصال المؤسسي" };
 const roleBg:    Record<string,string> = { ADMIN: "#ede9fe", SUPPORT: "#e0f1d0", USER: "#f4f4f5", COMM_SUPPORT: "#fef9c3", COMM_ADMIN: "#fce7f3" };
 const roleFg:    Record<string,string> = { ADMIN: "#7c3aed", SUPPORT: "#00805b", USER: "#374151", COMM_SUPPORT: "#a16207", COMM_ADMIN: "#9d174d" };
 
@@ -95,8 +95,8 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm">
                   <option value="USER">مستخدم</option>
                   <option value="SUPPORT">موظف دعم</option>
-                  <option value="COMM_SUPPORT">دعم التواصل</option>
-                  <option value="COMM_ADMIN">ادمن التواصل</option>
+                  <option value="COMM_SUPPORT">دعم الاتصال المؤسسي</option>
+                  <option value="COMM_ADMIN">ادمن الاتصال المؤسسي</option>
                   <option value="ADMIN">مدير النظام</option>
                 </select>
               </div>

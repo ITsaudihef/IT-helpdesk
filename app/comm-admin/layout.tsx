@@ -12,7 +12,7 @@ export default async function CommAdminLayout({ children }: { children: React.Re
     <div className="min-h-screen bg-slate-50" dir="rtl">
       <Sidebar role={(session.user as any).role} userName={session.user.name!} userEmail={session.user.email!} />
       <div className="lg:mr-64">
-        <Header title="ادمن التواصل" />
+        <Header title="ادمن الاتصال المؤسسي" />
         <main className="p-6">{children}</main>
       </div>
     </div>
