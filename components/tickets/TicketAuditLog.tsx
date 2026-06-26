@@ -12,7 +12,7 @@ interface AuditEntry {
 }
 
 const ACTION_ICON: Record<string, { icon: string; color: string }> = {
-  "إنشاء التذكرة":  { icon: "🟢", color: "#00805b" },
+  "إنشاء التذكرة":  { icon: "🟢", color: "#5B21B6" },
   "تغيير الحالة":   { icon: "🔄", color: "#d97706" },
   "تغيير التكليف":  { icon: "👤", color: "#7c3aed" },
   "تغيير الأولوية": { icon: "⚡", color: "#dc2626" },
@@ -39,27 +39,27 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
   }, [open, ticketId, logs.length]);
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <div className="rounded-2xl" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }} className_unused=" shadow-sm overflow-hidden">
       {/* Header — always visible, click to toggle */}
       <button
         onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center justify-between px-5 py-4 text-right transition-colors hover:bg-gray-50"
+        className="w-full flex items-center justify-between px-5 py-4 text-right transition-colors hover:bg-white/5"
       >
         <div className="flex items-center gap-2">
-          <ClipboardList className="w-4 h-4 text-gray-400" />
+          <ClipboardList className="w-4 h-4 text-purple-500" />
           <span className="font-semibold text-gray-800 text-sm">سجل الأحداث</span>
           {logs.length > 0 && (
-            <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-gray-100 text-gray-500">
+            <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-gray-100 text-purple-400">
               {logs.length}
             </span>
           )}
         </div>
-        {open ? <ChevronUp className="w-4 h-4 text-gray-400" /> : <ChevronDown className="w-4 h-4 text-gray-400" />}
+        {open ? <ChevronUp className="w-4 h-4 text-purple-500" /> : <ChevronDown className="w-4 h-4 text-purple-500" />}
       </button>
 
       {/* Collapsed body */}
       {open && (
-        <div className="border-t border-gray-100 px-5 py-4">
+        <div className="border-t border-white/5 px-5 py-4">
           {loading ? (
             <div className="space-y-3">
               {[1, 2, 3].map(i => (
@@ -67,9 +67,9 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
               ))}
             </div>
           ) : logs.length === 0 ? (
-            <p className="text-sm text-gray-400 text-center py-4">لا توجد أحداث مسجّلة</p>
+            <p className="text-sm text-purple-500 text-center py-4">لا توجد أحداث مسجّلة</p>
           ) : (
-            <ol className="relative border-r-2 border-gray-100 space-y-5 pr-4">
+            <ol className="relative border-r-2 border-white/5 space-y-5 pr-4">
               {logs.map((log) => {
                 const meta = ACTION_ICON[log.action] || { icon: "📌", color: "#6b7280" };
                 return (
@@ -83,13 +83,13 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-sm font-semibold text-gray-800">{log.action}</span>
                         {log.actor && (
-                          <span className="text-xs text-gray-400">— {log.actor.name}</span>
+                          <span className="text-xs text-purple-500">— {log.actor.name}</span>
                         )}
                       </div>
                       {log.detail && (
-                        <p className="text-xs text-gray-600">{log.detail}</p>
+                        <p className="text-xs text-purple-300">{log.detail}</p>
                       )}
-                      <p className="text-xs text-gray-400">{formatTime(log.createdAt)}</p>
+                      <p className="text-xs text-purple-500">{formatTime(log.createdAt)}</p>
                     </div>
                   </li>
                 );

@@ -59,28 +59,28 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
+    <div className="rounded-2xl" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }} className_unused=" p-5 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
-        <Paperclip className="w-4 h-4" style={{ color: "#6fb54a" }} />
-        <h3 className="font-bold text-gray-900 text-sm">
-          المرفقات {list.length > 0 && <span className="text-gray-400 font-normal">({list.length})</span>}
+        <Paperclip className="w-4 h-4" style={{ color: "#7C3AED" }} />
+        <h3 className="font-bold text-white text-sm">
+          المرفقات {list.length > 0 && <span className="text-purple-500 font-normal">({list.length})</span>}
         </h3>
       </div>
 
       {/* Existing attachments */}
       {list.length === 0 && !canUpload && (
-        <p className="text-sm text-gray-400 text-center py-4">لا توجد مرفقات</p>
+        <p className="text-sm text-purple-500 text-center py-4">لا توجد مرفقات</p>
       )}
       {list.length > 0 && (
         <ul className="space-y-2 mb-4">
           {list.map(a => (
             <li key={a.id}
-              className="flex items-center gap-3 p-3 rounded-lg border border-gray-100 bg-gray-50 hover:bg-green-50/40 transition-colors">
-              <span style={{ color: "#6fb54a" }}>{fileIcon(a.fileName)}</span>
-              <span className="flex-1 text-sm text-gray-700 truncate">{a.fileName}</span>
+              className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-purple-900/20 transition-colors">
+              <span style={{ color: "#7C3AED" }}>{fileIcon(a.fileName)}</span>
+              <span className="flex-1 text-sm text-purple-200 truncate">{a.fileName}</span>
               <a href={a.fileUrl} target="_blank" rel="noreferrer" download={a.fileName}
-                className="p-1.5 rounded-lg hover:bg-green-100 transition-colors"
-                style={{ color: "#00805b" }}>
+                className="p-1.5 rounded-lg hover:bg-purple-900 transition-colors"
+                style={{ color: "#5B21B6" }}>
                 <Download className="w-4 h-4" />
               </a>
             </li>
@@ -96,11 +96,11 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
             onClick={() => fileRef.current?.click()}
             onDragOver={e => e.preventDefault()}
             onDrop={e => { e.preventDefault(); addFiles(e.dataTransfer.files); }}
-            className="border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-colors hover:bg-green-50/40"
-            style={{ borderColor: "#6fb54a" }}>
-            <Upload className="w-6 h-6 mx-auto mb-1" style={{ color: "#6fb54a" }} />
-            <p className="text-xs text-gray-600">اسحب ملفات أو اضغط للاختيار</p>
-            <p className="text-xs text-gray-400 mt-1">الحد الأقصى للملف: 2MB</p>
+            className="border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-colors hover:bg-purple-900/20"
+            style={{ borderColor: "#7C3AED" }}>
+            <Upload className="w-6 h-6 mx-auto mb-1" style={{ color: "#7C3AED" }} />
+            <p className="text-xs text-purple-300">اسحب ملفات أو اضغط للاختيار</p>
+            <p className="text-xs text-purple-500 mt-1">الحد الأقصى للملف: 2MB</p>
             <input ref={fileRef} type="file" multiple className="hidden" accept={ALLOWED}
               onChange={e => addFiles(e.target.files)} />
           </div>
@@ -109,7 +109,7 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
           {pending.length > 0 && (
             <ul className="space-y-1">
               {pending.map((f, i) => (
-                <li key={i} className="flex items-center gap-2 text-xs text-gray-600 bg-yellow-50 rounded-lg px-3 py-2">
+                <li key={i} className="flex items-center gap-2 text-xs text-purple-300 bg-yellow-50 rounded-lg px-3 py-2">
                   <FileText className="w-3.5 h-3.5 text-yellow-600" />
                   <span className="flex-1 truncate">{f.name}</span>
                   <button onClick={() => setPending(p => p.filter((_, j) => j !== i))}
@@ -124,7 +124,7 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
           {pending.length > 0 && (
             <button onClick={upload} disabled={uploading}
               className="w-full py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 transition-all"
-              style={{ background: uploading ? "#9dd274" : "#6fb54a" }}>
+              style={{ background: uploading ? "#9dd274" : "#7C3AED" }}>
               {uploading ? "جارٍ الرفع..." : `رفع ${pending.length} ملف`}
             </button>
           )}

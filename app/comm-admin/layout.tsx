@@ -9,7 +9,7 @@ export default async function CommAdminLayout({ children }: { children: React.Re
   if (!["COMM_ADMIN", "ADMIN"].includes((session.user as any).role)) redirect("/dashboard");
 
   return (
-    <div className="min-h-screen bg-slate-50" dir="rtl">
+    <div className="min-h-screen" style={{ background: "#080820" }} dir="rtl">
       <Sidebar role={(session.user as any).role} userName={session.user.name!} userEmail={session.user.email!} />
       <div className="lg:mr-64">
         <Header title="ادمن الاتصال المؤسسي" />

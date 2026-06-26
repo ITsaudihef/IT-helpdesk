@@ -26,17 +26,17 @@ export default function ConfirmDialog({
             style={{ background: danger ? "#fee2e2" : "#fef3c7" }}>
             <AlertTriangle className="w-5 h-5" style={{ color: danger ? "#dc2626" : "#d97706" }} />
           </div>
-          <h3 className="font-bold text-gray-900">{title}</h3>
+          <h3 className="font-bold text-white">{title}</h3>
         </div>
-        <p className="text-sm text-gray-600 mb-6 leading-relaxed">{message}</p>
+        <p className="text-sm text-purple-300 mb-6 leading-relaxed">{message}</p>
         <div className="flex gap-3">
           <button onClick={onConfirm}
             className="flex-1 py-2 rounded-lg text-sm font-semibold text-white transition-all"
-            style={{ background: danger ? "#dc2626" : "#6fb54a" }}>
+            style={{ background: danger ? "#dc2626" : "#7C3AED" }}>
             {confirmLabel}
           </button>
           <button onClick={onCancel}
-            className="flex-1 border border-gray-200 text-gray-700 py-2 rounded-lg text-sm hover:bg-gray-50">
+            className="flex-1 border border-white/8 text-purple-200 py-2 rounded-lg text-sm hover:bg-white/5">
             {cancelLabel}
           </button>
         </div>

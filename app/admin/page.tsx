@@ -23,7 +23,7 @@ export default async function AdminDashboard() {
   ]);
 
   const kpis = [
-    { label: "إجمالي التذاكر",      value: total,      icon: Ticket,       bg: "#e0f1d0", fg: "#00805b", trend: "" },
+    { label: "إجمالي التذاكر",      value: total,      icon: Ticket,       bg: "rgba(124,58,237,0.12)", fg: "#5B21B6", trend: "" },
     { label: "مفتوحة",              value: open,       icon: AlertTriangle, bg: "#fef9c3", fg: "#a16207", trend: "" },
     { label: "قيد المعالجة",        value: inProgress, icon: Clock,        bg: "#fef3c7", fg: "#d97706", trend: "" },
     { label: "محلولة/مغلقة",        value: resolved,   icon: CheckCircle2, bg: "#dcfce7", fg: "#16a34a", trend: "" },
@@ -44,7 +44,7 @@ export default async function AdminDashboard() {
             </p>
           </div>
           <Link href="/admin/tickets?status=PENDING_APPROVAL"
-            className="text-sm font-semibold hover:underline" style={{ color: "#00805b" }}>
+            className="text-sm font-semibold hover:underline" style={{ color: "#5B21B6" }}>
             مراجعة الآن ←
           </Link>
         </div>
@@ -55,12 +55,12 @@ export default async function AdminDashboard() {
         {kpis.map((kpi) => {
           const Icon = kpi.icon;
           return (
-            <div key={kpi.label} className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
+            <div key={kpi.label} className="bg-white rounded-xl border border-white/5 p-4 shadow-sm">
               <div className="inline-flex p-2 rounded-lg mb-2" style={{ background: kpi.bg }}>
                 <Icon className="w-4 h-4" style={{ color: kpi.fg }} />
               </div>
-              <p className="text-2xl font-bold text-gray-900">{kpi.value}</p>
-              <p className="text-xs text-gray-500 mt-0.5">{kpi.label}</p>
+              <p className="text-2xl font-bold text-white">{kpi.value}</p>
+              <p className="text-xs text-purple-400 mt-0.5">{kpi.label}</p>
               {kpi.trend && <p className="text-xs font-bold mt-1" style={{ color: "#dc2626" }}>{kpi.trend}</p>}
             </div>
           );
@@ -70,8 +70,8 @@ export default async function AdminDashboard() {
       {/* Recent tickets */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-bold text-gray-900">أحدث التذاكر</h2>
-          <Link href="/admin/tickets" className="text-sm font-medium hover:underline" style={{ color: "#6fb54a" }}>
+          <h2 className="font-bold text-white">أحدث التذاكر</h2>
+          <Link href="/admin/tickets" className="text-sm font-medium hover:underline" style={{ color: "#7C3AED" }}>
             عرض الكل
           </Link>
         </div>

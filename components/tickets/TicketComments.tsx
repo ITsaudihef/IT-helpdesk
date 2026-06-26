@@ -37,25 +37,25 @@ export default function TicketComments({ ticketId, comments: initial, currentUse
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-      <h2 className="font-bold text-gray-900 mb-4">التعليقات ({comments.length})</h2>
+    <div className="rounded-2xl" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }} className_unused=" p-6 shadow-sm">
+      <h2 className="font-bold text-white mb-4">التعليقات ({comments.length})</h2>
 
       <div className="space-y-4 mb-6">
         {comments.length === 0 && (
-          <p className="text-sm text-gray-400 text-center py-4">لا توجد تعليقات بعد</p>
+          <p className="text-sm text-purple-500 text-center py-4">لا توجد تعليقات بعد</p>
         )}
         {comments.map((c) => (
           <div key={c.id} className="rounded-xl p-4 border"
             style={c.isInternal
               ? { background: "#fefce8", borderColor: "#fde047" }
-              : { background: "#f4f4f5", borderColor: "#e4e4e7" }}>
+              : { background: "#0a0320", borderColor: "#e4e4e7" }}>
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                  style={{ background: "#6fb54a" }}>
+                  style={{ background: "#7C3AED" }}>
                   {c.author.name.charAt(0)}
                 </div>
-                <span className="text-sm font-semibold text-gray-900">{c.author.name}</span>
+                <span className="text-sm font-semibold text-white">{c.author.name}</span>
                 {c.isInternal && (
                   <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full"
                     style={{ background: "#fef9c3", color: "#a16207" }}>
@@ -63,9 +63,9 @@ export default function TicketComments({ ticketId, comments: initial, currentUse
                   </span>
                 )}
               </div>
-              <span className="text-xs text-gray-400">{formatDate(c.createdAt)}</span>
+              <span className="text-xs text-purple-500">{formatDate(c.createdAt)}</span>
             </div>
-            <p className="text-sm text-gray-700 leading-relaxed">{c.body}</p>
+            <p className="text-sm text-purple-200 leading-relaxed">{c.body}</p>
           </div>
         ))}
       </div>
@@ -73,19 +73,19 @@ export default function TicketComments({ ticketId, comments: initial, currentUse
       <form onSubmit={submit} className="space-y-3">
         <textarea value={body} onChange={(e) => setBody(e.target.value)}
           placeholder="اكتب تعليقك هنا..." rows={3}
-          className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 resize-none"
-          style={{ "--tw-ring-color": "#6fb54a" } as any} />
+          className="w-full px-3 py-2.5 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2 resize-none"
+          style={{ "--tw-ring-color": "#7C3AED" } as any} />
         <div className="flex items-center justify-between">
           {(userRole === "ADMIN" || userRole === "SUPPORT") && (
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={isInternal} onChange={(e) => setIsInternal(e.target.checked)}
-                className="w-4 h-4 rounded" style={{ accentColor: "#6fb54a" }} />
-              <span className="text-sm text-gray-600">تعليق داخلي</span>
+                className="w-4 h-4 rounded" style={{ accentColor: "#7C3AED" }} />
+              <span className="text-sm text-purple-300">تعليق داخلي</span>
             </label>
           )}
           <button type="submit" disabled={loading || !body.trim()}
             className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 mr-auto"
-            style={{ background: "#6fb54a" }}>
+            style={{ background: "#7C3AED" }}>
             <Send className="w-4 h-4" />
             {loading ? "جارٍ الإرسال..." : "إرسال"}
           </button>

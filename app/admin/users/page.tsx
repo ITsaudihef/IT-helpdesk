@@ -17,7 +17,7 @@ export default async function AdminUsersPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-lg font-semibold text-gray-900">إدارة المستخدمين</h1>
+      <h1 className="text-lg font-semibold text-white">إدارة المستخدمين</h1>
       <UsersClient initialUsers={users as any} />
     </div>
   );

@@ -3,11 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --brand-primary:  #6fb54a;
-  --brand-dark:     #00805b;
-  --brand-light:    #e0f1d0;
-  --foreground:     #1a1a1a;
-  --background:     #f4f4f5;
+  --brand-primary:  #7C3AED;
+  --brand-dark:     #5B21B6;
+  --brand-light:    rgba(124,58,237,0.12);
+  --bg-base:        #080820;
+  --bg-card:        #100835;
+  --bg-sidebar:     #0a0525;
+  --bg-header:      #0d0728;
+  --border:         rgba(255,255,255,0.08);
+  --text-primary:   #FFFFFF;
+  --text-muted:     #A78BFA;
+  --foreground:     #FFFFFF;
+  --background:     #080820;
 }
 
 body {
@@ -15,6 +22,12 @@ body {
   background: var(--background);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* Dark scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0d0728; }
+::-webkit-scrollbar-thumb { background: #7C3AED; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #9D5CF6; }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
@@ -32,13 +45,18 @@ body {
   100% { background-position:  200% 0; }
 }
 .skeleton {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background: linear-gradient(90deg, #1a0f4a 25%, #2a1a5e 50%, #1a0f4a 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #f1f5f9; }
-::-webkit-scrollbar-thumb { background: #6fb54a; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #00805b; }
+/* Glow effects */
+.glow-purple {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+}
+.gradient-text {
+  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

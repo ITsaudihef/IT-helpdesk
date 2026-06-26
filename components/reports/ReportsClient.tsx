@@ -6,7 +6,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from "recharts";
 
-const HEF_COLORS = ["#6fb54a", "#00805b", "#9dd274", "#c3e4a6", "#58a033", "#438026"];
+const HEF_COLORS = ["#7C3AED", "#5B21B6", "#9dd274", "#c3e4a6", "#58a033", "#438026"];
 
 const ARABIC_TYPE: Record<string, string> = {
   SUPPORT: "دعم فني", SHIFA_SUPPORT: "دعم فني - شفاء", DEVELOPMENT: "تطوير",
@@ -17,7 +17,7 @@ const ARABIC_STATUS: Record<string, string> = {
   PENDING_APPROVAL: "بانتظار الاعتماد", RESOLVED: "تم الحل", CLOSED: "مغلقة",
 };
 const STATUS_COLORS: Record<string, { bg: string; fg: string }> = {
-  OPEN:             { bg: "#e0f1d0", fg: "#00805b" },
+  OPEN:             { bg: "rgba(124,58,237,0.12)", fg: "#5B21B6" },
   IN_PROGRESS:      { bg: "#fef3c7", fg: "#d97706" },
   WAITING_INFO:     { bg: "#ede9fe", fg: "#7c3aed" },
   PENDING_APPROVAL: { bg: "#fde68a", fg: "#92400e" },
@@ -25,12 +25,12 @@ const STATUS_COLORS: Record<string, { bg: string; fg: string }> = {
   CLOSED:           { bg: "#f3f4f6", fg: "#6b7280" },
 };
 const TYPE_META: Record<string, { bg: string; fg: string; icon: string }> = {
-  SUPPORT:       { bg: "#e0f1d0", fg: "#00805b", icon: "🛠️" },
+  SUPPORT:       { bg: "rgba(124,58,237,0.12)", fg: "#5B21B6", icon: "🛠️" },
   SHIFA_SUPPORT: { bg: "#dbeafe", fg: "#1d4ed8", icon: "🏥" },
   DEVELOPMENT:   { bg: "#f3e8ff", fg: "#7c3aed", icon: "💻" },
 };
 const ARABIC_PRIORITY: Record<string, string> = { CRITICAL: "حرجة", HIGH: "عالية", MEDIUM: "متوسطة", LOW: "منخفضة" };
-const PRIORITY_COLORS: Record<string, string>  = { حرجة: "#ef4444", عالية: "#f97316", متوسطة: "#6fb54a", منخفضة: "#00805b" };
+const PRIORITY_COLORS: Record<string, string>  = { حرجة: "#ef4444", عالية: "#f97316", متوسطة: "#7C3AED", منخفضة: "#5B21B6" };
 
 export default function ReportsClient() {
   const [period,  setPeriod]  = useState("monthly");
@@ -50,7 +50,7 @@ export default function ReportsClient() {
     return (
       <div className="space-y-4">
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="bg-white rounded-xl border border-gray-100 p-6 h-32 animate-pulse" />
+          <div key={i} className="bg-white rounded-xl border border-white/5 p-6 h-32 animate-pulse" />
         ))}
       </div>
     );
@@ -68,12 +68,12 @@ export default function ReportsClient() {
   return (
     <div className="space-y-6">
       {/* Period selector */}
-      <div className="flex gap-2 bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
+      <div className="flex gap-2 bg-white rounded-xl border border-white/5 p-4 shadow-sm">
         {[{ value: "weekly", label: "أسبوعي" }, { value: "monthly", label: "شهري" }, { value: "quarterly", label: "ربعي" }].map(p => (
           <button key={p.value} onClick={() => setPeriod(p.value)}
             className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
             style={period === p.value
-              ? { background: "linear-gradient(135deg,#6fb54a,#00805b)", color: "#fff" }
+              ? { background: "linear-gradient(135deg,#7C3AED,#5B21B6)", color: "#fff" }
               : { color: "#6b7280", background: "transparent" }}>
             {p.label}
           </button>
@@ -83,21 +83,21 @@ export default function ReportsClient() {
       {/* Top KPI row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "إجمالي التذاكر",  value: summary.total,                    fg: "#00805b", bg: "#e0f1d0" },
+          { label: "إجمالي التذاكر",  value: summary.total,                    fg: "#5B21B6", bg: "rgba(124,58,237,0.12)" },
           { label: "تذاكر حرجة",      value: summary.critical,                 fg: "#dc2626", bg: "#fee2e2" },
           { label: "محلولة + مغلقة",  value: summary.resolved,                 fg: "#16a34a", bg: "#dcfce7" },
           { label: "متوسط وقت الحل",  value: `${summary.avgResolutionHours}س`, fg: "#d97706", bg: "#fef3c7" },
         ].map(k => (
-          <div key={k.label} className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
+          <div key={k.label} className="bg-white rounded-xl border border-white/5 p-4 shadow-sm">
             <p className="text-2xl font-bold" style={{ color: k.fg }}>{k.value}</p>
-            <p className="text-xs text-gray-500 mt-1">{k.label}</p>
+            <p className="text-xs text-purple-400 mt-1">{k.label}</p>
           </div>
         ))}
       </div>
 
       {/* ── Detailed Status Breakdown ── */}
-      <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-        <h3 className="font-bold text-gray-900 mb-4">إحصائيات التذاكر حسب الحالة</h3>
+      <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+        <h3 className="font-bold text-white mb-4">إحصائيات التذاكر حسب الحالة</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {STATUS_KEYS.map((key) => {
             const c   = STATUS_COLORS[key];
@@ -119,8 +119,8 @@ export default function ReportsClient() {
       </div>
 
       {/* ── Detailed Type Breakdown ── */}
-      <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-        <h3 className="font-bold text-gray-900 mb-4">إحصائيات التذاكر حسب النوع</h3>
+      <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+        <h3 className="font-bold text-white mb-4">إحصائيات التذاكر حسب النوع</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {(["SUPPORT", "SHIFA_SUPPORT", "DEVELOPMENT"] as const).map((key) => {
             const meta = TYPE_META[key];
@@ -149,8 +149,8 @@ export default function ReportsClient() {
       {/* Charts Grid */}
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Incoming vs Resolved */}
-        <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-          <h3 className="font-bold text-gray-900 mb-4">الواردة مقابل المحلولة</h3>
+        <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+          <h3 className="font-bold text-white mb-4">الواردة مقابل المحلولة</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.dailyData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -158,15 +158,15 @@ export default function ReportsClient() {
               <YAxis tick={{ fontSize: 10 }} />
               <Tooltip />
               <Legend />
-              <Bar dataKey="created"  name="واردة"  fill="#6fb54a" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="resolved" name="محلولة" fill="#00805b" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="created"  name="واردة"  fill="#7C3AED" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="resolved" name="محلولة" fill="#5B21B6" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         {/* Type pie */}
-        <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-          <h3 className="font-bold text-gray-900 mb-4">توزيع أنواع التذاكر</h3>
+        <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+          <h3 className="font-bold text-white mb-4">توزيع أنواع التذاكر</h3>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie data={typeData} cx="50%" cy="50%" innerRadius={55} outerRadius={85}
@@ -180,10 +180,10 @@ export default function ReportsClient() {
         </div>
 
         {/* Staff performance */}
-        <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-          <h3 className="font-bold text-gray-900 mb-4">أداء موظفي الدعم</h3>
+        <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+          <h3 className="font-bold text-white mb-4">أداء موظفي الدعم</h3>
           {data.staffData.length === 0 ? (
-            <p className="text-sm text-gray-400 text-center py-8">لا توجد بيانات بعد</p>
+            <p className="text-sm text-purple-500 text-center py-8">لا توجد بيانات بعد</p>
           ) : (
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={data.staffData} layout="vertical">
@@ -192,16 +192,16 @@ export default function ReportsClient() {
                 <YAxis type="category" dataKey="name" tick={{ fontSize: 10 }} width={80} />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="resolved"  name="محلولة"             fill="#6fb54a" radius={[0, 4, 4, 0]} />
-                <Bar dataKey="avgHours"  name="متوسط الحل (ساعة)" fill="#00805b" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="resolved"  name="محلولة"             fill="#7C3AED" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="avgHours"  name="متوسط الحل (ساعة)" fill="#5B21B6" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
         </div>
 
         {/* Priority distribution */}
-        <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-          <h3 className="font-bold text-gray-900 mb-4">توزيع الأولويات</h3>
+        <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+          <h3 className="font-bold text-white mb-4">توزيع الأولويات</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={priorityData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />

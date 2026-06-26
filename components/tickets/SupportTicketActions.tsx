@@ -65,19 +65,19 @@ export default function SupportTicketActions({ ticket, supportUsers, currentUser
         onCancel={() => setConfirm(null)}
       />
 
-      <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-        <h2 className="font-bold text-gray-900 mb-4">الإجراءات</h2>
+      <div className="rounded-2xl" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }} className_unused=" p-6 shadow-sm">
+        <h2 className="font-bold text-white mb-4">الإجراءات</h2>
         <div className="space-y-4">
           {transitions.length > 0 && (
             <div>
-              <p className="text-sm font-medium text-gray-700 mb-2">تغيير الحالة</p>
+              <p className="text-sm font-medium text-purple-200 mb-2">تغيير الحالة</p>
               <div className="flex flex-wrap gap-2">
                 {transitions.map((s) => (
                   <button key={s} onClick={() => handleStatusClick(s)} disabled={loading}
                     className="px-3 py-1.5 rounded-lg text-sm font-medium border disabled:opacity-50 transition-colors"
-                    style={{ borderColor: "#6fb54a", color: "#00805b", background: "#e0f1d0" }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#6fb54a"; (e.currentTarget as HTMLElement).style.color = "#fff"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#e0f1d0"; (e.currentTarget as HTMLElement).style.color = "#00805b"; }}>
+                    style={{ borderColor: "#7C3AED", color: "#5B21B6", background: "rgba(124,58,237,0.12)" }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#7C3AED"; (e.currentTarget as HTMLElement).style.color = "#fff"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(124,58,237,0.12)"; (e.currentTarget as HTMLElement).style.color = "#5B21B6"; }}>
                     → {statusLabel[s]}
                   </button>
                 ))}
@@ -86,11 +86,11 @@ export default function SupportTicketActions({ ticket, supportUsers, currentUser
           )}
 
           <div>
-            <p className="text-sm font-medium text-gray-700 mb-2">إسناد إلى موظف</p>
+            <p className="text-sm font-medium text-purple-200 mb-2">إسناد إلى موظف</p>
             <div className="flex gap-2">
               <select value={assignTo} onChange={(e) => setAssignTo(e.target.value)}
-                className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "#6fb54a" } as any}>
+                className="flex-1 px-3 py-2 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2"
+                style={{ "--tw-ring-color": "#7C3AED" } as any}>
                 <option value="">غير مسندة</option>
                 {supportUsers.map((u) => (
                   <option key={u.id} value={u.id}>{u.name}{u.id === currentUserId ? " (أنا)" : ""}</option>
@@ -98,7 +98,7 @@ export default function SupportTicketActions({ ticket, supportUsers, currentUser
               </select>
               <button onClick={() => updateTicket({ assignedToId: assignTo || null })} disabled={loading}
                 className="px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50"
-                style={{ background: "#6fb54a" }}>
+                style={{ background: "#7C3AED" }}>
                 حفظ
               </button>
             </div>

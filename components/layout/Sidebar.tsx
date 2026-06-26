@@ -91,20 +91,19 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
   };
 
   const sidebarContent = (
-    <div className="flex flex-col h-full bg-white border-l border-gray-200 w-64 shadow-sm">
+    <div className="flex flex-col h-full w-64" style={{ background: "#0a0525", borderLeft: "1px solid rgba(255,255,255,0.06)" }}>
       {/* Logo */}
-      <div className="p-5 border-b border-gray-100 flex items-center justify-between">
+      <div className="p-5 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #6fb54a, #00805b)" }}>
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center glow-purple" style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
             <HeadphonesIcon className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-sm" style={{ color: "#1a1a1a" }}>بوابة تذاكر IT</h1>
-            <p className="text-xs text-gray-400">صندوق الوقف الصحي</p>
+            <h1 className="font-bold text-sm text-white">بوابة تذاكر IT</h1>
+            <p className="text-xs" style={{ color: "#A78BFA" }}>صندوق الوقف الصحي</p>
           </div>
         </div>
-        {/* Close button — mobile only */}
-        <button className="lg:hidden p-1 rounded-lg text-gray-400 hover:text-gray-600" onClick={() => setMobileOpen(false)}>
+        <button className="lg:hidden p-1 rounded-lg" style={{ color: "#A78BFA" }} onClick={() => setMobileOpen(false)}>
           <X className="w-5 h-5" />
         </button>
       </div>
@@ -119,11 +118,12 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
               key={item.href}
               href={item.href}
               onClick={() => setMobileOpen(false)}
-              className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all",
-                isActive ? "text-white shadow-sm" : "text-gray-600 hover:bg-green-50 hover:text-green-700"
-              )}
-              style={isActive ? { background: "linear-gradient(135deg, #6fb54a, #00805b)" } : {}}
+              className={cn("flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all")}
+              style={isActive
+                ? { background: "linear-gradient(135deg, #7C3AED, #EC4899)", color: "#fff", boxShadow: "0 4px 15px rgba(124,58,237,0.35)" }
+                : { color: "#A78BFA" }}
+              onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = "rgba(124,58,237,0.12)"; }}
+              onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = "transparent"; }}
             >
               <Icon className="w-4 h-4 flex-shrink-0" />
               {item.label}
@@ -133,29 +133,31 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
       </nav>
 
       {/* User */}
-      <div className="p-4 border-t border-gray-100">
+      <div className="p-4" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0" style={{ background: "#6fb54a" }}>
+          <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
+            style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
             {userName.charAt(0)}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-gray-900 truncate">{userName}</p>
-            <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: "#e0f1d0", color: "#00805b" }}>
+            <p className="text-sm font-semibold text-white truncate">{userName}</p>
+            <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: "rgba(124,58,237,0.2)", color: "#C4B5FD" }}>
               {roleLabel}
             </span>
           </div>
         </div>
-        <button
-          onClick={() => { setShowModal(true); setMobileOpen(false); }}
-          className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors mb-1"
-        >
+        <button onClick={() => { setShowModal(true); setMobileOpen(false); }}
+          className="flex items-center gap-2 w-full px-3 py-2 text-sm rounded-xl transition-all mb-1"
+          style={{ color: "#A78BFA" }}
+          onMouseEnter={e => (e.currentTarget.style.background = "rgba(124,58,237,0.12)")}
+          onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
           <KeyRound className="w-4 h-4" />
           تغيير كلمة المرور
         </button>
-        <button
-          onClick={() => signOut({ callbackUrl: "/login" })}
-          className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-        >
+        <button onClick={() => signOut({ callbackUrl: "/login" })}
+          className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-400 rounded-xl transition-all"
+          onMouseEnter={e => (e.currentTarget.style.background = "rgba(239,68,68,0.1)")}
+          onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
           <LogOut className="w-4 h-4" />
           تسجيل الخروج
         </button>
@@ -172,11 +174,12 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
 
       {/* ── Mobile hamburger button ── */}
       <button
-        className="lg:hidden fixed top-4 right-4 z-40 p-2 bg-white border border-gray-200 rounded-xl shadow-md"
+        className="lg:hidden fixed top-4 right-4 z-40 p-2 rounded-xl"
+        style={{ background: "#0a0525", border: "1px solid rgba(124,58,237,0.3)", boxShadow: "0 4px 15px rgba(124,58,237,0.25)" }}
         onClick={() => setMobileOpen(true)}
         aria-label="فتح القائمة"
       >
-        <Menu className="w-5 h-5 text-gray-700" />
+        <Menu className="w-5 h-5 text-white" />
       </button>
 
       {/* ── Mobile overlay + drawer ── */}
@@ -197,12 +200,12 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
       {/* ── Change Password Modal ── */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" dir="rtl">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-sm mx-4 shadow-xl">
+          <div className="rounded-2xl p-6 w-full max-w-sm mx-4" style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.25)", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}>
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "#e0f1d0" }}>
-                <KeyRound className="w-5 h-5" style={{ color: "#00805b" }} />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(124,58,237,0.2)" }}>
+                <KeyRound className="w-5 h-5 text-purple-300" />
               </div>
-              <h2 className="font-bold text-gray-900">تغيير كلمة المرور</h2>
+              <h2 className="font-bold text-white">تغيير كلمة المرور</h2>
             </div>
             <form onSubmit={handleChangePassword} className="space-y-4">
               {[
@@ -211,31 +214,24 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
                 { label: "تأكيد كلمة المرور",   val: confirmPw, set: setConfirmPw, show: showCon, toggle: () => setShowCon(v => !v) },
               ].map(f => (
                 <div key={f.label}>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">{f.label}</label>
+                  <label className="block text-sm font-medium mb-1" style={{ color: "#A78BFA" }}>{f.label}</label>
                   <div className="relative">
-                    <input
-                      type={f.show ? "text" : "password"}
-                      value={f.val}
-                      onChange={e => f.set(e.target.value)}
-                      required minLength={6}
-                      className="w-full pr-3 pl-10 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2"
-                      style={{ "--tw-ring-color": "#6fb54a" } as any}
-                    />
-                    <button type="button" onClick={f.toggle}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                    <input type={f.show ? "text" : "password"} value={f.val} onChange={e => f.set(e.target.value)} required minLength={6}
+                      className="w-full pr-3 pl-10 py-2 rounded-lg text-sm text-white focus:outline-none"
+                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(124,58,237,0.3)" }} />
+                    <button type="button" onClick={f.toggle} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#A78BFA" }}>
                       {f.show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
                   </div>
                 </div>
               ))}
               <div className="flex gap-3 pt-1">
-                <button type="submit" disabled={saving}
-                  className="flex-1 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50"
-                  style={{ background: "#6fb54a" }}>
+                <button type="submit" disabled={saving} className="flex-1 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-50"
+                  style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
                   {saving ? "جارٍ الحفظ..." : "حفظ"}
                 </button>
-                <button type="button" onClick={closeModal}
-                  className="flex-1 border border-gray-200 text-gray-700 py-2 rounded-lg text-sm hover:bg-gray-50">
+                <button type="button" onClick={closeModal} className="flex-1 py-2 rounded-xl text-sm font-semibold"
+                  style={{ border: "1px solid rgba(255,255,255,0.1)", color: "#A78BFA" }}>
                   إلغاء
                 </button>
               </div>

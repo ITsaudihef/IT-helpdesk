@@ -26,9 +26,9 @@ export default function TicketRating({ ticketId, currentRating }: Props) {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-6 text-center shadow-sm">
-      <h2 className="font-bold text-gray-900 mb-1">قيّم الخدمة</h2>
-      <p className="text-sm text-gray-500 mb-4">
+    <div className="rounded-2xl" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }} className_unused=" p-6 text-center shadow-sm">
+      <h2 className="font-bold text-white mb-1">قيّم الخدمة</h2>
+      <p className="text-sm text-purple-400 mb-4">
         {saved ? "شكراً على تقييمك! 🌟" : "كيف كانت تجربتك مع فريق الدعم؟"}
       </p>
       <div className="flex items-center justify-center gap-2">
@@ -40,8 +40,8 @@ export default function TicketRating({ ticketId, currentRating }: Props) {
             className="transition-transform hover:scale-110 disabled:cursor-default">
             <Star className="w-9 h-9 transition-colors"
               style={{
-                fill:   val <= (hover || rating) ? "#6fb54a" : "transparent",
-                color:  val <= (hover || rating) ? "#6fb54a" : "#d1d5db",
+                fill:   val <= (hover || rating) ? "#7C3AED" : "transparent",
+                color:  val <= (hover || rating) ? "#7C3AED" : "#d1d5db",
               }} />
           </button>
         ))}

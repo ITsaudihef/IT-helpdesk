@@ -12,14 +12,14 @@ export default function TicketCard({ ticket, href }: TicketCardProps) {
     <Link href={href}>
       <div
         className={cn(
-          "bg-white rounded-xl border-r-4 border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer",
+          "bg-white rounded-xl border-r-4 border border-white/8 p-4 hover:shadow-md transition-shadow cursor-pointer",
           priorityColors[ticket.priority]
         )}
       >
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex-1 min-w-0">
-            <p className="text-xs text-gray-500 mb-1">{ticket.ticketNo}</p>
-            <h3 className="font-medium text-gray-900 truncate">{ticket.title}</h3>
+            <p className="text-xs text-purple-400 mb-1">{ticket.ticketNo}</p>
+            <h3 className="font-medium text-white truncate">{ticket.title}</h3>
           </div>
           <div className="flex flex-col items-end gap-1 flex-shrink-0">
             <span className={cn("text-xs px-2 py-0.5 rounded-full font-medium", statusBadge[ticket.status])}>
@@ -31,13 +31,13 @@ export default function TicketCard({ ticket, href }: TicketCardProps) {
           </div>
         </div>
 
-        <p className="text-sm text-gray-500 line-clamp-2 mb-3">{ticket.description}</p>
+        <p className="text-sm text-purple-400 line-clamp-2 mb-3">{ticket.description}</p>
 
-        <div className="flex items-center justify-between text-xs text-gray-400">
+        <div className="flex items-center justify-between text-xs text-purple-500">
           <div className="flex items-center gap-3">
             <span className="bg-gray-100 px-2 py-0.5 rounded">{typeLabel[ticket.type]}</span>
             {ticket.assignedTo && (
-              <span className="text-gray-500">← {ticket.assignedTo.name}</span>
+              <span className="text-purple-400">← {ticket.assignedTo.name}</span>
             )}
           </div>
           <div className="flex items-center gap-2">

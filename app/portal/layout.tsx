@@ -9,7 +9,7 @@ export default async function PortalLayout({ children }: { children: React.React
   if (session.user.role !== "USER") redirect("/dashboard");
 
   return (
-    <div className="min-h-screen bg-slate-50" dir="rtl">
+    <div className="min-h-screen" style={{ background: "#080820" }} dir="rtl">
       <Sidebar
         role={session.user.role}
         userName={session.user.name}

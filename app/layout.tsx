@@ -32,11 +32,11 @@ export default function RootLayout({
             },
             success: {
               style: {
-                background:  "#e0f1d0",
-                color:       "#00805b",
-                border:      "1px solid #6fb54a",
+                background:  "rgba(124,58,237,0.12)",
+                color:       "#5B21B6",
+                border:      "1px solid #7C3AED",
               },
-              iconTheme: { primary: "#6fb54a", secondary: "#fff" },
+              iconTheme: { primary: "#7C3AED", secondary: "#fff" },
             },
             error: {
               style: {
