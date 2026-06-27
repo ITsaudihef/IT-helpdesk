@@ -38,12 +38,12 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-lg border text-white shadow-lg",
+        "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-lg border shadow-lg",
         position === "popper" && "translate-y-1",
         className
       )}
       position={position}
-      style={{ background: "#FFFFFF", borderColor: "#D1C4FE", boxShadow: "0 4px 15px rgba(124,58,237,0.1)" }}
+      style={{ background: "#FFFFFF", borderColor: "#D1C4FE", color: "#1F1535", boxShadow: "0 4px 15px rgba(124,58,237,0.1)" }}
       {...props}
     >
       <SelectPrimitive.Viewport className={cn("p-1", position === "popper" && "w-full")}>

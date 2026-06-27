@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 import { UserPlus, Pencil, Trash2 } from "lucide-react";
 
 const roleLabel: Record<string,string> = { ADMIN: "مدير", SUPPORT: "موظف دعم", USER: "مستخدم", COMM_SUPPORT: "دعم الاتصال المؤسسي", COMM_ADMIN: "ادمن الاتصال المؤسسي" };
-const roleBg:    Record<string,string> = { ADMIN: "rgba(124,58,237,0.2)", SUPPORT: "rgba(124,58,237,0.12)", USER: "rgba(148,163,184,0.1)", COMM_SUPPORT: "rgba(245,158,11,0.12)", COMM_ADMIN: "rgba(236,72,153,0.12)" };
-const roleFg:    Record<string,string> = { ADMIN: "#C4B5FD", SUPPORT: "#A78BFA", USER: "#CBD5E1", COMM_SUPPORT: "#FCD34D", COMM_ADMIN: "#F9A8D4" };
+const roleBg:    Record<string,string> = { ADMIN: "#EDE9FE", SUPPORT: "#DDD6FE", USER: "#F1F5F9", COMM_SUPPORT: "#FEF3C7", COMM_ADMIN: "#FCE7F3" };
+const roleFg:    Record<string,string> = { ADMIN: "#5B21B6", SUPPORT: "#6D28D9", USER: "#475569", COMM_SUPPORT: "#92400E", COMM_ADMIN: "#9D174D" };
 
 interface User {
   id: string; name: string; email: string; role: string;
@@ -57,8 +57,8 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
       {/* Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl" style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.2)" }}>
-            <h2 className="font-bold text-white mb-4">{editUser ? "تعديل المستخدم" : "مستخدم جديد"}</h2>
+          <div className="rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+            <h2 className="font-bold mb-4" style={{ color: "#1F1535" }}>{editUser ? "تعديل المستخدم" : "مستخدم جديد"}</h2>
             <form onSubmit={submit} className="space-y-4">
               {[
                 { name:"name",     label:"الاسم",              type:"text",     req: true },
@@ -66,18 +66,18 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                 { name:"password", label: editUser ? "كلمة مرور جديدة (اختياري)" : "كلمة المرور", type:"password", req: !editUser },
               ].map(f => (
                 <div key={f.name}>
-                  <label className="block text-sm font-medium text-purple-200 mb-1">{f.label}</label>
+                  <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>{f.label}</label>
                   <input type={f.type} value={(form as any)[f.name]}
                     onChange={e => setForm({ ...form, [f.name]: e.target.value })} required={f.req}
-                    className="w-full px-3 py-2 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2"
-                    style={{ "--tw-ring-color": "#7C3AED" } as any} />
+                    className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
                 </div>
               ))}
               <div>
-                <label className="block text-sm font-medium text-purple-200 mb-1">القسم</label>
+                <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>القسم</label>
                 <select value={form.department} onChange={e => setForm({ ...form, department: e.target.value })}
-                  className="w-full px-3 py-2 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2"
-                  style={{ "--tw-ring-color": "#7C3AED" } as any}>
+                  className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }}>
                   <option value="">— اختر القسم —</option>
                   <option value="الخدمات المشتركة">الخدمات المشتركة</option>
                   <option value="مكتب الرئيس التنفيذي">مكتب الرئيس التنفيذي</option>
@@ -90,9 +90,10 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-purple-200 mb-1">الدور</label>
+                <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>الدور</label>
                 <select value={form.role} onChange={e => setForm({ ...form, role: e.target.value })}
-                  className="w-full px-3 py-2 border border-white/8 rounded-lg text-sm">
+                  className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }}>
                   <option value="USER">مستخدم</option>
                   <option value="SUPPORT">موظف دعم</option>
                   <option value="COMM_SUPPORT">دعم الاتصال المؤسسي</option>
@@ -107,7 +108,8 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                   {loading ? "جارٍ الحفظ..." : "حفظ"}
                 </button>
                 <button type="button" onClick={() => setShowForm(false)}
-                  className="flex-1 border border-white/8 text-purple-200 py-2 rounded-lg text-sm hover:bg-white/5">
+                  className="flex-1 py-2 rounded-lg text-sm font-semibold"
+                  style={{ border: "1px solid #E9E3FF", color: "#6D28D9" }}>
                   إلغاء
                 </button>
               </div>
@@ -119,35 +121,35 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
       {/* Table */}
       <div className="rounded-xl overflow-hidden">
         <table className="w-full text-sm">
-          <thead style={{ background: "#0a0320" }}>
+          <thead style={{ background: "#F5F3FF", borderBottom: "2px solid #E9E3FF" }}>
             <tr>
               {["الاسم","البريد","الدور","القسم","التذاكر","تاريخ الإنشاء",""].map(h => (
-                <th key={h} className="px-4 py-3 text-right text-xs font-semibold text-purple-400">{h}</th>
+                <th key={h} className="px-4 py-3 text-right text-xs font-semibold" style={{ color: "#6D28D9" }}>{h}</th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-purple-50">
             {users.map(u => (
-              <tr key={u.id} className="hover:bg-purple-900/15 transition-colors">
-                <td className="px-4 py-3 font-semibold text-white">{u.name}</td>
-                <td className="px-4 py-3 text-purple-400">{u.email}</td>
+              <tr key={u.id} className="hover:bg-purple-50/60 transition-colors bg-white">
+                <td className="px-4 py-3 font-semibold" style={{ color: "#1F1535" }}>{u.name}</td>
+                <td className="px-4 py-3" style={{ color: "#6B6B8A" }}>{u.email}</td>
                 <td className="px-4 py-3">
                   <span className="px-2 py-0.5 rounded-full text-xs font-semibold"
                     style={{ background: roleBg[u.role], color: roleFg[u.role] }}>
                     {roleLabel[u.role]}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-purple-400">{u.department || "—"}</td>
-                <td className="px-4 py-3 text-purple-400">{u._count.ticketsCreated}</td>
-                <td className="px-4 py-3 text-purple-500">{new Date(u.createdAt).toLocaleDateString("ar-SA")}</td>
+                <td className="px-4 py-3" style={{ color: "#6B6B8A" }}>{u.department || "—"}</td>
+                <td className="px-4 py-3" style={{ color: "#6B6B8A" }}>{u._count.ticketsCreated}</td>
+                <td className="px-4 py-3" style={{ color: "#9CA3AF" }}>{new Date(u.createdAt).toLocaleDateString("ar-SA")}</td>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-1">
                     <button onClick={() => openEdit(u)}
-                      className="p-1.5 hover:bg-purple-900 rounded-lg transition-colors" style={{ color: "#7C3AED" }}>
+                      className="p-1.5 hover:bg-purple-100 rounded-lg transition-colors" style={{ color: "#7C3AED" }}>
                       <Pencil className="w-4 h-4" />
                     </button>
                     <button onClick={() => deleteUser(u.id)}
-                      className="p-1.5 hover:bg-red-50 rounded-lg transition-colors text-red-400">
+                      className="p-1.5 hover:bg-red-50 rounded-lg transition-colors text-red-500">
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>

@@ -61,7 +61,7 @@ export default async function AdminDashboard() {
               </div>
               <p className="text-2xl font-bold text-white">{kpi.value}</p>
               <p className="text-xs text-purple-400 mt-0.5">{kpi.label}</p>
-              {kpi.trend && <p className="text-xs font-bold mt-1" style={{ color: "#FCA5A5" }}>{kpi.trend}</p>}
+              {kpi.trend && <p className="text-xs font-bold mt-1" style={{ color: "#DC2626" }}>{kpi.trend}</p>}
             </div>
           );
         })}

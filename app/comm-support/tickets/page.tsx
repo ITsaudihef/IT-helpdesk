@@ -23,7 +23,7 @@ export default async function CommSupportMyTicketsPage() {
       {tickets.length === 0 ? (
         <p className="text-center text-purple-500 py-12 text-sm">لم ترفع أي تذكرة بعد</p>
       ) : (
-        <ul className="divide-y divide-white/5">
+        <ul className="divide-y divide-purple-100">
           {tickets.map(t => (
             <li key={t.id}>
               <Link href={`/portal/tickets/${t.id}`}

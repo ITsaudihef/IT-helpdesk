@@ -75,7 +75,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-purple-100">
               {tickets.length === 0 ? (
                 <tr><td colSpan={9} className="text-center py-12 text-purple-500">لا توجد تذاكر</td></tr>
               ) : tickets.map(t => (

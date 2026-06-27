@@ -73,7 +73,7 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
 
         {ticket.status === "PENDING_APPROVAL" && (
           <div className="mb-5 p-4 rounded-xl border" style={{ background: "rgba(245,158,11,0.08)", borderColor: "rgba(245,158,11,0.25)" }}>
-            <p className="text-sm font-semibold mb-3" style={{ color: "#FDE68A" }}>هذه التذكرة تنتظر اعتمادك</p>
+            <p className="text-sm font-semibold mb-3" style={{ color: "#92400E" }}>هذه التذكرة تنتظر اعتمادك</p>
             <div className="flex gap-3">
               <button
                 onClick={() => setConfirm({ type: "approve", label: "اعتماد", danger: false })}

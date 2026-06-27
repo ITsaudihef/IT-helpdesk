@@ -39,7 +39,7 @@ export default async function CommAdminPage() {
         {pending.length === 0 ? (
           <p className="text-center text-purple-500 py-12 text-sm">لا توجد تذاكر بانتظار الاعتماد ✓</p>
         ) : (
-          <ul className="divide-y divide-white/5">
+          <ul className="divide-y divide-purple-100">
             {pending.map(t => (
               <li key={t.id}>
                 <Link href={`/comm-admin/tickets/${t.id}`}

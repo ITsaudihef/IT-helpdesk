@@ -75,40 +75,40 @@ export default function LoginPage() {
             <h1 className="text-xl font-bold gradient-text">بوابة تذاكر IT</h1>
           </div>
 
-          <div className="rounded-2xl p-8" style={{ background: "#FFFFFF", border: "1px solid rgba(124,58,237,0.2)", boxShadow: "0 25px 80px rgba(0,0,0,0.5)" }}>
-            <h2 className="text-xl font-bold text-white mb-1">مرحباً بك</h2>
-            <p className="text-sm mb-6" style={{ color: "#A78BFA" }}>سجّل دخولك للمتابعة</p>
+          <div className="rounded-2xl p-8" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF", boxShadow: "0 20px 60px rgba(124,58,237,0.15)" }}>
+            <h2 className="text-xl font-bold mb-1" style={{ color: "#1F1535" }}>مرحباً بك</h2>
+            <p className="text-sm mb-6" style={{ color: "#7C6A9E" }}>سجّل دخولك للمتابعة</p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1.5" style={{ color: "#C4B5FD" }}>البريد الإلكتروني</label>
+                <label className="block text-sm font-medium mb-1.5" style={{ color: "#374151" }}>البريد الإلكتروني</label>
                 <div className="relative">
                   <Mail className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: "#7C3AED" }} />
                   <input
                     type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
                     placeholder="example@saudihef.org.sa"
-                    className="w-full pr-10 pl-4 py-2.5 rounded-xl text-sm text-white focus:outline-none transition-all"
-                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(124,58,237,0.25)", color: "#fff" }}
+                    className="w-full pr-10 pl-4 py-2.5 rounded-xl text-sm focus:outline-none transition-all"
+                    style={{ background: "#FAFAFA", border: "1px solid #D1C4FE", color: "#1F1535" }}
                     onFocus={e => (e.target.style.borderColor = "#7C3AED")}
-                    onBlur={e => (e.target.style.borderColor = "rgba(124,58,237,0.25)")}
+                    onBlur={e => (e.target.style.borderColor = "#D1C4FE")}
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1.5" style={{ color: "#C4B5FD" }}>كلمة المرور</label>
+                <label className="block text-sm font-medium mb-1.5" style={{ color: "#374151" }}>كلمة المرور</label>
                 <div className="relative">
                   <Lock className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: "#7C3AED" }} />
                   <input
                     type={showPassword ? "text" : "password"} value={password}
                     onChange={(e) => setPassword(e.target.value)} required placeholder="••••••••"
-                    className="w-full pr-10 pl-10 py-2.5 rounded-xl text-sm text-white focus:outline-none transition-all"
-                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(124,58,237,0.25)" }}
+                    className="w-full pr-10 pl-10 py-2.5 rounded-xl text-sm focus:outline-none transition-all"
+                    style={{ background: "#FAFAFA", border: "1px solid #D1C4FE", color: "#1F1535" }}
                     onFocus={e => (e.target.style.borderColor = "#7C3AED")}
-                    onBlur={e => (e.target.style.borderColor = "rgba(124,58,237,0.25)")}
+                    onBlur={e => (e.target.style.borderColor = "#D1C4FE")}
                   />
                   <button type="button" onClick={() => setShowPassword(!showPassword)}
-                    className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#A78BFA" }}>
+                    className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#7C3AED" }}>
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
@@ -116,13 +116,13 @@ export default function LoginPage() {
 
               <button type="submit" disabled={loading}
                 className="w-full text-white py-3 rounded-xl font-semibold transition-all disabled:opacity-50 mt-2"
-                style={{ background: loading ? "rgba(124,58,237,0.5)" : "linear-gradient(135deg, #7C3AED, #EC4899)", boxShadow: "0 8px 25px rgba(124,58,237,0.4)" }}>
+                style={{ background: loading ? "rgba(124,58,237,0.5)" : "linear-gradient(135deg, #7C3AED, #EC4899)", boxShadow: "0 8px 25px rgba(124,58,237,0.3)" }}>
                 {loading ? "جارٍ التحقق..." : "دخول"}
               </button>
             </form>
           </div>
 
-          <p className="text-center text-xs mt-6" style={{ color: "#4C1D95" }}>
+          <p className="text-center text-xs mt-6" style={{ color: "rgba(255,255,255,0.35)" }}>
             صندوق الوقف الصحي © {new Date().getFullYear()}
           </p>
         </div>
