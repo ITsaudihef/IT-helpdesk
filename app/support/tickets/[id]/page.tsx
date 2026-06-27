@@ -34,7 +34,9 @@ export default async function SupportTicketPage({ params }: { params: { id: stri
   if (!ticket) notFound();
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <>
+      <Breadcrumb crumbs={[{ label: "الرئيسية", href: "/support" }, { label: "التذاكر", href: "/support/tickets" }, { label: ticket.ticketNo }]} />
+      <div className="max-w-3xl mx-auto space-y-6">
       {/* Header */}
       <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
         <div className="flex items-start justify-between gap-4 mb-4">
