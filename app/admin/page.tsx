@@ -23,12 +23,12 @@ export default async function AdminDashboard() {
   ]);
 
   const kpis = [
-    { label: "إجمالي التذاكر",      value: total,      icon: Ticket,        bg: "rgba(124,58,237,0.15)", fg: "#7C3AED", trend: "" },
-    { label: "مفتوحة",              value: open,       icon: AlertTriangle, bg: "rgba(148,163,184,0.12)", fg: "#64748B", trend: "" },
-    { label: "قيد المعالجة",        value: inProgress, icon: Clock,         bg: "rgba(245,158,11,0.15)", fg: "#D97706", trend: "" },
-    { label: "محلولة/مغلقة",        value: resolved,   icon: CheckCircle2,  bg: "rgba(34,197,94,0.15)",  fg: "#16A34A", trend: "" },
-    { label: "بانتظار الاعتماد",    value: pending,    icon: TrendingUp,    bg: "rgba(124,58,237,0.15)", fg: "#7C3AED", trend: pending > 0 ? "يحتاج انتباه!" : "" },
-    { label: "تذاكر حرجة",          value: critical,   icon: AlertTriangle, bg: "rgba(239,68,68,0.15)",  fg: "#DC2626", trend: critical > 0 ? "عاجل!" : "" },
+    { label: "إجمالي التذاكر",   value: total,      icon: Ticket,        bg: "rgba(124,58,237,0.15)",  fg: "#7C3AED", trend: "", href: "/admin/tickets" },
+    { label: "مفتوحة",           value: open,       icon: AlertTriangle, bg: "rgba(148,163,184,0.12)", fg: "#64748B", trend: "", href: "/admin/tickets?status=OPEN" },
+    { label: "قيد المعالجة",     value: inProgress, icon: Clock,         bg: "rgba(245,158,11,0.15)",  fg: "#D97706", trend: "", href: "/admin/tickets?status=IN_PROGRESS" },
+    { label: "محلولة/مغلقة",     value: resolved,   icon: CheckCircle2,  bg: "rgba(34,197,94,0.15)",   fg: "#16A34A", trend: "", href: "/admin/tickets?status=RESOLVED" },
+    { label: "بانتظار الاعتماد", value: pending,    icon: TrendingUp,    bg: "rgba(124,58,237,0.15)",  fg: "#7C3AED", trend: pending > 0 ? "يحتاج انتباه!" : "", href: "/admin/tickets?status=PENDING_APPROVAL" },
+    { label: "تذاكر حرجة",       value: critical,   icon: AlertTriangle, bg: "rgba(239,68,68,0.15)",   fg: "#DC2626", trend: critical > 0 ? "عاجل!" : "",          href: "/admin/tickets?priority=CRITICAL" },
   ];
 
   return (
@@ -50,19 +50,21 @@ export default async function AdminDashboard() {
         </div>
       )}
 
-      {/* KPIs */}
+      {/* KPIs — clickable */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {kpis.map((kpi) => {
           const Icon = kpi.icon;
           return (
-            <div key={kpi.label} className="rounded-xl border border-purple-100 p-4" style={{ background: "#FFFFFF" }}>
+            <Link key={kpi.label} href={kpi.href}
+              className="rounded-xl border border-purple-100 p-4 transition-all hover:shadow-md hover:-translate-y-0.5 hover:border-purple-300"
+              style={{ background: "#FFFFFF" }}>
               <div className="inline-flex p-2 rounded-lg mb-2" style={{ background: kpi.bg }}>
                 <Icon className="w-4 h-4" style={{ color: kpi.fg }} />
               </div>
               <p className="text-2xl font-bold" style={{ color: "#1F1535" }}>{kpi.value}</p>
               <p className="text-xs text-purple-400 mt-0.5">{kpi.label}</p>
               {kpi.trend && <p className="text-xs font-bold mt-1" style={{ color: "#DC2626" }}>{kpi.trend}</p>}
-            </div>
+            </Link>
           );
         })}
       </div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cn, priorityColors, statusBadge, statusLabel, priorityLabel, priorityBadge, typeLabel } from "@/lib/utils";
-import { MessageSquare, Paperclip, Clock } from "lucide-react";
+import { MessageSquare, Paperclip, Clock, UserCheck, AlertCircle } from "lucide-react";
 
 interface TicketCardProps {
   ticket: any;
@@ -8,14 +8,23 @@ interface TicketCardProps {
 }
 
 export default function TicketCard({ ticket, href }: TicketCardProps) {
+  const needsReply = ticket.status === "WAITING_INFO";
   return (
     <Link href={href}>
       <div
         className={cn(
           "rounded-xl border-r-4 border border-purple-100 bg-white p-4 hover:shadow-md hover:border-purple-200 transition-all cursor-pointer",
-          priorityColors[ticket.priority]
+          priorityColors[ticket.priority],
+          needsReply && "ring-2 ring-purple-400"
         )}
       >
+        {needsReply && (
+          <div className="flex items-center gap-1.5 mb-2 text-xs font-semibold px-2 py-1 rounded-lg w-fit"
+            style={{ background: "rgba(124,58,237,0.12)", color: "#5B21B6" }}>
+            <AlertCircle className="w-3 h-3" />
+            بانتظار ردك
+          </div>
+        )}
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex-1 min-w-0">
             <p className="text-xs text-purple-500 mb-1">{ticket.ticketNo}</p>
@@ -37,7 +46,10 @@ export default function TicketCard({ ticket, href }: TicketCardProps) {
           <div className="flex items-center gap-3">
             <span className="px-2 py-0.5 rounded bg-purple-50 text-purple-700">{typeLabel[ticket.type]}</span>
             {ticket.assignedTo && (
-              <span style={{ color: "#7C3AED" }}>← {ticket.assignedTo.name}</span>
+              <span className="flex items-center gap-1" style={{ color: "#7C3AED" }}>
+                <UserCheck className="w-3 h-3" />
+                {ticket.assignedTo.name}
+              </span>
             )}
           </div>
           <div className="flex items-center gap-2">

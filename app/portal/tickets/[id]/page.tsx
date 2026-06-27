@@ -30,13 +30,12 @@ export default async function TicketDetailPage({ params }: { params: { id: strin
   const timelineEvents = [
     { date: ticket.createdAt, label: "تم رفع التذكرة", color: "bg-blue-500" },
     ...(ticket.assignedTo ? [{ date: ticket.updatedAt, label: `تم التكليف إلى ${ticket.assignedTo.name}`, color: "bg-purple-500" }] : []),
-    ...(ticket.resolvedAt ? [{ date: ticket.resolvedAt, label: "تم الحل", color: "bg-purple-9500" }] : []),
+    ...(ticket.resolvedAt ? [{ date: ticket.resolvedAt, label: "تم الحل", color: "bg-green-500" }] : []),
   ];
 
   return (
-    <>
+    <div className="max-w-3xl mx-auto space-y-6">
       <Breadcrumb crumbs={[{ label: "الرئيسية", href: "/portal" }, { label: "تذاكري", href: "/portal/tickets" }, { label: ticket.ticketNo }]} />
-      <div className="max-w-3xl mx-auto space-y-6">
       {/* Header */}
       <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
         <div className="flex items-start justify-between gap-4 mb-4">
@@ -113,6 +112,5 @@ export default async function TicketDetailPage({ params }: { params: { id: strin
         userRole="USER"
       />
     </div>
-    </>
   );
 }

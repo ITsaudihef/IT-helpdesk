@@ -34,9 +34,8 @@ export default async function AdminTicketDetail({ params }: { params: { id: stri
   if (!ticket) notFound();
 
   return (
-    <>
+    <div className="max-w-3xl mx-auto space-y-6">
       <Breadcrumb crumbs={[{ label: "الرئيسية", href: "/admin" }, { label: "التذاكر", href: "/admin/tickets" }, { label: ticket.ticketNo }]} />
-      <div className="max-w-3xl mx-auto space-y-6">
       <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
         <div className="flex items-start justify-between gap-4 mb-4">
           <div>
@@ -94,6 +93,5 @@ export default async function AdminTicketDetail({ params }: { params: { id: stri
         userRole="ADMIN"
       />
     </div>
-    </>
   );
 }
