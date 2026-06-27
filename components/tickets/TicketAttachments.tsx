@@ -59,10 +59,10 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
   };
 
   return (
-    <div className="rounded-2xl p-5 shadow-sm" style={{ background: "#100835", border: "1px solid #E9E3FF" }}>
+    <div className="rounded-2xl p-5 shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
       <div className="flex items-center gap-2 mb-4">
         <Paperclip className="w-4 h-4" style={{ color: "#7C3AED" }} />
-        <h3 className="font-bold text-white text-sm">
+        <h3 className="font-bold text-sm" style={{ color: "#1F1535" }}>
           المرفقات {list.length > 0 && <span className="text-purple-500 font-normal">({list.length})</span>}
         </h3>
       </div>
@@ -75,7 +75,7 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
         <ul className="space-y-2 mb-4">
           {list.map(a => (
             <li key={a.id}
-              className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-purple-900/20 transition-colors">
+              className="flex items-center gap-3 p-3 rounded-lg border border-purple-100 bg-white/5 hover:bg-purple-900/20 transition-colors">
               <span style={{ color: "#7C3AED" }}>{fileIcon(a.fileName)}</span>
               <span className="flex-1 text-sm text-purple-200 truncate">{a.fileName}</span>
               <a href={a.fileUrl} target="_blank" rel="noreferrer" download={a.fileName}
@@ -99,7 +99,7 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
             className="border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-colors hover:bg-purple-900/20"
             style={{ borderColor: "#7C3AED" }}>
             <Upload className="w-6 h-6 mx-auto mb-1" style={{ color: "#7C3AED" }} />
-            <p className="text-xs text-purple-300">اسحب ملفات أو اضغط للاختيار</p>
+            <p className="text-xs text-gray-500">اسحب ملفات أو اضغط للاختيار</p>
             <p className="text-xs text-purple-500 mt-1">الحد الأقصى للملف: 2MB</p>
             <input ref={fileRef} type="file" multiple className="hidden" accept={ALLOWED}
               onChange={e => addFiles(e.target.files)} />
@@ -109,7 +109,7 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
           {pending.length > 0 && (
             <ul className="space-y-1">
               {pending.map((f, i) => (
-                <li key={i} className="flex items-center gap-2 text-xs text-purple-300 bg-yellow-50 rounded-lg px-3 py-2">
+                <li key={i} className="flex items-center gap-2 text-xs text-amber-700 bg-yellow-50 rounded-lg px-3 py-2">
                   <FileText className="w-3.5 h-3.5 text-yellow-600" />
                   <span className="flex-1 truncate">{f.name}</span>
                   <button onClick={() => setPending(p => p.filter((_, j) => j !== i))}

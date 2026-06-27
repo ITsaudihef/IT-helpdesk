@@ -39,17 +39,17 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
   }, [open, ticketId, logs.length]);
 
   return (
-    <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#100835", border: "1px solid #E9E3FF" }}>
+    <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
       {/* Header — always visible, click to toggle */}
       <button
         onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center justify-between px-5 py-4 text-right transition-colors hover:bg-white/5"
+        className="w-full flex items-center justify-between px-5 py-4 text-right transition-colors hover:bg-purple-50"
       >
         <div className="flex items-center gap-2">
           <ClipboardList className="w-4 h-4 text-purple-500" />
           <span className="font-semibold text-white text-sm">سجل الأحداث</span>
           {logs.length > 0 && (
-            <span className="text-xs px-2 py-0.5 rounded-full font-medium text-purple-300" style={{ background: "rgba(124,58,237,0.12)" }}>
+            <span className="text-xs px-2 py-0.5 rounded-full font-medium text-gray-500" style={{ background: "rgba(124,58,237,0.12)" }}>
               {logs.length}
             </span>
           )}
@@ -87,7 +87,7 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
                         )}
                       </div>
                       {log.detail && (
-                        <p className="text-xs text-purple-300">{log.detail}</p>
+                        <p className="text-xs text-gray-500">{log.detail}</p>
                       )}
                       <p className="text-xs text-purple-500">{formatTime(log.createdAt)}</p>
                     </div>

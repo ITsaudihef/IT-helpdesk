@@ -38,8 +38,8 @@ export default async function TicketDetailPage({ params }: { params: { id: strin
       <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
         <div className="flex items-start justify-between gap-4 mb-4">
           <div>
-            <p className="text-sm text-purple-400 mb-1">{ticket.ticketNo}</p>
-            <h1 className="text-xl font-bold text-white">{ticket.title}</h1>
+            <p className="text-sm text-purple-600 mb-1">{ticket.ticketNo}</p>
+            <h1 className="text-xl font-bold" style={{ color: "#1F1535" }}>{ticket.title}</h1>
           </div>
           <div className="flex flex-col items-end gap-2">
             <StatusBadge status={ticket.status} />
@@ -47,7 +47,7 @@ export default async function TicketDetailPage({ params }: { params: { id: strin
           </div>
         </div>
 
-        <p className="text-purple-300 text-sm leading-relaxed mb-4">{ticket.description}</p>
+        <p className="text-sm leading-relaxed mb-4" style={{ color: "#374151" }}>{ticket.description}</p>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/5">
           <div>
@@ -73,13 +73,13 @@ export default async function TicketDetailPage({ params }: { params: { id: strin
 
       {/* Timeline */}
       <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-        <h2 className="font-semibold text-white mb-4">مسار التذكرة</h2>
+        <h2 className="font-semibold mb-4" style={{ color: "#1F1535" }}>مسار التذكرة</h2>
         <div className="space-y-3">
           {timelineEvents.map((e, i) => (
             <div key={i} className="flex items-center gap-3">
               <div className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${e.color}`} />
               <div className="flex-1 flex items-center justify-between">
-                <p className="text-sm text-purple-200">{e.label}</p>
+                <p className="text-sm text-gray-700">{e.label}</p>
                 <p className="text-xs text-purple-500">{formatDate(e.date)}</p>
               </div>
             </div>

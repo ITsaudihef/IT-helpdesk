@@ -16,7 +16,7 @@ export default async function CommAdminAllTicketsPage() {
   return (
     <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
       <div className="px-5 py-4 border-b border-white/5">
-        <h2 className="font-bold text-white">جميع تذاكر التواصل المؤسسي</h2>
+        <h2 className="font-bold" style={{ color: "#1F1535" }}>جميع تذاكر التواصل المؤسسي</h2>
       </div>
       {tickets.length === 0 ? (
         <p className="text-center text-purple-500 py-12 text-sm">لا توجد تذاكر</p>
@@ -29,7 +29,7 @@ export default async function CommAdminAllTicketsPage() {
                 <div className="flex-1 min-w-0">
                   <p className="text-xs text-purple-500 mb-0.5">{t.ticketNo}</p>
                   <p className="text-sm font-semibold text-white truncate">{t.title}</p>
-                  <p className="text-xs text-purple-400 mt-0.5">
+                  <p className="text-xs text-purple-600 mt-0.5">
                     {t.createdBy.name}
                     {t.assignedTo ? ` · مكلّف: ${t.assignedTo.name}` : ""}
                   </p>

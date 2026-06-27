@@ -15,7 +15,7 @@ export default async function CommSupportMyTicketsPage() {
   return (
     <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
       <div className="px-5 py-4 border-b border-white/5 flex items-center justify-between">
-        <h2 className="font-bold text-white">تذاكري المرفوعة</h2>
+        <h2 className="font-bold" style={{ color: "#1F1535" }}>تذاكري المرفوعة</h2>
         <Link href="/comm-support/new"
           className="text-sm font-semibold px-4 py-2 rounded-xl text-white"
           style={{ background: "#7C3AED" }}>+ تذكرة جديدة</Link>

@@ -93,21 +93,21 @@ export default function CommSupportNewTicketPage() {
       <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
         {step === 0 && (
           <div className="space-y-5">
-            <h2 className="text-lg font-bold text-white">تفاصيل التذكرة</h2>
+            <h2 className="text-lg font-bold" style={{ color: "#1F1535" }}>تفاصيل التذكرة</h2>
             <div>
-              <label className="block text-sm font-medium text-purple-200 mb-1.5">عنوان الطلب *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">عنوان الطلب *</label>
               <input value={form.title} onChange={e => setForm({ ...form, title: e.target.value })}
                 placeholder="مثال: مشكلة في الوصول لنظام الحضور"
                 className="w-full px-3 py-2.5 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-purple-200 mb-1.5">وصف الطلب *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">وصف الطلب *</label>
               <textarea value={form.description} onChange={e => setForm({ ...form, description: e.target.value })}
                 rows={4} placeholder="اشرح طلبك بالتفصيل..."
                 className="w-full px-3 py-2.5 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2 resize-none" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-purple-200 mb-2">نوع الطلب *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">نوع الطلب *</label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {typeOptions.map(t => (
                   <button key={t.value} type="button" onClick={() => setForm({ ...form, type: t.value, requiresApproval: t.value === "DEVELOPMENT" })}
@@ -115,20 +115,20 @@ export default function CommSupportNewTicketPage() {
                     style={{ borderColor: form.type === t.value ? "#7C3AED" : "#e5e7eb", background: form.type === t.value ? "rgba(124,58,237,0.12)" : "#fff" }}>
                     <div className="text-2xl mb-2">{t.icon}</div>
                     <div className="font-semibold text-sm" style={{ color: form.type === t.value ? "#5B21B6" : "#111827" }}>{t.label}</div>
-                    <div className="text-xs text-purple-400 mt-1">{t.desc}</div>
+                    <div className="text-xs text-purple-600 mt-1">{t.desc}</div>
                   </button>
                 ))}
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-purple-200 mb-2">الأولوية</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">الأولوية</label>
               <div className="grid grid-cols-2 gap-2">
                 {priorityOptions.map(p => (
                   <button key={p.value} type="button" onClick={() => setForm({ ...form, priority: p.value })}
                     className="p-3 rounded-xl border-2 text-right transition-all"
                     style={{ borderColor: form.priority === p.value ? p.border : "#e5e7eb", background: form.priority === p.value ? p.bg : "#fff" }}>
                     <div className="text-sm font-semibold" style={{ color: form.priority === p.value ? p.fg : "#374151" }}>{p.label}</div>
-                    <div className="text-xs text-purple-400 mt-0.5">{p.desc}</div>
+                    <div className="text-xs text-purple-600 mt-0.5">{p.desc}</div>
                   </button>
                 ))}
               </div>
@@ -138,13 +138,13 @@ export default function CommSupportNewTicketPage() {
 
         {step === 1 && (
           <div className="space-y-5">
-            <h2 className="text-lg font-bold text-white">المرفقات (اختياري)</h2>
+            <h2 className="text-lg font-bold" style={{ color: "#1F1535" }}>المرفقات (اختياري)</h2>
             <div onClick={() => fileRef.current?.click()} onDragOver={e => e.preventDefault()}
               onDrop={e => { e.preventDefault(); addFiles(e.dataTransfer.files); }}
               className="border-2 border-dashed rounded-xl p-10 text-center cursor-pointer hover:bg-purple-900/20"
               style={{ borderColor: "#7C3AED" }}>
               <Upload className="w-10 h-10 mx-auto mb-3" style={{ color: "#7C3AED" }} />
-              <p className="text-sm text-purple-200">اسحب الملفات هنا أو اضغط للاختيار</p>
+              <p className="text-sm text-gray-700">اسحب الملفات هنا أو اضغط للاختيار</p>
               <p className="text-xs text-purple-500 mt-1">الحد الأقصى 2MB لكل ملف</p>
               <input ref={fileRef} type="file" multiple className="hidden" accept=".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.xls,.xlsx"
                 onChange={e => addFiles(e.target.files)} />
@@ -167,7 +167,7 @@ export default function CommSupportNewTicketPage() {
 
         {step === 2 && (
           <div className="space-y-5">
-            <h2 className="text-lg font-bold text-white">مراجعة وتأكيد</h2>
+            <h2 className="text-lg font-bold" style={{ color: "#1F1535" }}>مراجعة وتأكيد</h2>
             <div className="rounded-xl p-4 space-y-3" style={{ background: "#0a0320" }}>
               {[
                 { label: "العنوان",   value: form.title },
@@ -175,13 +175,13 @@ export default function CommSupportNewTicketPage() {
                 { label: "الأولوية", value: priorityOptions.find(p => p.value === form.priority)?.label },
               ].map(r => (
                 <div key={r.label} className="flex justify-between text-sm">
-                  <span className="text-purple-400">{r.label}</span>
+                  <span className="text-purple-600">{r.label}</span>
                   <span className="font-semibold text-white">{r.value}</span>
                 </div>
               ))}
               <div className="pt-2 border-t border-white/8">
                 <p className="text-xs text-purple-500 mb-1">الوصف</p>
-                <p className="text-sm text-purple-200">{form.description}</p>
+                <p className="text-sm text-gray-700">{form.description}</p>
               </div>
             </div>
           </div>
@@ -189,7 +189,7 @@ export default function CommSupportNewTicketPage() {
 
         <div className="flex gap-3 mt-6">
           {step > 0 && (
-            <button onClick={() => setStep(s => s - 1)} className="flex items-center gap-2 px-4 py-2 border border-white/8 rounded-lg text-sm text-purple-200">
+            <button onClick={() => setStep(s => s - 1)} className="flex items-center gap-2 px-4 py-2 border border-white/8 rounded-lg text-sm text-gray-700">
               <ChevronRight className="w-4 h-4" />السابق
             </button>
           )}

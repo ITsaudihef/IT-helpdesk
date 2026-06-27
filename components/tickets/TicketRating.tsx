@@ -26,8 +26,8 @@ export default function TicketRating({ ticketId, currentRating }: Props) {
   };
 
   return (
-    <div className="rounded-2xl p-6 text-center shadow-sm" style={{ background: "#100835", border: "1px solid #E9E3FF" }}>
-      <h2 className="font-bold text-white mb-1">قيّم الخدمة</h2>
+    <div className="rounded-2xl p-6 text-center shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+      <h2 className="font-bold mb-1" style={{ color: "#1F1535" }}>قيّم الخدمة</h2>
       <p className="text-sm text-purple-400 mb-4">
         {saved ? "شكراً على تقييمك! 🌟" : "كيف كانت تجربتك مع فريق الدعم؟"}
       </p>

@@ -51,11 +51,11 @@ export default async function PortalPage() {
         ].map((stat) => {
           const Icon = stat.icon;
           return (
-            <div key={stat.label} className="rounded-xl border border-white/5 p-4" style={{ background: "#FFFFFF" }}>
+            <div key={stat.label} className="rounded-xl border border-purple-100 p-4" style={{ background: "#FFFFFF" }}>
               <div className="inline-flex p-2 rounded-lg mb-2" style={{ background: stat.bg }}>
                 <Icon className="w-4 h-4" style={{ color: stat.fg }} />
               </div>
-              <p className="text-2xl font-bold text-white">{stat.value}</p>
+              <p className="text-2xl font-bold" style={{ color: "#1F1535" }}>{stat.value}</p>
               <p className="text-xs text-purple-400 mt-0.5">{stat.label}</p>
             </div>
           );
@@ -65,7 +65,7 @@ export default async function PortalPage() {
       {/* Recent tickets */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-bold text-white">آخر التذاكر</h2>
+          <h2 className="font-bold" style={{ color: "#1F1535" }}>آخر التذاكر</h2>
           <Link href="/portal/tickets" className="text-sm font-medium hover:underline" style={{ color: "#7C3AED" }}>
             عرض الكل
           </Link>
@@ -76,7 +76,7 @@ export default async function PortalPage() {
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(124,58,237,0.12)" }}>
               <Ticket className="w-8 h-8" style={{ color: "#7C3AED" }} />
             </div>
-            <h3 className="font-semibold text-white mb-1">لا توجد تذاكر بعد</h3>
+            <h3 className="font-semibold mb-1" style={{ color: "#1F1535" }}>لا توجد تذاكر بعد</h3>
             <p className="text-sm text-purple-400 mb-4">ارفع أول تذكرة دعم لك</p>
             <Link href="/portal/new"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white"

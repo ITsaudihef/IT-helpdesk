@@ -1,9 +1,9 @@
 export default function SettingsPage() {
   return (
     <div className="space-y-6">
-      <h1 className="text-lg font-semibold text-white">إعدادات النظام</h1>
+      <h1 className="text-lg font-semibold text-gray-900">إعدادات النظام</h1>
       <div className="rounded-xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-        <h2 className="font-medium text-white mb-4">أنواع التذاكر</h2>
+        <h2 className="font-medium text-gray-900 mb-4">أنواع التذاكر</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {[
             { value: "HARDWARE", label: "أجهزة", icon: "🖥️" },
@@ -12,10 +12,10 @@ export default function SettingsPage() {
             { value: "ACCESS", label: "صلاحيات", icon: "🔐" },
             { value: "OTHER", label: "أخرى", icon: "📋" },
           ].map((t) => (
-            <div key={t.value} className="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/8">
+            <div key={t.value} className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg border border-white/8">
               <span className="text-xl">{t.icon}</span>
               <div>
-                <p className="text-sm font-medium text-white">{t.label}</p>
+                <p className="text-sm font-medium text-gray-900">{t.label}</p>
                 <p className="text-xs text-purple-500">{t.value}</p>
               </div>
             </div>
@@ -24,7 +24,7 @@ export default function SettingsPage() {
       </div>
 
       <div className="rounded-xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-        <h2 className="font-medium text-white mb-4">مستويات الأولوية</h2>
+        <h2 className="font-medium text-gray-900 mb-4">مستويات الأولوية</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
             { value: "LOW", label: "منخفضة", color: "bg-purple-900 text-green-700 border-green-200" },
@@ -41,9 +41,9 @@ export default function SettingsPage() {
       </div>
 
       <div className="rounded-xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-        <h2 className="font-medium text-white mb-2">إعدادات البريد الإلكتروني</h2>
+        <h2 className="font-medium text-gray-900 mb-2">إعدادات البريد الإلكتروني</h2>
         <p className="text-sm text-purple-400 mb-4">إعدادات Nodemailer لإشعارات تغيير الحالة</p>
-        <div className="bg-white/5 rounded-lg p-4 font-mono text-xs text-purple-300 space-y-1">
+        <div className="bg-purple-50 rounded-lg p-4 font-mono text-xs text-gray-500 space-y-1">
           <p>SMTP_HOST = {process.env.SMTP_HOST || "smtp.gmail.com"}</p>
           <p>SMTP_PORT = {process.env.SMTP_PORT || "587"}</p>
           <p>SMTP_USER = {process.env.SMTP_USER ? "✓ محدد" : "❌ غير محدد"}</p>

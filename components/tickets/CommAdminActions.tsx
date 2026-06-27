@@ -59,16 +59,16 @@ export default function CommAdminActions({ ticketId, status, commSupportUsers }:
   if (!isPending) return null;
 
   return (
-    <div className="rounded-2xl p-5 space-y-4" style={{ background: "#100835", border: "1px solid rgba(245,158,11,0.25)" }}>
+    <div className="rounded-2xl p-5 space-y-4" style={{ background: "#FFFFFF", border: "1px solid #FDE68A" }}>
       <div className="flex items-center gap-2">
         <span className="w-2 h-2 rounded-full bg-yellow-400" />
-        <h3 className="font-bold text-white text-sm">اعتماد التذكرة</h3>
+        <h3 className="font-bold text-sm" style={{ color: "#1F1535" }}>اعتماد التذكرة</h3>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-purple-200 mb-1.5">تكليف إلى موظف دعم الاتصال المؤسسي</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">تكليف إلى موظف دعم الاتصال المؤسسي</label>
         <select value={assignedToId} onChange={e => setAssignedToId(e.target.value)}
-          className="w-full px-3 py-2.5 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2 bg-white">
+          className="w-full px-3 py-2.5 border border-purple-100 rounded-lg text-sm focus:outline-none focus:ring-2 bg-white">
           <option value="">— اختر موظفاً —</option>
           {commSupportUsers.map(u => (
             <option key={u.id} value={u.id}>{u.name}</option>

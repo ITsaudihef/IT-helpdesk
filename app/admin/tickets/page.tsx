@@ -29,7 +29,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-bold text-white">جميع التذاكر ({tickets.length})</h1>
+        <h1 className="text-lg font-bold" style={{ color: "#1F1535" }}>جميع التذاكر ({tickets.length})</h1>
       </div>
 
       {/* Filters */}
@@ -68,10 +68,10 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
       <div className="rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead style={{ background: "#0a0320" }}>
+            <thead style={{ background: "#F5F3FF", borderBottom: "2px solid #E9E3FF" }}>
               <tr>
                 {["رقم التذكرة","العنوان","المُرسل / القسم","النوع","الأولوية","الحالة","المسند إلى","تاريخ الرفع",""].map(h => (
-                  <th key={h} className="px-4 py-3 text-right text-xs font-semibold text-purple-400 whitespace-nowrap">{h}</th>
+                  <th key={h} className="px-4 py-3 text-right text-xs font-semibold text-purple-600 whitespace-nowrap">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -81,12 +81,12 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
               ) : tickets.map(t => (
                 <tr key={t.id} className="hover:bg-purple-950/20 transition-colors">
                   <td className="px-4 py-3 font-mono text-xs font-bold" style={{ color: "#7C3AED" }}>{t.ticketNo}</td>
-                  <td className="px-4 py-3 max-w-xs"><p className="font-medium text-white truncate">{t.title}</p></td>
+                  <td className="px-4 py-3 max-w-xs"><p className="font-medium truncate" style={{ color: "#1F1535" }}>{t.title}</p></td>
                   <td className="px-4 py-3">
-                    <p className="text-white">{t.createdBy.name}</p>
+                    <p className="text-gray-700">{t.createdBy.name}</p>
                     <p className="text-xs text-purple-500">{t.createdBy.department}</p>
                   </td>
-                  <td className="px-4 py-3 text-purple-300 whitespace-nowrap">{typeLabel[t.type]}</td>
+                  <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{typeLabel[t.type]}</td>
                   <td className="px-4 py-3">
                     <span className={cn("px-2 py-0.5 rounded-full text-xs font-semibold", priorityBadge[t.priority])}>
                       {priorityLabel[t.priority]}
@@ -97,7 +97,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
                       {statusLabel[t.status]}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-purple-300">{t.assignedTo?.name || "—"}</td>
+                  <td className="px-4 py-3 text-gray-500">{t.assignedTo?.name || "—"}</td>
                   <td className="px-4 py-3 text-purple-500 whitespace-nowrap">{new Date(t.createdAt).toLocaleDateString("ar-SA")}</td>
                   <td className="px-4 py-3">
                     <Link href={`/admin/tickets/${t.id}`}

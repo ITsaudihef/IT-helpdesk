@@ -18,7 +18,7 @@ export default async function MyTicketsPage() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold text-white">تذاكري ({tickets.length})</h1>
+        <h1 className="text-lg font-semibold" style={{ color: "#1F1535" }}>تذاكري ({tickets.length})</h1>
         <Link
           href="/portal/new"
           className="text-white px-4 py-2 rounded-lg text-sm font-medium"
@@ -33,8 +33,8 @@ export default async function MyTicketsPage() {
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(124,58,237,0.15)" }}>
             <Ticket className="w-8 h-8" style={{ color: "#C4B5FD" }} />
           </div>
-          <h3 className="font-medium text-white mb-1">لا توجد تذاكر</h3>
-          <p className="text-sm text-purple-400">لم ترفع أي تذكرة حتى الآن</p>
+          <h3 className="font-medium mb-1" style={{ color: "#1F1535" }}>لا توجد تذاكر</h3>
+          <p className="text-sm text-purple-600">لم ترفع أي تذكرة حتى الآن</p>
         </div>
       ) : (
         <div className="space-y-3">

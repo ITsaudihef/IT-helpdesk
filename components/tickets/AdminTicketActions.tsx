@@ -68,8 +68,8 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
         onCancel={() => setConfirm(null)}
       />
 
-      <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#100835", border: "1px solid #E9E3FF" }}>
-        <h2 className="font-bold text-white mb-4">إجراءات المدير</h2>
+      <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+        <h2 className="font-bold mb-4" style={{ color: "#1F1535" }}>إجراءات المدير</h2>
 
         {ticket.status === "PENDING_APPROVAL" && (
           <div className="mb-5 p-4 rounded-xl border" style={{ background: "rgba(245,158,11,0.08)", borderColor: "rgba(245,158,11,0.25)" }}>
@@ -98,9 +98,9 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
             { label: "الأولوية", value: priority, onChange: setPriority, options: ALL_PRIORITIES.map(p => ({ v: p, l: priorityLabel[p] })) },
           ].map((f) => (
             <div key={f.label}>
-              <label className="block text-sm font-medium text-purple-200 mb-1.5">{f.label}</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">{f.label}</label>
               <select value={f.value} onChange={(e) => f.onChange(e.target.value)}
-                className="w-full px-3 py-2 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2"
+                className="w-full px-3 py-2 border border-purple-100 rounded-lg text-sm focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "#7C3AED" } as any}>
                 {f.options.map((o) => <option key={o.v} value={o.v}>{o.l}</option>)}
               </select>
@@ -108,9 +108,9 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
           ))}
 
           <div>
-            <label className="block text-sm font-medium text-purple-200 mb-1.5">إسناد إلى</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">إسناد إلى</label>
             <select value={assignTo} onChange={(e) => setAssignTo(e.target.value)}
-              className="w-full px-3 py-2 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2"
+              className="w-full px-3 py-2 border border-purple-100 rounded-lg text-sm focus:outline-none focus:ring-2"
               style={{ "--tw-ring-color": "#7C3AED" } as any}>
               <option value="">غير مسندة</option>
               {supportUsers.map((u) => <option key={u.id} value={u.id}>{u.name}</option>)}

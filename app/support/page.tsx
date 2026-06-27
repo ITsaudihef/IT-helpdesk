@@ -49,7 +49,7 @@ export default async function SupportDashboard() {
       </div>
 
       <div>
-        <h2 className="font-bold text-white mb-4">
+        <h2 className="font-bold mb-4" style={{ color: "#1F1535" }}>
           التذاكر المسندة إليّ ({sorted.length}) — مرتبة بالأولوية
         </h2>
 
@@ -59,7 +59,7 @@ export default async function SupportDashboard() {
               <HeadphonesIcon className="w-8 h-8" style={{ color: "#7C3AED" }} />
             </div>
             <h3 className="font-semibold text-white">لا توجد تذاكر مسندة</h3>
-            <p className="text-sm text-purple-400 mt-1">أنت متاح لاستقبال تذاكر جديدة</p>
+            <p className="text-sm text-purple-600 mt-1">أنت متاح لاستقبال تذاكر جديدة</p>
           </div>
         ) : (
           <div className="space-y-3">

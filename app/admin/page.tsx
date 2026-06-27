@@ -55,11 +55,11 @@ export default async function AdminDashboard() {
         {kpis.map((kpi) => {
           const Icon = kpi.icon;
           return (
-            <div key={kpi.label} className="rounded-xl border border-white/5 p-4" style={{ background: "#FFFFFF" }}>
+            <div key={kpi.label} className="rounded-xl border border-purple-100 p-4" style={{ background: "#FFFFFF" }}>
               <div className="inline-flex p-2 rounded-lg mb-2" style={{ background: kpi.bg }}>
                 <Icon className="w-4 h-4" style={{ color: kpi.fg }} />
               </div>
-              <p className="text-2xl font-bold text-white">{kpi.value}</p>
+              <p className="text-2xl font-bold" style={{ color: "#1F1535" }}>{kpi.value}</p>
               <p className="text-xs text-purple-400 mt-0.5">{kpi.label}</p>
               {kpi.trend && <p className="text-xs font-bold mt-1" style={{ color: "#DC2626" }}>{kpi.trend}</p>}
             </div>
@@ -70,7 +70,7 @@ export default async function AdminDashboard() {
       {/* Recent tickets */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-bold text-white">أحدث التذاكر</h2>
+          <h2 className="font-bold" style={{ color: "#1F1535" }}>أحدث التذاكر</h2>
           <Link href="/admin/tickets" className="text-sm font-medium hover:underline" style={{ color: "#7C3AED" }}>
             عرض الكل
           </Link>

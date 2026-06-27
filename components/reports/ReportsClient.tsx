@@ -17,17 +17,17 @@ const ARABIC_STATUS: Record<string, string> = {
   PENDING_APPROVAL: "بانتظار الاعتماد", RESOLVED: "تم الحل", CLOSED: "مغلقة",
 };
 const STATUS_COLORS: Record<string, { bg: string; fg: string }> = {
-  OPEN:             { bg: "rgba(148,163,184,0.12)", fg: "#CBD5E1" },
-  IN_PROGRESS:      { bg: "rgba(245,158,11,0.15)",  fg: "#FCD34D" },
-  WAITING_INFO:     { bg: "rgba(124,58,237,0.15)",  fg: "#C4B5FD" },
-  PENDING_APPROVAL: { bg: "rgba(245,158,11,0.15)",  fg: "#FCD34D" },
-  RESOLVED:         { bg: "rgba(34,197,94,0.15)",   fg: "#86EFAC" },
-  CLOSED:           { bg: "rgba(100,116,139,0.12)", fg: "#94A3B8" },
+  OPEN:             { bg: "#F1F5F9", fg: "#475569" },
+  IN_PROGRESS:      { bg: "#FEF3C7", fg: "#92400E" },
+  WAITING_INFO:     { bg: "#EDE9FE", fg: "#5B21B6" },
+  PENDING_APPROVAL: { bg: "#FEF3C7", fg: "#B45309" },
+  RESOLVED:         { bg: "#D1FAE5", fg: "#065F46" },
+  CLOSED:           { bg: "#F3F4F6", fg: "#374151" },
 };
 const TYPE_META: Record<string, { bg: string; fg: string; icon: string }> = {
-  SUPPORT:       { bg: "rgba(124,58,237,0.15)", fg: "#C4B5FD", icon: "🛠️" },
-  SHIFA_SUPPORT: { bg: "rgba(59,130,246,0.15)", fg: "#93C5FD", icon: "🏥" },
-  DEVELOPMENT:   { bg: "rgba(168,85,247,0.15)", fg: "#D8B4FE", icon: "💻" },
+  SUPPORT:       { bg: "#EDE9FE", fg: "#5B21B6", icon: "🛠️" },
+  SHIFA_SUPPORT: { bg: "#DBEAFE", fg: "#1D4ED8", icon: "🏥" },
+  DEVELOPMENT:   { bg: "#F3E8FF", fg: "#7E22CE", icon: "💻" },
 };
 const ARABIC_PRIORITY: Record<string, string> = { CRITICAL: "حرجة", HIGH: "عالية", MEDIUM: "متوسطة", LOW: "منخفضة" };
 const PRIORITY_COLORS: Record<string, string>  = { حرجة: "#ef4444", عالية: "#f97316", متوسطة: "#7C3AED", منخفضة: "#5B21B6" };
@@ -50,7 +50,7 @@ export default function ReportsClient() {
     return (
       <div className="space-y-4">
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="rounded-xl border border-white/5 p-6 h-32 animate-pulse" style={{ background: "#100835" }} />
+          <div key={i} className="rounded-xl border border-purple-100 p-6 h-32 animate-pulse" style={{ background: "#FFFFFF" }} />
         ))}
       </div>
     );
@@ -68,13 +68,13 @@ export default function ReportsClient() {
   return (
     <div className="space-y-6">
       {/* Period selector */}
-      <div className="flex gap-2 rounded-xl border border-white/5 p-4" style={{ background: "#100835" }}>
+      <div className="flex gap-2 rounded-xl border border-purple-100 p-4" style={{ background: "#FFFFFF" }}>
         {[{ value: "weekly", label: "أسبوعي" }, { value: "monthly", label: "شهري" }, { value: "quarterly", label: "ربعي" }].map(p => (
           <button key={p.value} onClick={() => setPeriod(p.value)}
             className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
             style={period === p.value
               ? { background: "linear-gradient(135deg,#7C3AED,#5B21B6)", color: "#fff" }
-              : { color: "#A78BFA", background: "transparent" }}>
+              : { color: "#6D28D9", background: "transparent" }}>
             {p.label}
           </button>
         ))}
@@ -83,12 +83,12 @@ export default function ReportsClient() {
       {/* Top KPI row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "إجمالي التذاكر",  value: summary.total,                    fg: "#C4B5FD", bg: "rgba(124,58,237,0.15)" },
-          { label: "تذاكر حرجة",      value: summary.critical,                 fg: "#FCA5A5", bg: "rgba(239,68,68,0.15)"  },
-          { label: "محلولة + مغلقة",  value: summary.resolved,                 fg: "#86EFAC", bg: "rgba(34,197,94,0.15)"  },
-          { label: "متوسط وقت الحل",  value: `${summary.avgResolutionHours}س`, fg: "#FCD34D", bg: "rgba(245,158,11,0.15)" },
+          { label: "إجمالي التذاكر",  value: summary.total,                    fg: "#5B21B6", bg: "#EDE9FE" },
+          { label: "تذاكر حرجة",      value: summary.critical,                 fg: "#DC2626", bg: "#FEE2E2" },
+          { label: "محلولة + مغلقة",  value: summary.resolved,                 fg: "#065F46", bg: "#D1FAE5" },
+          { label: "متوسط وقت الحل",  value: `${summary.avgResolutionHours}س`, fg: "#92400E", bg: "#FEF3C7" },
         ].map(k => (
-          <div key={k.label} className="rounded-xl border border-white/5 p-4" style={{ background: "#100835" }}>
+          <div key={k.label} className="rounded-xl border border-purple-100 p-4" style={{ background: "#FFFFFF" }}>
             <p className="text-2xl font-bold" style={{ color: k.fg }}>{k.value}</p>
             <p className="text-xs text-purple-400 mt-1">{k.label}</p>
           </div>
@@ -96,8 +96,8 @@ export default function ReportsClient() {
       </div>
 
       {/* ── Detailed Status Breakdown ── */}
-      <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
-        <h3 className="font-bold text-white mb-4">إحصائيات التذاكر حسب الحالة</h3>
+      <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
+        <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>إحصائيات التذاكر حسب الحالة</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {STATUS_KEYS.map((key) => {
             const c   = STATUS_COLORS[key];
@@ -119,8 +119,8 @@ export default function ReportsClient() {
       </div>
 
       {/* ── Detailed Type Breakdown ── */}
-      <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
-        <h3 className="font-bold text-white mb-4">إحصائيات التذاكر حسب النوع</h3>
+      <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
+        <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>إحصائيات التذاكر حسب النوع</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {(["SUPPORT", "SHIFA_SUPPORT", "DEVELOPMENT"] as const).map((key) => {
             const meta = TYPE_META[key];
@@ -149,8 +149,8 @@ export default function ReportsClient() {
       {/* Charts Grid */}
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Incoming vs Resolved */}
-        <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
-          <h3 className="font-bold text-white mb-4">الواردة مقابل المحلولة</h3>
+        <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
+          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>الواردة مقابل المحلولة</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.dailyData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -165,8 +165,8 @@ export default function ReportsClient() {
         </div>
 
         {/* Type pie */}
-        <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
-          <h3 className="font-bold text-white mb-4">توزيع أنواع التذاكر</h3>
+        <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
+          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>توزيع أنواع التذاكر</h3>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie data={typeData} cx="50%" cy="50%" innerRadius={55} outerRadius={85}
@@ -180,8 +180,8 @@ export default function ReportsClient() {
         </div>
 
         {/* Staff performance */}
-        <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
-          <h3 className="font-bold text-white mb-4">أداء موظفي الدعم</h3>
+        <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
+          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>أداء موظفي الدعم</h3>
           {data.staffData.length === 0 ? (
             <p className="text-sm text-purple-500 text-center py-8">لا توجد بيانات بعد</p>
           ) : (
@@ -200,8 +200,8 @@ export default function ReportsClient() {
         </div>
 
         {/* Priority distribution */}
-        <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
-          <h3 className="font-bold text-white mb-4">توزيع الأولويات</h3>
+        <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
+          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>توزيع الأولويات</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={priorityData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />

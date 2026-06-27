@@ -34,7 +34,7 @@ export default async function CommAdminPage() {
       <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
         <div className="px-5 py-4 border-b border-white/5 flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-yellow-400" />
-          <h2 className="font-bold text-white">تذاكر التواصل المؤسسي — بانتظار الاعتماد</h2>
+          <h2 className="font-bold" style={{ color: "#1F1535" }}>تذاكر التواصل المؤسسي — بانتظار الاعتماد</h2>
         </div>
         {pending.length === 0 ? (
           <p className="text-center text-purple-500 py-12 text-sm">لا توجد تذاكر بانتظار الاعتماد ✓</p>
