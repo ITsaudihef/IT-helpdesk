@@ -13,7 +13,7 @@ export default async function CommSupportMyTicketsPage() {
   });
 
   return (
-    <div className="rounded-2xl" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }} className_unused=" shadow-sm overflow-hidden">
+    <div <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
       <div className="px-5 py-4 border-b border-white/5 flex items-center justify-between">
         <h2 className="font-bold text-white">تذاكري المرفوعة</h2>
         <Link href="/comm-support/new"

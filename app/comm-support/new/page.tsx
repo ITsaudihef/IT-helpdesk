@@ -90,7 +90,7 @@ export default function CommSupportNewTicketPage() {
         ))}
       </div>
 
-      <div className="rounded-2xl" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }} className_unused=" p-6 shadow-sm">
+      <div <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
         {step === 0 && (
           <div className="space-y-5">
             <h2 className="text-lg font-bold text-white">تفاصيل التذكرة</h2>

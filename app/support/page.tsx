@@ -54,7 +54,7 @@ export default async function SupportDashboard() {
         </h2>
 
         {sorted.length === 0 ? (
-          <div className="rounded-2xl" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }} className_unused=" p-12 text-center shadow-sm">
+          <div <div className="rounded-2xl p-12 text-center shadow-sm" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(124,58,237,0.12)" }}>
               <HeadphonesIcon className="w-8 h-8" style={{ color: "#7C3AED" }} />
             </div>

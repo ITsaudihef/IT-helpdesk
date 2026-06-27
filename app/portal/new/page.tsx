@@ -115,7 +115,7 @@ export default function NewTicketPage() {
         ))}
       </div>
 
-      <div className="rounded-2xl" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }} className_unused=" p-6 shadow-sm">
+      <div <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
 
         {/* ── Step 1: Details ── */}
         {step === 0 && (
