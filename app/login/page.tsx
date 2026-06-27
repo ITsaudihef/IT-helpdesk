@@ -75,7 +75,7 @@ export default function LoginPage() {
             <h1 className="text-xl font-bold gradient-text">بوابة تذاكر IT</h1>
           </div>
 
-          <div className="rounded-2xl p-8" style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.2)", boxShadow: "0 25px 80px rgba(0,0,0,0.5)" }}>
+          <div className="rounded-2xl p-8" style={{ background: "#FFFFFF", border: "1px solid rgba(124,58,237,0.2)", boxShadow: "0 25px 80px rgba(0,0,0,0.5)" }}>
             <h2 className="text-xl font-bold text-white mb-1">مرحباً بك</h2>
             <p className="text-sm mb-6" style={{ color: "#A78BFA" }}>سجّل دخولك للمتابعة</p>
 

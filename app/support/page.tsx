@@ -35,12 +35,12 @@ export default async function SupportDashboard() {
     <div className="space-y-6">
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "مفتوحة",           value: open,        bg: "rgba(148,163,184,0.12)", fg: "#CBD5E1" },
-          { label: "قيد المعالجة",     value: inProgress,  bg: "rgba(245,158,11,0.15)",  fg: "#FCD34D" },
-          { label: "بانتظار معلومات",  value: waiting,     bg: "rgba(124,58,237,0.15)",  fg: "#C4B5FD" },
-          { label: "مغلقة (منجزة)",    value: closedCount, bg: "rgba(100,116,139,0.12)", fg: "#94A3B8" },
+          { label: "مفتوحة",           value: open,        bg: "rgba(148,163,184,0.12)", fg: "#64748B" },
+          { label: "قيد المعالجة",     value: inProgress,  bg: "rgba(245,158,11,0.15)",  fg: "#D97706" },
+          { label: "بانتظار معلومات",  value: waiting,     bg: "rgba(124,58,237,0.15)",  fg: "#7C3AED" },
+          { label: "مغلقة (منجزة)",    value: closedCount, bg: "rgba(100,116,139,0.12)", fg: "#475569" },
         ].map(s => (
-          <div key={s.label} className="rounded-xl border border-white/5 p-4 text-center" style={{ background: "#100835" }}>
+          <div key={s.label} className="rounded-xl border border-white/5 p-4 text-center" style={{ background: "#FFFFFF" }}>
             <p className="text-2xl font-bold" style={{ color: s.fg }}>{s.value}</p>
             <span className="text-xs px-2 py-0.5 rounded-full font-medium mt-1 inline-block"
               style={{ background: s.bg, color: s.fg }}>{s.label}</span>
@@ -54,7 +54,7 @@ export default async function SupportDashboard() {
         </h2>
 
         {sorted.length === 0 ? (
-          <div className="rounded-2xl p-12 text-center shadow-sm" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+          <div className="rounded-2xl p-12 text-center shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(124,58,237,0.12)" }}>
               <HeadphonesIcon className="w-8 h-8" style={{ color: "#7C3AED" }} />
             </div>

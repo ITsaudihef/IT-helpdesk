@@ -23,12 +23,12 @@ export default async function AdminDashboard() {
   ]);
 
   const kpis = [
-    { label: "إجمالي التذاكر",      value: total,      icon: Ticket,        bg: "rgba(124,58,237,0.15)", fg: "#C4B5FD", trend: "" },
-    { label: "مفتوحة",              value: open,       icon: AlertTriangle, bg: "rgba(148,163,184,0.12)", fg: "#CBD5E1", trend: "" },
-    { label: "قيد المعالجة",        value: inProgress, icon: Clock,         bg: "rgba(245,158,11,0.15)", fg: "#FCD34D", trend: "" },
-    { label: "محلولة/مغلقة",        value: resolved,   icon: CheckCircle2,  bg: "rgba(34,197,94,0.15)",  fg: "#86EFAC", trend: "" },
-    { label: "بانتظار الاعتماد",    value: pending,    icon: TrendingUp,    bg: "rgba(124,58,237,0.15)", fg: "#C4B5FD", trend: pending > 0 ? "يحتاج انتباه!" : "" },
-    { label: "تذاكر حرجة",          value: critical,   icon: AlertTriangle, bg: "rgba(239,68,68,0.15)",  fg: "#FCA5A5", trend: critical > 0 ? "عاجل!" : "" },
+    { label: "إجمالي التذاكر",      value: total,      icon: Ticket,        bg: "rgba(124,58,237,0.15)", fg: "#7C3AED", trend: "" },
+    { label: "مفتوحة",              value: open,       icon: AlertTriangle, bg: "rgba(148,163,184,0.12)", fg: "#64748B", trend: "" },
+    { label: "قيد المعالجة",        value: inProgress, icon: Clock,         bg: "rgba(245,158,11,0.15)", fg: "#D97706", trend: "" },
+    { label: "محلولة/مغلقة",        value: resolved,   icon: CheckCircle2,  bg: "rgba(34,197,94,0.15)",  fg: "#16A34A", trend: "" },
+    { label: "بانتظار الاعتماد",    value: pending,    icon: TrendingUp,    bg: "rgba(124,58,237,0.15)", fg: "#7C3AED", trend: pending > 0 ? "يحتاج انتباه!" : "" },
+    { label: "تذاكر حرجة",          value: critical,   icon: AlertTriangle, bg: "rgba(239,68,68,0.15)",  fg: "#DC2626", trend: critical > 0 ? "عاجل!" : "" },
   ];
 
   return (
@@ -39,7 +39,7 @@ export default async function AdminDashboard() {
           style={{ background: "rgba(245,158,11,0.1)", border: "1px solid rgba(245,158,11,0.3)" }}>
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-5 h-5" style={{ color: "#FCD34D" }} />
-            <p className="text-sm font-semibold" style={{ color: "#FDE68A" }}>
+            <p className="text-sm font-semibold" style={{ color: "#92400E" }}>
               {pending} تذكرة تنتظر اعتمادك
             </p>
           </div>
@@ -55,7 +55,7 @@ export default async function AdminDashboard() {
         {kpis.map((kpi) => {
           const Icon = kpi.icon;
           return (
-            <div key={kpi.label} className="rounded-xl border border-white/5 p-4" style={{ background: "#100835" }}>
+            <div key={kpi.label} className="rounded-xl border border-white/5 p-4" style={{ background: "#FFFFFF" }}>
               <div className="inline-flex p-2 rounded-lg mb-2" style={{ background: kpi.bg }}>
                 <Icon className="w-4 h-4" style={{ color: kpi.fg }} />
               </div>

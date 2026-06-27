@@ -5,16 +5,17 @@
 :root {
   --brand-primary:  #7C3AED;
   --brand-dark:     #5B21B6;
-  --brand-light:    rgba(124,58,237,0.12);
-  --bg-base:        #080820;
-  --bg-card:        #100835;
+  --brand-light:    rgba(124,58,237,0.1);
+  --bg-base:        #F5F3FF;
+  --bg-card:        #FFFFFF;
   --bg-sidebar:     #0a0525;
-  --bg-header:      #0d0728;
-  --border:         rgba(255,255,255,0.08);
-  --text-primary:   #FFFFFF;
-  --text-muted:     #A78BFA;
-  --foreground:     #FFFFFF;
-  --background:     #080820;
+  --bg-header:      #FFFFFF;
+  --border:         #E9E3FF;
+  --text-primary:   #1F1535;
+  --text-secondary: #6D28D9;
+  --text-muted:     #7C6A9E;
+  --foreground:     #1F1535;
+  --background:     #F5F3FF;
 }
 
 body {
@@ -23,11 +24,34 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Dark scrollbar */
+/* ── Content area text overrides ── */
+/* Make text-white dark in main content (not on buttons/links with colored bg) */
+.main-content .text-white:not(button):not(a) {
+  color: var(--text-primary) !important;
+}
+/* Lighten purple text so it's readable on white */
+.main-content .text-purple-200,
+.main-content .text-purple-300 {
+  color: #5B21B6 !important;
+}
+.main-content .text-purple-400 {
+  color: #6D28D9 !important;
+}
+.main-content .text-purple-500 {
+  color: #7C3AED !important;
+}
+/* Keep white text on colored bg elements */
+.main-content button .text-white,
+.main-content a .text-white,
+.main-content .keep-white {
+  color: white !important;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #0d0728; }
-::-webkit-scrollbar-thumb { background: #7C3AED; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #9D5CF6; }
+::-webkit-scrollbar-track { background: #F5F3FF; }
+::-webkit-scrollbar-thumb { background: #C4B5FD; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #7C3AED; }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
@@ -45,12 +69,12 @@ body {
   100% { background-position:  200% 0; }
 }
 .skeleton {
-  background: linear-gradient(90deg, #1a0f4a 25%, #2a1a5e 50%, #1a0f4a 75%);
+  background: linear-gradient(90deg, #E9E3FF 25%, #D8B4FE 50%, #E9E3FF 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
-/* Glow effects */
+/* Glow effects (used in sidebar/login only) */
 .glow-purple {
   box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
 }

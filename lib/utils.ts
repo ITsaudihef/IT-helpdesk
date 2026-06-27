@@ -26,20 +26,20 @@ export const priorityColors: Record<string, string> = {
 };
 
 export const priorityBadge: Record<string, string> = {
-  CRITICAL: "bg-red-500/15 text-red-300",
-  HIGH:     "bg-orange-500/15 text-orange-300",
-  MEDIUM:   "bg-blue-500/15 text-blue-300",
-  LOW:      "bg-green-500/15 text-green-300",
+  CRITICAL: "bg-red-100 text-red-700",
+  HIGH:     "bg-orange-100 text-orange-700",
+  MEDIUM:   "bg-blue-100 text-blue-700",
+  LOW:      "bg-green-100 text-green-700",
 };
 
 export const statusBadge: Record<string, string> = {
-  OPEN:             "bg-slate-500/15 text-slate-300",
-  IN_PROGRESS:      "bg-blue-500/15 text-blue-300",
-  PENDING_APPROVAL: "bg-amber-500/15 text-amber-300",
-  APPROVED:         "bg-emerald-500/15 text-emerald-300",
-  WAITING_INFO:     "bg-purple-500/15 text-purple-300",
-  RESOLVED:         "bg-green-500/15 text-green-300",
-  CLOSED:           "bg-slate-500/10 text-slate-400",
+  OPEN:             "bg-slate-100 text-slate-700",
+  IN_PROGRESS:      "bg-blue-100 text-blue-700",
+  PENDING_APPROVAL: "bg-amber-100 text-amber-700",
+  APPROVED:         "bg-emerald-100 text-emerald-700",
+  WAITING_INFO:     "bg-purple-100 text-purple-700",
+  RESOLVED:         "bg-green-100 text-green-700",
+  CLOSED:           "bg-gray-100 text-gray-600",
 };
 
 export const statusLabel: Record<string, string> = {

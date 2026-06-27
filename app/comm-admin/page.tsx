@@ -23,7 +23,7 @@ export default async function CommAdminPage() {
           { label: "معتمدة / جارية",   value: approved,        color: "#22c55e" },
           { label: "الإجمالي",          value: all,             color: "#7C3AED" },
         ].map(s => (
-          <div key={s.label} className="rounded-2xl p-5 shadow-sm text-center" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+          <div key={s.label} className="rounded-2xl p-5 shadow-sm text-center" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
             <p className="text-2xl font-bold" style={{ color: s.color }}>{s.value}</p>
             <p className="text-xs text-purple-400 mt-1">{s.label}</p>
           </div>
@@ -31,7 +31,7 @@ export default async function CommAdminPage() {
       </div>
 
       {/* Pending approval */}
-      <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+      <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
         <div className="px-5 py-4 border-b border-white/5 flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-yellow-400" />
           <h2 className="font-bold text-white">تذاكر التواصل المؤسسي — بانتظار الاعتماد</h2>

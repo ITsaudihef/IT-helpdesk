@@ -39,7 +39,7 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
   }, [open, ticketId, logs.length]);
 
   return (
-    <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+    <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#100835", border: "1px solid #E9E3FF" }}>
       {/* Header — always visible, click to toggle */}
       <button
         onClick={() => setOpen(o => !o)}

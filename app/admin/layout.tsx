@@ -9,7 +9,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (session.user.role !== "ADMIN") redirect("/dashboard");
 
   return (
-    <div className="min-h-screen" style={{ background: "#080820" }} dir="rtl">
+    <div className="min-h-screen" style={{ background: "#F5F3FF" }} dir="rtl">
       <Sidebar
         role={session.user.role}
         userName={session.user.name}
@@ -17,7 +17,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       />
       <div className="lg:mr-64">
         <Header title="لوحة الإدارة" />
-        <main className="p-6">{children}</main>
+        <main className="p-6 main-content">{children}</main>
       </div>
     </div>
   );

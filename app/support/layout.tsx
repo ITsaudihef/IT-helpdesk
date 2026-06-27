@@ -9,7 +9,7 @@ export default async function SupportLayout({ children }: { children: React.Reac
   if (session.user.role !== "SUPPORT") redirect("/dashboard");
 
   return (
-    <div className="min-h-screen" style={{ background: "#080820" }} dir="rtl">
+    <div className="min-h-screen" style={{ background: "#F5F3FF" }} dir="rtl">
       <Sidebar
         role={session.user.role}
         userName={session.user.name}
@@ -17,7 +17,7 @@ export default async function SupportLayout({ children }: { children: React.Reac
       />
       <div className="lg:mr-64">
         <Header title="لوحة موظف الدعم" />
-        <main className="p-6">{children}</main>
+        <main className="p-6 main-content">{children}</main>
       </div>
     </div>
   );

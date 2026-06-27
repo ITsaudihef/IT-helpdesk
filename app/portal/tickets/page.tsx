@@ -29,7 +29,7 @@ export default async function MyTicketsPage() {
       </div>
 
       {tickets.length === 0 ? (
-        <div className="rounded-2xl p-12 text-center" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="rounded-2xl p-12 text-center" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(124,58,237,0.15)" }}>
             <Ticket className="w-8 h-8" style={{ color: "#C4B5FD" }} />
           </div>

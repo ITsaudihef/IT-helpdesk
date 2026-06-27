@@ -19,7 +19,7 @@ const SelectTrigger = React.forwardRef<
       "flex h-9 w-full items-center justify-between rounded-lg border px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className
     )}
-    style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(124,58,237,0.3)" }}
+    style={{ background: "#FFFFFF", borderColor: "#D1C4FE", color: "#1F1535" }}
     {...props}
   >
     {children}
@@ -43,7 +43,7 @@ const SelectContent = React.forwardRef<
         className
       )}
       position={position}
-      style={{ background: "#150940", borderColor: "rgba(124,58,237,0.3)" }}
+      style={{ background: "#FFFFFF", borderColor: "#D1C4FE", boxShadow: "0 4px 15px rgba(124,58,237,0.1)" }}
       {...props}
     >
       <SelectPrimitive.Viewport className={cn("p-1", position === "popper" && "w-full")}>
@@ -61,7 +61,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center rounded-md py-1.5 pr-8 pl-2 text-sm text-white outline-none focus:bg-purple-500/20 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex w-full cursor-default select-none items-center rounded-md py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-purple-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className
     )}
     {...props}

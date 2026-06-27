@@ -12,15 +12,14 @@ export default function TicketCard({ ticket, href }: TicketCardProps) {
     <Link href={href}>
       <div
         className={cn(
-          "rounded-xl border-r-4 border border-white/8 p-4 hover:border-purple-500/30 transition-all cursor-pointer",
+          "rounded-xl border-r-4 border border-purple-100 bg-white p-4 hover:shadow-md hover:border-purple-200 transition-all cursor-pointer",
           priorityColors[ticket.priority]
         )}
-        style={{ background: "#100835" }}
       >
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex-1 min-w-0">
-            <p className="text-xs text-purple-400 mb-1">{ticket.ticketNo}</p>
-            <h3 className="font-medium text-white truncate">{ticket.title}</h3>
+            <p className="text-xs text-purple-500 mb-1">{ticket.ticketNo}</p>
+            <h3 className="font-medium truncate" style={{ color: "#1F1535" }}>{ticket.title}</h3>
           </div>
           <div className="flex flex-col items-end gap-1 flex-shrink-0">
             <span className={cn("text-xs px-2 py-0.5 rounded-full font-medium", statusBadge[ticket.status])}>
@@ -32,13 +31,13 @@ export default function TicketCard({ ticket, href }: TicketCardProps) {
           </div>
         </div>
 
-        <p className="text-sm text-purple-300 line-clamp-2 mb-3">{ticket.description}</p>
+        <p className="text-sm line-clamp-2 mb-3" style={{ color: "#6B6B8A" }}>{ticket.description}</p>
 
-        <div className="flex items-center justify-between text-xs text-purple-400">
+        <div className="flex items-center justify-between text-xs" style={{ color: "#7C6A9E" }}>
           <div className="flex items-center gap-3">
-            <span className="px-2 py-0.5 rounded" style={{ background: "rgba(124,58,237,0.15)", color: "#C4B5FD" }}>{typeLabel[ticket.type]}</span>
+            <span className="px-2 py-0.5 rounded bg-purple-50 text-purple-700">{typeLabel[ticket.type]}</span>
             {ticket.assignedTo && (
-              <span className="text-purple-400">← {ticket.assignedTo.name}</span>
+              <span style={{ color: "#7C3AED" }}>← {ticket.assignedTo.name}</span>
             )}
           </div>
           <div className="flex items-center gap-2">

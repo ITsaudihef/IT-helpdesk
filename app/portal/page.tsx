@@ -44,14 +44,14 @@ export default async function PortalPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "إجمالي التذاكر", value: total,      icon: Ticket,       bg: "rgba(124,58,237,0.15)",  fg: "#C4B5FD" },
-          { label: "مفتوحة",         value: open,       icon: AlertCircle,  bg: "rgba(148,163,184,0.12)", fg: "#CBD5E1" },
-          { label: "قيد المعالجة",   value: inProgress, icon: Clock,        bg: "rgba(245,158,11,0.15)",  fg: "#FCD34D" },
-          { label: "محلولة",         value: resolved,   icon: CheckCircle2, bg: "rgba(34,197,94,0.15)",   fg: "#86EFAC" },
+          { label: "إجمالي التذاكر", value: total,      icon: Ticket,       bg: "rgba(124,58,237,0.15)",  fg: "#7C3AED" },
+          { label: "مفتوحة",         value: open,       icon: AlertCircle,  bg: "rgba(148,163,184,0.12)", fg: "#64748B" },
+          { label: "قيد المعالجة",   value: inProgress, icon: Clock,        bg: "rgba(245,158,11,0.15)",  fg: "#D97706" },
+          { label: "محلولة",         value: resolved,   icon: CheckCircle2, bg: "rgba(34,197,94,0.15)",   fg: "#16A34A" },
         ].map((stat) => {
           const Icon = stat.icon;
           return (
-            <div key={stat.label} className="rounded-xl border border-white/5 p-4" style={{ background: "#100835" }}>
+            <div key={stat.label} className="rounded-xl border border-white/5 p-4" style={{ background: "#FFFFFF" }}>
               <div className="inline-flex p-2 rounded-lg mb-2" style={{ background: stat.bg }}>
                 <Icon className="w-4 h-4" style={{ color: stat.fg }} />
               </div>
@@ -72,7 +72,7 @@ export default async function PortalPage() {
         </div>
 
         {tickets.length === 0 ? (
-          <div className="rounded-2xl p-12 text-center shadow-sm" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+          <div className="rounded-2xl p-12 text-center shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(124,58,237,0.12)" }}>
               <Ticket className="w-8 h-8" style={{ color: "#7C3AED" }} />
             </div>

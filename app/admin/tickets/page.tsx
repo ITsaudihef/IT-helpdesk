@@ -33,7 +33,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
       </div>
 
       {/* Filters */}
-      <div className="rounded-xl border border-white/5 p-4" style={{ background: "#100835" }}>
+      <div className="rounded-xl border border-white/5 p-4" style={{ background: "#FFFFFF" }}>
         <form className="flex flex-wrap gap-3">
           <div className="relative flex-1 min-w-48">
             <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-500" />

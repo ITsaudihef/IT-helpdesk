@@ -35,7 +35,7 @@ export default async function CommAdminTicketPage({ params }: { params: { id: st
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <div className="rounded-2xl p-6" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+      <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
         <div className="flex items-start justify-between gap-4 mb-4">
           <div>
             <p className="text-sm text-purple-400 mb-1">{ticket.ticketNo} · طلب تصميم</p>
