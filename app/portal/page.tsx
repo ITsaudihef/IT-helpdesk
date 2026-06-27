@@ -31,7 +31,7 @@ export default async function PortalPage() {
 
         {/* Create ticket — main CTA (takes 2/3 width on desktop) */}
         <Link href="/portal/new"
-          className="lg:col-span-2 group rounded-2xl p-7 flex items-center justify-between relative overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5"
+          className="lg:col-span-2 group rounded-2xl p-5 sm:p-7 flex items-center justify-between relative overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5"
           style={{ background: "linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)" }}>
           {/* Decorative circles */}
           <div className="absolute top-[-50px] left-[-50px] w-56 h-56 rounded-full opacity-10 bg-white pointer-events-none" />
@@ -39,7 +39,7 @@ export default async function PortalPage() {
 
           <div className="relative">
             <p className="text-purple-200 text-sm mb-1">مرحباً، {session!.user.name} 👋</p>
-            <h1 className="text-2xl font-bold text-white mb-3">ارفع تذكرة دعم جديدة</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-white mb-3">ارفع تذكرة دعم جديدة</h1>
             <div className="inline-flex items-center gap-2 bg-white rounded-xl px-5 py-2.5 text-sm font-bold transition-all group-hover:bg-purple-50"
               style={{ color: "#5B21B6" }}>
               <PlusCircle className="w-4 h-4" />

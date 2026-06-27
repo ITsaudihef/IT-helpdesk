@@ -19,33 +19,37 @@ export default function FilterForm({ searchParams }: Props) {
   const submit  = () => formRef.current?.submit();
 
   return (
-    <div className="rounded-xl border border-purple-100 p-4" style={{ background: "#FFFFFF" }}>
-      <form ref={formRef} className="flex flex-wrap gap-3">
-        <div className="relative flex-1 min-w-48">
+    <div className="rounded-xl border border-purple-100 p-3 sm:p-4" style={{ background: "#FFFFFF" }}>
+      <form ref={formRef} className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
+        {/* Search — full width on mobile */}
+        <div className="relative w-full sm:flex-1 sm:min-w-48">
           <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-500" />
           <input name="search" defaultValue={searchParams.search}
             placeholder="بحث برقم أو عنوان التذكرة..."
             className="w-full pr-9 pl-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
             style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
         </div>
-        {FILTERS.map(f => (
-          <select key={f.name} name={f.name} defaultValue={(searchParams as any)[f.name] || ""}
-            onChange={submit}
-            className="px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-            style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }}>
-            <option value="">كل {f.label}</option>
-            {f.opts.map(o => (
-              <option key={o} value={o}>
-                {statusLabel[o] || priorityLabel[o] || typeLabel[o] || o}
-              </option>
-            ))}
-          </select>
-        ))}
-        <button type="submit"
-          className="px-4 py-2 rounded-lg text-sm font-semibold text-white"
-          style={{ background: "#7C3AED" }}>
-          بحث
-        </button>
+        {/* Filters row on mobile */}
+        <div className="flex gap-2 flex-wrap">
+          {FILTERS.map(f => (
+            <select key={f.name} name={f.name} defaultValue={(searchParams as any)[f.name] || ""}
+              onChange={submit}
+              className="flex-1 min-w-0 px-2 py-2 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+              style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }}>
+              <option value="">كل {f.label}</option>
+              {f.opts.map(o => (
+                <option key={o} value={o}>
+                  {statusLabel[o] || priorityLabel[o] || typeLabel[o] || o}
+                </option>
+              ))}
+            </select>
+          ))}
+          <button type="submit"
+            className="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white whitespace-nowrap"
+            style={{ background: "#7C3AED" }}>
+            بحث
+          </button>
+        </div>
       </form>
     </div>
   );

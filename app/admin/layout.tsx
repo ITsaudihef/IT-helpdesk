@@ -15,9 +15,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         userName={session.user.name}
         userEmail={session.user.email}
       />
-      <div className="lg:mr-64">
+      <div className="lg:mr-64 overflow-x-hidden">
         <Header title="لوحة الإدارة" />
-        <main className="p-6 main-content">{children}</main>
+        <main className="p-4 sm:p-6 main-content">{children}</main>
       </div>
     </div>
   );
