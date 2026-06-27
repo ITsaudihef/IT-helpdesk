@@ -59,7 +59,7 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
   };
 
   return (
-    <div <div className="rounded-2xl p-5 shadow-sm" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+    <div className="rounded-2xl p-5 shadow-sm" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
       <div className="flex items-center gap-2 mb-4">
         <Paperclip className="w-4 h-4" style={{ color: "#7C3AED" }} />
         <h3 className="font-bold text-white text-sm">

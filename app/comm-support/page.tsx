@@ -31,7 +31,7 @@ export default async function CommSupportPage() {
           { label: "محلولة",       value: counts.resolved,  color: "#22c55e" },
           { label: "الإجمالي",     value: counts.total,     color: "#7C3AED" },
         ].map(s => (
-          <div key={s.label} <div className="rounded-2xl p-5 shadow-sm text-center" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+          <div key={s.label} className="rounded-2xl p-5 shadow-sm text-center" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
             <p className="text-2xl font-bold" style={{ color: s.color }}>{s.value}</p>
             <p className="text-xs text-purple-400 mt-1">{s.label}</p>
           </div>
@@ -39,7 +39,7 @@ export default async function CommSupportPage() {
       </div>
 
       {/* Tickets */}
-      <div <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+      <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
         <div className="px-5 py-4 border-b border-white/5">
           <h2 className="font-bold text-white">تذاكر التواصل المؤسسي المكلّف بها</h2>
         </div>

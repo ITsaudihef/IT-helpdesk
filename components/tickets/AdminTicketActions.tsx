@@ -68,7 +68,7 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
         onCancel={() => setConfirm(null)}
       />
 
-      <div <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+      <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
         <h2 className="font-bold text-white mb-4">إجراءات المدير</h2>
 
         {ticket.status === "PENDING_APPROVAL" && (

@@ -14,7 +14,7 @@ export default async function CommAdminAllTicketsPage() {
   });
 
   return (
-    <div <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
+    <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
       <div className="px-5 py-4 border-b border-white/5">
         <h2 className="font-bold text-white">جميع تذاكر التواصل المؤسسي</h2>
       </div>
