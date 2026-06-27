@@ -40,7 +40,7 @@ export default async function SupportDashboard() {
           { label: "بانتظار معلومات",  value: waiting,     bg: "rgba(124,58,237,0.15)",  fg: "#7C3AED" },
           { label: "مغلقة (منجزة)",    value: closedCount, bg: "rgba(100,116,139,0.12)", fg: "#475569" },
         ].map(s => (
-          <div key={s.label} className="rounded-xl border border-white/5 p-4 text-center" style={{ background: "#FFFFFF" }}>
+          <div key={s.label} className="rounded-xl border border-purple-100 p-4 text-center" style={{ background: "#FFFFFF" }}>
             <p className="text-2xl font-bold" style={{ color: s.fg }}>{s.value}</p>
             <span className="text-xs px-2 py-0.5 rounded-full font-medium mt-1 inline-block"
               style={{ background: s.bg, color: s.fg }}>{s.label}</span>

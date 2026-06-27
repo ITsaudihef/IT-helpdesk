@@ -1,17 +1,25 @@
+import Pagination from "@/components/ui/Pagination";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
 import { StatusBadge, PriorityBadge } from "@/components/tickets/StatusBadge";
 
-export default async function CommAdminAllTicketsPage() {
-  const tickets = await prisma.ticket.findMany({
-    where: { type: "INSTITUTIONAL_COMM" },
+export default async function CommAdminAllTicketsPage() { searchParams }: { searchParams: { page?: string } } {
+  const page = Math.max(1, parseInt(searchParams.page || "1"));
+  const PER_PAGE = 20;
+  const [tickets, total] = await Promise.all([
+    prisma.ticket.findMany({
+      where: { type: "INSTITUTIONAL_COMM" },
     include: {
       createdBy: { select: { name: true, department: true } },
       assignedTo: { select: { name: true } },
     },
-    orderBy: { createdAt: "desc" },
-  });
+    orderBy: { updatedAt: "desc" },
+      skip: (page - 1) * PER_PAGE,
+      take: PER_PAGE,
+    }),
+    prisma.ticket.count({ where: { type: "INSTITUTIONAL_COMM" } }),
+  ]);
 
   return (
     <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
@@ -25,7 +33,7 @@ export default async function CommAdminAllTicketsPage() {
           {tickets.map(t => (
             <li key={t.id}>
               <Link href={`/comm-admin/tickets/${t.id}`}
-                className="flex items-center gap-4 px-5 py-4 hover:bg-purple-900/20 transition-colors">
+                className="flex items-center gap-4 px-5 py-4 hover:bg-purple-50 transition-colors">
                 <div className="flex-1 min-w-0">
                   <p className="text-xs text-purple-500 mb-0.5">{t.ticketNo}</p>
                   <p className="text-sm font-semibold text-white truncate">{t.title}</p>

@@ -1,4 +1,5 @@
 import { auth } from "@/lib/auth";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { statusLabel, typeLabel, priorityLabel, formatDate } from "@/lib/utils";
@@ -49,7 +50,7 @@ export default async function TicketDetailPage({ params }: { params: { id: strin
 
         <p className="text-sm leading-relaxed mb-4" style={{ color: "#374151" }}>{ticket.description}</p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/5">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-purple-100">
           <div>
             <p className="text-xs text-purple-500">النوع</p>
             <p className="text-sm font-medium mt-0.5">{typeLabel[ticket.type]}</p>
@@ -110,5 +111,6 @@ export default async function TicketDetailPage({ params }: { params: { id: strin
         userRole="USER"
       />
     </div>
+    </>
   );
 }

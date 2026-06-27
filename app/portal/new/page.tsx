@@ -126,16 +126,14 @@ export default function NewTicketPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1.5">عنوان الطلب *</label>
               <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })}
                 placeholder="مثال: مشكلة في الوصول لنظام الحضور"
-                className="w-full px-3 py-2.5 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "#7C3AED" } as any} />
+                className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">وصف الطلب *</label>
               <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
                 rows={4} placeholder="اشرح طلبك بالتفصيل..."
-                className="w-full px-3 py-2.5 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2 resize-none"
-                style={{ "--tw-ring-color": "#7C3AED" } as any} />
+                className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none" style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
             </div>
 
             <div>
@@ -155,7 +153,7 @@ export default function NewTicketPage() {
                     <div className="text-xs text-purple-600 mt-1">{t.desc}</div>
                     {t.value === "DEVELOPMENT" && (
                       <span className="inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium"
-                        style={{ background: "rgba(245,158,11,0.15)", color: "#FCD34D" }}>
+                        style={{ background: "#FEF3C7", color: "#92400E" }}>
                         يتطلب اعتماد
                       </span>
                     )}
@@ -169,7 +167,10 @@ export default function NewTicketPage() {
               <div className="grid grid-cols-2 gap-2">
                 {priorityOptions.map((p) => (
                   <button key={p.value} type="button"
-                    onClick={() => setForm({ ...form, priority: p.value })}
+                    onClick={() => {
+                      if (p.value === "CRITICAL") toast("تأكد أن المشكلة تستوجب أولوية حرجة فعلاً — توقف تام عن العمل", { icon: "⚠️" });
+                      setForm({ ...form, priority: p.value });
+                    }}
                     className="p-3 rounded-xl border-2 text-right transition-all"
                     style={{
                       borderColor: form.priority === p.value ? p.border : "#e5e7eb",
@@ -195,7 +196,7 @@ export default function NewTicketPage() {
               onClick={() => fileRef.current?.click()}
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => { e.preventDefault(); addFiles(e.dataTransfer.files); }}
-              className="border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-colors hover:bg-purple-900/20"
+              className="border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-colors hover:bg-purple-50"
               style={{ borderColor: "#7C3AED" }}>
               <Upload className="w-10 h-10 mx-auto mb-3" style={{ color: "#7C3AED" }} />
               <p className="text-sm font-medium text-gray-700">اسحب الملفات هنا أو اضغط للاختيار</p>
@@ -211,7 +212,7 @@ export default function NewTicketPage() {
             {files.length > 0 && (
               <ul className="space-y-2">
                 {files.map((f, i) => (
-                  <li key={i} className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-white/5">
+                  <li key={i} className="flex items-center gap-3 p-3 rounded-lg border border-purple-100 bg-purple-50">
                     <FileText className="w-5 h-5 flex-shrink-0" style={{ color: "#7C3AED" }} />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium truncate" style={{ color: "#1F1535" }}>{f.name}</p>
@@ -232,7 +233,7 @@ export default function NewTicketPage() {
         {step === 2 && (
           <div className="space-y-5">
             <h2 className="text-lg font-bold" style={{ color: "#1F1535" }}>مراجعة وتأكيد</h2>
-            <div className="rounded-xl p-4 space-y-3" style={{ background: "#0a0320" }}>
+            <div className="rounded-xl p-4 space-y-3" style={{ background: "#F5F3FF", border: "1px solid #E9E3FF" }}>
               {[
                 { label: "العنوان",   value: form.title },
                 { label: "النوع",     value: typeOptions.find((t) => t.value === form.type)?.label },
@@ -246,7 +247,7 @@ export default function NewTicketPage() {
               {form.requiresApproval && (
                 <div className="flex justify-between text-sm">
                   <span className="text-purple-600">الاعتماد</span>
-                  <span className="font-semibold" style={{ color: "#D97706" }}>يتطلب اعتماد الإدارة</span>
+                  <span className="font-semibold" style={{ color: "#B45309" }}>يتطلب اعتماد الإدارة</span>
                 </div>
               )}
               {files.length > 0 && (
@@ -255,7 +256,7 @@ export default function NewTicketPage() {
                   <span className="font-semibold text-white">{files.length} ملف</span>
                 </div>
               )}
-              <div className="pt-2 border-t border-white/8">
+              <div className="pt-2 border-t border-purple-100">
                 <p className="text-xs text-purple-500 mb-1">الوصف</p>
                 <p className="text-sm text-gray-700">{form.description}</p>
               </div>
@@ -267,7 +268,7 @@ export default function NewTicketPage() {
         <div className="flex gap-3 mt-6">
           {step > 0 && (
             <button onClick={() => setStep((s) => s - 1)}
-              className="flex items-center gap-2 px-4 py-2 border border-white/8 rounded-lg text-sm text-gray-700 hover:bg-white/5">
+              className="flex items-center gap-2 px-4 py-2 border border-purple-200 rounded-lg text-sm text-gray-700 hover:bg-purple-50">
               <ChevronRight className="w-4 h-4" />السابق
             </button>
           )}

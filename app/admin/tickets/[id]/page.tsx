@@ -1,3 +1,4 @@
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { notFound } from "next/navigation";
@@ -48,7 +49,7 @@ export default async function AdminTicketDetail({ params }: { params: { id: stri
 
         <p className="text-sm leading-relaxed mb-4" style={{ color: "#374151" }}>{ticket.description}</p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/5">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-purple-100">
           <div>
             <p className="text-xs text-purple-500">المُرسل</p>
             <p className="text-sm font-medium mt-0.5">{ticket.createdBy.name}</p>
@@ -91,5 +92,6 @@ export default async function AdminTicketDetail({ params }: { params: { id: stri
         userRole="ADMIN"
       />
     </div>
+    </>
   );
 }

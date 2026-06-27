@@ -12,7 +12,7 @@ export default function SettingsPage() {
             { value: "ACCESS", label: "صلاحيات", icon: "🔐" },
             { value: "OTHER", label: "أخرى", icon: "📋" },
           ].map((t) => (
-            <div key={t.value} className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg border border-white/8">
+            <div key={t.value} className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg border border-purple-200">
               <span className="text-xl">{t.icon}</span>
               <div>
                 <p className="text-sm font-medium text-gray-900">{t.label}</p>
@@ -27,7 +27,7 @@ export default function SettingsPage() {
         <h2 className="font-medium text-gray-900 mb-4">مستويات الأولوية</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { value: "LOW", label: "منخفضة", color: "bg-purple-900 text-green-700 border-green-200" },
+            { value: "LOW", label: "منخفضة", color: "bg-green-100 text-green-700 border-green-200" },
             { value: "MEDIUM", label: "متوسطة", color: "bg-blue-100 text-blue-700 border-blue-200" },
             { value: "HIGH", label: "عالية", color: "bg-orange-100 text-orange-700 border-orange-200" },
             { value: "CRITICAL", label: "حرجة", color: "bg-red-100 text-red-700 border-red-200" },

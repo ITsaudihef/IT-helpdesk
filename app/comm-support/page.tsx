@@ -50,7 +50,7 @@ export default async function CommSupportPage() {
             {tickets.map(t => (
               <li key={t.id}>
                 <Link href={`/comm-support/tickets/${t.id}`}
-                  className="flex items-center gap-4 px-5 py-4 hover:bg-purple-900/20 transition-colors">
+                  className="flex items-center gap-4 px-5 py-4 hover:bg-purple-50 transition-colors">
                   <div className="flex-1 min-w-0">
                     <p className="text-xs text-purple-500 mb-0.5">{t.ticketNo}</p>
                     <p className="text-sm font-semibold text-white truncate">{t.title}</p>

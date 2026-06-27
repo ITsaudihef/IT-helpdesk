@@ -98,13 +98,13 @@ export default function CommSupportNewTicketPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1.5">عنوان الطلب *</label>
               <input value={form.title} onChange={e => setForm({ ...form, title: e.target.value })}
                 placeholder="مثال: مشكلة في الوصول لنظام الحضور"
-                className="w-full px-3 py-2.5 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2" />
+                className="w-full px-3 py-2.5 border border-purple-200 rounded-lg text-sm focus:outline-none focus:ring-2" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">وصف الطلب *</label>
               <textarea value={form.description} onChange={e => setForm({ ...form, description: e.target.value })}
                 rows={4} placeholder="اشرح طلبك بالتفصيل..."
-                className="w-full px-3 py-2.5 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2 resize-none" />
+                className="w-full px-3 py-2.5 border border-purple-200 rounded-lg text-sm focus:outline-none focus:ring-2 resize-none" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">نوع الطلب *</label>
@@ -141,7 +141,7 @@ export default function CommSupportNewTicketPage() {
             <h2 className="text-lg font-bold" style={{ color: "#1F1535" }}>المرفقات (اختياري)</h2>
             <div onClick={() => fileRef.current?.click()} onDragOver={e => e.preventDefault()}
               onDrop={e => { e.preventDefault(); addFiles(e.dataTransfer.files); }}
-              className="border-2 border-dashed rounded-xl p-10 text-center cursor-pointer hover:bg-purple-900/20"
+              className="border-2 border-dashed rounded-xl p-10 text-center cursor-pointer hover:bg-purple-50"
               style={{ borderColor: "#7C3AED" }}>
               <Upload className="w-10 h-10 mx-auto mb-3" style={{ color: "#7C3AED" }} />
               <p className="text-sm text-gray-700">اسحب الملفات هنا أو اضغط للاختيار</p>
@@ -152,7 +152,7 @@ export default function CommSupportNewTicketPage() {
             {files.length > 0 && (
               <ul className="space-y-2">
                 {files.map((f, i) => (
-                  <li key={i} className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-white/5">
+                  <li key={i} className="flex items-center gap-3 p-3 rounded-lg border border-purple-100 bg-purple-50">
                     <FileText className="w-5 h-5" style={{ color: "#7C3AED" }} />
                     <span className="flex-1 text-sm truncate">{f.name}</span>
                     <button onClick={() => setFiles(p => p.filter((_, j) => j !== i))} className="text-red-400 hover:text-red-600">
@@ -168,7 +168,7 @@ export default function CommSupportNewTicketPage() {
         {step === 2 && (
           <div className="space-y-5">
             <h2 className="text-lg font-bold" style={{ color: "#1F1535" }}>مراجعة وتأكيد</h2>
-            <div className="rounded-xl p-4 space-y-3" style={{ background: "#0a0320" }}>
+            <div className="rounded-xl p-4 space-y-3" style={{ background: "#F5F3FF", border: "1px solid #E9E3FF" }}>
               {[
                 { label: "العنوان",   value: form.title },
                 { label: "النوع",     value: typeOptions.find(t => t.value === form.type)?.label },
@@ -179,7 +179,7 @@ export default function CommSupportNewTicketPage() {
                   <span className="font-semibold text-white">{r.value}</span>
                 </div>
               ))}
-              <div className="pt-2 border-t border-white/8">
+              <div className="pt-2 border-t border-purple-100">
                 <p className="text-xs text-purple-500 mb-1">الوصف</p>
                 <p className="text-sm text-gray-700">{form.description}</p>
               </div>
@@ -189,7 +189,7 @@ export default function CommSupportNewTicketPage() {
 
         <div className="flex gap-3 mt-6">
           {step > 0 && (
-            <button onClick={() => setStep(s => s - 1)} className="flex items-center gap-2 px-4 py-2 border border-white/8 rounded-lg text-sm text-gray-700">
+            <button onClick={() => setStep(s => s - 1)} className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-purple-50" style={{ border: "1px solid #E9E3FF", color: "#6D28D9" }}>
               <ChevronRight className="w-4 h-4" />السابق
             </button>
           )}

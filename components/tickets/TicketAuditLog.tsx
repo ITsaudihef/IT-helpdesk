@@ -59,7 +59,7 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
 
       {/* Collapsed body */}
       {open && (
-        <div className="border-t border-white/5 px-5 py-4">
+        <div className="border-t border-purple-100 px-5 py-4">
           {loading ? (
             <div className="space-y-3">
               {[1, 2, 3].map(i => (

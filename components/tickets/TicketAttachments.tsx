@@ -75,7 +75,7 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
         <ul className="space-y-2 mb-4">
           {list.map(a => (
             <li key={a.id}
-              className="flex items-center gap-3 p-3 rounded-lg border border-purple-100 bg-white/5 hover:bg-purple-900/20 transition-colors">
+              className="flex items-center gap-3 p-3 rounded-lg border border-purple-100 bg-purple-50 hover:bg-purple-50 transition-colors">
               <span style={{ color: "#7C3AED" }}>{fileIcon(a.fileName)}</span>
               <span className="flex-1 text-sm text-purple-200 truncate">{a.fileName}</span>
               <a href={a.fileUrl} target="_blank" rel="noreferrer" download={a.fileName}
@@ -96,7 +96,7 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
             onClick={() => fileRef.current?.click()}
             onDragOver={e => e.preventDefault()}
             onDrop={e => { e.preventDefault(); addFiles(e.dataTransfer.files); }}
-            className="border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-colors hover:bg-purple-900/20"
+            className="border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-colors hover:bg-purple-50"
             style={{ borderColor: "#7C3AED" }}>
             <Upload className="w-6 h-6 mx-auto mb-1" style={{ color: "#7C3AED" }} />
             <p className="text-xs text-gray-500">اسحب ملفات أو اضغط للاختيار</p>
