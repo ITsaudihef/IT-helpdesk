@@ -99,7 +99,7 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
             <HeadphonesIcon className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-sm text-white">بوابة تذاكر IT</h1>
+            <h1 className="font-bold text-sm text-white">بوابة الدعم الفني</h1>
             <p className="text-xs" style={{ color: "#A78BFA" }}>صندوق الوقف الصحي</p>
           </div>
         </div>

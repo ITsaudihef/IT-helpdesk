@@ -44,10 +44,7 @@ export default function LoginPage() {
             style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
             <HeadphonesIcon className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-3xl font-bold mb-3 gradient-text">بوابة تذاكر IT</h1>
-          <p className="text-base leading-relaxed" style={{ color: "#A78BFA" }}>
-            صندوق الوقف الصحي<br />نظام إدارة طلبات الدعم التقني
-          </p>
+          <h1 className="text-3xl font-bold mb-3 gradient-text">بوابة الدعم الفني</h1>
           <div className="mt-10 grid grid-cols-3 gap-4 text-center">
             {[
               { n: "سريع", d: "حل مشاكلك بكفاءة" },
@@ -72,7 +69,7 @@ export default function LoginPage() {
               style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
               <HeadphonesIcon className="w-7 h-7 text-white" />
             </div>
-            <h1 className="text-xl font-bold gradient-text">بوابة تذاكر IT</h1>
+            <h1 className="text-xl font-bold gradient-text">بوابة الدعم الفني</h1>
           </div>
 
           <div className="rounded-2xl p-8" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF", boxShadow: "0 20px 60px rgba(124,58,237,0.15)" }}>
