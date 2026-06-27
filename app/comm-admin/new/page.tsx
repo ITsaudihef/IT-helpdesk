@@ -14,10 +14,10 @@ const typeOptions = [
 ];
 
 const priorityOptions = [
-  { value: "LOW",      label: "منخفضة", desc: "لا يوجد تأثير على العمل",  border: "#86efac", bg: "#f0fdf4", fg: "#16a34a" },
+  { value: "LOW",      label: "منخفضة", desc: "لا يوجد تأثير على العمل",  border: "#86efac", bg: "rgba(34,197,94,0.1)", fg: "#86EFAC" },
   { value: "MEDIUM",   label: "متوسطة", desc: "تأثير محدود على العمل",    border: "#7C3AED", bg: "rgba(124,58,237,0.12)", fg: "#5B21B6" },
-  { value: "HIGH",     label: "عالية",  desc: "يؤثر على الإنتاجية",       border: "#fb923c", bg: "#fff7ed", fg: "#ea580c" },
-  { value: "CRITICAL", label: "حرجة",   desc: "توقف تام عن العمل",        border: "#f87171", bg: "#fef2f2", fg: "#dc2626" },
+  { value: "HIGH",     label: "عالية",  desc: "يؤثر على الإنتاجية",       border: "#fb923c", bg: "rgba(249,115,22,0.1)", fg: "#FDBA74" },
+  { value: "CRITICAL", label: "حرجة",   desc: "توقف تام عن العمل",        border: "#f87171", bg: "rgba(239,68,68,0.1)", fg: "#FCA5A5" },
 ];
 
 export default function CommAdminNewTicketPage() {
@@ -118,7 +118,7 @@ export default function CommAdminNewTicketPage() {
                     <div className="font-semibold text-sm" style={{ color: form.type === t.value ? "#5B21B6" : "#111827" }}>{t.label}</div>
                     <div className="text-xs text-purple-400 mt-0.5">{t.desc}</div>
                     {t.needsApproval && (
-                      <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: "#fef3c7", color: "#d97706" }}>يتطلب اعتماد</span>
+                      <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: "rgba(245,158,11,0.15)", color: "#FCD34D" }}>يتطلب اعتماد</span>
                     )}
                   </button>
                 ))}
@@ -184,7 +184,7 @@ export default function CommAdminNewTicketPage() {
               {form.requiresApproval && (
                 <div className="flex justify-between text-sm">
                   <span className="text-purple-400">الاعتماد</span>
-                  <span className="font-semibold" style={{ color: "#d97706" }}>يتطلب اعتماد</span>
+                  <span className="font-semibold" style={{ color: "#FCD34D" }}>يتطلب اعتماد</span>
                 </div>
               )}
               <div className="pt-2 border-t border-white/8">

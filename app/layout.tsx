@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ar" dir="rtl">
-      <body className="antialiased bg-slate-50">
+      <body className="antialiased" style={{ background: "#080820" }}>
         {children}
         <Toaster
           position="top-right"

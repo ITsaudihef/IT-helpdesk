@@ -19,7 +19,7 @@ export default async function CommAdminPage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4">
         {[
-          { label: "بانتظار الاعتماد", value: pending.length, color: "#d97706" },
+          { label: "بانتظار الاعتماد", value: pending.length, color: "#FCD34D" },
           { label: "معتمدة / جارية",   value: approved,        color: "#22c55e" },
           { label: "الإجمالي",          value: all,             color: "#7C3AED" },
         ].map(s => (

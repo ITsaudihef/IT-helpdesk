@@ -14,10 +14,10 @@ const typeOptions = [
 ];
 
 const priorityOptions = [
-  { value: "LOW",      label: "منخفضة", desc: "لا يوجد تأثير على العمل",  border: "#86efac", bg: "#f0fdf4", fg: "#16a34a" },
+  { value: "LOW",      label: "منخفضة", desc: "لا يوجد تأثير على العمل",  border: "#86efac", bg: "rgba(34,197,94,0.1)", fg: "#86EFAC" },
   { value: "MEDIUM",   label: "متوسطة", desc: "تأثير محدود على العمل",    border: "#7C3AED", bg: "rgba(124,58,237,0.12)", fg: "#5B21B6" },
-  { value: "HIGH",     label: "عالية",  desc: "يؤثر على الإنتاجية",       border: "#fb923c", bg: "#fff7ed", fg: "#ea580c" },
-  { value: "CRITICAL", label: "حرجة",   desc: "توقف تام عن العمل",        border: "#f87171", bg: "#fef2f2", fg: "#dc2626" },
+  { value: "HIGH",     label: "عالية",  desc: "يؤثر على الإنتاجية",       border: "#fb923c", bg: "rgba(249,115,22,0.1)", fg: "#FDBA74" },
+  { value: "CRITICAL", label: "حرجة",   desc: "توقف تام عن العمل",        border: "#f87171", bg: "rgba(239,68,68,0.1)", fg: "#FCA5A5" },
 ];
 
 const ALLOWED_EXTS = ["jpg","jpeg","png","gif","webp","pdf","doc","docx","xls","xlsx"];

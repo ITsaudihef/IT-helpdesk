@@ -47,8 +47,8 @@ export default function TicketComments({ ticketId, comments: initial, currentUse
         {comments.map((c) => (
           <div key={c.id} className="rounded-xl p-4 border"
             style={c.isInternal
-              ? { background: "#fefce8", borderColor: "#fde047" }
-              : { background: "#0a0320", borderColor: "#e4e4e7" }}>
+              ? { background: "rgba(245,158,11,0.08)", borderColor: "rgba(245,158,11,0.25)" }
+              : { background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)" }}>
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white"
@@ -58,7 +58,7 @@ export default function TicketComments({ ticketId, comments: initial, currentUse
                 <span className="text-sm font-semibold text-white">{c.author.name}</span>
                 {c.isInternal && (
                   <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full"
-                    style={{ background: "#fef9c3", color: "#a16207" }}>
+                    style={{ background: "rgba(245,158,11,0.15)", color: "#FCD34D" }}>
                     <Lock className="w-3 h-3" />داخلي
                   </span>
                 )}
@@ -73,8 +73,8 @@ export default function TicketComments({ ticketId, comments: initial, currentUse
       <form onSubmit={submit} className="space-y-3">
         <textarea value={body} onChange={(e) => setBody(e.target.value)}
           placeholder="اكتب تعليقك هنا..." rows={3}
-          className="w-full px-3 py-2.5 border border-white/8 rounded-lg text-sm focus:outline-none focus:ring-2 resize-none"
-          style={{ "--tw-ring-color": "#7C3AED" } as any} />
+          className="w-full px-3 py-2.5 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+          style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(124,58,237,0.3)" }} />
         <div className="flex items-center justify-between">
           {(userRole === "ADMIN" || userRole === "SUPPORT") && (
             <label className="flex items-center gap-2 cursor-pointer">

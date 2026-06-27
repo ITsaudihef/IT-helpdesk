@@ -17,17 +17,17 @@ const ARABIC_STATUS: Record<string, string> = {
   PENDING_APPROVAL: "بانتظار الاعتماد", RESOLVED: "تم الحل", CLOSED: "مغلقة",
 };
 const STATUS_COLORS: Record<string, { bg: string; fg: string }> = {
-  OPEN:             { bg: "rgba(124,58,237,0.12)", fg: "#5B21B6" },
-  IN_PROGRESS:      { bg: "#fef3c7", fg: "#d97706" },
-  WAITING_INFO:     { bg: "#ede9fe", fg: "#7c3aed" },
-  PENDING_APPROVAL: { bg: "#fde68a", fg: "#92400e" },
-  RESOLVED:         { bg: "#dcfce7", fg: "#16a34a" },
-  CLOSED:           { bg: "#f3f4f6", fg: "#6b7280" },
+  OPEN:             { bg: "rgba(148,163,184,0.12)", fg: "#CBD5E1" },
+  IN_PROGRESS:      { bg: "rgba(245,158,11,0.15)",  fg: "#FCD34D" },
+  WAITING_INFO:     { bg: "rgba(124,58,237,0.15)",  fg: "#C4B5FD" },
+  PENDING_APPROVAL: { bg: "rgba(245,158,11,0.15)",  fg: "#FCD34D" },
+  RESOLVED:         { bg: "rgba(34,197,94,0.15)",   fg: "#86EFAC" },
+  CLOSED:           { bg: "rgba(100,116,139,0.12)", fg: "#94A3B8" },
 };
 const TYPE_META: Record<string, { bg: string; fg: string; icon: string }> = {
-  SUPPORT:       { bg: "rgba(124,58,237,0.12)", fg: "#5B21B6", icon: "🛠️" },
-  SHIFA_SUPPORT: { bg: "#dbeafe", fg: "#1d4ed8", icon: "🏥" },
-  DEVELOPMENT:   { bg: "#f3e8ff", fg: "#7c3aed", icon: "💻" },
+  SUPPORT:       { bg: "rgba(124,58,237,0.15)", fg: "#C4B5FD", icon: "🛠️" },
+  SHIFA_SUPPORT: { bg: "rgba(59,130,246,0.15)", fg: "#93C5FD", icon: "🏥" },
+  DEVELOPMENT:   { bg: "rgba(168,85,247,0.15)", fg: "#D8B4FE", icon: "💻" },
 };
 const ARABIC_PRIORITY: Record<string, string> = { CRITICAL: "حرجة", HIGH: "عالية", MEDIUM: "متوسطة", LOW: "منخفضة" };
 const PRIORITY_COLORS: Record<string, string>  = { حرجة: "#ef4444", عالية: "#f97316", متوسطة: "#7C3AED", منخفضة: "#5B21B6" };
@@ -50,7 +50,7 @@ export default function ReportsClient() {
     return (
       <div className="space-y-4">
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="bg-white rounded-xl border border-white/5 p-6 h-32 animate-pulse" />
+          <div key={i} className="rounded-xl border border-white/5 p-6 h-32 animate-pulse" style={{ background: "#100835" }} />
         ))}
       </div>
     );
@@ -68,13 +68,13 @@ export default function ReportsClient() {
   return (
     <div className="space-y-6">
       {/* Period selector */}
-      <div className="flex gap-2 bg-white rounded-xl border border-white/5 p-4 shadow-sm">
+      <div className="flex gap-2 rounded-xl border border-white/5 p-4" style={{ background: "#100835" }}>
         {[{ value: "weekly", label: "أسبوعي" }, { value: "monthly", label: "شهري" }, { value: "quarterly", label: "ربعي" }].map(p => (
           <button key={p.value} onClick={() => setPeriod(p.value)}
             className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
             style={period === p.value
               ? { background: "linear-gradient(135deg,#7C3AED,#5B21B6)", color: "#fff" }
-              : { color: "#6b7280", background: "transparent" }}>
+              : { color: "#A78BFA", background: "transparent" }}>
             {p.label}
           </button>
         ))}
@@ -83,12 +83,12 @@ export default function ReportsClient() {
       {/* Top KPI row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "إجمالي التذاكر",  value: summary.total,                    fg: "#5B21B6", bg: "rgba(124,58,237,0.12)" },
-          { label: "تذاكر حرجة",      value: summary.critical,                 fg: "#dc2626", bg: "#fee2e2" },
-          { label: "محلولة + مغلقة",  value: summary.resolved,                 fg: "#16a34a", bg: "#dcfce7" },
-          { label: "متوسط وقت الحل",  value: `${summary.avgResolutionHours}س`, fg: "#d97706", bg: "#fef3c7" },
+          { label: "إجمالي التذاكر",  value: summary.total,                    fg: "#C4B5FD", bg: "rgba(124,58,237,0.15)" },
+          { label: "تذاكر حرجة",      value: summary.critical,                 fg: "#FCA5A5", bg: "rgba(239,68,68,0.15)"  },
+          { label: "محلولة + مغلقة",  value: summary.resolved,                 fg: "#86EFAC", bg: "rgba(34,197,94,0.15)"  },
+          { label: "متوسط وقت الحل",  value: `${summary.avgResolutionHours}س`, fg: "#FCD34D", bg: "rgba(245,158,11,0.15)" },
         ].map(k => (
-          <div key={k.label} className="bg-white rounded-xl border border-white/5 p-4 shadow-sm">
+          <div key={k.label} className="rounded-xl border border-white/5 p-4" style={{ background: "#100835" }}>
             <p className="text-2xl font-bold" style={{ color: k.fg }}>{k.value}</p>
             <p className="text-xs text-purple-400 mt-1">{k.label}</p>
           </div>
@@ -96,7 +96,7 @@ export default function ReportsClient() {
       </div>
 
       {/* ── Detailed Status Breakdown ── */}
-      <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+      <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
         <h3 className="font-bold text-white mb-4">إحصائيات التذاكر حسب الحالة</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {STATUS_KEYS.map((key) => {
@@ -119,7 +119,7 @@ export default function ReportsClient() {
       </div>
 
       {/* ── Detailed Type Breakdown ── */}
-      <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+      <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
         <h3 className="font-bold text-white mb-4">إحصائيات التذاكر حسب النوع</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {(["SUPPORT", "SHIFA_SUPPORT", "DEVELOPMENT"] as const).map((key) => {
@@ -149,7 +149,7 @@ export default function ReportsClient() {
       {/* Charts Grid */}
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Incoming vs Resolved */}
-        <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+        <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
           <h3 className="font-bold text-white mb-4">الواردة مقابل المحلولة</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.dailyData}>
@@ -165,7 +165,7 @@ export default function ReportsClient() {
         </div>
 
         {/* Type pie */}
-        <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+        <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
           <h3 className="font-bold text-white mb-4">توزيع أنواع التذاكر</h3>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
@@ -180,7 +180,7 @@ export default function ReportsClient() {
         </div>
 
         {/* Staff performance */}
-        <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+        <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
           <h3 className="font-bold text-white mb-4">أداء موظفي الدعم</h3>
           {data.staffData.length === 0 ? (
             <p className="text-sm text-purple-500 text-center py-8">لا توجد بيانات بعد</p>
@@ -200,7 +200,7 @@ export default function ReportsClient() {
         </div>
 
         {/* Priority distribution */}
-        <div className="bg-white rounded-xl border border-white/5 p-5 shadow-sm">
+        <div className="rounded-xl border border-white/5 p-5" style={{ background: "#100835" }}>
           <h3 className="font-bold text-white mb-4">توزيع الأولويات</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={priorityData}>

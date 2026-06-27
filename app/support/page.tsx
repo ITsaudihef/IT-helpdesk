@@ -35,12 +35,12 @@ export default async function SupportDashboard() {
     <div className="space-y-6">
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "مفتوحة",           value: open,        bg: "rgba(124,58,237,0.12)", fg: "#5B21B6" },
-          { label: "قيد المعالجة",     value: inProgress,  bg: "#fef3c7", fg: "#d97706" },
-          { label: "بانتظار معلومات",  value: waiting,     bg: "#ede9fe", fg: "#7c3aed" },
-          { label: "مغلقة (منجزة)",    value: closedCount, bg: "#f3f4f6", fg: "#6b7280" },
+          { label: "مفتوحة",           value: open,        bg: "rgba(148,163,184,0.12)", fg: "#CBD5E1" },
+          { label: "قيد المعالجة",     value: inProgress,  bg: "rgba(245,158,11,0.15)",  fg: "#FCD34D" },
+          { label: "بانتظار معلومات",  value: waiting,     bg: "rgba(124,58,237,0.15)",  fg: "#C4B5FD" },
+          { label: "مغلقة (منجزة)",    value: closedCount, bg: "rgba(100,116,139,0.12)", fg: "#94A3B8" },
         ].map(s => (
-          <div key={s.label} className="bg-white rounded-xl border border-white/5 p-4 text-center shadow-sm">
+          <div key={s.label} className="rounded-xl border border-white/5 p-4 text-center" style={{ background: "#100835" }}>
             <p className="text-2xl font-bold" style={{ color: s.fg }}>{s.value}</p>
             <span className="text-xs px-2 py-0.5 rounded-full font-medium mt-1 inline-block"
               style={{ background: s.bg, color: s.fg }}>{s.label}</span>

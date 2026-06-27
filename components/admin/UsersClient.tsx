@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 import { UserPlus, Pencil, Trash2 } from "lucide-react";
 
 const roleLabel: Record<string,string> = { ADMIN: "مدير", SUPPORT: "موظف دعم", USER: "مستخدم", COMM_SUPPORT: "دعم الاتصال المؤسسي", COMM_ADMIN: "ادمن الاتصال المؤسسي" };
-const roleBg:    Record<string,string> = { ADMIN: "#ede9fe", SUPPORT: "rgba(124,58,237,0.12)", USER: "#f4f4f5", COMM_SUPPORT: "#fef9c3", COMM_ADMIN: "#fce7f3" };
-const roleFg:    Record<string,string> = { ADMIN: "#7c3aed", SUPPORT: "#5B21B6", USER: "#374151", COMM_SUPPORT: "#a16207", COMM_ADMIN: "#9d174d" };
+const roleBg:    Record<string,string> = { ADMIN: "rgba(124,58,237,0.2)", SUPPORT: "rgba(124,58,237,0.12)", USER: "rgba(148,163,184,0.1)", COMM_SUPPORT: "rgba(245,158,11,0.12)", COMM_ADMIN: "rgba(236,72,153,0.12)" };
+const roleFg:    Record<string,string> = { ADMIN: "#C4B5FD", SUPPORT: "#A78BFA", USER: "#CBD5E1", COMM_SUPPORT: "#FCD34D", COMM_ADMIN: "#F9A8D4" };
 
 interface User {
   id: string; name: string; email: string; role: string;
@@ -57,7 +57,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
       {/* Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl">
+          <div className="rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl" style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.2)" }}>
             <h2 className="font-bold text-white mb-4">{editUser ? "تعديل المستخدم" : "مستخدم جديد"}</h2>
             <form onSubmit={submit} className="space-y-4">
               {[

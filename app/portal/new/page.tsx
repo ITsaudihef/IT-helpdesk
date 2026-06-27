@@ -14,10 +14,10 @@ const typeOptions = [
 ];
 
 const priorityOptions = [
-  { value: "LOW",      label: "منخفضة", desc: "لا يوجد تأثير على العمل",  border: "#86efac", bg: "#f0fdf4", fg: "#16a34a" },
+  { value: "LOW",      label: "منخفضة", desc: "لا يوجد تأثير على العمل",  border: "#86efac", bg: "rgba(34,197,94,0.1)", fg: "#86EFAC" },
   { value: "MEDIUM",   label: "متوسطة", desc: "تأثير محدود على العمل",    border: "#7C3AED", bg: "rgba(124,58,237,0.12)", fg: "#5B21B6" },
-  { value: "HIGH",     label: "عالية",  desc: "يؤثر على الإنتاجية",       border: "#fb923c", bg: "#fff7ed", fg: "#ea580c" },
-  { value: "CRITICAL", label: "حرجة",   desc: "توقف تام عن العمل",        border: "#f87171", bg: "#fef2f2", fg: "#dc2626" },
+  { value: "HIGH",     label: "عالية",  desc: "يؤثر على الإنتاجية",       border: "#fb923c", bg: "rgba(249,115,22,0.1)", fg: "#FDBA74" },
+  { value: "CRITICAL", label: "حرجة",   desc: "توقف تام عن العمل",        border: "#f87171", bg: "rgba(239,68,68,0.1)", fg: "#FCA5A5" },
 ];
 
 const ALLOWED_EXTS = ["jpg","jpeg","png","gif","webp","pdf","doc","docx","xls","xlsx"];
@@ -155,7 +155,7 @@ export default function NewTicketPage() {
                     <div className="text-xs text-purple-400 mt-1">{t.desc}</div>
                     {t.value === "DEVELOPMENT" && (
                       <span className="inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium"
-                        style={{ background: "#fef3c7", color: "#d97706" }}>
+                        style={{ background: "rgba(245,158,11,0.15)", color: "#FCD34D" }}>
                         يتطلب اعتماد
                       </span>
                     )}
@@ -214,7 +214,7 @@ export default function NewTicketPage() {
                   <li key={i} className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-white/5">
                     <FileText className="w-5 h-5 flex-shrink-0" style={{ color: "#7C3AED" }} />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-800 truncate">{f.name}</p>
+                      <p className="text-sm font-medium text-white truncate">{f.name}</p>
                       <p className="text-xs text-purple-500">{formatSize(f.size)}</p>
                     </div>
                     <button type="button" onClick={() => removeFile(i)}
@@ -246,7 +246,7 @@ export default function NewTicketPage() {
               {form.requiresApproval && (
                 <div className="flex justify-between text-sm">
                   <span className="text-purple-400">الاعتماد</span>
-                  <span className="font-semibold" style={{ color: "#d97706" }}>يتطلب اعتماد الإدارة</span>
+                  <span className="font-semibold" style={{ color: "#FCD34D" }}>يتطلب اعتماد الإدارة</span>
                 </div>
               )}
               {files.length > 0 && (

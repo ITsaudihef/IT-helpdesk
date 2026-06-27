@@ -20,11 +20,11 @@ export default function ConfirmDialog({
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" dir="rtl">
-      <div className="bg-white rounded-2xl p-6 w-full max-w-sm mx-4 shadow-xl">
+      <div className="rounded-2xl p-6 w-full max-w-sm mx-4 shadow-xl" style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.2)" }}>
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{ background: danger ? "#fee2e2" : "#fef3c7" }}>
-            <AlertTriangle className="w-5 h-5" style={{ color: danger ? "#dc2626" : "#d97706" }} />
+            style={{ background: danger ? "rgba(239,68,68,0.15)" : "rgba(245,158,11,0.15)" }}>
+            <AlertTriangle className="w-5 h-5" style={{ color: danger ? "#FCA5A5" : "#FCD34D" }} />
           </div>
           <h3 className="font-bold text-white">{title}</h3>
         </div>

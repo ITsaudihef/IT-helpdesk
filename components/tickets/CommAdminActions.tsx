@@ -59,7 +59,7 @@ export default function CommAdminActions({ ticketId, status, commSupportUsers }:
   if (!isPending) return null;
 
   return (
-    <div className="bg-white rounded-2xl border border-yellow-200 shadow-sm p-5 space-y-4">
+    <div className="rounded-2xl p-5 space-y-4" style={{ background: "#100835", border: "1px solid rgba(245,158,11,0.25)" }}>
       <div className="flex items-center gap-2">
         <span className="w-2 h-2 rounded-full bg-yellow-400" />
         <h3 className="font-bold text-white text-sm">اعتماد التذكرة</h3>

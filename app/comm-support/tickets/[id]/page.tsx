@@ -35,7 +35,7 @@ export default async function CommSupportTicketPage({ params }: { params: { id: 
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <div className="bg-white rounded-2xl border border-white/8 p-6">
+      <div className="rounded-2xl p-6" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
         <div className="flex items-start justify-between gap-4 mb-4">
           <div>
             <p className="text-sm text-purple-400 mb-1">{ticket.ticketNo}</p>

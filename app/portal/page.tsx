@@ -31,7 +31,7 @@ export default async function PortalPage() {
         <div className="absolute top-[-40px] left-[-40px] w-48 h-48 rounded-full opacity-10 bg-white" />
         <div className="relative">
           <h1 className="text-xl font-bold mb-1">مرحباً، {session!.user.name} 👋</h1>
-          <p className="text-purple-900 text-sm">يمكنك رفع طلبات دعم IT وتتبع حالتها من هنا</p>
+          <p className="text-purple-200 text-sm">يمكنك رفع طلبات دعم IT وتتبع حالتها من هنا</p>
           <Link href="/portal/new"
             className="inline-flex items-center gap-2 mt-4 bg-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors hover:bg-purple-950"
             style={{ color: "#5B21B6" }}>
@@ -44,14 +44,14 @@ export default async function PortalPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "إجمالي التذاكر", value: total,      icon: Ticket,       bg: "#f4f4f5",  fg: "#1a1a1a" },
-          { label: "مفتوحة",         value: open,       icon: AlertCircle,  bg: "rgba(124,58,237,0.12)",  fg: "#5B21B6" },
-          { label: "قيد المعالجة",   value: inProgress, icon: Clock,        bg: "#fef3c7",  fg: "#d97706" },
-          { label: "محلولة",         value: resolved,   icon: CheckCircle2, bg: "#dcfce7",  fg: "#16a34a" },
+          { label: "إجمالي التذاكر", value: total,      icon: Ticket,       bg: "rgba(124,58,237,0.15)",  fg: "#C4B5FD" },
+          { label: "مفتوحة",         value: open,       icon: AlertCircle,  bg: "rgba(148,163,184,0.12)", fg: "#CBD5E1" },
+          { label: "قيد المعالجة",   value: inProgress, icon: Clock,        bg: "rgba(245,158,11,0.15)",  fg: "#FCD34D" },
+          { label: "محلولة",         value: resolved,   icon: CheckCircle2, bg: "rgba(34,197,94,0.15)",   fg: "#86EFAC" },
         ].map((stat) => {
           const Icon = stat.icon;
           return (
-            <div key={stat.label} className="bg-white rounded-xl border border-white/5 p-4 shadow-sm">
+            <div key={stat.label} className="rounded-xl border border-white/5 p-4" style={{ background: "#100835" }}>
               <div className="inline-flex p-2 rounded-lg mb-2" style={{ background: stat.bg }}>
                 <Icon className="w-4 h-4" style={{ color: stat.fg }} />
               </div>

@@ -2,7 +2,7 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-lg font-semibold text-white">إعدادات النظام</h1>
-      <div className="bg-white rounded-xl border border-white/8 p-6">
+      <div className="rounded-xl p-6" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
         <h2 className="font-medium text-white mb-4">أنواع التذاكر</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {[
@@ -23,7 +23,7 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-white/8 p-6">
+      <div className="rounded-xl p-6" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
         <h2 className="font-medium text-white mb-4">مستويات الأولوية</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
@@ -40,7 +40,7 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-white/8 p-6">
+      <div className="rounded-xl p-6" style={{ background: "#100835", border: "1px solid rgba(255,255,255,0.07)" }}>
         <h2 className="font-medium text-white mb-2">إعدادات البريد الإلكتروني</h2>
         <p className="text-sm text-purple-400 mb-4">إعدادات Nodemailer لإشعارات تغيير الحالة</p>
         <div className="bg-white/5 rounded-lg p-4 font-mono text-xs text-purple-300 space-y-1">

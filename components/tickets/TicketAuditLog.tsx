@@ -47,9 +47,9 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
       >
         <div className="flex items-center gap-2">
           <ClipboardList className="w-4 h-4 text-purple-500" />
-          <span className="font-semibold text-gray-800 text-sm">سجل الأحداث</span>
+          <span className="font-semibold text-white text-sm">سجل الأحداث</span>
           {logs.length > 0 && (
-            <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-gray-100 text-purple-400">
+            <span className="text-xs px-2 py-0.5 rounded-full font-medium text-purple-300" style={{ background: "rgba(124,58,237,0.12)" }}>
               {logs.length}
             </span>
           )}
@@ -63,7 +63,7 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
           {loading ? (
             <div className="space-y-3">
               {[1, 2, 3].map(i => (
-                <div key={i} className="h-10 bg-gray-100 rounded-lg animate-pulse" />
+                <div key={i} className="h-10 rounded-lg animate-pulse skeleton" />
               ))}
             </div>
           ) : logs.length === 0 ? (
@@ -81,7 +81,7 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
                     />
                     <div className="flex flex-col gap-0.5">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-sm font-semibold text-gray-800">{log.action}</span>
+                        <span className="text-sm font-semibold text-white">{log.action}</span>
                         {log.actor && (
                           <span className="text-xs text-purple-500">— {log.actor.name}</span>
                         )}
