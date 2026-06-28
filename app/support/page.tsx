@@ -58,7 +58,7 @@ export default async function SupportDashboard() {
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(124,58,237,0.12)" }}>
               <HeadphonesIcon className="w-8 h-8" style={{ color: "#7C3AED" }} />
             </div>
-            <h3 className="font-semibold text-white">لا توجد تذاكر مسندة</h3>
+            <h3 className="font-semibold" style={{ color: "#1F1535" }}>لا توجد تذاكر مسندة</h3>
             <p className="text-sm text-purple-600 mt-1">أنت متاح لاستقبال تذاكر جديدة</p>
           </div>
         ) : (

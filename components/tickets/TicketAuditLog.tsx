@@ -47,7 +47,7 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
       >
         <div className="flex items-center gap-2">
           <ClipboardList className="w-4 h-4 text-purple-500" />
-          <span className="font-semibold text-white text-sm">سجل الأحداث</span>
+          <span className="font-semibold text-sm" style={{ color: "#1F1535" }}>سجل الأحداث</span>
           {logs.length > 0 && (
             <span className="text-xs px-2 py-0.5 rounded-full font-medium text-gray-500" style={{ background: "rgba(124,58,237,0.12)" }}>
               {logs.length}
@@ -69,7 +69,7 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
           ) : logs.length === 0 ? (
             <p className="text-sm text-purple-500 text-center py-4">لا توجد أحداث مسجّلة</p>
           ) : (
-            <ol className="relative border-r-2 border-white/5 space-y-5 pr-4">
+            <ol className="relative border-r-2 border-purple-200 space-y-5 pr-4">
               {logs.map((log) => {
                 const meta = ACTION_ICON[log.action] || { icon: "📌", color: "#6b7280" };
                 return (
@@ -81,7 +81,7 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
                     />
                     <div className="flex flex-col gap-0.5">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-sm font-semibold text-white">{log.action}</span>
+                        <span className="text-sm font-semibold" style={{ color: "#1F1535" }}>{log.action}</span>
                         {log.actor && (
                           <span className="text-xs text-purple-500">— {log.actor.name}</span>
                         )}

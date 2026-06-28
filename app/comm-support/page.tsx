@@ -40,7 +40,7 @@ export default async function CommSupportPage() {
 
       {/* Tickets */}
       <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-        <div className="px-5 py-4 border-b border-white/5">
+        <div className="px-5 py-4 border-b border-purple-100">
           <h2 className="font-bold" style={{ color: "#1F1535" }}>تذاكر التواصل المؤسسي المكلّف بها</h2>
         </div>
         {tickets.length === 0 ? (
@@ -53,7 +53,7 @@ export default async function CommSupportPage() {
                   className="flex items-center gap-4 px-5 py-4 hover:bg-purple-50 transition-colors">
                   <div className="flex-1 min-w-0">
                     <p className="text-xs text-purple-500 mb-0.5">{t.ticketNo}</p>
-                    <p className="text-sm font-semibold text-white truncate">{t.title}</p>
+                    <p className="text-sm font-semibold truncate" style={{ color: "#1F1535" }}>{t.title}</p>
                     <p className="text-xs text-purple-600 mt-0.5">{t.createdBy.name} · {t.createdBy.department}</p>
                   </div>
                   <div className="flex flex-col items-end gap-1">

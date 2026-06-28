@@ -176,7 +176,7 @@ export default function CommSupportNewTicketPage() {
               ].map(r => (
                 <div key={r.label} className="flex justify-between text-sm">
                   <span className="text-purple-600">{r.label}</span>
-                  <span className="font-semibold text-white">{r.value}</span>
+                  <span className="font-semibold" style={{ color: "#1F1535" }}>{r.value}</span>
                 </div>
               ))}
               <div className="pt-2 border-t border-purple-100">
