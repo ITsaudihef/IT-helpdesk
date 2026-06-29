@@ -29,7 +29,7 @@ export default async function MyTicketsPage({
   const where: any = { createdById: session!.user.id };
   if (status) where.status = status;
 
-  const [tickets, total, waitingCount] = await Promise.all([
+  const [tickets, total, waitingCount, deptPendingCount] = await Promise.all([
     prisma.ticket.findMany({
       where,
       include: {
@@ -42,6 +42,7 @@ export default async function MyTicketsPage({
     }),
     prisma.ticket.count({ where }),
     prisma.ticket.count({ where: { createdById: session!.user.id, status: "WAITING_INFO" } }),
+    prisma.ticket.count({ where: { createdById: session!.user.id, status: "PENDING_DEPT_APPROVAL" } }),
   ]);
 
   return (
@@ -71,6 +72,21 @@ export default async function MyTicketsPage({
         </div>
       )}
 
+      {/* PENDING_DEPT_APPROVAL alert */}
+      {deptPendingCount > 0 && !status && (
+        <div className="rounded-xl p-3 flex items-center justify-between"
+          style={{ background: "rgba(234,88,12,0.07)", border: "1px solid #FED7AA" }}>
+          <p className="text-sm font-semibold" style={{ color: "#C2410C" }}>
+            🕐 {deptPendingCount} طلب بانتظار اعتماد مدير القسم
+          </p>
+          <Link href="?status=PENDING_DEPT_APPROVAL"
+            className="text-xs font-bold px-3 py-1.5 rounded-lg text-white whitespace-nowrap"
+            style={{ background: "#EA580C" }}>
+            عرض
+          </Link>
+        </div>
+      )}
+
       {/* Status tabs */}
       <div className="flex gap-1 flex-wrap">
         {STATUS_TABS.map(tab => {
@@ -86,6 +102,11 @@ export default async function MyTicketsPage({
               {tab.value === "WAITING_INFO" && waitingCount > 0 && (
                 <span className="mr-1.5 bg-red-500 text-white rounded-full text-[10px] px-1.5 py-0.5">
                   {waitingCount}
+                </span>
+              )}
+              {tab.value === "PENDING_DEPT_APPROVAL" && deptPendingCount > 0 && (
+                <span className="mr-1.5 rounded-full text-[10px] px-1.5 py-0.5" style={{ background: "#EA580C", color: "white" }}>
+                  {deptPendingCount}
                 </span>
               )}
             </Link>

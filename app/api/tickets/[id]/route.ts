@@ -48,7 +48,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
   const updateData: any = {};
 
-  const isStaff = ["ADMIN","SUPPORT","COMM_SUPPORT","COMM_ADMIN"].includes(session.user.role);
+  const isStaff = ["ADMIN","SUPPORT","COMM_SUPPORT","COMM_ADMIN","DEPT_MANAGER"].includes(session.user.role);
   const isAdmin = ["ADMIN","COMM_ADMIN"].includes(session.user.role);
 
   if (status && isStaff) {

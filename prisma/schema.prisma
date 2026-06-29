@@ -50,6 +50,12 @@ model Ticket {
   notifications Notification[]
   auditLogs     AuditLog[]
 
+  @@index([status])
+  @@index([priority])
+  @@index([type])
+  @@index([createdById])
+  @@index([assignedToId])
+  @@index([createdAt])
   @@map("tickets")
 }
 
