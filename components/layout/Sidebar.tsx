@@ -126,13 +126,13 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
             <p className="text-xs" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
           </div>
         </div>
-        <button className="lg:hidden p-1 rounded-lg" style={{ color: "#A78BFA" }} onClick={() => setMobileOpen(false)}>
-          <X className="w-5 h-5" />
+        <button className="lg:hidden p-1 rounded-lg" style={{ color: "#A78BFA" }} onClick={() => setMobileOpen(false)} aria-label="إغلاق القائمة">
+          <X className="w-5 h-5" aria-hidden="true" />
         </button>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 p-4 space-y-1 overflow-y-auto" aria-label="القائمة الرئيسية">
         {nav.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href) && item.href.length > 1);
@@ -141,6 +141,7 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
               key={item.href}
               href={item.href}
               onClick={() => setMobileOpen(false)}
+              aria-current={isActive ? "page" : undefined}
               className={cn("flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all")}
               style={isActive
                 ? { background: "linear-gradient(135deg, #7C3AED, #EC4899)", color: "#fff", boxShadow: "0 4px 15px rgba(124,58,237,0.35)" }
@@ -148,7 +149,7 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
               onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = "rgba(124,58,237,0.12)"; }}
               onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = "transparent"; }}
             >
-              <Icon className="w-4 h-4 flex-shrink-0" />
+              <Icon className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
               {item.label}
             </Link>
           );
@@ -208,7 +209,7 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
       {/* ── Mobile overlay + drawer ── */}
       {mobileOpen && (
         <>
-          <div className="lg:hidden fixed inset-0 bg-black/40 z-40" onClick={() => setMobileOpen(false)} />
+          <div className="lg:hidden fixed inset-0 bg-black/40 z-40" onClick={() => setMobileOpen(false)} aria-hidden="true" />
           <div className="lg:hidden fixed right-0 top-0 h-full z-50 w-64">
             {sidebarContent}
           </div>
@@ -217,28 +218,31 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
 
       {/* ── Change Password Modal ── */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" dir="rtl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" dir="rtl"
+          role="dialog" aria-modal="true" aria-labelledby="change-pw-title">
           <div className="rounded-2xl p-6 w-full max-w-sm mx-4" style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.25)", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(124,58,237,0.2)" }}>
-                <KeyRound className="w-5 h-5 text-purple-300" />
+                <KeyRound className="w-5 h-5 text-purple-300" aria-hidden="true" />
               </div>
-              <h2 className="font-bold text-white">تغيير كلمة المرور</h2>
+              <h2 id="change-pw-title" className="font-bold text-white">تغيير كلمة المرور</h2>
             </div>
             <form onSubmit={handleChangePassword} className="space-y-4">
               {[
-                { label: "كلمة المرور الحالية", val: currentPw, set: setCurrentPw, show: showCur, toggle: () => setShowCur(v => !v) },
-                { label: "كلمة المرور الجديدة", val: newPw,     set: setNewPw,     show: showNew, toggle: () => setShowNew(v => !v) },
-                { label: "تأكيد كلمة المرور",   val: confirmPw, set: setConfirmPw, show: showCon, toggle: () => setShowCon(v => !v) },
+                { id: "cur-pw",  label: "كلمة المرور الحالية", val: currentPw, set: setCurrentPw, show: showCur, toggle: () => setShowCur(v => !v) },
+                { id: "new-pw",  label: "كلمة المرور الجديدة", val: newPw,     set: setNewPw,     show: showNew, toggle: () => setShowNew(v => !v) },
+                { id: "conf-pw", label: "تأكيد كلمة المرور",   val: confirmPw, set: setConfirmPw, show: showCon, toggle: () => setShowCon(v => !v) },
               ].map(f => (
-                <div key={f.label}>
-                  <label className="block text-sm font-medium mb-1" style={{ color: "#A78BFA" }}>{f.label}</label>
+                <div key={f.id}>
+                  <label htmlFor={f.id} className="block text-sm font-medium mb-1" style={{ color: "#A78BFA" }}>{f.label}</label>
                   <div className="relative">
-                    <input type={f.show ? "text" : "password"} value={f.val} onChange={e => f.set(e.target.value)} required minLength={6}
+                    <input id={f.id} type={f.show ? "text" : "password"} value={f.val} onChange={e => f.set(e.target.value)} required minLength={8}
                       className="w-full pr-3 pl-10 py-2 rounded-lg text-sm text-white focus:outline-none"
                       style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(124,58,237,0.3)" }} />
-                    <button type="button" onClick={f.toggle} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#A78BFA" }}>
-                      {f.show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    <button type="button" onClick={f.toggle}
+                      aria-label={f.show ? `إخفاء ${f.label}` : `إظهار ${f.label}`}
+                      className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#A78BFA" }}>
+                      {f.show ? <EyeOff className="w-4 h-4" aria-hidden="true" /> : <Eye className="w-4 h-4" aria-hidden="true" />}
                     </button>
                   </div>
                 </div>

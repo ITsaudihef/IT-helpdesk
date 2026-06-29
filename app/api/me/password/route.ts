@@ -12,8 +12,8 @@ export async function PATCH(req: Request) {
   if (!currentPassword || !newPassword)
     return NextResponse.json({ error: "جميع الحقول مطلوبة" }, { status: 400 });
 
-  if (newPassword.length < 6)
-    return NextResponse.json({ error: "كلمة المرور يجب أن تكون 6 أحرف على الأقل" }, { status: 400 });
+  if (newPassword.length < 8)
+    return NextResponse.json({ error: "كلمة المرور يجب أن تكون 8 أحرف على الأقل" }, { status: 400 });
 
   const user = await prisma.user.findUnique({ where: { id: session.user.id } });
   if (!user) return NextResponse.json({ error: "المستخدم غير موجود" }, { status: 404 });
