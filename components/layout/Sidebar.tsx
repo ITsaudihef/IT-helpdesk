@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
@@ -9,6 +10,7 @@ import {
   LayoutDashboard, Ticket, Users, BarChart3, Settings,
   LogOut, HeadphonesIcon, PlusCircle, List, KeyRound, Eye, EyeOff, Menu, X, ShieldCheck, CalendarDays,
 } from "lucide-react";
+import logoSrc from "@/public/logo.png";
 import toast from "react-hot-toast";
 
 interface NavItem { href: string; label: string; icon: React.ElementType; }
@@ -113,7 +115,7 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
       {/* Logo */}
       <div className="p-5 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="بوابة سند" className="w-10 h-10 rounded-xl object-cover" />
+          <Image src={logoSrc} alt="بوابة سند" width={40} height={40} className="rounded-xl object-cover" />
           <div>
             <h1 className="font-bold text-sm text-white">بوابة سند</h1>
             <p className="text-xs" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>

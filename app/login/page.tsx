@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { HeadphonesIcon, Lock, Mail, Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
+import { Lock, Mail, Eye, EyeOff } from "lucide-react";
+import logoSrc from "@/public/logo.png";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
@@ -40,7 +42,7 @@ export default function LoginPage() {
           style={{ background: "radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)" }} />
 
         <div className="relative text-center text-white px-12 z-10">
-          <img src="/logo.png" alt="بوابة سند" className="w-20 h-20 rounded-2xl object-cover mx-auto mb-6" />
+          <Image src={logoSrc} alt="بوابة سند" width={80} height={80} className="rounded-2xl object-cover mx-auto mb-6" />
           <h1 className="text-3xl font-bold mb-1 gradient-text">بوابة سند</h1>
           <p className="text-sm mb-3" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
           <div className="mt-10 grid grid-cols-3 gap-4 text-center">
@@ -63,7 +65,7 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           {/* Mobile logo */}
           <div className="lg:hidden text-center mb-8">
-            <img src="/logo.png" alt="بوابة سند" className="w-14 h-14 rounded-xl object-cover inline-block mb-3" />
+            <Image src={logoSrc} alt="بوابة سند" width={56} height={56} className="rounded-xl object-cover inline-block mb-3" />
             <h1 className="text-xl font-bold gradient-text">بوابة سند</h1>
             <p className="text-xs mt-1" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
           </div>
