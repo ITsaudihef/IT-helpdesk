@@ -31,8 +31,6 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
   const [depts,        setDepts]       = useState(departments);
   const [expanded,     setExpanded]    = useState<string | null>(null);
   const [modal,        setModal]       = useState<{ dept: Dept } | null>(null);
-  const [addDeptModal, setAddDeptModal] = useState(false);
-  const [newDeptName,  setNewDeptName]  = useState("");
   const [saving,       setSaving]      = useState(false);
 
   const toggleExpand = (name: string) => setExpanded(e => e === name ? null : name);
@@ -102,12 +100,6 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
       setSaving(false);
     }
   };
-
-  const allDeptNames = [...new Set([
-    ...PRESET_DEPTS,
-    ...depts.map(d => d.name).filter(n => n !== "بدون قسم"),
-    ...(newDeptName ? [newDeptName] : []),
-  ])].sort((a, b) => a.localeCompare(b, "ar"));
 
   return (
     <div className="space-y-4">
