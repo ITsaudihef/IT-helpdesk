@@ -44,8 +44,8 @@ export default function LoginPage() {
             style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
             <HeadphonesIcon className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-3xl font-bold mb-1 gradient-text">بوابة الدعم الفني</h1>
-          <p className="text-sm mb-3" style={{ color: "#A78BFA" }}>صندوق الوقف الصحي</p>
+          <h1 className="text-3xl font-bold mb-1 gradient-text">سند</h1>
+          <p className="text-sm mb-3" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
           <div className="mt-10 grid grid-cols-3 gap-4 text-center">
             {[
               { n: "سريع", d: "حل مشاكلك بكفاءة" },
@@ -70,8 +70,8 @@ export default function LoginPage() {
               style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
               <HeadphonesIcon className="w-7 h-7 text-white" />
             </div>
-            <h1 className="text-xl font-bold gradient-text">بوابة الدعم الفني</h1>
-            <p className="text-xs mt-1" style={{ color: "#A78BFA" }}>صندوق الوقف الصحي</p>
+            <h1 className="text-xl font-bold gradient-text">سند</h1>
+            <p className="text-xs mt-1" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
           </div>
 
           <div className="rounded-2xl p-8" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF", boxShadow: "0 20px 60px rgba(124,58,237,0.15)" }}>
@@ -122,7 +122,7 @@ export default function LoginPage() {
           </div>
 
           <p className="text-center text-xs mt-6" style={{ color: "rgba(255,255,255,0.35)" }}>
-            صندوق الوقف الصحي © {new Date().getFullYear()}
+            كل تحدي وله سند © {new Date().getFullYear()}
           </p>
         </div>
       </div>

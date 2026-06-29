@@ -117,8 +117,8 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
             <HeadphonesIcon className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-sm text-white">بوابة الدعم الفني</h1>
-            <p className="text-xs" style={{ color: "#A78BFA" }}>صندوق الوقف الصحي</p>
+            <h1 className="font-bold text-sm text-white">سند</h1>
+            <p className="text-xs" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
           </div>
         </div>
         <button className="lg:hidden p-1 rounded-lg" style={{ color: "#A78BFA" }} onClick={() => setMobileOpen(false)}>

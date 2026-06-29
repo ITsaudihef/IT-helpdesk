@@ -57,7 +57,7 @@ export default async function SettingsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-bold" style={{ color: "#1F1535" }}>إعدادات النظام</h1>
-          <p className="text-sm mt-0.5" style={{ color: "#7C6A9E" }}>نظرة شاملة على إعدادات وحالة بوابة الدعم الفني</p>
+          <p className="text-sm mt-0.5" style={{ color: "#7C6A9E" }}>نظرة شاملة على إعدادات وحالة سند</p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold"
           style={{ background: "#D1FAE5", color: "#065F46", border: "1px solid #6EE7B7" }}>
@@ -236,8 +236,8 @@ export default async function SettingsPage() {
             </div>
             <div className="space-y-2.5">
               {[
-                { label: "اسم النظام",    value: "بوابة الدعم الفني" },
-                { label: "المنظمة",       value: "صندوق الوقف الصحي" },
+                { label: "اسم النظام",    value: "سند" },
+                { label: "المنظمة",       value: "كل تحدي وله سند" },
                 { label: "الإصدار",       value: "v1.0.0" },
                 { label: "المنصة",        value: "Next.js 14 / Prisma" },
                 { label: "قاعدة البيانات",value: "SQLite" },
