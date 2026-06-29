@@ -54,16 +54,21 @@ const deptManagerNav: NavItem[] = [
   roomsLink,
 ];
 
-interface SidebarProps { role: string; userName: string; userEmail: string; }
+interface SidebarProps { role: string; userName: string; userEmail: string; roomsEnabled?: boolean; }
 
-export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
+export default function Sidebar({ role, userName, userEmail, roomsEnabled = true }: SidebarProps) {
   const pathname = usePathname();
-  const nav =
+
+  const filterRooms = (items: NavItem[]) =>
+    roomsEnabled ? items : items.filter(i => i.href !== "/rooms");
+
+  const nav = filterRooms(
     role === "ADMIN"        ? adminNav        :
     role === "SUPPORT"      ? supportNav      :
     role === "COMM_SUPPORT" ? commSupportNav  :
     role === "COMM_ADMIN"   ? commAdminNav    :
-    role === "DEPT_MANAGER" ? deptManagerNav  : userNav;
+    role === "DEPT_MANAGER" ? deptManagerNav  : userNav
+  );
   const roleLabelMap: Record<string,string> = {
     ADMIN:        "مدير النظام",
     SUPPORT:      "موظف الدعم",

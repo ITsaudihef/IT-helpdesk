@@ -1,9 +1,11 @@
 import { prisma } from "@/lib/prisma";
+import { getSetting } from "@/lib/settings";
 import Link from "next/link";
 import {
   Users, Ticket, Clock, CheckCircle2, AlertTriangle, Mail,
   Shield, Database, Settings, ChevronLeft, Zap, BarChart3,
 } from "lucide-react";
+import SettingsToggles from "@/components/admin/SettingsToggles";
 
 const ROLE_META: Record<string, { label: string; color: string; bg: string }> = {
   ADMIN:        { label: "مدير النظام",              color: "#5B21B6", bg: "#EDE9FE" },
@@ -49,6 +51,7 @@ export default async function SettingsPage() {
 
   const smtpConfigured = !!(process.env.SMTP_USER && process.env.SMTP_PASS);
   const dbUrl = process.env.DATABASE_URL || "file:./dev.db";
+  const roomsEnabled = await getSetting("rooms_enabled", "true") === "true";
 
   return (
     <div className="space-y-6 max-w-5xl">
@@ -227,6 +230,9 @@ export default async function SettingsPage() {
 
         {/* ── Right column (1/3) ── */}
         <div className="space-y-6">
+
+          {/* Feature toggles */}
+          <SettingsToggles roomsEnabled={roomsEnabled} />
 
           {/* System info */}
           <div className="rounded-2xl p-5" style={{ background: "linear-gradient(135deg,#7C3AED,#5B21B6)", color: "white" }}>

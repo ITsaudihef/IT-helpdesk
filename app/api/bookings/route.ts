@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getSetting } from "@/lib/settings";
 
 export async function GET(req: NextRequest) {
   const session = await auth();
@@ -29,6 +30,11 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  if ((session.user as any).role !== "ADMIN") {
+    const roomsEnabled = await getSetting("rooms_enabled", "true") === "true";
+    if (!roomsEnabled) return NextResponse.json({ error: "ميزة حجز القاعات معطّلة حالياً" }, { status: 403 });
+  }
 
   const { roomId, title, date, startTime, endTime, notes } = await req.json();
 

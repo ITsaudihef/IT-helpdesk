@@ -2,10 +2,14 @@ import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
+import { getSetting } from "@/lib/settings";
 
 export default async function RoomsLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
   if (!session) redirect("/login");
+
+  const roomsEnabled = await getSetting("rooms_enabled", "true") === "true";
+  if (!roomsEnabled && session.user.role !== "ADMIN") redirect("/dashboard");
 
   return (
     <div className="min-h-screen" style={{ background: "#F5F3FF" }} dir="rtl">
@@ -13,6 +17,7 @@ export default async function RoomsLayout({ children }: { children: React.ReactN
         role={session.user.role}
         userName={session.user.name}
         userEmail={session.user.email}
+        roomsEnabled={roomsEnabled}
       />
       <div className="lg:mr-64 overflow-x-hidden">
         <Header title="حجز القاعات" />

@@ -129,6 +129,13 @@ model AuditLog {
   @@map("audit_logs")
 }
 
+model SystemSetting {
+  key   String @id
+  value String
+
+  @@map("system_settings")
+}
+
 model Notification {
   id        String   @id @default(cuid())
   userId    String
