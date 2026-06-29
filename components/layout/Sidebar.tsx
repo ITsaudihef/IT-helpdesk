@@ -14,11 +14,12 @@ import toast from "react-hot-toast";
 interface NavItem { href: string; label: string; icon: React.ElementType; }
 
 const adminNav: NavItem[] = [
-  { href: "/admin",          label: "لوحة التحكم",  icon: LayoutDashboard },
-  { href: "/admin/tickets",  label: "جميع التذاكر", icon: Ticket },
-  { href: "/admin/reports",  label: "التقارير",      icon: BarChart3 },
-  { href: "/admin/users",    label: "المستخدمون",   icon: Users },
-  { href: "/admin/settings", label: "الإعدادات",    icon: Settings },
+  { href: "/admin",               label: "لوحة التحكم",  icon: LayoutDashboard },
+  { href: "/admin/tickets",       label: "جميع التذاكر", icon: Ticket },
+  { href: "/admin/reports",       label: "التقارير",      icon: BarChart3 },
+  { href: "/admin/users",         label: "المستخدمون",   icon: Users },
+  { href: "/admin/departments",   label: "الأقسام",       icon: ShieldCheck },
+  { href: "/admin/settings",      label: "الإعدادات",    icon: Settings },
 ];
 const supportNav: NavItem[] = [
   { href: "/support", label: "تذاكري", icon: HeadphonesIcon },
