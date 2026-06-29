@@ -19,6 +19,7 @@ export default auth((req) => {
       if (role === "SUPPORT")      return NextResponse.redirect(new URL("/support",      req.url));
       if (role === "COMM_SUPPORT") return NextResponse.redirect(new URL("/comm-support", req.url));
       if (role === "COMM_ADMIN")   return NextResponse.redirect(new URL("/comm-admin",   req.url));
+      if (role === "DEPT_MANAGER") return NextResponse.redirect(new URL("/dept-manager", req.url));
       return NextResponse.redirect(new URL("/portal", req.url));
     }
 
@@ -35,6 +36,10 @@ export default auth((req) => {
     }
 
     if (pathname.startsWith("/comm-admin") && role !== "COMM_ADMIN" && role !== "ADMIN") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+
+    if (pathname.startsWith("/dept-manager") && role !== "DEPT_MANAGER" && role !== "ADMIN") {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 

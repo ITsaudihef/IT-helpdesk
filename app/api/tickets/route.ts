@@ -76,6 +76,24 @@ export async function POST(req: NextRequest) {
 
   const needsApproval = requiresApproval || type === "INSTITUTIONAL_COMM";
 
+  // For DEVELOPMENT tickets: route through dept manager first if one exists in the same department
+  let initialStatus = needsApproval ? "PENDING_APPROVAL" : "OPEN";
+  if (type === "DEVELOPMENT") {
+    const creator = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { department: true },
+    });
+    if (creator?.department) {
+      const deptManager = await prisma.user.findFirst({
+        where: { role: "DEPT_MANAGER", department: creator.department },
+        select: { id: true },
+      });
+      if (deptManager) {
+        initialStatus = "PENDING_DEPT_APPROVAL";
+      }
+    }
+  }
+
   const ticket = await prisma.ticket.create({
     data: {
       ticketNo,
@@ -84,7 +102,7 @@ export async function POST(req: NextRequest) {
       type,
       priority: priority || "MEDIUM",
       requiresApproval: needsApproval,
-      status: needsApproval ? "PENDING_APPROVAL" : "OPEN",
+      status: initialStatus,
       createdById: session.user.id,
     },
     include: {
@@ -92,11 +110,31 @@ export async function POST(req: NextRequest) {
     },
   });
 
+  // Notify dept manager if ticket is routed to them
+  const notifyDeptManager: Promise<any>[] = [];
+  if (initialStatus === "PENDING_DEPT_APPROVAL") {
+    const creator = await prisma.user.findUnique({ where: { id: session.user.id }, select: { department: true } });
+    if (creator?.department) {
+      const deptManagers = await prisma.user.findMany({
+        where: { role: "DEPT_MANAGER", department: creator.department },
+        select: { id: true },
+      });
+      deptManagers.forEach(dm => {
+        notifyDeptManager.push(
+          prisma.notification.create({
+            data: { userId: dm.id, ticketId: ticket.id, message: `طلب تطوير جديد يحتاج اعتمادك: ${ticketNo}` },
+          })
+        );
+      });
+    }
+  }
+
   await Promise.all([
     prisma.notification.create({
       data: { userId: session.user.id, ticketId: ticket.id, message: `تم إنشاء تذكرتك ${ticketNo} بنجاح` },
     }),
     logAudit(ticket.id, "إنشاء التذكرة", `بواسطة ${session.user.name}`, session.user.id),
+    ...notifyDeptManager,
   ]);
 
   return NextResponse.json(ticket, { status: 201 });

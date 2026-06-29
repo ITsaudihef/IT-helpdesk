@@ -7,20 +7,28 @@ import FilterForm from "@/components/tickets/FilterForm";
 
 const PER_PAGE = 20;
 
-interface Props { searchParams: { status?: string; priority?: string; type?: string; search?: string; page?: string } }
+interface Props { searchParams: { status?: string; priority?: string; type?: string; search?: string; department?: string; page?: string } }
 
 export default async function AdminTicketsPage({ searchParams }: Props) {
   const page = Math.max(1, parseInt(searchParams.page || "1"));
   const where: any = {};
-  if (searchParams.status)   where.status   = searchParams.status;
-  if (searchParams.priority) where.priority = searchParams.priority;
-  if (searchParams.type)     where.type     = searchParams.type;
+  if (searchParams.status)     where.status   = searchParams.status;
+  if (searchParams.priority)   where.priority = searchParams.priority;
+  if (searchParams.type)       where.type     = searchParams.type;
+  if (searchParams.department) where.createdBy = { department: searchParams.department };
   if (searchParams.search) {
     where.OR = [
       { title:    { contains: searchParams.search } },
       { ticketNo: { contains: searchParams.search } },
     ];
   }
+
+  // Fetch distinct departments for filter dropdown
+  const deptGroups = await prisma.user.groupBy({
+    by: ["department"],
+    where: { department: { not: null } },
+  });
+  const departments = deptGroups.map(g => g.department!).filter(Boolean).sort();
 
   const [tickets, total] = await Promise.all([
     prisma.ticket.findMany({
@@ -43,7 +51,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
       </div>
 
       {/* Filters — auto-submit on select change */}
-      <FilterForm searchParams={searchParams} />
+      <FilterForm searchParams={searchParams} departments={departments} />
 
       {/* Table — desktop */}
       <div className="rounded-xl overflow-hidden border border-purple-100" style={{ background: "#FFFFFF" }}>

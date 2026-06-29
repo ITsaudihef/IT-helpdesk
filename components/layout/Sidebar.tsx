@@ -7,7 +7,7 @@ import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, Ticket, Users, BarChart3, Settings,
-  LogOut, HeadphonesIcon, PlusCircle, List, KeyRound, Eye, EyeOff, Menu, X,
+  LogOut, HeadphonesIcon, PlusCircle, List, KeyRound, Eye, EyeOff, Menu, X, ShieldCheck,
 } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -38,6 +38,10 @@ const commAdminNav: NavItem[] = [
   { href: "/comm-admin/new",     label: "تذكرة جديدة",      icon: PlusCircle },
   { href: "/comm-admin/tickets", label: "جميع التذاكر",     icon: Ticket },
 ];
+const deptManagerNav: NavItem[] = [
+  { href: "/dept-manager",         label: "لوحة التحكم",  icon: LayoutDashboard },
+  { href: "/dept-manager/tickets", label: "تذاكر القسم",  icon: Ticket },
+];
 
 interface SidebarProps { role: string; userName: string; userEmail: string; }
 
@@ -47,22 +51,27 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
     role === "ADMIN"        ? adminNav        :
     role === "SUPPORT"      ? supportNav      :
     role === "COMM_SUPPORT" ? commSupportNav  :
-    role === "COMM_ADMIN"   ? commAdminNav    : userNav;
+    role === "COMM_ADMIN"   ? commAdminNav    :
+    role === "DEPT_MANAGER" ? deptManagerNav  : userNav;
   const roleLabelMap: Record<string,string> = {
-    ADMIN: "مدير النظام", SUPPORT: "موظف الدعم", USER: "مستخدم",
-    COMM_SUPPORT: "دعم الاتصال المؤسسي", COMM_ADMIN: "ادمن الاتصال المؤسسي",
+    ADMIN:        "مدير النظام",
+    SUPPORT:      "موظف الدعم",
+    USER:         "مستخدم",
+    COMM_SUPPORT: "دعم الاتصال المؤسسي",
+    COMM_ADMIN:   "ادمن الاتصال المؤسسي",
+    DEPT_MANAGER: "مدير القسم",
   };
   const roleLabel = roleLabelMap[role] ?? "مستخدم";
 
-  const [mobileOpen, setMobileOpen]         = useState(false);
-  const [showModal, setShowModal]           = useState(false);
-  const [currentPw, setCurrentPw]           = useState("");
-  const [newPw,     setNewPw]               = useState("");
-  const [confirmPw, setConfirmPw]           = useState("");
-  const [showCur,   setShowCur]             = useState(false);
-  const [showNew,   setShowNew]             = useState(false);
-  const [showCon,   setShowCon]             = useState(false);
-  const [saving,    setSaving]              = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [showModal,  setShowModal]  = useState(false);
+  const [currentPw,  setCurrentPw]  = useState("");
+  const [newPw,      setNewPw]      = useState("");
+  const [confirmPw,  setConfirmPw]  = useState("");
+  const [showCur,    setShowCur]    = useState(false);
+  const [showNew,    setShowNew]    = useState(false);
+  const [showCon,    setShowCon]    = useState(false);
+  const [saving,     setSaving]     = useState(false);
 
   const closeModal = () => {
     setShowModal(false);
@@ -185,12 +194,7 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
       {/* ── Mobile overlay + drawer ── */}
       {mobileOpen && (
         <>
-          {/* Backdrop */}
-          <div
-            className="lg:hidden fixed inset-0 bg-black/40 z-40"
-            onClick={() => setMobileOpen(false)}
-          />
-          {/* Drawer */}
+          <div className="lg:hidden fixed inset-0 bg-black/40 z-40" onClick={() => setMobileOpen(false)} />
           <div className="lg:hidden fixed right-0 top-0 h-full z-50 w-64">
             {sidebarContent}
           </div>

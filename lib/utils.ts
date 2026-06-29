@@ -33,23 +33,25 @@ export const priorityBadge: Record<string, string> = {
 };
 
 export const statusBadge: Record<string, string> = {
-  OPEN:             "bg-slate-100 text-slate-700",
-  IN_PROGRESS:      "bg-blue-100 text-blue-700",
-  PENDING_APPROVAL: "bg-amber-100 text-amber-700",
-  APPROVED:         "bg-emerald-100 text-emerald-700",
-  WAITING_INFO:     "bg-purple-100 text-purple-700",
-  RESOLVED:         "bg-green-100 text-green-700",
-  CLOSED:           "bg-gray-100 text-gray-600",
+  OPEN:                  "bg-slate-100 text-slate-700",
+  IN_PROGRESS:           "bg-blue-100 text-blue-700",
+  PENDING_DEPT_APPROVAL: "bg-orange-100 text-orange-700",
+  PENDING_APPROVAL:      "bg-amber-100 text-amber-700",
+  APPROVED:              "bg-emerald-100 text-emerald-700",
+  WAITING_INFO:          "bg-purple-100 text-purple-700",
+  RESOLVED:              "bg-green-100 text-green-700",
+  CLOSED:                "bg-gray-100 text-gray-600",
 };
 
 export const statusLabel: Record<string, string> = {
-  OPEN: "مفتوحة",
-  IN_PROGRESS: "قيد المعالجة",
-  PENDING_APPROVAL: "بانتظار الاعتماد",
-  APPROVED: "معتمدة",
-  WAITING_INFO: "بانتظار معلومات",
-  RESOLVED: "محلولة",
-  CLOSED: "مغلقة",
+  OPEN:                  "مفتوحة",
+  IN_PROGRESS:           "قيد المعالجة",
+  PENDING_DEPT_APPROVAL: "بانتظار اعتماد المدير",
+  PENDING_APPROVAL:      "بانتظار اعتماد التقنية",
+  APPROVED:              "معتمدة",
+  WAITING_INFO:          "بانتظار معلومات",
+  RESOLVED:              "محلولة",
+  CLOSED:                "مغلقة",
 };
 
 export const priorityLabel: Record<string, string> = {
@@ -78,4 +80,5 @@ export const roleLabel: Record<string, string> = {
   USER:         "مستخدم",
   COMM_SUPPORT: "دعم الاتصال المؤسسي",
   COMM_ADMIN:   "ادمن الاتصال المؤسسي",
+  DEPT_MANAGER: "مدير القسم",
 };

@@ -8,11 +8,13 @@ import Link from "next/link";
 const PER_PAGE = 20;
 
 const STATUS_TABS = [
-  { label: "الكل",            value: "" },
-  { label: "مفتوحة",          value: "OPEN" },
-  { label: "قيد المعالجة",   value: "IN_PROGRESS" },
-  { label: "بانتظار ردك",    value: "WAITING_INFO" },
-  { label: "محلولة",          value: "RESOLVED" },
+  { label: "الكل",                   value: "" },
+  { label: "مفتوحة",                 value: "OPEN" },
+  { label: "بانتظار اعتماد المدير",  value: "PENDING_DEPT_APPROVAL" },
+  { label: "بانتظار اعتماد التقنية", value: "PENDING_APPROVAL" },
+  { label: "قيد المعالجة",           value: "IN_PROGRESS" },
+  { label: "بانتظار ردك",            value: "WAITING_INFO" },
+  { label: "محلولة",                 value: "RESOLVED" },
 ];
 
 export default async function MyTicketsPage({
