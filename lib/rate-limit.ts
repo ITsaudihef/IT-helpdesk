@@ -24,7 +24,7 @@ export function resetRateLimit(key: string) {
 // Periodic cleanup so the map doesn't grow unbounded over the process lifetime.
 setInterval(() => {
   const now = Date.now();
-  for (const [key, entry] of attempts) {
+  attempts.forEach((entry, key) => {
     if (now > entry.resetAt) attempts.delete(key);
-  }
+  });
 }, WINDOW_MS).unref?.();
