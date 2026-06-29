@@ -3,7 +3,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  title: "سند",
+  title: "بوابة سند",
   description: "نظام إدارة تذاكر دعم تقنية المعلومات",
 };
 

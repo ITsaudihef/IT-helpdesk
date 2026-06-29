@@ -236,7 +236,7 @@ export default async function SettingsPage() {
             </div>
             <div className="space-y-2.5">
               {[
-                { label: "اسم النظام",    value: "سند" },
+                { label: "اسم النظام",    value: "بوابة سند" },
                 { label: "المنظمة",       value: "كل تحدي وله سند" },
                 { label: "الإصدار",       value: "v1.0.0" },
                 { label: "المنصة",        value: "Next.js 14 / Prisma" },

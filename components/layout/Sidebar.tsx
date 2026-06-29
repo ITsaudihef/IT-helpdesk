@@ -117,7 +117,7 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
             <HeadphonesIcon className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-sm text-white">سند</h1>
+            <h1 className="font-bold text-sm text-white">بوابة سند</h1>
             <p className="text-xs" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
           </div>
         </div>

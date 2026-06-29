@@ -44,7 +44,7 @@ export default function LoginPage() {
             style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
             <HeadphonesIcon className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-3xl font-bold mb-1 gradient-text">سند</h1>
+          <h1 className="text-3xl font-bold mb-1 gradient-text">بوابة سند</h1>
           <p className="text-sm mb-3" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
           <div className="mt-10 grid grid-cols-3 gap-4 text-center">
             {[
@@ -70,7 +70,7 @@ export default function LoginPage() {
               style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
               <HeadphonesIcon className="w-7 h-7 text-white" />
             </div>
-            <h1 className="text-xl font-bold gradient-text">سند</h1>
+            <h1 className="text-xl font-bold gradient-text">بوابة سند</h1>
             <p className="text-xs mt-1" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
           </div>
 
