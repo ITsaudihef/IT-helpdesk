@@ -81,7 +81,7 @@ export default async function DeptManagerTicketDetail({ params }: { params: { id
       {canApprove && <DeptManagerActions ticketId={ticket.id} />}
 
       {/* Attachments */}
-      <TicketAttachments ticketId={ticket.id} attachments={ticket.attachments} canUpload={false} />
+      <TicketAttachments ticketId={ticket.id} attachments={ticket.attachments.map(a => ({ ...a, uploadedAt: a.uploadedAt.toISOString() }))} canUpload={false} />
 
       {/* Comments */}
       <TicketComments
