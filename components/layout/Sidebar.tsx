@@ -7,11 +7,13 @@ import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, Ticket, Users, BarChart3, Settings,
-  LogOut, HeadphonesIcon, PlusCircle, List, KeyRound, Eye, EyeOff, Menu, X, ShieldCheck,
+  LogOut, HeadphonesIcon, PlusCircle, List, KeyRound, Eye, EyeOff, Menu, X, ShieldCheck, CalendarDays,
 } from "lucide-react";
 import toast from "react-hot-toast";
 
 interface NavItem { href: string; label: string; icon: React.ElementType; }
+
+const roomsLink: NavItem = { href: "/rooms", label: "حجز القاعات", icon: CalendarDays };
 
 const adminNav: NavItem[] = [
   { href: "/admin",               label: "لوحة التحكم",  icon: LayoutDashboard },
@@ -19,29 +21,35 @@ const adminNav: NavItem[] = [
   { href: "/admin/reports",       label: "التقارير",      icon: BarChart3 },
   { href: "/admin/users",         label: "المستخدمون",   icon: Users },
   { href: "/admin/departments",   label: "الأقسام",       icon: ShieldCheck },
+  { href: "/admin/rooms",         label: "القاعات",       icon: CalendarDays },
   { href: "/admin/settings",      label: "الإعدادات",    icon: Settings },
 ];
 const supportNav: NavItem[] = [
   { href: "/support", label: "تذاكري", icon: HeadphonesIcon },
+  roomsLink,
 ];
 const userNav: NavItem[] = [
   { href: "/portal",         label: "الرئيسية",    icon: LayoutDashboard },
   { href: "/portal/new",     label: "تذكرة جديدة", icon: PlusCircle },
   { href: "/portal/tickets", label: "تذاكري",      icon: List },
+  roomsLink,
 ];
 const commSupportNav: NavItem[] = [
   { href: "/comm-support",         label: "التذاكر الواردة", icon: HeadphonesIcon },
   { href: "/comm-support/new",     label: "تذكرة جديدة",     icon: PlusCircle },
   { href: "/comm-support/tickets", label: "تذاكري المرفوعة", icon: List },
+  roomsLink,
 ];
 const commAdminNav: NavItem[] = [
   { href: "/comm-admin",         label: "بانتظار الاعتماد", icon: LayoutDashboard },
   { href: "/comm-admin/new",     label: "تذكرة جديدة",      icon: PlusCircle },
   { href: "/comm-admin/tickets", label: "جميع التذاكر",     icon: Ticket },
+  roomsLink,
 ];
 const deptManagerNav: NavItem[] = [
   { href: "/dept-manager",         label: "لوحة التحكم",  icon: LayoutDashboard },
   { href: "/dept-manager/tickets", label: "تذاكر القسم",  icon: Ticket },
+  roomsLink,
 ];
 
 interface SidebarProps { role: string; userName: string; userEmail: string; }

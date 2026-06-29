@@ -21,8 +21,41 @@ model User {
   comments        Comment[]
   notifications   Notification[]
   auditLogs       AuditLog[]
+  roomBookings    RoomBooking[]
 
   @@map("users")
+}
+
+model Room {
+  id        String   @id @default(cuid())
+  name      String
+  capacity  Int      @default(10)
+  features  String   @default("")
+  location  String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  bookings  RoomBooking[]
+
+  @@map("rooms")
+}
+
+model RoomBooking {
+  id        String   @id @default(cuid())
+  roomId    String
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  date      String
+  startTime String
+  endTime   String
+  notes     String?
+  createdAt DateTime @default(now())
+
+  @@index([roomId, date])
+  @@index([userId])
+  @@map("room_bookings")
 }
 
 model Ticket {
