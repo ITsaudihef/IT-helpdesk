@@ -3,6 +3,8 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getSetting } from "@/lib/settings";
 
+class ConflictError extends Error {}
+
 export async function GET(req: NextRequest) {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -54,37 +56,46 @@ export async function POST(req: NextRequest) {
   const room = await prisma.room.findUnique({ where: { id: roomId, isActive: true } });
   if (!room) return NextResponse.json({ error: "القاعة غير موجودة" }, { status: 404 });
 
-  const conflict = await prisma.roomBooking.findFirst({
-    where: {
-      roomId,
-      date,
-      startTime: { lt: endTime },
-      endTime: { gt: startTime },
-    },
-    include: { user: { select: { name: true } } },
-  });
+  try {
+    const booking = await prisma.$transaction(async (tx) => {
+      const conflict = await tx.roomBooking.findFirst({
+        where: {
+          roomId,
+          date,
+          startTime: { lt: endTime },
+          endTime: { gt: startTime },
+        },
+        include: { user: { select: { name: true } } },
+      });
 
-  if (conflict) {
-    return NextResponse.json({
-      error: `القاعة محجوزة من ${conflict.startTime} إلى ${conflict.endTime} بواسطة ${conflict.user.name}`,
-    }, { status: 409 });
+      if (conflict) {
+        throw new ConflictError(
+          `القاعة محجوزة من ${conflict.startTime} إلى ${conflict.endTime} بواسطة ${conflict.user.name}`
+        );
+      }
+
+      return tx.roomBooking.create({
+        data: {
+          roomId,
+          userId: session.user.id,
+          title,
+          date,
+          startTime,
+          endTime,
+          notes: notes || null,
+        },
+        include: {
+          room: { select: { name: true } },
+          user: { select: { name: true } },
+        },
+      });
+    });
+
+    return NextResponse.json(booking);
+  } catch (err: any) {
+    if (err instanceof ConflictError) {
+      return NextResponse.json({ error: err.message }, { status: 409 });
+    }
+    throw err;
   }
-
-  const booking = await prisma.roomBooking.create({
-    data: {
-      roomId,
-      userId: session.user.id,
-      title,
-      date,
-      startTime,
-      endTime,
-      notes: notes || null,
-    },
-    include: {
-      room: { select: { name: true } },
-      user: { select: { name: true } },
-    },
-  });
-
-  return NextResponse.json(booking);
 }

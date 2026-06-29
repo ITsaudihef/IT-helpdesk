@@ -72,8 +72,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
-  const ticketNo = await generateTicketNo();
-
   const needsApproval = requiresApproval || type === "INSTITUTIONAL_COMM";
 
   // For DEVELOPMENT tickets: route through dept manager first if one exists in the same department
@@ -94,21 +92,35 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  const ticket = await prisma.ticket.create({
-    data: {
-      ticketNo,
-      title,
-      description,
-      type,
-      priority: priority || "MEDIUM",
-      requiresApproval: needsApproval,
-      status: initialStatus,
-      createdById: session.user.id,
-    },
-    include: {
-      createdBy: { select: { id: true, name: true, email: true } },
-    },
-  });
+  let ticket;
+  let ticketNo = "";
+  for (let attempt = 0; attempt < 5; attempt++) {
+    ticketNo = await generateTicketNo();
+    try {
+      ticket = await prisma.ticket.create({
+        data: {
+          ticketNo,
+          title,
+          description,
+          type,
+          priority: priority || "MEDIUM",
+          requiresApproval: needsApproval,
+          status: initialStatus,
+          createdById: session.user.id,
+        },
+        include: {
+          createdBy: { select: { id: true, name: true, email: true } },
+        },
+      });
+      break;
+    } catch (err: any) {
+      if (err.code === "P2002" && attempt < 4) continue; // ticketNo collision — retry with a fresh number
+      throw err;
+    }
+  }
+  if (!ticket) {
+    return NextResponse.json({ error: "تعذّر إنشاء رقم تذكرة فريد، حاول مجدداً" }, { status: 500 });
+  }
 
   // Notify dept manager if ticket is routed to them
   const notifyDeptManager: Promise<any>[] = [];
