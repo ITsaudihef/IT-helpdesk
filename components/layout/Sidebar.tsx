@@ -113,9 +113,7 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
       {/* Logo */}
       <div className="p-5 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center glow-purple" style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
-            <HeadphonesIcon className="w-5 h-5 text-white" />
-          </div>
+          <img src="/logo.png" alt="بوابة سند" className="w-10 h-10 rounded-xl object-cover" />
           <div>
             <h1 className="font-bold text-sm text-white">بوابة سند</h1>
             <p className="text-xs" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>

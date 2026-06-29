@@ -40,10 +40,7 @@ export default function LoginPage() {
           style={{ background: "radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)" }} />
 
         <div className="relative text-center text-white px-12 z-10">
-          <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 glow-purple"
-            style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
-            <HeadphonesIcon className="w-10 h-10 text-white" />
-          </div>
+          <img src="/logo.png" alt="بوابة سند" className="w-20 h-20 rounded-2xl object-cover mx-auto mb-6" />
           <h1 className="text-3xl font-bold mb-1 gradient-text">بوابة سند</h1>
           <p className="text-sm mb-3" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
           <div className="mt-10 grid grid-cols-3 gap-4 text-center">
@@ -66,10 +63,7 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           {/* Mobile logo */}
           <div className="lg:hidden text-center mb-8">
-            <div className="inline-flex w-14 h-14 rounded-xl items-center justify-center mb-3 glow-purple"
-              style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
-              <HeadphonesIcon className="w-7 h-7 text-white" />
-            </div>
+            <img src="/logo.png" alt="بوابة سند" className="w-14 h-14 rounded-xl object-cover inline-block mb-3" />
             <h1 className="text-xl font-bold gradient-text">بوابة سند</h1>
             <p className="text-xs mt-1" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
           </div>
