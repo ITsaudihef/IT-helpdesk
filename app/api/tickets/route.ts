@@ -5,8 +5,9 @@ import { logAudit } from "@/lib/audit";
 
 async function generateTicketNo(): Promise<string> {
   const year = new Date().getFullYear();
-  const count = await prisma.ticket.count();
-  const seq = String(count + 1).padStart(5, "0");
+  // Use a PostgreSQL sequence for atomic, collision-free ticket numbering
+  const result = await prisma.$queryRaw<Array<{ nextval: bigint }>>`SELECT nextval('ticket_seq')`;
+  const seq = String(Number(result[0].nextval)).padStart(5, "0");
   return `IT-${year}-${seq}`;
 }
 
@@ -94,32 +95,26 @@ export async function POST(req: NextRequest) {
 
   let ticket;
   let ticketNo = "";
-  for (let attempt = 0; attempt < 5; attempt++) {
+  try {
     ticketNo = await generateTicketNo();
-    try {
-      ticket = await prisma.ticket.create({
-        data: {
-          ticketNo,
-          title,
-          description,
-          type,
-          priority: priority || "MEDIUM",
-          requiresApproval: needsApproval,
-          status: initialStatus,
-          createdById: session.user.id,
-        },
-        include: {
-          createdBy: { select: { id: true, name: true, email: true } },
-        },
-      });
-      break;
-    } catch (err: any) {
-      if (err.code === "P2002" && attempt < 4) continue; // ticketNo collision — retry with a fresh number
-      throw err;
-    }
-  }
-  if (!ticket) {
-    return NextResponse.json({ error: "تعذّر إنشاء رقم تذكرة فريد، حاول مجدداً" }, { status: 500 });
+    ticket = await prisma.ticket.create({
+      data: {
+        ticketNo,
+        title,
+        description,
+        type,
+        priority: priority || "MEDIUM",
+        requiresApproval: needsApproval,
+        status: initialStatus,
+        createdById: session.user.id,
+      },
+      include: {
+        createdBy: { select: { id: true, name: true, email: true } },
+      },
+    });
+  } catch (err: any) {
+    console.error("[POST /api/tickets] error:", err?.message ?? err);
+    return NextResponse.json({ error: "تعذّر إنشاء التذكرة، حاول مجدداً" }, { status: 500 });
   }
 
   // Notify dept manager if ticket is routed to them
