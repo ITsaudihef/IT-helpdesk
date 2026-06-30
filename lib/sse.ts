@@ -1,12 +1,15 @@
 // Global SSE client registry — works on Railway's single-instance Node process
-const clients = new Map<string, Set<ReadableStreamDefaultController>>();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SSEController = ReadableStreamDefaultController<any>;
 
-export function addSSEClient(userId: string, ctrl: ReadableStreamDefaultController) {
+const clients = new Map<string, Set<SSEController>>();
+
+export function addSSEClient(userId: string, ctrl: SSEController) {
   if (!clients.has(userId)) clients.set(userId, new Set());
   clients.get(userId)!.add(ctrl);
 }
 
-export function removeSSEClient(userId: string, ctrl: ReadableStreamDefaultController) {
+export function removeSSEClient(userId: string, ctrl: SSEController) {
   const set = clients.get(userId);
   if (!set) return;
   set.delete(ctrl);
