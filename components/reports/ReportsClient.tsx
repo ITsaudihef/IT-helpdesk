@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import {
   BarChart, Bar, PieChart, Pie, Cell,
+  AreaChart, Area,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from "recharts";
 
@@ -217,6 +218,96 @@ export default function ReportsClient() {
           </ResponsiveContainer>
         </div>
       </div>
+
+      {/* ── Monthly Trend (last 6 months) ── */}
+      {summary.monthlyTrend && summary.monthlyTrend.length > 0 && (
+        <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
+          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>الاتجاه الشهري — آخر 6 أشهر</h3>
+          <ResponsiveContainer width="100%" height={240}>
+            <AreaChart data={summary.monthlyTrend}>
+              <defs>
+                <linearGradient id="gradCreated" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%"  stopColor="#7C3AED" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#7C3AED" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="gradResolved" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%"  stopColor="#22c55e" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#22c55e" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+              <XAxis dataKey="month" tick={{ fontSize: 10 }} />
+              <YAxis tick={{ fontSize: 10 }} />
+              <Tooltip />
+              <Legend />
+              <Area type="monotone" dataKey="created"  name="واردة"  stroke="#7C3AED" fill="url(#gradCreated)"  strokeWidth={2} />
+              <Area type="monotone" dataKey="resolved" name="محلولة" stroke="#22c55e" fill="url(#gradResolved)" strokeWidth={2} />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+
+      {/* ── Department Breakdown ── */}
+      {summary.departmentBreakdown && summary.departmentBreakdown.length > 0 && (
+        <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
+          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>التذاكر حسب القسم</h3>
+          <ResponsiveContainer width="100%" height={Math.max(180, summary.departmentBreakdown.length * 36)}>
+            <BarChart data={summary.departmentBreakdown} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+              <XAxis type="number" tick={{ fontSize: 10 }} />
+              <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={100} />
+              <Tooltip />
+              <Bar dataKey="count" name="عدد التذاكر" radius={[0, 4, 4, 0]}>
+                {summary.departmentBreakdown.map((_: any, i: number) => (
+                  <Cell key={i} fill={HEF_COLORS[i % HEF_COLORS.length]} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+
+      {/* ── Agent Performance Table ── */}
+      {summary.agentPerformance && summary.agentPerformance.length > 0 && (
+        <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
+          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>أداء موظفي الدعم</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm" style={{ borderCollapse: "collapse" }}>
+              <thead>
+                <tr style={{ borderBottom: "2px solid #E9E3FF" }}>
+                  {["الموظف", "مُكلَّف", "محلولة", "متوسط الحل", "معدل الإنجاز"].map((h) => (
+                    <th key={h} className="text-right py-2 px-3 text-xs font-semibold" style={{ color: "#7C3AED" }}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {summary.agentPerformance.map((a: any, i: number) => (
+                  <tr key={i} style={{ borderBottom: "1px solid #F3EEFF" }}
+                    className="transition-colors hover:bg-purple-50">
+                    <td className="py-3 px-3 font-medium" style={{ color: "#1F1535" }}>{a.name}</td>
+                    <td className="py-3 px-3 text-center" style={{ color: "#475569" }}>{a.assigned}</td>
+                    <td className="py-3 px-3 text-center">
+                      <span className="font-semibold" style={{ color: "#16a34a" }}>{a.resolved}</span>
+                    </td>
+                    <td className="py-3 px-3 text-center" style={{ color: "#92400e" }}>
+                      {a.avgHours > 0 ? `${a.avgHours}س` : "—"}
+                    </td>
+                    <td className="py-3 px-3">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 h-2 rounded-full" style={{ background: "#E9E3FF" }}>
+                          <div className="h-2 rounded-full transition-all"
+                            style={{ width: `${a.rate}%`, background: a.rate >= 75 ? "#22c55e" : a.rate >= 40 ? "#f59e0b" : "#ef4444" }} />
+                        </div>
+                        <span className="text-xs font-semibold w-8 text-left" style={{ color: "#475569" }}>{a.rate}%</span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

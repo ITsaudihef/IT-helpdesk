@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { createNotification } from "@/lib/notify";
 
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await auth();
@@ -31,12 +32,10 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   });
 
   if (!internalFlag && ticket.createdById !== session.user.id) {
-    await prisma.notification.create({
-      data: {
-        userId: ticket.createdById,
-        ticketId: ticket.id,
-        message: `تعليق جديد على تذكرتك ${ticket.ticketNo}`,
-      },
+    await createNotification({
+      userId: ticket.createdById,
+      ticketId: ticket.id,
+      message: `تعليق جديد على تذكرتك ${ticket.ticketNo}`,
     });
   }
 

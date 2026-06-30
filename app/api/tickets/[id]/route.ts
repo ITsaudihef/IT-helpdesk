@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { sendStatusNotification } from "@/lib/email";
 import { statusLabel } from "@/lib/utils";
 import { logAudit } from "@/lib/audit";
+import { createNotification } from "@/lib/notify";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await auth();
@@ -85,12 +86,10 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   if (status && status !== ticket.status) {
     const label = statusLabel[status] || status;
     auditTasks.push(
-      prisma.notification.create({
-        data: {
-          userId: ticket.createdById,
-          ticketId: ticket.id,
-          message: `تم تحديث حالة تذكرتك ${ticket.ticketNo} إلى: ${label}`,
-        },
+      createNotification({
+        userId: ticket.createdById,
+        ticketId: ticket.id,
+        message: `تم تحديث حالة تذكرتك ${ticket.ticketNo} إلى: ${label}`,
       }),
       logAudit(ticket.id, "تغيير الحالة", `من "${statusLabel[ticket.status] || ticket.status}" إلى "${label}"`, session.user.id)
     );

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAudit } from "@/lib/audit";
+import { createNotification } from "@/lib/notify";
 
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await auth();
@@ -40,12 +41,10 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 
     await Promise.all([
       logAudit(params.id, "اعتماد مدير القسم", `اعتمد ${session.user.name} الطلب وأُرسل للفريق التقني`, session.user.id),
-      prisma.notification.create({
-        data: {
-          userId: ticket.createdBy.id,
-          ticketId: ticket.id,
-          message: `تم اعتماد طلبك ${ticket.ticketNo} من مدير القسم وهو الآن بانتظار اعتماد الفريق التقني`,
-        },
+      createNotification({
+        userId: ticket.createdBy.id,
+        ticketId: ticket.id,
+        message: `تم اعتماد طلبك ${ticket.ticketNo} من مدير القسم وهو الآن بانتظار اعتماد الفريق التقني`,
       }),
     ]);
   } else {
@@ -67,12 +66,10 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
             },
           })]
         : []),
-      prisma.notification.create({
-        data: {
-          userId: ticket.createdBy.id,
-          ticketId: ticket.id,
-          message: `تم إعادة طلبك ${ticket.ticketNo} من مدير القسم${note ? `: ${note}` : ""}`,
-        },
+      createNotification({
+        userId: ticket.createdBy.id,
+        ticketId: ticket.id,
+        message: `تم إعادة طلبك ${ticket.ticketNo} من مدير القسم${note ? `: ${note}` : ""}`,
       }),
     ]);
   }

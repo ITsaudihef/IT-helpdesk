@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAudit } from "@/lib/audit";
+import { createNotification } from "@/lib/notify";
 
 async function generateTicketNo(): Promise<string> {
   const year = new Date().getFullYear();
@@ -128,18 +129,14 @@ export async function POST(req: NextRequest) {
       });
       deptManagers.forEach(dm => {
         notifyDeptManager.push(
-          prisma.notification.create({
-            data: { userId: dm.id, ticketId: ticket.id, message: `طلب تطوير جديد يحتاج اعتمادك: ${ticketNo}` },
-          })
+          createNotification({ userId: dm.id, ticketId: ticket.id, message: `طلب تطوير جديد يحتاج اعتمادك: ${ticketNo}` })
         );
       });
     }
   }
 
   await Promise.all([
-    prisma.notification.create({
-      data: { userId: session.user.id, ticketId: ticket.id, message: `تم إنشاء تذكرتك ${ticketNo} بنجاح` },
-    }),
+    createNotification({ userId: session.user.id, ticketId: ticket.id, message: `تم إنشاء تذكرتك ${ticketNo} بنجاح` }),
     logAudit(ticket.id, "إنشاء التذكرة", `بواسطة ${session.user.name}`, session.user.id),
     ...notifyDeptManager,
   ]);
