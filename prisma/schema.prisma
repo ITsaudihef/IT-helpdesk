@@ -22,6 +22,9 @@ model User {
   notifications   Notification[]
   auditLogs       AuditLog[]
   roomBookings    RoomBooking[]
+  projectsCreated Project[]      @relation("ProjectCreator")
+  cardsCreated    KanbanCard[]   @relation("CardCreator")
+  cardsAssigned   KanbanCard[]   @relation("CardAssignee")
 
   @@map("users")
 }
@@ -147,4 +150,48 @@ model Notification {
   createdAt DateTime @default(now())
 
   @@map("notifications")
+}
+
+model Project {
+  id          String         @id @default(cuid())
+  title       String
+  description String?
+  color       String         @default("#7C3AED")
+  createdById String
+  createdBy   User           @relation("ProjectCreator", fields: [createdById], references: [id])
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  columns     KanbanColumn[]
+
+  @@map("projects")
+}
+
+model KanbanColumn {
+  id        String       @id @default(cuid())
+  projectId String
+  project   Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title     String
+  order     Int          @default(0)
+  cards     KanbanCard[]
+
+  @@map("kanban_columns")
+}
+
+model KanbanCard {
+  id          String       @id @default(cuid())
+  columnId    String
+  column      KanbanColumn @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  priority    String       @default("MEDIUM")
+  assigneeId  String?
+  assignee    User?        @relation("CardAssignee", fields: [assigneeId], references: [id])
+  dueDate     DateTime?
+  order       Int          @default(0)
+  createdById String
+  createdBy   User         @relation("CardCreator", fields: [createdById], references: [id])
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@map("kanban_cards")
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CalendarDays, ToggleLeft, ToggleRight } from "lucide-react";
+import { CalendarDays, ToggleLeft, ToggleRight, LayoutGrid } from "lucide-react";
 import toast from "react-hot-toast";
 
 interface Toggle {
@@ -15,10 +15,11 @@ interface Toggle {
 }
 
 interface Props {
-  roomsEnabled: boolean;
+  roomsEnabled:  boolean;
+  kanbanEnabled: boolean;
 }
 
-export default function SettingsToggles({ roomsEnabled }: Props) {
+export default function SettingsToggles({ roomsEnabled, kanbanEnabled }: Props) {
   const [toggles, setToggles] = useState<Toggle[]>([
     {
       key:     "rooms_enabled",
@@ -28,6 +29,15 @@ export default function SettingsToggles({ roomsEnabled }: Props) {
       color:   "#7C3AED",
       bg:      "rgba(124,58,237,0.1)",
       enabled: roomsEnabled,
+    },
+    {
+      key:     "kanban_enabled",
+      label:   "لوحة المشاريع",
+      desc:    "تتبع المهام والمشاريع بين الفرق عبر لوحة كانبان",
+      icon:    LayoutGrid,
+      color:   "#2563EB",
+      bg:      "rgba(37,99,235,0.1)",
+      enabled: kanbanEnabled,
     },
   ]);
 

@@ -51,7 +51,10 @@ export default async function SettingsPage() {
 
   const smtpConfigured = !!(process.env.SMTP_USER && process.env.SMTP_PASS);
   const dbUrl = process.env.DATABASE_URL || "file:./dev.db";
-  const roomsEnabled = await getSetting("rooms_enabled", "true") === "true";
+  const [roomsEnabled, kanbanEnabled] = await Promise.all([
+    getSetting("rooms_enabled",  "true").then(v => v === "true"),
+    getSetting("kanban_enabled", "true").then(v => v === "true"),
+  ]);
 
   return (
     <div className="space-y-6 max-w-5xl">
@@ -232,7 +235,7 @@ export default async function SettingsPage() {
         <div className="space-y-6">
 
           {/* Feature toggles */}
-          <SettingsToggles roomsEnabled={roomsEnabled} />
+          <SettingsToggles roomsEnabled={roomsEnabled} kanbanEnabled={kanbanEnabled} />
 
           {/* System info */}
           <div className="rounded-2xl p-5" style={{ background: "linear-gradient(135deg,#7C3AED,#5B21B6)", color: "white" }}>

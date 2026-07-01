@@ -9,7 +9,10 @@ export default async function DeptManagerLayout({ children }: { children: React.
   if (!session) redirect("/login");
   if (session.user.role !== "DEPT_MANAGER" && session.user.role !== "ADMIN") redirect("/dashboard");
 
-  const roomsEnabled = await getSetting("rooms_enabled", "true") === "true";
+  const [roomsEnabled, kanbanEnabled] = await Promise.all([
+    getSetting("rooms_enabled",  "true").then(v => v === "true"),
+    getSetting("kanban_enabled", "true").then(v => v === "true"),
+  ]);
 
   return (
     <div className="min-h-screen" style={{ background: "#F5F3FF" }} dir="rtl">
@@ -18,6 +21,7 @@ export default async function DeptManagerLayout({ children }: { children: React.
         userName={session.user.name}
         userEmail={session.user.email}
         roomsEnabled={roomsEnabled}
+        kanbanEnabled={kanbanEnabled}
       />
       <div className="lg:mr-64 overflow-x-hidden">
         <Header title="بوابة مدير القسم" />
