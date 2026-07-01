@@ -25,6 +25,7 @@ model User {
   projectsCreated Project[]      @relation("ProjectCreator")
   cardsCreated    KanbanCard[]   @relation("CardCreator")
   cardsAssigned   KanbanCard[]   @relation("CardAssignee")
+  projectMemberships ProjectMember[] @relation("ProjectMemberUser")
 
   @@map("users")
 }
@@ -164,8 +165,21 @@ model Project {
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
   columns     KanbanColumn[]
+  members     ProjectMember[]
 
   @@map("projects")
+}
+
+model ProjectMember {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation("ProjectMemberUser", fields: [userId], references: [id], onDelete: Cascade)
+  addedAt   DateTime @default(now())
+
+  @@unique([projectId, userId])
+  @@map("project_members")
 }
 
 model KanbanColumn {

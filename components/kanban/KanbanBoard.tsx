@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Plus, Trash2, ArrowRight, Calendar, User, Clock, AlertCircle, CheckCircle2, Edit3 } from "lucide-react";
+import { Plus, Trash2, ArrowRight, Calendar, User, Clock, AlertCircle, CheckCircle2, Edit3, Users, X } from "lucide-react";
 import toast from "react-hot-toast";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -27,6 +27,11 @@ interface ColumnData {
   cards: CardData[];
 }
 
+interface MemberData {
+  userId: string;
+  name: string;
+}
+
 interface ProjectData {
   id: string;
   title: string;
@@ -34,7 +39,9 @@ interface ProjectData {
   color: string;
   startDate?: string | null;
   endDate?: string | null;
+  createdById: string;
   createdBy: { name: string };
+  members: MemberData[];
   columns: ColumnData[];
 }
 
@@ -43,6 +50,7 @@ interface Props {
   users: Array<{ id: string; name: string }>;
   currentUserId: string;
   isAdmin: boolean;
+  canManageTeam: boolean;
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -81,11 +89,14 @@ function isCardOverdue(dueDate?: string | null) {
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
-export default function KanbanBoard({ project, users, currentUserId, isAdmin }: Props) {
+export default function KanbanBoard({ project, users, currentUserId, isAdmin, canManageTeam }: Props) {
   const router = useRouter();
   const [columns, setColumns] = useState<ColumnData[]>(
     [...project.columns].sort((a, b) => a.order - b.order)
   );
+  const [members, setMembers] = useState<MemberData[]>(project.members);
+  const [showTeam, setShowTeam] = useState(false);
+  const [addMemberId, setAddMemberId] = useState("");
   const [draggingCardId, setDraggingCardId]       = useState<string | null>(null);
   const [draggingFromColId, setDraggingFromColId] = useState<string | null>(null);
   const [dragOverColId, setDragOverColId]         = useState<string | null>(null);
@@ -122,6 +133,38 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin }: 
       toast.success("تم حفظ التواريخ");
     } catch {
       toast.error("فشل حفظ التواريخ");
+    }
+  };
+
+  // ── Team members ─────────────────────────────────────────────────────────
+
+  const handleAddMember = async () => {
+    if (!addMemberId) return;
+    const user = users.find(u => u.id === addMemberId);
+    if (!user) return;
+    setAddMemberId("");
+    try {
+      const res = await fetch(`/api/projects/${project.id}/members`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.id }),
+      });
+      if (!res.ok) throw new Error();
+      setMembers(prev => prev.some(m => m.userId === user.id) ? prev : [...prev, { userId: user.id, name: user.name }]);
+      toast.success("تمت إضافة العضو");
+    } catch {
+      toast.error("فشل إضافة العضو");
+    }
+  };
+
+  const handleRemoveMember = async (userId: string) => {
+    setMembers(prev => prev.filter(m => m.userId !== userId));
+    try {
+      const res = await fetch(`/api/projects/${project.id}/members/${userId}`, { method: "DELETE" });
+      if (!res.ok) throw new Error();
+    } catch {
+      toast.error("فشل إزالة العضو");
+      router.refresh();
     }
   };
 
@@ -334,6 +377,13 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin }: 
                 <strong style={{ color: "#1F1535" }}>{totalCards}</strong> بطاقة
               </span>
             </div>
+            <button
+              onClick={() => setShowTeam(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all hover:bg-purple-50"
+              style={{ color: "#7C3AED", border: "1px solid #E9E3FF" }}>
+              <Users className="w-3.5 h-3.5" />
+              الفريق ({members.length})
+            </button>
             <button
               onClick={() => { setShowDateEdit(true); setEditStart(projectDates.startDate?.slice(0,10) ?? ""); setEditEnd(projectDates.endDate?.slice(0,10) ?? ""); }}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all hover:bg-purple-50"
@@ -681,6 +731,77 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin }: 
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Team Modal ─────────────────────────────────────────────────────── */}
+      {showTeam && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          dir="rtl"
+          onClick={e => { if (e.target === e.currentTarget) setShowTeam(false); }}>
+          <div className="dark-modal rounded-2xl p-6 w-full max-w-sm mx-4 shadow-2xl"
+            style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.3)" }}>
+            <div className="flex items-center justify-between mb-5">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+                  style={{ background: "rgba(124,58,237,0.2)" }}>
+                  <Users className="w-4 h-4" style={{ color: "#A78BFA" }} />
+                </div>
+                <div>
+                  <h2 className="font-bold text-white text-sm">فريق المشروع</h2>
+                  <p className="text-xs mt-0.5" style={{ color: "#7C6A9E" }}>يرى المشروع فقط الأدمن ومدير القسم وأعضاء الفريق</p>
+                </div>
+              </div>
+              <button onClick={() => setShowTeam(false)} className="p-1 rounded-lg hover:bg-white/5">
+                <X className="w-4 h-4" style={{ color: "#A78BFA" }} />
+              </button>
+            </div>
+
+            <div className="space-y-2 mb-4 max-h-64 overflow-y-auto">
+              {members.map(m => (
+                <div key={m.userId} className="flex items-center justify-between px-3 py-2 rounded-xl"
+                  style={{ background: "rgba(255,255,255,0.05)" }}>
+                  <span className="text-sm text-white">
+                    {m.name}
+                    {m.userId === currentUserId && <span className="text-xs" style={{ color: "#7C6A9E" }}> (أنت)</span>}
+                  </span>
+                  {canManageTeam && m.userId !== project.createdById && (
+                    <button
+                      onClick={() => handleRemoveMember(m.userId)}
+                      className="p-1 rounded hover:bg-red-500/10">
+                      <X className="w-3.5 h-3.5 text-red-400" />
+                    </button>
+                  )}
+                </div>
+              ))}
+              {members.length === 0 && (
+                <p className="text-xs text-center py-4" style={{ color: "#7C6A9E" }}>لا يوجد أعضاء بعد</p>
+              )}
+            </div>
+
+            {canManageTeam && (
+              <div className="flex gap-2">
+                <select
+                  value={addMemberId}
+                  onChange={e => setAddMemberId(e.target.value)}
+                  className="flex-1 px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none transition-all"
+                  style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(124,58,237,0.3)" }}>
+                  <option value="">اختر عضواً لإضافته...</option>
+                  {users.filter(u => !members.some(m => m.userId === u.id)).map(u => (
+                    <option key={u.id} value={u.id}>{u.name}</option>
+                  ))}
+                </select>
+                <button
+                  onClick={handleAddMember}
+                  disabled={!addMemberId}
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-40 transition-all"
+                  style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                  إضافة
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

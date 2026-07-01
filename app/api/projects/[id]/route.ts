@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { canViewProject, canManageProject } from "@/lib/project-access";
 
 export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
   const session = await auth();
@@ -9,7 +10,8 @@ export async function GET(_: NextRequest, { params }: { params: { id: string } }
   const project = await prisma.project.findUnique({
     where: { id: params.id },
     include: {
-      createdBy: { select: { name: true } },
+      createdBy: { select: { name: true, department: true } },
+      members:   { include: { user: { select: { id: true, name: true } } } },
       columns: {
         orderBy: { order: "asc" },
         include: {
@@ -26,6 +28,12 @@ export async function GET(_: NextRequest, { params }: { params: { id: string } }
   });
 
   if (!project) return NextResponse.json({ error: "المشروع غير موجود" }, { status: 404 });
+
+  const viewer = { id: session.user.id, role: (session.user as any).role, department: (session.user as any).department };
+  if (!canViewProject(viewer, project)) {
+    return NextResponse.json({ error: "المشروع غير موجود" }, { status: 404 });
+  }
+
   return NextResponse.json(project);
 }
 
@@ -36,7 +44,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   const project = await prisma.project.findUnique({ where: { id: params.id } });
   if (!project) return NextResponse.json({ error: "المشروع غير موجود" }, { status: 404 });
 
-  if (project.createdById !== session.user.id && session.user.role !== "ADMIN") {
+  if (!canManageProject({ id: session.user.id, role: (session.user as any).role }, project)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
@@ -62,7 +70,7 @@ export async function DELETE(_: NextRequest, { params }: { params: { id: string 
   const project = await prisma.project.findUnique({ where: { id: params.id } });
   if (!project) return NextResponse.json({ error: "المشروع غير موجود" }, { status: 404 });
 
-  if (project.createdById !== session.user.id && session.user.role !== "ADMIN") {
+  if (!canManageProject({ id: session.user.id, role: (session.user as any).role }, project)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 

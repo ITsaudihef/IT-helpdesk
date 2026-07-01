@@ -26,6 +26,15 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     },
   });
 
+  // Assigning a card automatically makes the assignee a visible team member
+  if (assigneeId) {
+    await prisma.projectMember.upsert({
+      where: { projectId_userId: { projectId: params.id, userId: assigneeId } },
+      update: {},
+      create: { projectId: params.id, userId: assigneeId },
+    });
+  }
+
   return NextResponse.json(updated);
 }
 

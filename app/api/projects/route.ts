@@ -1,12 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { projectVisibilityWhere } from "@/lib/project-access";
 
 export async function GET() {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
+  const { id, role } = session.user as any;
+  const department = (session.user as any).department;
+
   const projects = await prisma.project.findMany({
+    where: projectVisibilityWhere({ id, role, department }),
     orderBy: { createdAt: "desc" },
     include: {
       createdBy: { select: { name: true } },
@@ -59,6 +64,11 @@ export async function POST(req: NextRequest) {
       { projectId: project.id, title: "قيد التنفيذ",  order: 1 },
       { projectId: project.id, title: "مكتمل",        order: 2 },
     ],
+  });
+
+  // Creator is automatically a team member
+  await prisma.projectMember.create({
+    data: { projectId: project.id, userId: session.user.id },
   });
 
   return NextResponse.json({
