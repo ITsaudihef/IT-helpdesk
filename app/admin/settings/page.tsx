@@ -249,7 +249,7 @@ export default async function SettingsPage() {
                 { label: "المنظمة",       value: "كل تحدي وله سند" },
                 { label: "الإصدار",       value: "v1.0.0" },
                 { label: "المنصة",        value: "Next.js 14 / Prisma" },
-                { label: "قاعدة البيانات",value: "SQLite" },
+                { label: "قاعدة البيانات",value: "PostgreSQL" },
               ].map(item => (
                 <div key={item.label} className="flex items-center justify-between">
                   <span className="text-xs opacity-70">{item.label}</span>
@@ -312,7 +312,7 @@ export default async function SettingsPage() {
             <div className="space-y-2.5">
               {[
                 { label: "الحالة",     value: "متصلة",   ok: true  },
-                { label: "نوع قاعدة البيانات", value: "SQLite",  ok: true  },
+                { label: "نوع قاعدة البيانات", value: "PostgreSQL",  ok: true  },
                 { label: "المستخدمون", value: `${totalUsers} سجل`,     ok: true  },
                 { label: "التذاكر",    value: `${totalTickets} سجل`,    ok: true  },
               ].map(row => (

@@ -336,7 +336,7 @@ export default function ProjectsClient({
           dir="rtl"
           onClick={e => { if (e.target === e.currentTarget) { setShowCreate(false); resetForm(); } }}>
           <div
-            className="rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl"
+            className="dark-modal rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl"
             style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.3)" }}>
 
             {/* Modal header */}

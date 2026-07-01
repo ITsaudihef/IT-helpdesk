@@ -618,7 +618,7 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin }: 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
           dir="rtl"
           onClick={e => { if (e.target === e.currentTarget) setShowDateEdit(false); }}>
-          <div className="rounded-2xl p-6 w-full max-w-sm mx-4 shadow-2xl"
+          <div className="dark-modal rounded-2xl p-6 w-full max-w-sm mx-4 shadow-2xl"
             style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.3)" }}>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-xl flex items-center justify-center"
@@ -691,7 +691,7 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin }: 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
           dir="rtl"
           onClick={e => { if (e.target === e.currentTarget) { setEditCard(null); setEditColId(null); } }}>
-          <div className="rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl"
+          <div className="dark-modal rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl"
             style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.3)" }}>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-xl flex items-center justify-center"

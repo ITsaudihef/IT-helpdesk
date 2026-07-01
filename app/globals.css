@@ -46,6 +46,11 @@ body {
 .main-content .keep-white {
   color: white !important;
 }
+/* Dark modals (Kanban create/edit dialogs) render inside main-content but
+   need genuinely white text on their dark background */
+.main-content .dark-modal .text-white {
+  color: white !important;
+}
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
