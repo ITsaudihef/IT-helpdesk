@@ -40,13 +40,15 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  const { title, description, color } = await req.json();
+  const { title, description, color, startDate, endDate } = await req.json();
   const updated = await prisma.project.update({
     where: { id: params.id },
     data: {
       ...(title       !== undefined && { title: title.trim() }),
       ...(description !== undefined && { description: description?.trim() || null }),
       ...(color       !== undefined && { color }),
+      ...(startDate   !== undefined && { startDate: startDate ? new Date(startDate) : null }),
+      ...(endDate     !== undefined && { endDate:   endDate   ? new Date(endDate)   : null }),
     },
   });
 

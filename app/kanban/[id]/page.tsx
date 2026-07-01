@@ -33,16 +33,17 @@ export default async function KanbanBoardPage({ params }: { params: { id: string
 
   if (!project) notFound();
 
-  // Serialize dates
   const serialized = {
     ...project,
+    startDate: project.startDate?.toISOString() ?? null,
+    endDate:   project.endDate?.toISOString()   ?? null,
     createdAt: project.createdAt.toISOString(),
     updatedAt: project.updatedAt.toISOString(),
     columns: project.columns.map(col => ({
       ...col,
       cards: col.cards.map(card => ({
         ...card,
-        dueDate:   card.dueDate?.toISOString() ?? null,
+        dueDate:   card.dueDate?.toISOString()   ?? null,
         createdAt: card.createdAt.toISOString(),
         updatedAt: card.updatedAt.toISOString(),
       })),

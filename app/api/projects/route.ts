@@ -22,8 +22,10 @@ export async function GET() {
     title: p.title,
     description: p.description,
     color: p.color,
+    startDate: p.startDate?.toISOString() ?? null,
+    endDate:   p.endDate?.toISOString()   ?? null,
     createdBy: p.createdBy,
-    createdAt: p.createdAt,
+    createdAt: p.createdAt.toISOString(),
     columnCount: p._count.columns,
     cardCount: p.columns.reduce((sum, col) => sum + col._count.cards, 0),
   }));
@@ -35,7 +37,7 @@ export async function POST(req: NextRequest) {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { title, description, color } = await req.json();
+  const { title, description, color, startDate, endDate } = await req.json();
   if (!title?.trim()) return NextResponse.json({ error: "العنوان مطلوب" }, { status: 400 });
 
   const project = await prisma.project.create({
@@ -43,6 +45,8 @@ export async function POST(req: NextRequest) {
       title: title.trim(),
       description: description?.trim() || null,
       color: color || "#7C3AED",
+      startDate: startDate ? new Date(startDate) : null,
+      endDate:   endDate   ? new Date(endDate)   : null,
       createdById: session.user.id,
     },
     include: { createdBy: { select: { name: true } } },
@@ -57,5 +61,10 @@ export async function POST(req: NextRequest) {
     ],
   });
 
-  return NextResponse.json(project, { status: 201 });
+  return NextResponse.json({
+    ...project,
+    startDate: project.startDate?.toISOString() ?? null,
+    endDate:   project.endDate?.toISOString()   ?? null,
+    createdAt: project.createdAt.toISOString(),
+  }, { status: 201 });
 }

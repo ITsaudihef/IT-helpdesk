@@ -157,6 +157,8 @@ model Project {
   title       String
   description String?
   color       String         @default("#7C3AED")
+  startDate   DateTime?
+  endDate     DateTime?
   createdById String
   createdBy   User           @relation("ProjectCreator", fields: [createdById], references: [id])
   createdAt   DateTime       @default(now())

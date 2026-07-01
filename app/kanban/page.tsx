@@ -21,6 +21,8 @@ export default async function KanbanPage() {
     title: p.title,
     description: p.description,
     color: p.color,
+    startDate: p.startDate?.toISOString() ?? null,
+    endDate:   p.endDate?.toISOString()   ?? null,
     createdBy: p.createdBy,
     createdAt: p.createdAt.toISOString(),
     columnCount: p._count.columns,
