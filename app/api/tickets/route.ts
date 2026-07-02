@@ -58,6 +58,7 @@ export async function GET(req: NextRequest) {
       { priority: "desc" },
       { createdAt: "desc" },
     ],
+    take: 1000, // safety cap; switch to real pagination if ticket volume grows past this
   });
 
   return NextResponse.json(tickets);

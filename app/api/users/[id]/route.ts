@@ -33,6 +33,22 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
+  const [ticketsCreated, comments, roomBookings, projectsCreated, cardsCreated, memberships] = await Promise.all([
+    prisma.ticket.count({ where: { createdById: params.id } }),
+    prisma.comment.count({ where: { authorId: params.id } }),
+    prisma.roomBooking.count({ where: { userId: params.id } }),
+    prisma.project.count({ where: { createdById: params.id } }),
+    prisma.kanbanCard.count({ where: { createdById: params.id } }),
+    prisma.projectMember.count({ where: { userId: params.id } }),
+  ]);
+
+  if (ticketsCreated || comments || roomBookings || projectsCreated || cardsCreated || memberships) {
+    return NextResponse.json(
+      { error: "لا يمكن حذف هذا المستخدم لأن لديه نشاطاً سابقاً (تذاكر أو تعليقات أو مشاريع أو حجوزات). عدّل دوره أو صلاحياته بدلاً من الحذف." },
+      { status: 409 }
+    );
+  }
+
   await prisma.user.delete({ where: { id: params.id } });
   return NextResponse.json({ success: true });
 }

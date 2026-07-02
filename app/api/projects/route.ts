@@ -13,6 +13,7 @@ export async function GET() {
   const projects = await prisma.project.findMany({
     where: projectVisibilityWhere({ id, role, department }),
     orderBy: { createdAt: "desc" },
+    take: 500, // safety cap; switch to real pagination if project volume grows past this
     include: {
       createdBy: { select: { name: true } },
       _count: { select: { columns: true } },

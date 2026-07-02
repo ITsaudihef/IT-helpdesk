@@ -12,6 +12,7 @@ export default function Header({ title }: { title: string }) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [open, setOpen]     = useState(false);
   const [live, setLive]     = useState(false);
+  const [loadError, setLoadError] = useState(false);
   const retryRef            = useRef<ReturnType<typeof setTimeout> | null>(null);
   const esRef               = useRef<EventSource | null>(null);
   const unread = notifications.filter((n) => !n.read).length;
@@ -19,9 +20,12 @@ export default function Header({ title }: { title: string }) {
   useEffect(() => {
     // Initial load
     fetch("/api/notifications")
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
       .then(setNotifications)
-      .catch(() => {});
+      .catch((err) => {
+        console.error("[notifications] initial load failed:", err);
+        setLoadError(true);
+      });
 
     // SSE real-time stream with auto-reconnect
     function connect() {
@@ -103,7 +107,9 @@ export default function Header({ title }: { title: string }) {
               </span>
             </div>
             <div className="max-h-72 overflow-y-auto">
-              {notifications.length === 0 ? (
+              {loadError ? (
+                <p className="text-sm p-4 text-center" style={{ color: "#DC2626" }}>تعذر تحميل الإشعارات — تحقق من اتصالك</p>
+              ) : notifications.length === 0 ? (
                 <p className="text-sm p-4 text-center" style={{ color: "#7C6A9E" }}>لا توجد إشعارات</p>
               ) : (
                 notifications.map((n) => (

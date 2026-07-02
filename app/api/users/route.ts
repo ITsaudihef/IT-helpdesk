@@ -20,6 +20,7 @@ export async function GET() {
       _count: { select: { ticketsCreated: true, ticketsAssigned: true } },
     },
     orderBy: { createdAt: "desc" },
+    take: 2000, // safety cap; switch to real pagination if the org grows past this
   });
 
   return NextResponse.json(users);

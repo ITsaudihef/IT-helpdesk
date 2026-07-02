@@ -56,8 +56,12 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
 
   const deleteUser = async (id: string) => {
     if (!confirm("هل أنت متأكد من حذف هذا المستخدم؟")) return;
-    try { await fetch(`/api/users/${id}`, { method:"DELETE" }); setUsers(prev => prev.filter(u => u.id !== id)); toast.success("تم الحذف"); }
-    catch { toast.error("حدث خطأ"); }
+    try {
+      const res = await fetch(`/api/users/${id}`, { method:"DELETE" });
+      if (!res.ok) { const err = await res.json(); throw new Error(err.error); }
+      setUsers(prev => prev.filter(u => u.id !== id));
+      toast.success("تم الحذف");
+    } catch (err: any) { toast.error(err.message || "حدث خطأ"); }
   };
 
   return (

@@ -27,6 +27,7 @@ model User {
   cardsAssigned   KanbanCard[]   @relation("CardAssignee")
   projectMemberships ProjectMember[] @relation("ProjectMemberUser")
 
+  @@index([department])
   @@map("users")
 }
 
@@ -106,6 +107,8 @@ model Comment {
   isInternal Boolean  @default(false)
   createdAt  DateTime @default(now())
 
+  @@index([ticketId])
+  @@index([authorId])
   @@map("comments")
 }
 
