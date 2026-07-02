@@ -26,6 +26,7 @@ const adminNav: NavItem[] = [
   { href: "/admin/departments",   label: "الأقسام",       icon: ShieldCheck },
   { href: "/admin/rooms",         label: "القاعات",       icon: CalendarDays },
   { href: "/admin/settings",      label: "الإعدادات",    icon: Settings },
+  roomsLink,
   kanbanLink,
 ];
 const supportNav: NavItem[] = [
