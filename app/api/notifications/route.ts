@@ -8,7 +8,10 @@ export async function GET() {
 
   const notifications = await prisma.notification.findMany({
     where: { userId: session.user.id },
-    include: { ticket: { select: { ticketNo: true } } },
+    include: {
+      ticket:  { select: { ticketNo: true } },
+      project: { select: { id: true, title: true } },
+    },
     orderBy: { createdAt: "desc" },
     take: 20,
   });

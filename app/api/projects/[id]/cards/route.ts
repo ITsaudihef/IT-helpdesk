@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { createNotification, notifyProjectMembers } from "@/lib/notify";
 
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await auth();
@@ -37,6 +38,23 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       createdBy: { select: { name: true } },
     },
   });
+
+  const project = await prisma.project.findUnique({ where: { id: params.id }, select: { title: true } });
+  if (project) {
+    const excludeFromBroadcast = [session.user.id, ...(card.assigneeId ? [card.assigneeId] : [])];
+    await notifyProjectMembers(
+      params.id,
+      `${card.createdBy.name} أضاف بطاقة جديدة في مشروع «${project.title}»: ${card.title}`,
+      excludeFromBroadcast
+    );
+    if (card.assigneeId && card.assigneeId !== session.user.id) {
+      await createNotification({
+        userId: card.assigneeId,
+        projectId: params.id,
+        message: `تم تكليفك ببطاقة «${card.title}» في مشروع «${project.title}»`,
+      });
+    }
+  }
 
   return NextResponse.json(card, { status: 201 });
 }

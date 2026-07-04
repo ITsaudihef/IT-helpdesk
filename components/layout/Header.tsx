@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { Bell } from "lucide-react";
 
 interface Notification {
   id: string; message: string; read: boolean; createdAt: string;
   ticket?: { ticketNo: string };
+  project?: { id: string; title: string };
 }
 
 export default function Header({ title }: { title: string }) {
@@ -42,7 +44,9 @@ export default function Header({ title }: { title: string }) {
             if (prev.find((n) => n.id === notif.id)) return prev;
             return [notif, ...prev];
           });
-        } catch {}
+        } catch (err) {
+          console.error("[notifications] failed to parse SSE payload:", err);
+        }
       };
 
       es.onerror = () => {
@@ -112,13 +116,26 @@ export default function Header({ title }: { title: string }) {
               ) : notifications.length === 0 ? (
                 <p className="text-sm p-4 text-center" style={{ color: "#7C6A9E" }}>لا توجد إشعارات</p>
               ) : (
-                notifications.map((n) => (
-                  <div key={n.id} className="px-4 py-3 text-sm transition-colors"
-                    style={{ borderBottom: "1px solid #F3EEFF", background: !n.read ? "rgba(124,58,237,0.05)" : "transparent" }}>
-                    <p style={{ color: "#1F1535" }}>{n.message}</p>
-                    {n.ticket && <p className="text-xs mt-1" style={{ color: "#7C3AED" }}>{n.ticket.ticketNo}</p>}
-                  </div>
-                ))
+                notifications.map((n) => {
+                  const body = (
+                    <>
+                      <p style={{ color: "#1F1535" }}>{n.message}</p>
+                      {n.ticket  && <p className="text-xs mt-1" style={{ color: "#7C3AED" }}>{n.ticket.ticketNo}</p>}
+                      {n.project && <p className="text-xs mt-1" style={{ color: "#7C3AED" }}>{n.project.title}</p>}
+                    </>
+                  );
+                  const style = { borderBottom: "1px solid #F3EEFF", background: !n.read ? "rgba(124,58,237,0.05)" : "transparent" };
+                  return n.project ? (
+                    <Link key={n.id} href={`/kanban/${n.project.id}`} onClick={() => setOpen(false)}
+                      className="block px-4 py-3 text-sm transition-colors hover:bg-purple-50" style={style}>
+                      {body}
+                    </Link>
+                  ) : (
+                    <div key={n.id} className="px-4 py-3 text-sm transition-colors" style={style}>
+                      {body}
+                    </div>
+                  );
+                })
               )}
             </div>
           </div>

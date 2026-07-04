@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { createNotification } from "@/lib/notify";
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string; cardId: string } }) {
   const session = await auth();
@@ -8,6 +9,11 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
   const body = await req.json();
   const { columnId, title, description, priority, assigneeId, dueDate, order } = body;
+
+  const existing = await prisma.kanbanCard.findUnique({
+    where: { id: params.cardId },
+    select: { assigneeId: true },
+  });
 
   const updated = await prisma.kanbanCard.update({
     where: { id: params.cardId },
@@ -33,6 +39,18 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       update: {},
       create: { projectId: params.id, userId: assigneeId },
     });
+  }
+
+  // Notify only on a genuine new assignment (not on unrelated edits/moves)
+  if (assigneeId && assigneeId !== existing?.assigneeId && assigneeId !== session.user.id) {
+    const project = await prisma.project.findUnique({ where: { id: params.id }, select: { title: true } });
+    if (project) {
+      await createNotification({
+        userId: assigneeId,
+        projectId: params.id,
+        message: `تم تكليفك ببطاقة «${updated.title}» في مشروع «${project.title}»`,
+      });
+    }
   }
 
   return NextResponse.json(updated);
