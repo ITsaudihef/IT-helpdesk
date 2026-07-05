@@ -7,7 +7,7 @@ import { formatDate } from "@/lib/utils";
 
 export default async function DeptManagerPage() {
   const session = await auth();
-  const dept = (session!.user as any).department as string;
+  const dept = session!.user.department as string;
 
   const [pending, approved, returned, total] = await Promise.all([
     prisma.ticket.findMany({

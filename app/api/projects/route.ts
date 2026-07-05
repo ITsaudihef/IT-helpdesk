@@ -7,8 +7,7 @@ export async function GET() {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { id, role } = session.user as any;
-  const department = (session.user as any).department;
+  const { id, role, department } = session.user;
 
   const projects = await prisma.project.findMany({
     where: projectVisibilityWhere({ id, role, department }),

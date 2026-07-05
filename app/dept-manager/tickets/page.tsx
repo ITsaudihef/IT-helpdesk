@@ -10,7 +10,7 @@ interface Props { searchParams: { status?: string; page?: string } }
 
 export default async function DeptManagerTicketsPage({ searchParams }: Props) {
   const session = await auth();
-  const dept = (session!.user as any).department as string;
+  const dept = session!.user.department as string;
   const page = Math.max(1, parseInt(searchParams.page || "1"));
 
   const where: any = {

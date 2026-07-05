@@ -7,7 +7,7 @@ import { getSetting } from "@/lib/settings";
 export default async function CommAdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
   if (!session) redirect("/login");
-  if (!["COMM_ADMIN", "ADMIN"].includes((session.user as any).role)) redirect("/dashboard");
+  if (!["COMM_ADMIN", "ADMIN"].includes(session.user.role)) redirect("/dashboard");
 
   const [roomsEnabled, kanbanEnabled] = await Promise.all([
     getSetting("rooms_enabled",  "true").then(v => v === "true"),
@@ -16,7 +16,7 @@ export default async function CommAdminLayout({ children }: { children: React.Re
 
   return (
     <div className="min-h-screen" style={{ background: "#F5F3FF" }} dir="rtl">
-      <Sidebar role={(session.user as any).role} userName={session.user.name!} userEmail={session.user.email!} roomsEnabled={roomsEnabled} kanbanEnabled={kanbanEnabled} />
+      <Sidebar role={session.user.role} userName={session.user.name!} userEmail={session.user.email!} roomsEnabled={roomsEnabled} kanbanEnabled={kanbanEnabled} />
       <div className="lg:mr-64 overflow-x-hidden">
         <Header title="ادمن الاتصال المؤسسي" />
         <main className="p-4 sm:p-6 main-content">{children}</main>

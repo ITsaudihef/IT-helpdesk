@@ -5,8 +5,7 @@ import { projectVisibilityWhere } from "@/lib/project-access";
 
 export default async function KanbanPage() {
   const session = await auth();
-  const { id, role } = session!.user as any;
-  const department = (session!.user as any).department;
+  const { id, role, department } = session!.user;
 
   const projects = await prisma.project.findMany({
     where: projectVisibilityWhere({ id, role, department }),

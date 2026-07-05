@@ -35,7 +35,7 @@ export default async function KanbanBoardPage({ params }: { params: { id: string
 
   if (!project) notFound();
 
-  const viewer = { id: session!.user.id, role: (session!.user as any).role, department: (session!.user as any).department };
+  const viewer = { id: session!.user.id, role: session!.user.role, department: session!.user.department };
   if (!canViewProject(viewer, project)) notFound();
 
   const serialized = {

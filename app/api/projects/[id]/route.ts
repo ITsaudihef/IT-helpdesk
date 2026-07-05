@@ -29,7 +29,7 @@ export async function GET(_: NextRequest, { params }: { params: { id: string } }
 
   if (!project) return NextResponse.json({ error: "المشروع غير موجود" }, { status: 404 });
 
-  const viewer = { id: session.user.id, role: (session.user as any).role, department: (session.user as any).department };
+  const viewer = { id: session.user.id, role: session.user.role, department: session.user.department };
   if (!canViewProject(viewer, project)) {
     return NextResponse.json({ error: "المشروع غير موجود" }, { status: 404 });
   }
@@ -44,7 +44,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   const project = await prisma.project.findUnique({ where: { id: params.id } });
   if (!project) return NextResponse.json({ error: "المشروع غير موجود" }, { status: 404 });
 
-  if (!canManageProject({ id: session.user.id, role: (session.user as any).role }, project)) {
+  if (!canManageProject({ id: session.user.id, role: session.user.role }, project)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
@@ -70,7 +70,7 @@ export async function DELETE(_: NextRequest, { params }: { params: { id: string 
   const project = await prisma.project.findUnique({ where: { id: params.id } });
   if (!project) return NextResponse.json({ error: "المشروع غير موجود" }, { status: 404 });
 
-  if (!canManageProject({ id: session.user.id, role: (session.user as any).role }, project)) {
+  if (!canManageProject({ id: session.user.id, role: session.user.role }, project)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 

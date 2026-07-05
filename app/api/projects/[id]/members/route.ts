@@ -11,7 +11,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   const project = await prisma.project.findUnique({ where: { id: params.id } });
   if (!project) return NextResponse.json({ error: "المشروع غير موجود" }, { status: 404 });
 
-  if (!canManageProject({ id: session.user.id, role: (session.user as any).role }, project)) {
+  if (!canManageProject({ id: session.user.id, role: session.user.role }, project)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 

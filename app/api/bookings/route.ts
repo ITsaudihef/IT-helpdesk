@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  if ((session.user as any).role !== "ADMIN") {
+  if (session.user.role !== "ADMIN") {
     const roomsEnabled = await getSetting("rooms_enabled", "true") === "true";
     if (!roomsEnabled) return NextResponse.json({ error: "ميزة حجز القاعات معطّلة حالياً" }, { status: 403 });
   }

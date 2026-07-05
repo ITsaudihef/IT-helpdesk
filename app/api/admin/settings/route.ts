@@ -4,7 +4,7 @@ import { setSetting } from "@/lib/settings";
 
 export async function PATCH(req: Request) {
   const session = await auth();
-  if (!session || (session.user as any).role !== "ADMIN")
+  if (!session || session.user.role !== "ADMIN")
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { key, value } = await req.json();

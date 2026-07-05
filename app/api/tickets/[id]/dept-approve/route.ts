@@ -28,7 +28,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     return NextResponse.json({ error: "Ticket is not pending dept approval" }, { status: 400 });
   }
 
-  const dept = (session.user as any).department;
+  const dept = session.user.department;
   if (role === "DEPT_MANAGER" && ticket.createdBy.department !== dept) {
     return NextResponse.json({ error: "Forbidden — not your department" }, { status: 403 });
   }

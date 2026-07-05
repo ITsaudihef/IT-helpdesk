@@ -11,7 +11,7 @@ import DeptManagerActions from "@/components/tickets/DeptManagerActions";
 
 export default async function DeptManagerTicketDetail({ params }: { params: { id: string } }) {
   const session = await auth();
-  const dept = (session!.user as any).department as string;
+  const dept = session!.user.department as string;
 
   const ticket = await prisma.ticket.findUnique({
     where: { id: params.id },
