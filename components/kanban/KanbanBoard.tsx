@@ -788,9 +788,9 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                   onChange={e => setAddMemberId(e.target.value)}
                   className="flex-1 px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none transition-all"
                   style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(124,58,237,0.3)" }}>
-                  <option value="">اختر عضواً لإضافته...</option>
+                  <option value="" style={{ color: "#1F1535", background: "#FFFFFF" }}>اختر عضواً لإضافته...</option>
                   {users.filter(u => !members.some(m => m.userId === u.id)).map(u => (
-                    <option key={u.id} value={u.id}>{u.name}</option>
+                    <option key={u.id} value={u.id} style={{ color: "#1F1535", background: "#FFFFFF" }}>{u.name}</option>
                   ))}
                 </select>
                 <button
@@ -856,10 +856,10 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                     style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(124,58,237,0.3)" }}
                     value={editCard.priority}
                     onChange={e => setEditCard(c => c ? { ...c, priority: e.target.value } : c)}>
-                    <option value="LOW">منخفضة</option>
-                    <option value="MEDIUM">متوسطة</option>
-                    <option value="HIGH">عالية</option>
-                    <option value="CRITICAL">حرجة</option>
+                    <option value="LOW"      style={{ color: "#1F1535", background: "#FFFFFF" }}>منخفضة</option>
+                    <option value="MEDIUM"   style={{ color: "#1F1535", background: "#FFFFFF" }}>متوسطة</option>
+                    <option value="HIGH"     style={{ color: "#1F1535", background: "#FFFFFF" }}>عالية</option>
+                    <option value="CRITICAL" style={{ color: "#1F1535", background: "#FFFFFF" }}>حرجة</option>
                   </select>
                 </div>
                 <div>
@@ -881,8 +881,8 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                   style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(124,58,237,0.3)" }}
                   value={editCard.assigneeId ?? ""}
                   onChange={e => setEditCard(c => c ? { ...c, assigneeId: e.target.value || null } : c)}>
-                  <option value="">بدون مسؤول</option>
-                  {users.map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
+                  <option value="" style={{ color: "#1F1535", background: "#FFFFFF" }}>بدون مسؤول</option>
+                  {users.map(u => <option key={u.id} value={u.id} style={{ color: "#1F1535", background: "#FFFFFF" }}>{u.name}</option>)}
                 </select>
               </div>
 
