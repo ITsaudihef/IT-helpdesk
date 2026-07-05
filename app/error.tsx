@@ -28,7 +28,7 @@ export default function GlobalError({
         <button
           onClick={reset}
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white"
-          style={{ background: "linear-gradient(135deg, #7C3AED, #5B21B6)" }}
+          style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}
         >
           <RefreshCw className="w-4 h-4" />
           إعادة المحاولة

@@ -79,7 +79,7 @@ export default function CommAdminActions({ ticketId, status, commSupportUsers }:
       <div className="flex gap-3">
         <button onClick={approve} disabled={loading !== null}
           className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-50 transition-all"
-          style={{ background: "linear-gradient(135deg,#7C3AED,#5B21B6)" }}>
+          style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
           <CheckCircle className="w-4 h-4" />
           {loading === "approve" ? "جارٍ الاعتماد..." : "اعتماد وتكليف"}
         </button>

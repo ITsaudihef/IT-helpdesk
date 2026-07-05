@@ -199,7 +199,7 @@ export default function CommSupportNewTicketPage() {
             </button>
           ) : (
             <button onClick={submit} disabled={loading} className="px-6 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 mr-auto"
-              style={{ background: "linear-gradient(135deg,#7C3AED,#5B21B6)" }}>
+              style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
               {loading ? "جارٍ الإرسال..." : "إرسال التذكرة ✓"}
             </button>
           )}

@@ -115,7 +115,7 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
         {tab === "rooms" && (
           <button onClick={openCreate}
             className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm"
-            style={{ background: "linear-gradient(135deg,#7C3AED,#5B21B6)" }}>
+            style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
             <Plus className="w-4 h-4" />قاعة جديدة
           </button>
         )}
@@ -258,7 +258,7 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
               <div className="flex gap-3 pt-1">
                 <button type="submit" disabled={saving}
                   className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-50"
-                  style={{ background: "linear-gradient(135deg,#7C3AED,#5B21B6)" }}>
+                  style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
                   {saving ? "جارٍ الحفظ..." : "حفظ"}
                 </button>
                 <button type="button" onClick={() => setShowForm(false)}

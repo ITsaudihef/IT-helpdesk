@@ -8,7 +8,7 @@ import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, Ticket, Users, BarChart3, Settings,
-  LogOut, HeadphonesIcon, PlusCircle, List, KeyRound, Eye, EyeOff, Menu, X, ShieldCheck, CalendarDays, LayoutGrid,
+  LogOut, HeadphonesIcon, PlusCircle, List, KeyRound, Eye, EyeOff, Menu, X, ShieldCheck, CalendarDays, LayoutGrid, Palette,
 } from "lucide-react";
 import logoSrc from "@/public/logo.png";
 import toast from "react-hot-toast";
@@ -26,6 +26,7 @@ const adminNav: NavItem[] = [
   { href: "/admin/departments",   label: "الأقسام",       icon: ShieldCheck },
   { href: "/admin/rooms",         label: "القاعات",       icon: CalendarDays },
   { href: "/admin/settings",      label: "الإعدادات",    icon: Settings },
+  { href: "/admin/design-system", label: "نظام التصميم", icon: Palette },
   roomsLink,
   kanbanLink,
 ];

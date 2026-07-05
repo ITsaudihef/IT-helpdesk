@@ -74,7 +74,7 @@ export default function ReportsClient() {
           <button key={p.value} onClick={() => setPeriod(p.value)}
             className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
             style={period === p.value
-              ? { background: "linear-gradient(135deg,#7C3AED,#5B21B6)", color: "#fff" }
+              ? { background: "linear-gradient(135deg,#7C3AED,#EC4899)", color: "#fff" }
               : { color: "#6D28D9", background: "transparent" }}>
             {p.label}
           </button>

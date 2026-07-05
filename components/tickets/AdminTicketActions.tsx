@@ -122,7 +122,7 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
           onClick={() => setConfirm({ type: "save", label: "حفظ", danger: false })}
           disabled={loading}
           className="mt-4 px-6 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50"
-          style={{ background: "linear-gradient(135deg,#7C3AED,#5B21B6)" }}>
+          style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
           {loading ? "جارٍ الحفظ..." : "حفظ التغييرات"}
         </button>
       </div>

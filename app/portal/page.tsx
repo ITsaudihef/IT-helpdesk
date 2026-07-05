@@ -99,7 +99,7 @@ export default async function PortalPage() {
             <p className="text-sm text-purple-400 mb-4">ارفع أول تذكرة دعم لك</p>
             <Link href="/portal/new"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white"
-              style={{ background: "linear-gradient(135deg, #7C3AED, #5B21B6)" }}>
+              style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
               <PlusCircle className="w-4 h-4" />
               إنشاء تذكرة الآن
             </Link>

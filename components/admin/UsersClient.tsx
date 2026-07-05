@@ -85,7 +85,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
         <span className="text-xs text-purple-500 whitespace-nowrap">{filtered.length} / {users.length}</span>
         <button onClick={openCreate}
           className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white shadow-sm whitespace-nowrap"
-          style={{ background: "linear-gradient(135deg,#7C3AED,#5B21B6)" }}>
+          style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
           <UserPlus className="w-4 h-4" />مستخدم جديد
         </button>
       </div>

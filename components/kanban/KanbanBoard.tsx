@@ -58,7 +58,7 @@ interface Props {
 const PRIORITY_META = {
   LOW:      { label: "منخفضة", color: "#16A34A", bg: "#D1FAE5", dot: "#16A34A" },
   MEDIUM:   { label: "متوسطة", color: "#2563EB", bg: "#DBEAFE", dot: "#2563EB" },
-  HIGH:     { label: "عالية",  color: "#D97706", bg: "#FEF3C7", dot: "#D97706" },
+  HIGH:     { label: "عالية",  color: "#C2410C", bg: "#FFEDD5", dot: "#C2410C" },
   CRITICAL: { label: "حرجة",   color: "#DC2626", bg: "#FEF2F2", dot: "#DC2626" },
 } as const;
 
