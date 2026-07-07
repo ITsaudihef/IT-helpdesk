@@ -7,7 +7,8 @@ import { getSetting } from "@/lib/settings";
 export default async function PortalLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
   if (!session) redirect("/login");
-  if (session.user.role !== "USER" && session.user.role !== "ADMIN") redirect("/dashboard");
+  const allowedRoles = ["USER", "ADMIN", "DEPT_MANAGER"];
+  if (!allowedRoles.includes(session.user.role)) redirect("/dashboard");
 
   const [roomsEnabled, kanbanEnabled] = await Promise.all([
     getSetting("rooms_enabled",  "true").then(v => v === "true"),

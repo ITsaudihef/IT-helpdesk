@@ -59,6 +59,7 @@ const commAdminNav: NavItem[] = [
 ];
 const deptManagerNav: NavItem[] = [
   { href: "/dept-manager",         label: "لوحة التحكم",  icon: LayoutDashboard },
+  { href: "/portal/new",           label: "تذكرة جديدة",  icon: PlusCircle },
   { href: "/dept-manager/tickets", label: "تذاكر القسم",  icon: Ticket },
   roomsLink,
   kanbanLink,
