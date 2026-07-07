@@ -125,7 +125,7 @@ export default function LoginPage() {
           </div>
 
           <p className="text-center text-xs mt-6" style={{ color: "rgba(255,255,255,0.35)" }}>
-            كل تحدي وله سند © {new Date().getFullYear()}
+            صندوق الوقف الصحي © {new Date().getFullYear()}
           </p>
         </div>
       </div>
