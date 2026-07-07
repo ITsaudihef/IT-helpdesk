@@ -20,6 +20,7 @@ const kanbanLink: NavItem = { href: "/kanban", label: "لوحة المشاريع
 
 const adminNav: NavItem[] = [
   { href: "/admin",               label: "لوحة التحكم",  icon: LayoutDashboard },
+  { href: "/portal/new",          label: "تذكرة جديدة",  icon: PlusCircle },
   { href: "/admin/tickets",       label: "جميع التذاكر", icon: Ticket },
   { href: "/admin/reports",       label: "التقارير",      icon: BarChart3 },
   { href: "/admin/users",         label: "المستخدمون",   icon: Users },
