@@ -72,6 +72,31 @@ Nightly PostgreSQL backups run outside of this repo (SSH into the Postgres servi
 
 Hosted on Railway. Push to `main`, then either wait for Railway's GitHub auto-deploy or run `railway up` from this directory. Migrations run automatically on container start (`npx prisma migrate deploy && npm start` — see `railway.toml`).
 
+### Staging environment
+
+A second Railway environment (`staging`) mirrors production 1:1 — its own app instance, its own PostgreSQL database, its own domain (`hef-helpdesk-staging.up.railway.app`), its own `NEXTAUTH_SECRET`. No shared state with production; safe to break things there.
+
+**Note:** Railway's GitHub auto-deploy connection is per-*service*, not per-environment — a service can only track one branch at a time. So `staging` is **not** wired to auto-deploy on push; deploy to it explicitly:
+
+```bash
+git checkout staging
+git merge main            # or just work directly on staging
+railway up --service HEF-HelpDesk --environment staging --detach
+```
+
+Test on the staging URL. Once approved, promote to production:
+
+```bash
+git checkout main
+git merge staging
+git push origin main
+railway up --service HEF-HelpDesk --environment production --detach
+```
+
+(`git push origin main` alone may also trigger Railway's GitHub auto-deploy for production, in addition to the manual `railway up` — that's expected, not a problem, just occasionally means two back-to-back builds of the same commit.)
+
+Re-seed staging any time with `prisma/seed.ts` pointed at its `DATABASE_PUBLIC_URL` (`railway variables --service Postgres --environment staging --kv`) — seed logins: `admin@helpdesk.com` / `admin123`, `support1@helpdesk.com` / `support123`, `user1@helpdesk.com` / `user123` (see `prisma/seed.ts` for the full list).
+
 ## What's not here yet
 
 No automated test suite exists — verification is currently manual (typecheck + live smoke-test on Railway after each deploy). Worth knowing before making structural changes.
