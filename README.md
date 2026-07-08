@@ -74,7 +74,9 @@ Hosted on Railway. Push to `main`, then either wait for Railway's GitHub auto-de
 
 ### Staging environment
 
-A second Railway environment (`staging`) mirrors production 1:1 — its own app instance, its own PostgreSQL database, its own domain (`hef-helpdesk-staging.up.railway.app`), its own `NEXTAUTH_SECRET`. No shared state with production; safe to break things there.
+A second Railway environment (`staging`) mirrors production 1:1 — its own app instance, its own PostgreSQL database, its own domain (`hef-helpdesk-staging.up.railway.app`), its own `NEXTAUTH_SECRET`.
+
+**Data:** staging's database is refreshed from production's nightly backup every night at ~1 AM AST, as the last step of `backup/remote-backup.sh` (`pg_restore --clean` against `STAGING_DATABASE_URL`, set on the production Postgres service). So staging always has realistic, current production data for testing — but that also means **any schema change tested only on staging gets wiped back to production's schema every night.** Test migrations by applying them to staging right before you need them, not as a standing setup.
 
 **Note:** Railway's GitHub auto-deploy connection is per-*service*, not per-environment — a service can only track one branch at a time. So `staging` is **not** wired to auto-deploy on push; deploy to it explicitly:
 
