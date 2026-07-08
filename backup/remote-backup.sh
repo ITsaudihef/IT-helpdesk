@@ -26,4 +26,17 @@ find "$BACKUP_DIR" -name 'helpdesk-*.dump' -mtime +"$RETENTION_DAYS" -print -del
 echo "[backup] current backups on volume:"
 ls -lh "$BACKUP_DIR"
 
+# Refresh staging from this backup — best-effort, does not fail the backup job itself.
+if [ -n "${STAGING_DATABASE_URL:-}" ]; then
+  echo "[backup] refreshing staging from this backup"
+  if pg_restore --clean --if-exists --no-owner --no-privileges \
+      --dbname="$STAGING_DATABASE_URL" "$FILE" 2>&1; then
+    echo "[backup] staging refresh finished successfully"
+  else
+    echo "[backup] WARNING: staging refresh had errors (see above) — production backup is unaffected" >&2
+  fi
+else
+  echo "[backup] STAGING_DATABASE_URL not set, skipping staging refresh"
+fi
+
 echo "[backup] $(date -u -Iseconds) done"
