@@ -14,8 +14,10 @@ const STATUS_TABS = [
   { label: "بانتظار اعتماد التقنية", value: "PENDING_APPROVAL" },
   { label: "قيد المعالجة",           value: "IN_PROGRESS" },
   { label: "اختبار قبل الإطلاق",     value: "PENDING_USER_TEST" },
+  { label: "جاهزة للإطلاق",          value: "READY_TO_LAUNCH" },
   { label: "بانتظار ردك",            value: "WAITING_INFO" },
   { label: "محلولة",                 value: "RESOLVED" },
+  { label: "تم الإطلاق",             value: "LAUNCHED" },
 ];
 
 export default async function MyTicketsPage({

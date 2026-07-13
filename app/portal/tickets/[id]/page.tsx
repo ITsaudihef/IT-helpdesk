@@ -97,11 +97,11 @@ export default async function TicketDetailPage({ params }: { params: { id: strin
       <TicketAttachments
         ticketId={ticket.id}
         attachments={ticket.attachments as any}
-        canUpload={ticket.status !== "CLOSED"}
+        canUpload={!["CLOSED", "LAUNCHED"].includes(ticket.status)}
       />
 
       {/* Rating if closed */}
-      {(ticket.status === "RESOLVED" || ticket.status === "CLOSED") && (
+      {["RESOLVED", "CLOSED", "LAUNCHED"].includes(ticket.status) && (
         <TicketRating ticketId={ticket.id} currentRating={ticket.rating} />
       )}
 

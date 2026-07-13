@@ -75,11 +75,11 @@ export default async function SupportTicketPage({ params }: { params: { id: stri
         currentUserId={session!.user.id}
       />
 
-      {/* Attachments — view only for support staff */}
+      {/* Attachments */}
       <TicketAttachments
         ticketId={ticket.id}
         attachments={ticket.attachments as any}
-        canUpload={false}
+        canUpload={!["CLOSED", "LAUNCHED"].includes(ticket.status)}
       />
 
       {/* Audit Log */}

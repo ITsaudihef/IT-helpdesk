@@ -77,11 +77,11 @@ export default async function AdminTicketDetail({ params }: { params: { id: stri
         currentUserId={session!.user.id}
       />
 
-      {/* Attachments — view only for admin */}
+      {/* Attachments */}
       <TicketAttachments
         ticketId={ticket.id}
         attachments={ticket.attachments as any}
-        canUpload={false}
+        canUpload={!["CLOSED", "LAUNCHED"].includes(ticket.status)}
       />
 
       <TicketAuditLog ticketId={ticket.id} />

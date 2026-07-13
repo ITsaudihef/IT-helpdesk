@@ -7,7 +7,7 @@ import { statusLabel, priorityLabel } from "@/lib/utils";
 import { CheckCircle2, XCircle } from "lucide-react";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
-const ALL_STATUSES   = ["OPEN","IN_PROGRESS","PENDING_USER_TEST","PENDING_DEPT_APPROVAL","PENDING_APPROVAL","APPROVED","WAITING_INFO","RESOLVED","CLOSED"];
+const ALL_STATUSES   = ["OPEN","IN_PROGRESS","PENDING_USER_TEST","LAUNCHED","PENDING_DEPT_APPROVAL","PENDING_APPROVAL","APPROVED","WAITING_INFO","RESOLVED","CLOSED"];
 const ALL_PRIORITIES = ["LOW","MEDIUM","HIGH","CRITICAL"];
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
   currentUserId: string;
 }
 
-type ConfirmAction = { type: "approve" | "reject" | "save"; label: string; danger: boolean };
+type ConfirmAction = { type: "approve" | "reject" | "save" | "launch"; label: string; danger: boolean };
 
 export default function AdminTicketActions({ ticket, supportUsers }: Props) {
   const router = useRouter();
@@ -46,6 +46,7 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
     if (!confirm) return;
     if (confirm.type === "approve") update({ status: "APPROVED" });
     else if (confirm.type === "reject") update({ status: "CLOSED" });
+    else if (confirm.type === "launch") update({ status: "LAUNCHED" });
     else update({ status, priority, assignedToId: assignTo || null });
     setConfirm(null);
   };
@@ -54,13 +55,21 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
     approve: "هل تريد اعتماد هذه التذكرة والموافقة عليها؟",
     reject:  "هل تريد رفض هذه التذكرة؟ سيتم إغلاقها نهائياً.",
     save:    `هل تريد حفظ التغييرات؟ سيتم تغيير الحالة إلى "${statusLabel[status]}"`,
+    launch:  "هل تم إطلاق هذا التحديث فعلياً؟ سيتم تعليم التذكرة كمُطلقة.",
+  };
+
+  const confirmTitles: Record<string, string> = {
+    approve: "تأكيد الاعتماد",
+    reject:  "تأكيد الرفض",
+    launch:  "تأكيد الإطلاق",
+    save:    "تأكيد حفظ التغييرات",
   };
 
   return (
     <>
       <ConfirmDialog
         open={!!confirm}
-        title={confirm?.type === "approve" ? "تأكيد الاعتماد" : confirm?.type === "reject" ? "تأكيد الرفض" : "تأكيد حفظ التغييرات"}
+        title={confirm ? confirmTitles[confirm.type] : ""}
         message={confirm ? confirmMessages[confirm.type] : ""}
         confirmLabel={confirm?.label || "تأكيد"}
         danger={confirm?.danger || false}
@@ -89,6 +98,19 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
                 <XCircle className="w-4 h-4" />رفض
               </button>
             </div>
+          </div>
+        )}
+
+        {ticket.status === "READY_TO_LAUNCH" && (
+          <div className="mb-5 p-4 rounded-xl border" style={{ background: "rgba(6,182,212,0.08)", borderColor: "rgba(6,182,212,0.25)" }}>
+            <p className="text-sm font-semibold mb-3" style={{ color: "#0E7490" }}>الطالب اختبر التذكرة ونجحت — جاهزة للإطلاق</p>
+            <button
+              onClick={() => setConfirm({ type: "launch", label: "إطلاق", danger: false })}
+              disabled={loading}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50"
+              style={{ background: "#0891B2" }}>
+              <CheckCircle2 className="w-4 h-4" />إطلاق التذكرة
+            </button>
           </div>
         )}
 

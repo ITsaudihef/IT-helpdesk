@@ -15,6 +15,8 @@ const statusTransitions: Record<string, string[]> = {
   CLOSED:            [],
   PENDING_APPROVAL:  [],
   PENDING_USER_TEST: [],
+  READY_TO_LAUNCH:   ["LAUNCHED"],
+  LAUNCHED:          [],
 };
 
 interface Props {

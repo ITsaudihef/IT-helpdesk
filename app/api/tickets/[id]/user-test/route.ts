@@ -29,9 +29,11 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     return NextResponse.json({ error: "Ticket is not pending user test" }, { status: 400 });
   }
 
+  const nextStatus = action === "pass" ? "READY_TO_LAUNCH" : "IN_PROGRESS";
+
   await prisma.ticket.update({
     where: { id: params.id },
-    data: { status: "IN_PROGRESS", updatedAt: new Date() },
+    data: { status: nextStatus, updatedAt: new Date() },
   });
 
   const tasks: Promise<any>[] = [
@@ -39,7 +41,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       params.id,
       action === "pass" ? "اجتياز اختبار المستخدم" : "فشل اختبار المستخدم",
       action === "pass"
-        ? `أكّد ${ticket.createdBy.name} نجاح الاختبار، أُعيدت التذكرة لتقنية المعلومات للإطلاق`
+        ? `أكّد ${ticket.createdBy.name} نجاح الاختبار، أصبحت التذكرة جاهزة للإطلاق`
         : `أبلغ ${ticket.createdBy.name} عن مشكلة: ${note}`,
       session.user.id
     ),
