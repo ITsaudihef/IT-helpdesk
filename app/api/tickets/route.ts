@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
     });
     if (creator?.department) {
       const deptManager = await prisma.user.findFirst({
-        where: { role: "DEPT_MANAGER", department: creator.department },
+        where: { role: "DEPT_MANAGER", department: creator.department, id: { not: session.user.id } },
         select: { id: true },
       });
       if (deptManager) {
@@ -125,7 +125,7 @@ export async function POST(req: NextRequest) {
     const creator = await prisma.user.findUnique({ where: { id: session.user.id }, select: { department: true } });
     if (creator?.department) {
       const deptManagers = await prisma.user.findMany({
-        where: { role: "DEPT_MANAGER", department: creator.department },
+        where: { role: "DEPT_MANAGER", department: creator.department, id: { not: session.user.id } },
         select: { id: true },
       });
       deptManagers.forEach(dm => {
