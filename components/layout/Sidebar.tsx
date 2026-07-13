@@ -210,8 +210,8 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
       </div>
 
       {/* Fund branding footer */}
-      <div className="px-5 py-4 flex items-center justify-center" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-        <Image src={hefLogoSrc} alt="صندوق الوقف الصحي" width={130} height={30} className="object-contain opacity-90" />
+      <div className="px-4 py-5 flex items-center justify-center" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <Image src={hefLogoSrc} alt="صندوق الوقف الصحي" width={190} height={45} className="object-contain opacity-95" />
       </div>
     </div>
   );

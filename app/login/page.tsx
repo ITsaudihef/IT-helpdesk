@@ -61,7 +61,7 @@ export default function LoginPage() {
 
           <div className="mt-10 pt-6 flex flex-col items-center gap-2" style={{ borderTop: "1px solid rgba(124,58,237,0.2)" }}>
             <p className="text-xs" style={{ color: "#A78BFA" }}>مبادرة من</p>
-            <Image src={hefLogoSrc} alt="صندوق الوقف الصحي" width={160} height={38} className="object-contain" />
+            <Image src={hefLogoSrc} alt="صندوق الوقف الصحي" width={220} height={52} className="object-contain" />
           </div>
         </div>
       </div>
@@ -131,7 +131,7 @@ export default function LoginPage() {
           </div>
 
           <div className="flex flex-col items-center gap-2 mt-6">
-            <Image src={hefLogoSrc} alt="صندوق الوقف الصحي" width={150} height={35} className="object-contain opacity-90" />
+            <Image src={hefLogoSrc} alt="صندوق الوقف الصحي" width={200} height={47} className="object-contain opacity-95" />
             <p className="text-center text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
               © {new Date().getFullYear()}
             </p>
