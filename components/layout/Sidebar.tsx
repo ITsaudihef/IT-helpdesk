@@ -11,6 +11,7 @@ import {
   LogOut, HeadphonesIcon, PlusCircle, List, KeyRound, Eye, EyeOff, Menu, X, ShieldCheck, CalendarDays, LayoutGrid, Palette,
 } from "lucide-react";
 import logoSrc from "@/public/logo.png";
+import hefLogoSrc from "@/public/hef-logo-white.png";
 import toast from "react-hot-toast";
 
 interface NavItem { href: string; label: string; icon: React.ElementType; }
@@ -206,6 +207,11 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
           <LogOut className="w-4 h-4" />
           تسجيل الخروج
         </button>
+      </div>
+
+      {/* Fund branding footer */}
+      <div className="px-5 py-4 flex items-center justify-center" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <Image src={hefLogoSrc} alt="صندوق الوقف الصحي" width={130} height={30} className="object-contain opacity-90" />
       </div>
     </div>
   );
