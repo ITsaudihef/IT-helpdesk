@@ -7,7 +7,24 @@ import { statusLabel, priorityLabel } from "@/lib/utils";
 import { CheckCircle2, XCircle } from "lucide-react";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
-const ALL_STATUSES   = ["OPEN","IN_PROGRESS","PENDING_USER_TEST","LAUNCHED","PENDING_DEPT_APPROVAL","PENDING_APPROVAL","APPROVED","WAITING_INFO","RESOLVED","CLOSED"];
+// Options shown in the status dropdown, keyed by the ticket's CURRENT status —
+// each list includes the current status itself (so "no change" stays valid)
+// plus only the statuses that make sense to jump to from there. READY_TO_LAUNCH
+// is deliberately never offered as a target — it's only reachable automatically
+// once the requester passes their test (see /api/tickets/[id]/user-test).
+const STATUS_TRANSITIONS: Record<string, string[]> = {
+  OPEN:                  ["OPEN", "IN_PROGRESS", "WAITING_INFO", "CLOSED"],
+  IN_PROGRESS:           ["IN_PROGRESS", "PENDING_USER_TEST", "WAITING_INFO", "RESOLVED", "CLOSED"],
+  WAITING_INFO:          ["WAITING_INFO", "IN_PROGRESS", "RESOLVED", "CLOSED"],
+  PENDING_DEPT_APPROVAL: ["PENDING_DEPT_APPROVAL", "PENDING_APPROVAL", "OPEN"],
+  PENDING_APPROVAL:      ["PENDING_APPROVAL", "APPROVED", "CLOSED"],
+  APPROVED:              ["APPROVED", "IN_PROGRESS"],
+  PENDING_USER_TEST:     ["PENDING_USER_TEST", "IN_PROGRESS"],
+  READY_TO_LAUNCH:       ["READY_TO_LAUNCH", "LAUNCHED"],
+  LAUNCHED:              ["LAUNCHED", "CLOSED"],
+  RESOLVED:              ["RESOLVED", "IN_PROGRESS", "CLOSED"],
+  CLOSED:                ["CLOSED", "OPEN"],
+};
 const ALL_PRIORITIES = ["LOW","MEDIUM","HIGH","CRITICAL"];
 
 interface Props {
@@ -116,7 +133,7 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
 
         <div className="grid sm:grid-cols-3 gap-4">
           {[
-            { label: "الحالة",    value: status,   onChange: setStatus,   options: ALL_STATUSES.map(s => ({ v: s, l: statusLabel[s] })) },
+            { label: "الحالة",    value: status,   onChange: setStatus,   options: (STATUS_TRANSITIONS[ticket.status] || [ticket.status]).map(s => ({ v: s, l: statusLabel[s] })) },
             { label: "الأولوية", value: priority, onChange: setPriority, options: ALL_PRIORITIES.map(p => ({ v: p, l: priorityLabel[p] })) },
           ].map((f) => (
             <div key={f.label}>
