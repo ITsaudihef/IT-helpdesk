@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
+import { canActOnTicket } from "@/lib/ticket-access";
 
 const MAX_SIZE = 2 * 1024 * 1024; // 2 MB
 const ALLOWED  = ["image/jpeg","image/png","image/gif","image/webp","application/pdf",
@@ -13,11 +14,13 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   const session = await auth();
   if (!session) return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
 
-  const ticket = await prisma.ticket.findUnique({ where: { id: params.id } });
+  const ticket = await prisma.ticket.findUnique({
+    where: { id: params.id },
+    include: { createdBy: { select: { department: true } } },
+  });
   if (!ticket) return NextResponse.json({ error: "التذكرة غير موجودة" }, { status: 404 });
 
-  // Users can only upload to their own tickets; support/admin can upload to any
-  if (session.user.role === "USER" && ticket.createdById !== session.user.id)
+  if (!canActOnTicket({ id: session.user.id, role: session.user.role, department: session.user.department }, ticket))
     return NextResponse.json({ error: "غير مصرح" }, { status: 403 });
 
   const contentLength = Number(req.headers.get("content-length") || 0);

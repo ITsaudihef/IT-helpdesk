@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { createNotification } from "@/lib/notify";
+import { canActOnTicket } from "@/lib/ticket-access";
 
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await auth();
@@ -10,10 +11,13 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   const { body, isInternal } = await req.json();
   if (!body) return NextResponse.json({ error: "Body required" }, { status: 400 });
 
-  const ticket = await prisma.ticket.findUnique({ where: { id: params.id } });
+  const ticket = await prisma.ticket.findUnique({
+    where: { id: params.id },
+    include: { createdBy: { select: { department: true } } },
+  });
   if (!ticket) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-  if (session.user.role === "USER" && ticket.createdById !== session.user.id) {
+  if (!canActOnTicket({ id: session.user.id, role: session.user.role, department: session.user.department }, ticket)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 

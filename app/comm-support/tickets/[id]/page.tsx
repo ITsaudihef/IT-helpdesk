@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
+import { canActOnTicket } from "@/lib/ticket-access";
 import { statusLabel, typeLabel, priorityLabel, formatDate } from "@/lib/utils";
 import { StatusBadge, PriorityBadge } from "@/components/tickets/StatusBadge";
 import TicketComments from "@/components/tickets/TicketComments";
@@ -33,6 +34,7 @@ export default async function CommSupportTicketPage({ params }: { params: { id: 
 
   if (!ticket) notFound();
   if (ticket.type !== "INSTITUTIONAL_COMM") notFound();
+  if (!canActOnTicket({ id: session!.user.id, role: session!.user.role, department: session!.user.department }, ticket)) notFound();
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
