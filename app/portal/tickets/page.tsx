@@ -13,6 +13,7 @@ const STATUS_TABS = [
   { label: "بانتظار اعتماد المدير",  value: "PENDING_DEPT_APPROVAL" },
   { label: "بانتظار اعتماد التقنية", value: "PENDING_APPROVAL" },
   { label: "قيد المعالجة",           value: "IN_PROGRESS" },
+  { label: "اختبار قبل الإطلاق",     value: "PENDING_USER_TEST" },
   { label: "بانتظار ردك",            value: "WAITING_INFO" },
   { label: "محلولة",                 value: "RESOLVED" },
 ];

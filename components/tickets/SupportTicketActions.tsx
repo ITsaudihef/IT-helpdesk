@@ -7,13 +7,14 @@ import { statusLabel } from "@/lib/utils";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 const statusTransitions: Record<string, string[]> = {
-  OPEN:             ["IN_PROGRESS", "WAITING_INFO", "CLOSED"],
-  IN_PROGRESS:      ["RESOLVED", "WAITING_INFO", "CLOSED"],
-  WAITING_INFO:     ["IN_PROGRESS", "RESOLVED", "CLOSED"],
-  APPROVED:         ["IN_PROGRESS"],
-  RESOLVED:         ["CLOSED"],
-  CLOSED:           [],
-  PENDING_APPROVAL: [],
+  OPEN:              ["IN_PROGRESS", "WAITING_INFO", "CLOSED"],
+  IN_PROGRESS:       ["PENDING_USER_TEST", "RESOLVED", "WAITING_INFO", "CLOSED"],
+  WAITING_INFO:      ["IN_PROGRESS", "RESOLVED", "CLOSED"],
+  APPROVED:          ["IN_PROGRESS"],
+  RESOLVED:          ["CLOSED"],
+  CLOSED:            [],
+  PENDING_APPROVAL:  [],
+  PENDING_USER_TEST: [],
 };
 
 interface Props {

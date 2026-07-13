@@ -8,6 +8,7 @@ import TicketComments from "@/components/tickets/TicketComments";
 import TicketRating from "@/components/tickets/TicketRating";
 import TicketAttachments from "@/components/tickets/TicketAttachments";
 import TicketAuditLog from "@/components/tickets/TicketAuditLog";
+import UserTestActions from "@/components/tickets/UserTestActions";
 
 export default async function TicketDetailPage({ params }: { params: { id: string } }) {
   const session = await auth();
@@ -88,6 +89,9 @@ export default async function TicketDetailPage({ params }: { params: { id: strin
           ))}
         </div>
       </div>
+
+      {/* User test action */}
+      {ticket.status === "PENDING_USER_TEST" && <UserTestActions ticketId={ticket.id} />}
 
       {/* Attachments */}
       <TicketAttachments

@@ -5,7 +5,7 @@ import { Search } from "lucide-react";
 import { statusLabel, priorityLabel, typeLabel } from "@/lib/utils";
 
 const FILTERS = [
-  { name: "status",   label: "الحالة",   opts: ["OPEN","IN_PROGRESS","PENDING_DEPT_APPROVAL","PENDING_APPROVAL","WAITING_INFO","RESOLVED","CLOSED"] },
+  { name: "status",   label: "الحالة",   opts: ["OPEN","IN_PROGRESS","PENDING_USER_TEST","PENDING_DEPT_APPROVAL","PENDING_APPROVAL","WAITING_INFO","RESOLVED","CLOSED"] },
   { name: "priority", label: "الأولوية", opts: ["CRITICAL","HIGH","MEDIUM","LOW"] },
   { name: "type",     label: "النوع",    opts: ["SUPPORT","SHIFA_SUPPORT","DEVELOPMENT","INSTITUTIONAL_COMM"] },
 ];

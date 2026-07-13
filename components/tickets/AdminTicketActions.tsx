@@ -7,7 +7,7 @@ import { statusLabel, priorityLabel } from "@/lib/utils";
 import { CheckCircle2, XCircle } from "lucide-react";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
-const ALL_STATUSES   = ["OPEN","IN_PROGRESS","PENDING_DEPT_APPROVAL","PENDING_APPROVAL","APPROVED","WAITING_INFO","RESOLVED","CLOSED"];
+const ALL_STATUSES   = ["OPEN","IN_PROGRESS","PENDING_USER_TEST","PENDING_DEPT_APPROVAL","PENDING_APPROVAL","APPROVED","WAITING_INFO","RESOLVED","CLOSED"];
 const ALL_PRIORITIES = ["LOW","MEDIUM","HIGH","CRITICAL"];
 
 interface Props {

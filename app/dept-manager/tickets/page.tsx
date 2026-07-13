@@ -35,6 +35,7 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
     { label: "بانتظار اعتمادك",   value: "PENDING_DEPT_APPROVAL" },
     { label: "بانتظار التقنية",   value: "PENDING_APPROVAL" },
     { label: "قيد المعالجة",      value: "IN_PROGRESS" },
+    { label: "اختبار قبل الإطلاق", value: "PENDING_USER_TEST" },
     { label: "محلولة",            value: "RESOLVED" },
     { label: "مُعادة",            value: "OPEN" },
   ];
