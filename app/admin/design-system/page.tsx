@@ -75,7 +75,7 @@ export default function DesignSystemPage() {
   return (
     <div dir="rtl">
       {/* Intro */}
-      <div className="rounded-2xl p-5 mb-8 flex items-center gap-4" style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+      <div className="dark-modal rounded-2xl p-5 mb-8 flex items-center gap-4" style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
         <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(255,255,255,0.2)" }}>
           <Palette className="w-6 h-6 text-white" />
         </div>
@@ -167,7 +167,7 @@ export default function DesignSystemPage() {
             <p className="text-sm font-bold mb-1" style={{ color: "#1F1535" }}>بطاقة فاتحة (Card)</p>
             <p className="text-xs" style={{ color: "#7C6A9E" }}>خلفية بيضاء + حدود بنفسجية فاتحة — الأكثر استخداماً في المنصة</p>
           </div>
-          <div className="rounded-2xl p-5" style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.3)" }}>
+          <div className="dark-modal rounded-2xl p-5" style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.3)" }}>
             <p className="text-sm font-bold mb-1 text-white">نافذة داكنة (Dark Modal)</p>
             <p className="text-xs" style={{ color: "#A78BFA" }}>
               تنبيه مهم: أي نص أبيض داخل نافذة داكنة يجب أن يكون ضمن عنصر بصنف <code className="px-1 rounded" style={{ background: "rgba(255,255,255,0.1)" }}>dark-modal</code> — بدونه تفرض قاعدة CSS عامة لون نص داكن فيختفي على الخلفية الداكنة.
