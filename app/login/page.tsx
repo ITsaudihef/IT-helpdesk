@@ -60,7 +60,7 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-10 pt-6 flex flex-col items-center gap-2" style={{ borderTop: "1px solid rgba(124,58,237,0.2)" }}>
-            <p className="text-xs" style={{ color: "#A78BFA" }}>مبادرة من</p>
+            <p className="text-xs" style={{ color: "#A78BFA" }}>صنع بحب بواسطة</p>
             <Image src={hefLogoSrc} alt="صندوق الوقف الصحي" width={220} height={52} className="object-contain" />
           </div>
         </div>
@@ -130,12 +130,9 @@ export default function LoginPage() {
             </form>
           </div>
 
-          <div className="flex flex-col items-center gap-2 mt-6">
-            <Image src={hefLogoSrc} alt="صندوق الوقف الصحي" width={200} height={47} className="object-contain opacity-95" />
-            <p className="text-center text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
-              © {new Date().getFullYear()}
-            </p>
-          </div>
+          <p className="text-center text-xs mt-6" style={{ color: "rgba(255,255,255,0.35)" }}>
+            صندوق الوقف الصحي © {new Date().getFullYear()}
+          </p>
         </div>
       </div>
     </div>
