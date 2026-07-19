@@ -78,7 +78,7 @@ export async function GET() {
   const monthlyTrend = Object.entries(monthMap)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([month, v]) => ({
-      month: new Date(month + "-01").toLocaleDateString("ar-SA", { month: "short", year: "numeric" }),
+      month: new Date(month + "-01").toLocaleDateString("ar-SA", { month: "short", year: "numeric", calendar: "gregory" }),
       ...v,
     }));
 

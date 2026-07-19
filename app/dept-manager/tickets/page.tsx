@@ -83,7 +83,7 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
               <p className="text-sm font-medium" style={{ color: "#1F1535" }}>{t.title}</p>
               <div className="flex items-center justify-between text-xs" style={{ color: "#7C6A9E" }}>
                 <span>{t.createdBy.name}</span>
-                <span>{new Date(t.createdAt).toLocaleDateString("ar-SA")}</span>
+                <span>{new Date(t.createdAt).toLocaleDateString("ar-SA", { calendar: "gregory" })}</span>
               </div>
             </Link>
           ))}
@@ -116,7 +116,7 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
                     <StatusBadge status={t.status} />
                   </td>
                   <td className="px-4 py-3 text-purple-500 whitespace-nowrap">
-                    {new Date(t.createdAt).toLocaleDateString("ar-SA")}
+                    {new Date(t.createdAt).toLocaleDateString("ar-SA", { calendar: "gregory" })}
                   </td>
                   <td className="px-4 py-3">
                     <Link href={`/dept-manager/tickets/${t.id}`}

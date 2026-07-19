@@ -76,7 +76,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
               <p className="text-sm font-medium" style={{ color: "#1F1535" }}>{t.title}</p>
               <div className="flex items-center justify-between text-xs" style={{ color: "#7C6A9E" }}>
                 <span>{t.createdBy.name} · {t.createdBy.department}</span>
-                <span>{new Date(t.createdAt).toLocaleDateString("ar-SA")}</span>
+                <span>{new Date(t.createdAt).toLocaleDateString("ar-SA", { calendar: "gregory" })}</span>
               </div>
             </Link>
           ))}
@@ -115,7 +115,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-gray-500">{t.assignedTo?.name || "—"}</td>
-                  <td className="px-4 py-3 text-purple-500 whitespace-nowrap">{new Date(t.createdAt).toLocaleDateString("ar-SA")}</td>
+                  <td className="px-4 py-3 text-purple-500 whitespace-nowrap">{new Date(t.createdAt).toLocaleDateString("ar-SA", { calendar: "gregory" })}</td>
                   <td className="px-4 py-3">
                     <Link href={`/admin/tickets/${t.id}`}
                       className="text-xs font-semibold hover:underline" style={{ color: "#7C3AED" }}>

@@ -67,7 +67,7 @@ export default function TicketCard({ ticket, href }: TicketCardProps) {
             )}
             <span className="flex items-center gap-1">
               <Clock className="w-3 h-3" />
-              {new Date(ticket.updatedAt ?? ticket.createdAt).toLocaleDateString("ar-SA")}
+              {new Date(ticket.updatedAt ?? ticket.createdAt).toLocaleDateString("ar-SA", { calendar: "gregory" })}
             </span>
           </div>
         </div>

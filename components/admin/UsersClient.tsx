@@ -212,7 +212,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                 </td>
                 <td className="px-4 py-3" style={{ color: "#6B6B8A" }}>{u.department || "—"}</td>
                 <td className="px-4 py-3" style={{ color: "#6B6B8A" }}>{u._count.ticketsCreated}</td>
-                <td className="px-4 py-3" style={{ color: "#9CA3AF" }}>{new Date(u.createdAt).toLocaleDateString("ar-SA")}</td>
+                <td className="px-4 py-3" style={{ color: "#9CA3AF" }}>{new Date(u.createdAt).toLocaleDateString("ar-SA", { calendar: "gregory" })}</td>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-1">
                     <button onClick={() => openEdit(u)}

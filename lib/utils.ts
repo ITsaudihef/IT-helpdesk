@@ -6,14 +6,14 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatDate(date: Date | string) {
-  return new Intl.DateTimeFormat("ar-SA", {
+  return new Intl.DateTimeFormat("ar-SA-u-ca-gregory", {
     dateStyle: "medium",
     timeStyle: "short",
   }).format(new Date(date));
 }
 
 export function formatDateShort(date: Date | string) {
-  return new Intl.DateTimeFormat("ar-SA", {
+  return new Intl.DateTimeFormat("ar-SA-u-ca-gregory", {
     dateStyle: "short",
   }).format(new Date(date));
 }

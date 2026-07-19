@@ -53,7 +53,7 @@ function fmtHour(h: number) {
 }
 function fmtDate(d: string) {
   return new Date(d + "T00:00:00").toLocaleDateString("ar-SA", {
-    weekday: "long", year: "numeric", month: "long", day: "numeric",
+    weekday: "long", year: "numeric", month: "long", day: "numeric", calendar: "gregory",
   });
 }
 function addHour(t: string) {

@@ -46,7 +46,12 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
       const fd = new FormData();
       pending.forEach(f => fd.append("files", f));
       const res = await fetch(`/api/tickets/${ticketId}/attachments`, { method: "POST", body: fd });
-      if (!res.ok) { const e = await res.json(); throw new Error(e.error); }
+      if (!res.ok) {
+        const message = await res.json().then(e => e.error).catch(() =>
+          res.status === 413 ? "حجم الملفات يتجاوز الحد المسموح" : "فشل رفع المرفقات"
+        );
+        throw new Error(message);
+      }
       const created: Attachment[] = await res.json();
       setList(l => [...l, ...created]);
       setPending([]);

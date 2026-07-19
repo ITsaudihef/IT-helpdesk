@@ -64,7 +64,7 @@ const PRIORITY_META = {
 
 function formatDate(iso?: string | null) {
   if (!iso) return "";
-  return new Date(iso).toLocaleDateString("ar-SA", { day: "numeric", month: "short", year: "numeric" });
+  return new Date(iso).toLocaleDateString("ar-SA", { day: "numeric", month: "short", year: "numeric", calendar: "gregory" });
 }
 
 function getProgressPct(startDate?: string | null, endDate?: string | null) {
@@ -561,7 +561,7 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                               color:      overdue ? "#DC2626"  : "#374151",
                             }}>
                             {overdue ? <AlertCircle className="w-2.5 h-2.5" /> : <Calendar className="w-2.5 h-2.5" />}
-                            {new Date(card.dueDate).toLocaleDateString("ar-SA", { day: "numeric", month: "short" })}
+                            {new Date(card.dueDate).toLocaleDateString("ar-SA", { day: "numeric", month: "short", calendar: "gregory" })}
                           </span>
                         )}
                       </div>

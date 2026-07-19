@@ -21,7 +21,7 @@ const ACTION_ICON: Record<string, { icon: string; color: string }> = {
 
 function formatTime(iso: string) {
   const d = new Date(iso);
-  return d.toLocaleString("ar-SA", { dateStyle: "short", timeStyle: "short" });
+  return d.toLocaleString("ar-SA", { dateStyle: "short", timeStyle: "short", calendar: "gregory" });
 }
 
 export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
