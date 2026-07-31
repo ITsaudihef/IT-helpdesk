@@ -6,20 +6,18 @@ import {
   Shield, Database, Settings, ChevronLeft, Zap, BarChart3,
 } from "lucide-react";
 import SettingsToggles from "@/components/admin/SettingsToggles";
+import MaintenanceModeCard from "@/components/admin/MaintenanceModeCard";
 
 const ROLE_META: Record<string, { label: string; color: string; bg: string }> = {
   ADMIN:        { label: "مدير النظام",              color: "#5B21B6", bg: "#EDE9FE" },
   SUPPORT:      { label: "موظف الدعم الفني",         color: "#1D4ED8", bg: "#DBEAFE" },
   USER:         { label: "مستخدم",                   color: "#374151", bg: "#F3F4F6" },
-  COMM_SUPPORT: { label: "دعم الاتصال المؤسسي",      color: "#92400E", bg: "#FEF3C7" },
-  COMM_ADMIN:   { label: "مدير الاتصال المؤسسي",     color: "#9D174D", bg: "#FCE7F3" },
 };
 
 const TYPE_META: Record<string, { label: string; icon: string; desc: string; color: string; bg: string }> = {
   SUPPORT:            { label: "دعم فني",         icon: "🛠️", desc: "أجهزة، شبكة، برمجيات، صلاحيات",      color: "#5B21B6", bg: "#EDE9FE" },
   SHIFA_SUPPORT:      { label: "دعم شفاء",        icon: "🏥", desc: "طلبات الدعم الموجهة لنظام شفاء",       color: "#1D4ED8", bg: "#DBEAFE" },
   DEVELOPMENT:        { label: "تطوير",            icon: "💻", desc: "طلبات تطوير أنظمة — يتطلب اعتماد",     color: "#7E22CE", bg: "#F3E8FF" },
-  INSTITUTIONAL_COMM: { label: "طلب تصميم",        icon: "🎨", desc: "طلبات التصميم والاتصال المؤسسي",       color: "#065F46", bg: "#D1FAE5" },
 };
 
 const PRIORITY_META = [
@@ -51,9 +49,10 @@ export default async function SettingsPage() {
 
   const smtpConfigured = !!(process.env.SMTP_USER && process.env.SMTP_PASS);
   const dbUrl = process.env.DATABASE_URL || "file:./dev.db";
-  const [roomsEnabled, kanbanEnabled] = await Promise.all([
+  const [roomsEnabled, kanbanEnabled, maintenanceMode] = await Promise.all([
     getSetting("rooms_enabled",  "true").then(v => v === "true"),
     getSetting("kanban_enabled", "true").then(v => v === "true"),
+    getSetting("maintenance_mode", "false").then(v => v === "true"),
   ]);
 
   return (
@@ -236,6 +235,9 @@ export default async function SettingsPage() {
 
           {/* Feature toggles */}
           <SettingsToggles roomsEnabled={roomsEnabled} kanbanEnabled={kanbanEnabled} />
+
+          {/* Maintenance mode */}
+          <MaintenanceModeCard initialEnabled={maintenanceMode} />
 
           {/* System info */}
           <div className="rounded-2xl p-5" style={{ background: "linear-gradient(135deg,#7C3AED,#5B21B6)", color: "white" }}>

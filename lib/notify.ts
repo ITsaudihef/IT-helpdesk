@@ -12,7 +12,7 @@ export async function createNotification(data: NotifyInput) {
   const notif = await prisma.notification.create({
     data,
     include: {
-      ticket:  { select: { ticketNo: true } },
+      ticket:  { select: { id: true, ticketNo: true } },
       project: { select: { id: true, title: true } },
     },
   });

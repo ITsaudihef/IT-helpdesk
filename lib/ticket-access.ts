@@ -19,10 +19,6 @@ export function canActOnTicket(viewer: Viewer, ticket: TicketRef): boolean {
       return ticket.createdById === viewer.id;
     case "SUPPORT":
       return ticket.assignedToId === viewer.id;
-    case "COMM_SUPPORT":
-      return ticket.type === "INSTITUTIONAL_COMM" && ticket.assignedToId === viewer.id;
-    case "COMM_ADMIN":
-      return ticket.type === "INSTITUTIONAL_COMM";
     case "DEPT_MANAGER":
       return !!viewer.department && ticket.createdBy?.department === viewer.department;
     default:

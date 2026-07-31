@@ -17,7 +17,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         kanbanEnabled={true}
       />
       <div className="lg:mr-64 overflow-x-hidden">
-        <Header title="لوحة الإدارة" />
+        <Header title="لوحة الإدارة" role={session.user.role} />
         <main className="p-4 sm:p-6 main-content">{children}</main>
       </div>
     </div>

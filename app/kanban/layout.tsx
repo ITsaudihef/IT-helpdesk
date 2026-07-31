@@ -3,15 +3,19 @@ import { auth } from "@/lib/auth";
 import { getSetting } from "@/lib/settings";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
+import MaintenancePage from "@/components/layout/MaintenancePage";
 
 export default async function KanbanLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
   if (!session) redirect("/login");
 
-  const [kanbanEnabled, roomsEnabled] = await Promise.all([
+  const [kanbanEnabled, roomsEnabled, maintenanceMode] = await Promise.all([
     getSetting("kanban_enabled", "true").then(v => v === "true"),
     getSetting("rooms_enabled",  "true").then(v => v === "true"),
+    getSetting("maintenance_mode", "false").then(v => v === "true"),
   ]);
+
+  if (maintenanceMode && session.user.role !== "ADMIN") return <MaintenancePage />;
 
   if (!kanbanEnabled) redirect("/dashboard");
 
@@ -25,7 +29,7 @@ export default async function KanbanLayout({ children }: { children: React.React
         kanbanEnabled={kanbanEnabled}
       />
       <div className="lg:mr-64 overflow-x-hidden">
-        <Header title="لوحة المشاريع" />
+        <Header title="لوحة المشاريع" role={session.user.role} />
         <main className="p-4 sm:p-6 main-content">{children}</main>
       </div>
     </div>

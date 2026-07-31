@@ -44,20 +44,6 @@ const userNav: NavItem[] = [
   roomsLink,
   kanbanLink,
 ];
-const commSupportNav: NavItem[] = [
-  { href: "/comm-support",         label: "التذاكر الواردة", icon: HeadphonesIcon },
-  { href: "/comm-support/new",     label: "تذكرة جديدة",     icon: PlusCircle },
-  { href: "/comm-support/tickets", label: "تذاكري المرفوعة", icon: List },
-  roomsLink,
-  kanbanLink,
-];
-const commAdminNav: NavItem[] = [
-  { href: "/comm-admin",         label: "بانتظار الاعتماد", icon: LayoutDashboard },
-  { href: "/comm-admin/new",     label: "تذكرة جديدة",      icon: PlusCircle },
-  { href: "/comm-admin/tickets", label: "جميع التذاكر",     icon: Ticket },
-  roomsLink,
-  kanbanLink,
-];
 const deptManagerNav: NavItem[] = [
   { href: "/dept-manager",         label: "لوحة التحكم",  icon: LayoutDashboard },
   { href: "/portal/new",           label: "تذكرة جديدة",  icon: PlusCircle },
@@ -87,16 +73,12 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
   const nav = filterFeatures(
     role === "ADMIN"        ? adminNav        :
     role === "SUPPORT"      ? supportNav      :
-    role === "COMM_SUPPORT" ? commSupportNav  :
-    role === "COMM_ADMIN"   ? commAdminNav    :
     role === "DEPT_MANAGER" ? deptManagerNav  : userNav
   );
   const roleLabelMap: Record<string,string> = {
     ADMIN:        "مدير النظام",
     SUPPORT:      "موظف الدعم",
     USER:         "مستخدم",
-    COMM_SUPPORT: "دعم الاتصال المؤسسي",
-    COMM_ADMIN:   "ادمن الاتصال المؤسسي",
     DEPT_MANAGER: "مدير القسم",
   };
   const roleLabel = roleLabelMap[role] ?? "مستخدم";

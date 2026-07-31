@@ -4,9 +4,9 @@ import { useState, useMemo } from "react";
 import toast from "react-hot-toast";
 import { UserPlus, Pencil, Trash2, Search, X } from "lucide-react";
 
-const roleLabel: Record<string,string> = { ADMIN: "مدير", SUPPORT: "موظف دعم", USER: "مستخدم", COMM_SUPPORT: "دعم الاتصال المؤسسي", COMM_ADMIN: "ادمن الاتصال المؤسسي", DEPT_MANAGER: "مدير قسم" };
-const roleBg:    Record<string,string> = { ADMIN: "#EDE9FE", SUPPORT: "#DDD6FE", USER: "#F1F5F9", COMM_SUPPORT: "#FEF3C7", COMM_ADMIN: "#FCE7F3", DEPT_MANAGER: "#FEF3C7" };
-const roleFg:    Record<string,string> = { ADMIN: "#5B21B6", SUPPORT: "#6D28D9", USER: "#475569", COMM_SUPPORT: "#92400E", COMM_ADMIN: "#9D174D", DEPT_MANAGER: "#92400E" };
+const roleLabel: Record<string,string> = { ADMIN: "مدير", SUPPORT: "موظف دعم", USER: "مستخدم", DEPT_MANAGER: "مدير قسم" };
+const roleBg:    Record<string,string> = { ADMIN: "#EDE9FE", SUPPORT: "#DDD6FE", USER: "#F1F5F9", DEPT_MANAGER: "#FEF3C7" };
+const roleFg:    Record<string,string> = { ADMIN: "#5B21B6", SUPPORT: "#6D28D9", USER: "#475569", DEPT_MANAGER: "#92400E" };
 
 const DEPT_OPTIONS = [
   "الخدمات المشتركة","مكتب الرئيس التنفيذي","المالية","شفاء",
@@ -126,8 +126,6 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                   <option value="USER">مستخدم</option>
                   <option value="DEPT_MANAGER">مدير قسم</option>
                   <option value="SUPPORT">موظف دعم</option>
-                  <option value="COMM_SUPPORT">دعم الاتصال المؤسسي</option>
-                  <option value="COMM_ADMIN">ادمن الاتصال المؤسسي</option>
                   <option value="ADMIN">مدير النظام</option>
                 </select>
               </div>

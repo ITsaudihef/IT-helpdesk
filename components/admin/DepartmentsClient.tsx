@@ -23,8 +23,6 @@ const roleColor: Record<string, { bg: string; fg: string; label: string }> = {
   SUPPORT:      { bg: "#DDD6FE", fg: "#6D28D9", label: "موظف دعم" },
   DEPT_MANAGER: { bg: "#FEF3C7", fg: "#92400E", label: "مدير القسم" },
   USER:         { bg: "#F1F5F9", fg: "#475569", label: "مستخدم" },
-  COMM_SUPPORT: { bg: "#FEF3C7", fg: "#92400E", label: "دعم اتصال مؤسسي" },
-  COMM_ADMIN:   { bg: "#FCE7F3", fg: "#9D174D", label: "ادمن اتصال مؤسسي" },
 };
 
 export default function DepartmentsClient({ departments, allUsers }: { departments: Dept[]; allUsers: User[] }) {

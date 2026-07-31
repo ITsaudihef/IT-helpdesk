@@ -31,7 +31,7 @@ export default async function PortalPage() {
 
         {/* Create ticket — main CTA (takes 2/3 width on desktop) */}
         <Link href="/portal/new"
-          className="lg:col-span-2 group rounded-2xl p-5 sm:p-7 flex items-center justify-between relative overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5"
+          className="dark-modal lg:col-span-2 group rounded-2xl p-5 sm:p-7 flex items-center justify-between relative overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5"
           style={{ background: "linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)" }}>
           {/* Decorative circles */}
           <div className="absolute top-[-50px] left-[-50px] w-56 h-56 rounded-full opacity-10 bg-white pointer-events-none" />

@@ -6,11 +6,18 @@ import { Bell } from "lucide-react";
 
 interface Notification {
   id: string; message: string; read: boolean; createdAt: string;
-  ticket?: { ticketNo: string };
+  ticket?: { id: string; ticketNo: string };
   project?: { id: string; title: string };
 }
 
-export default function Header({ title }: { title: string }) {
+const TICKET_BASE_PATH: Record<string, string> = {
+  ADMIN:        "/admin/tickets",
+  SUPPORT:      "/support/tickets",
+  DEPT_MANAGER: "/dept-manager/tickets",
+  USER:         "/portal/tickets",
+};
+
+export default function Header({ title, role }: { title: string; role?: string }) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [open, setOpen]     = useState(false);
   const [live, setLive]     = useState(false);
@@ -125,8 +132,14 @@ export default function Header({ title }: { title: string }) {
                     </>
                   );
                   const style = { borderBottom: "1px solid #F3EEFF", background: !n.read ? "rgba(124,58,237,0.05)" : "transparent" };
-                  return n.project ? (
-                    <Link key={n.id} href={`/kanban/${n.project.id}`} onClick={() => setOpen(false)}
+                  const ticketBase = role ? TICKET_BASE_PATH[role] : undefined;
+                  const href = n.project
+                    ? `/kanban/${n.project.id}`
+                    : n.ticket && ticketBase
+                    ? `${ticketBase}/${n.ticket.id}`
+                    : undefined;
+                  return href ? (
+                    <Link key={n.id} href={href} onClick={() => setOpen(false)}
                       className="block px-4 py-3 text-sm transition-colors hover:bg-purple-50" style={style}>
                       {body}
                     </Link>

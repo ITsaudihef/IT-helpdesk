@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import { ShieldCheck, Clock, CheckCircle, XCircle, ArrowLeft } from "lucide-react";
+import { ShieldCheck, Clock, CheckCircle, XCircle, ArrowLeft, PlusCircle } from "lucide-react";
 import { StatusBadge, PriorityBadge } from "@/components/tickets/StatusBadge";
 import { formatDate } from "@/lib/utils";
 
@@ -38,6 +38,28 @@ export default async function DeptManagerPage() {
           <p className="text-sm text-purple-500">القسم: {dept || "غير محدد"}</p>
         </div>
       </div>
+
+      {/* New ticket CTA */}
+      <Link href="/portal/new"
+        className="dark-modal group rounded-2xl p-5 sm:p-7 flex items-center justify-between relative overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5"
+        style={{ background: "linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)" }}>
+        <div className="absolute top-[-50px] left-[-50px] w-56 h-56 rounded-full opacity-10 bg-white pointer-events-none" />
+        <div className="absolute bottom-[-30px] right-[40%] w-32 h-32 rounded-full opacity-10 bg-white pointer-events-none" />
+        <div className="relative">
+          <p className="text-purple-200 text-sm mb-1">مرحباً، {session!.user.name} 👋</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-white mb-3">ارفع تذكرة دعم جديدة</h1>
+          <div className="inline-flex items-center gap-2 bg-white rounded-xl px-5 py-2.5 text-sm font-bold transition-all group-hover:bg-purple-50"
+            style={{ color: "#5B21B6" }}>
+            <PlusCircle className="w-4 h-4" />
+            إنشاء تذكرة
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+          </div>
+        </div>
+        <div className="relative hidden sm:flex w-24 h-24 rounded-2xl items-center justify-center flex-shrink-0"
+          style={{ background: "rgba(255,255,255,0.12)" }}>
+          <PlusCircle className="w-12 h-12 text-white opacity-80" />
+        </div>
+      </Link>
 
       {/* KPI Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

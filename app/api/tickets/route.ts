@@ -29,11 +29,6 @@ export async function GET(req: NextRequest) {
     where.createdById = session.user.id;
   } else if (session.user.role === "SUPPORT") {
     where.assignedToId = session.user.id;
-  } else if (session.user.role === "COMM_SUPPORT") {
-    where.assignedToId = session.user.id;
-    where.type = "INSTITUTIONAL_COMM";
-  } else if (session.user.role === "COMM_ADMIN") {
-    where.type = "INSTITUTIONAL_COMM";
   }
 
   if (status) where.status = status;
@@ -75,7 +70,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
-  const needsApproval = requiresApproval || type === "INSTITUTIONAL_COMM";
+  const needsApproval = requiresApproval;
 
   // For DEVELOPMENT tickets: route through dept manager first if one exists in the same department
   let initialStatus = needsApproval ? "PENDING_APPROVAL" : "OPEN";
