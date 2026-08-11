@@ -30,11 +30,11 @@ export default async function DeptManagerPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #007F5C, #6FB449)" }}>
           <ShieldCheck className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h1 className="font-bold text-lg" style={{ color: "#1F1535" }}>لوحة مدير القسم</h1>
+          <h1 className="font-bold text-lg" style={{ color: "#16241D" }}>لوحة مدير القسم</h1>
           <p className="text-sm text-purple-500">القسم: {dept || "غير محدد"}</p>
         </div>
       </div>
@@ -42,14 +42,14 @@ export default async function DeptManagerPage() {
       {/* New ticket CTA */}
       <Link href="/portal/new"
         className="dark-modal group rounded-2xl p-5 sm:p-7 flex items-center justify-between relative overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5"
-        style={{ background: "linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)" }}>
+        style={{ background: "linear-gradient(135deg, #007F5C 0%, #00543D 100%)" }}>
         <div className="absolute top-[-50px] left-[-50px] w-56 h-56 rounded-full opacity-10 bg-white pointer-events-none" />
         <div className="absolute bottom-[-30px] right-[40%] w-32 h-32 rounded-full opacity-10 bg-white pointer-events-none" />
         <div className="relative">
           <p className="text-purple-200 text-sm mb-1">مرحباً، {session!.user.name} 👋</p>
           <h1 className="text-xl sm:text-2xl font-bold text-white mb-3">ارفع تذكرة دعم جديدة</h1>
           <div className="inline-flex items-center gap-2 bg-white rounded-xl px-5 py-2.5 text-sm font-bold transition-all group-hover:bg-purple-50"
-            style={{ color: "#5B21B6" }}>
+            style={{ color: "#00543D" }}>
             <PlusCircle className="w-4 h-4" />
             إنشاء تذكرة
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
@@ -67,7 +67,7 @@ export default async function DeptManagerPage() {
           { label: "بانتظار اعتمادك",  value: pending.length, color: "#EA580C", bg: "rgba(234,88,12,0.1)",    icon: Clock },
           { label: "تم الاعتماد",       value: approved,        color: "#16A34A", bg: "rgba(22,163,74,0.1)",    icon: CheckCircle },
           { label: "مُعادة / مفتوحة",   value: returned,        color: "#6B7280", bg: "rgba(107,114,128,0.1)", icon: XCircle },
-          { label: "إجمالي طلبات التطوير", value: total,        color: "#7C3AED", bg: "rgba(124,58,237,0.1)", icon: ShieldCheck },
+          { label: "إجمالي طلبات التطوير", value: total,        color: "#007F5C", bg: "rgba(0,127,92,0.1)", icon: ShieldCheck },
         ].map(s => {
           const Icon = s.icon;
           return (
@@ -85,16 +85,16 @@ export default async function DeptManagerPage() {
       </div>
 
       {/* Pending approval list */}
-      <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+      <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
         <div className="px-5 py-4 flex items-center justify-between border-b border-purple-100">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-orange-400 animate-pulse" />
-            <h2 className="font-bold" style={{ color: "#1F1535" }}>
+            <h2 className="font-bold" style={{ color: "#16241D" }}>
               طلبات التطوير — بانتظار اعتمادك ({pending.length})
             </h2>
           </div>
           <Link href="/dept-manager/tickets"
-            className="text-xs font-semibold flex items-center gap-1 hover:underline" style={{ color: "#7C3AED" }}>
+            className="text-xs font-semibold flex items-center gap-1 hover:underline" style={{ color: "#007F5C" }}>
             عرض الكل <ArrowLeft className="w-3 h-3" />
           </Link>
         </div>
@@ -102,7 +102,7 @@ export default async function DeptManagerPage() {
         {pending.length === 0 ? (
           <div className="text-center py-14">
             <CheckCircle className="w-10 h-10 text-green-400 mx-auto mb-3" />
-            <p className="font-semibold" style={{ color: "#1F1535" }}>لا توجد طلبات بانتظار الاعتماد</p>
+            <p className="font-semibold" style={{ color: "#16241D" }}>لا توجد طلبات بانتظار الاعتماد</p>
             <p className="text-sm text-purple-500 mt-1">جميع الطلبات تمت معالجتها</p>
           </div>
         ) : (
@@ -113,7 +113,7 @@ export default async function DeptManagerPage() {
                   className="flex items-center gap-4 px-5 py-4 hover:bg-orange-50/40 transition-colors">
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-mono text-purple-500 mb-0.5">{t.ticketNo}</p>
-                    <p className="text-sm font-semibold truncate" style={{ color: "#1F1535" }}>{t.title}</p>
+                    <p className="text-sm font-semibold truncate" style={{ color: "#16241D" }}>{t.title}</p>
                     <p className="text-xs text-purple-400 mt-0.5">{t.createdBy.name} · {t.createdBy.department}</p>
                   </div>
                   <div className="flex flex-col items-end gap-1.5">

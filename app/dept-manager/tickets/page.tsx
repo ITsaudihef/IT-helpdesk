@@ -45,7 +45,7 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-bold" style={{ color: "#1F1535" }}>
+        <h1 className="text-lg font-bold" style={{ color: "#16241D" }}>
           طلبات تطوير القسم ({total})
         </h1>
         <p className="text-sm text-purple-500">القسم: {dept}</p>
@@ -60,8 +60,8 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
             <Link key={tab.value} href={href}
               className="px-3 py-1.5 rounded-xl text-xs font-semibold transition-all"
               style={active
-                ? { background: "linear-gradient(135deg,#7C3AED,#EC4899)", color: "#fff" }
-                : { background: "#FFFFFF", color: "#7C3AED", border: "1px solid #D1C4FE" }}>
+                ? { background: "linear-gradient(135deg,#007F5C,#6FB449)", color: "#fff" }
+                : { background: "#FFFFFF", color: "#007F5C", border: "1px solid #BFE0B6" }}>
               {tab.label}
             </Link>
           );
@@ -77,11 +77,11 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
             <Link key={t.id} href={`/dept-manager/tickets/${t.id}`}
               className="flex flex-col gap-2 p-4 hover:bg-purple-50 transition-colors block">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold" style={{ color: "#7C3AED" }}>{t.ticketNo}</span>
+                <span className="font-mono text-xs font-bold" style={{ color: "#007F5C" }}>{t.ticketNo}</span>
                 <StatusBadge status={t.status} />
               </div>
-              <p className="text-sm font-medium" style={{ color: "#1F1535" }}>{t.title}</p>
-              <div className="flex items-center justify-between text-xs" style={{ color: "#7C6A9E" }}>
+              <p className="text-sm font-medium" style={{ color: "#16241D" }}>{t.title}</p>
+              <div className="flex items-center justify-between text-xs" style={{ color: "#5C7A6C" }}>
                 <span>{t.createdBy.name}</span>
                 <span>{new Date(t.createdAt).toLocaleDateString("ar-SA", { calendar: "gregory" })}</span>
               </div>
@@ -92,7 +92,7 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
         {/* Desktop table */}
         <div className="hidden sm:block overflow-x-auto">
           <table className="w-full text-sm">
-            <thead style={{ background: "#F5F3FF", borderBottom: "2px solid #E9E3FF" }}>
+            <thead style={{ background: "#F3F7F1", borderBottom: "2px solid #DCEAD9" }}>
               <tr>
                 {["رقم التذكرة","العنوان","المُرسل","الأولوية","الحالة","تاريخ الرفع",""].map(h => (
                   <th key={h} className="px-4 py-3 text-right text-xs font-semibold text-purple-600 whitespace-nowrap">{h}</th>
@@ -104,9 +104,9 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
                 <tr><td colSpan={7} className="text-center py-12 text-purple-500">لا توجد طلبات</td></tr>
               ) : tickets.map(t => (
                 <tr key={t.id} className="hover:bg-purple-50 transition-colors">
-                  <td className="px-4 py-3 font-mono text-xs font-bold" style={{ color: "#7C3AED" }}>{t.ticketNo}</td>
+                  <td className="px-4 py-3 font-mono text-xs font-bold" style={{ color: "#007F5C" }}>{t.ticketNo}</td>
                   <td className="px-4 py-3 max-w-xs">
-                    <p className="font-medium truncate" style={{ color: "#1F1535" }}>{t.title}</p>
+                    <p className="font-medium truncate" style={{ color: "#16241D" }}>{t.title}</p>
                   </td>
                   <td className="px-4 py-3 text-gray-600">{t.createdBy.name}</td>
                   <td className="px-4 py-3">
@@ -120,7 +120,7 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
                   </td>
                   <td className="px-4 py-3">
                     <Link href={`/dept-manager/tickets/${t.id}`}
-                      className="text-xs font-semibold hover:underline" style={{ color: "#7C3AED" }}>
+                      className="text-xs font-semibold hover:underline" style={{ color: "#007F5C" }}>
                       عرض
                     </Link>
                   </td>

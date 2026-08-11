@@ -29,12 +29,12 @@ export default async function MyBookingsPage() {
       <div className="flex items-center gap-3">
         <Link href="/rooms"
           className="p-2 rounded-xl hover:bg-purple-100 transition-colors"
-          style={{ color: "#7C3AED" }}>
+          style={{ color: "#007F5C" }}>
           <ArrowRight className="w-4 h-4" />
         </Link>
         <div>
-          <h1 className="text-lg font-bold" style={{ color: "#1F1535" }}>حجوزاتي</h1>
-          <p className="text-sm" style={{ color: "#7C6A9E" }}>إدارة حجوزات القاعات</p>
+          <h1 className="text-lg font-bold" style={{ color: "#16241D" }}>حجوزاتي</h1>
+          <p className="text-sm" style={{ color: "#5C7A6C" }}>إدارة حجوزات القاعات</p>
         </div>
       </div>
 

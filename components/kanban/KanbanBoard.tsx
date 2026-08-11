@@ -343,24 +343,24 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
   return (
     <div>
       {/* ── Board header ──────────────────────────────────────────────────── */}
-      <div className="rounded-2xl p-5 mb-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+      <div className="rounded-2xl p-5 mb-6" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
         <div className="flex items-start justify-between gap-4 mb-4">
           {/* Left: back + title */}
           <div className="flex items-center gap-3 min-w-0">
             <Link
               href="/kanban"
               className="p-2 rounded-xl flex-shrink-0 transition-all hover:bg-purple-50"
-              style={{ color: "#7C3AED" }}
+              style={{ color: "#007F5C" }}
               title="العودة">
               <ArrowRight className="w-5 h-5" />
             </Link>
             <div className="w-10 h-10 rounded-xl flex-shrink-0" style={{ background: project.color }} />
             <div className="min-w-0">
-              <h1 className="text-xl font-bold leading-tight" style={{ color: "#1F1535" }}>
+              <h1 className="text-xl font-bold leading-tight" style={{ color: "#16241D" }}>
                 {project.title}
               </h1>
               {project.description && (
-                <p className="text-sm mt-0.5 truncate" style={{ color: "#7C6A9E" }}>
+                <p className="text-sm mt-0.5 truncate" style={{ color: "#5C7A6C" }}>
                   {project.description}
                 </p>
               )}
@@ -369,25 +369,25 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
 
           {/* Right: stats + date edit */}
           <div className="flex items-center gap-3 flex-shrink-0">
-            <div className="hidden sm:flex items-center gap-4 text-sm" style={{ color: "#7C6A9E" }}>
+            <div className="hidden sm:flex items-center gap-4 text-sm" style={{ color: "#5C7A6C" }}>
               <span>
-                <strong style={{ color: "#1F1535" }}>{columns.length}</strong> أعمدة
+                <strong style={{ color: "#16241D" }}>{columns.length}</strong> أعمدة
               </span>
               <span>
-                <strong style={{ color: "#1F1535" }}>{totalCards}</strong> بطاقة
+                <strong style={{ color: "#16241D" }}>{totalCards}</strong> بطاقة
               </span>
             </div>
             <button
               onClick={() => setShowTeam(true)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all hover:bg-purple-50"
-              style={{ color: "#7C3AED", border: "1px solid #E9E3FF" }}>
+              style={{ color: "#007F5C", border: "1px solid #DCEAD9" }}>
               <Users className="w-3.5 h-3.5" />
               الفريق ({members.length})
             </button>
             <button
               onClick={() => { setShowDateEdit(true); setEditStart(projectDates.startDate?.slice(0,10) ?? ""); setEditEnd(projectDates.endDate?.slice(0,10) ?? ""); }}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all hover:bg-purple-50"
-              style={{ color: "#7C3AED", border: "1px solid #E9E3FF" }}>
+              style={{ color: "#007F5C", border: "1px solid #DCEAD9" }}>
               <Edit3 className="w-3.5 h-3.5" />
               تعديل التواريخ
             </button>
@@ -400,18 +400,18 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
             <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
               <div className="flex items-center gap-5">
                 {projectDates.startDate && (
-                  <div className="flex items-center gap-1.5 text-xs" style={{ color: "#7C6A9E" }}>
-                    <Calendar className="w-3.5 h-3.5" style={{ color: "#7C3AED" }} />
-                    <span>بدء المشروع: <strong style={{ color: "#1F1535" }}>{formatDate(projectDates.startDate)}</strong></span>
+                  <div className="flex items-center gap-1.5 text-xs" style={{ color: "#5C7A6C" }}>
+                    <Calendar className="w-3.5 h-3.5" style={{ color: "#007F5C" }} />
+                    <span>بدء المشروع: <strong style={{ color: "#16241D" }}>{formatDate(projectDates.startDate)}</strong></span>
                   </div>
                 )}
                 {projectDates.endDate && (
-                  <div className="flex items-center gap-1.5 text-xs" style={{ color: isOverdue ? "#DC2626" : "#7C6A9E" }}>
-                    <Clock className="w-3.5 h-3.5" style={{ color: isOverdue ? "#DC2626" : "#7C3AED" }} />
+                  <div className="flex items-center gap-1.5 text-xs" style={{ color: isOverdue ? "#DC2626" : "#5C7A6C" }}>
+                    <Clock className="w-3.5 h-3.5" style={{ color: isOverdue ? "#DC2626" : "#007F5C" }} />
                     <span>
                       {isOverdue
                         ? <><strong style={{ color: "#DC2626" }}>متأخر {Math.abs(daysLeft!)} يوم</strong> (انتهى {formatDate(projectDates.endDate)})</>
-                        : <>انتهاء المشروع: <strong style={{ color: "#1F1535" }}>{formatDate(projectDates.endDate)}</strong>{daysLeft !== null && <span style={{ color: "#7C6A9E" }}> ({daysLeft} يوم متبقٍ)</span>}</>
+                        : <>انتهاء المشروع: <strong style={{ color: "#16241D" }}>{formatDate(projectDates.endDate)}</strong>{daysLeft !== null && <span style={{ color: "#5C7A6C" }}> ({daysLeft} يوم متبقٍ)</span>}</>
                       }
                     </span>
                   </div>
@@ -420,8 +420,8 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
               {projectDates.startDate && projectDates.endDate && (
                 <span className="text-xs font-bold px-2 py-0.5 rounded-full"
                   style={{
-                    background: isOverdue ? "#FEF2F2" : "#EDE9FE",
-                    color:      isOverdue ? "#DC2626" : "#7C3AED",
+                    background: isOverdue ? "#FEF2F2" : "#E3F2E0",
+                    color:      isOverdue ? "#DC2626" : "#007F5C",
                   }}>
                   {pct}% مكتمل
                 </span>
@@ -464,9 +464,9 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
               key={col.id}
               className="flex-shrink-0 w-72 flex flex-col rounded-2xl transition-all"
               style={{
-                background: isOver ? "#EDE9FE" : "#F7F5FF",
-                border: `2px solid ${isOver ? "#7C3AED" : "#E9E3FF"}`,
-                boxShadow: isOver ? "0 0 0 3px rgba(124,58,237,0.12)" : "none",
+                background: isOver ? "#E3F2E0" : "#F7F5FF",
+                border: `2px solid ${isOver ? "#007F5C" : "#DCEAD9"}`,
+                boxShadow: isOver ? "0 0 0 3px rgba(0,127,92,0.12)" : "none",
               }}
               onDragOver={e => handleDragOver(e, col.id)}
               onDragLeave={() => setDragOverColId(null)}
@@ -476,10 +476,10 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
               <div className="flex items-center justify-between px-4 py-3">
                 <div className="flex items-center gap-2">
                   <div className="w-2.5 h-2.5 rounded-full" style={{ background: project.color }} />
-                  <span className="font-bold text-sm" style={{ color: "#1F1535" }}>{col.title}</span>
+                  <span className="font-bold text-sm" style={{ color: "#16241D" }}>{col.title}</span>
                   <span
                     className="text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold flex-shrink-0"
-                    style={{ background: "#E9E3FF", color: "#7C3AED" }}>
+                    style={{ background: "#DCEAD9", color: "#007F5C" }}>
                     {col.cards.length}
                   </span>
                 </div>
@@ -508,14 +508,14 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                       onClick={() => { setEditCard(card); setEditColId(col.id); }}
                       className="bg-white rounded-xl p-3.5 group/card transition-all hover:shadow-md"
                       style={{
-                        border:  overdue ? "1px solid #FCA5A5" : "1px solid #E9E3FF",
+                        border:  overdue ? "1px solid #FCA5A5" : "1px solid #DCEAD9",
                         opacity: draggingCardId === card.id ? 0.4 : 1,
                         cursor:  draggingCardId === card.id ? "grabbing" : "grab",
                       }}
                     >
                       {/* Card header */}
                       <div className="flex items-start justify-between gap-2 mb-2">
-                        <p className="text-sm font-semibold flex-1 leading-snug" style={{ color: "#1F1535" }}>
+                        <p className="text-sm font-semibold flex-1 leading-snug" style={{ color: "#16241D" }}>
                           {card.title}
                         </p>
                         <button
@@ -572,10 +572,10 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                 {/* Add card */}
                 {addingCardCol === col.id ? (
                   <div className="bg-white rounded-xl p-3 shadow-sm"
-                    style={{ border: "2px solid #7C3AED" }}>
+                    style={{ border: "2px solid #007F5C" }}>
                     <textarea
                       className="w-full text-sm resize-none focus:outline-none leading-relaxed"
-                      style={{ color: "#1F1535" }}
+                      style={{ color: "#16241D" }}
                       placeholder="عنوان البطاقة..."
                       rows={2}
                       value={newCardTitle}
@@ -591,7 +591,7 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                         value={newCardPriority}
                         onChange={e => setNewCardPriority(e.target.value)}
                         className="text-xs rounded-lg px-2 py-1 focus:outline-none"
-                        style={{ background: "#F3EEFF", color: "#7C3AED", border: "1px solid #E9E3FF" }}>
+                        style={{ background: "#F3EEFF", color: "#007F5C", border: "1px solid #DCEAD9" }}>
                         <option value="LOW">منخفضة</option>
                         <option value="MEDIUM">متوسطة</option>
                         <option value="HIGH">عالية</option>
@@ -600,13 +600,13 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                       <button
                         onClick={() => handleAddCard(col.id)}
                         className="text-xs px-3 py-1.5 rounded-lg text-white font-semibold"
-                        style={{ background: "#7C3AED" }}>
+                        style={{ background: "#007F5C" }}>
                         إضافة
                       </button>
                       <button
                         onClick={() => { setAddingCardCol(null); setNewCardTitle(""); }}
                         className="text-xs px-3 py-1.5 rounded-lg transition-colors hover:bg-gray-100"
-                        style={{ color: "#7C6A9E", border: "1px solid #E9E3FF" }}>
+                        style={{ color: "#5C7A6C", border: "1px solid #DCEAD9" }}>
                         إلغاء
                       </button>
                     </div>
@@ -628,10 +628,10 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
         {/* Add column */}
         <div className="flex-shrink-0 w-72">
           {addingCol ? (
-            <div className="rounded-2xl p-4" style={{ background: "#F7F5FF", border: "2px solid #7C3AED" }}>
+            <div className="rounded-2xl p-4" style={{ background: "#F7F5FF", border: "2px solid #007F5C" }}>
               <input
                 className="w-full text-sm px-3 py-2.5 rounded-xl mb-3 focus:outline-none"
-                style={{ background: "white", border: "1px solid #E9E3FF", color: "#1F1535" }}
+                style={{ background: "white", border: "1px solid #DCEAD9", color: "#16241D" }}
                 placeholder="اسم العمود..."
                 value={newColTitle}
                 onChange={e => setNewColTitle(e.target.value)}
@@ -644,17 +644,17 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
               <div className="flex gap-2">
                 <button onClick={handleAddColumn}
                   className="text-xs px-3 py-1.5 rounded-lg text-white font-semibold"
-                  style={{ background: "#7C3AED" }}>إضافة</button>
+                  style={{ background: "#007F5C" }}>إضافة</button>
                 <button onClick={() => { setAddingCol(false); setNewColTitle(""); }}
                   className="text-xs px-3 py-1.5 rounded-lg transition-colors hover:bg-gray-100"
-                  style={{ color: "#7C6A9E", border: "1px solid #E9E3FF" }}>إلغاء</button>
+                  style={{ color: "#5C7A6C", border: "1px solid #DCEAD9" }}>إلغاء</button>
               </div>
             </div>
           ) : (
             <button
               onClick={() => setAddingCol(true)}
               className="w-full flex items-center gap-2 px-4 py-3.5 rounded-2xl text-sm font-medium transition-all hover:bg-purple-100 hover:border-purple-300"
-              style={{ background: "#F7F5FF", border: "2px dashed #C4B5FD", color: "#7C3AED" }}>
+              style={{ background: "#F7F5FF", border: "2px dashed #A8DB98", color: "#007F5C" }}>
               <Plus className="w-4 h-4" />
               إضافة عمود جديد
             </button>
@@ -669,46 +669,46 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
           dir="rtl"
           onClick={e => { if (e.target === e.currentTarget) setShowDateEdit(false); }}>
           <div className="dark-modal rounded-2xl p-6 w-full max-w-sm mx-4 shadow-2xl"
-            style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.3)" }}>
+            style={{ background: "#0F2A1F", border: "1px solid rgba(0,127,92,0.3)" }}>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                style={{ background: "rgba(124,58,237,0.2)" }}>
-                <Calendar className="w-4 h-4" style={{ color: "#A78BFA" }} />
+                style={{ background: "rgba(0,127,92,0.2)" }}>
+                <Calendar className="w-4 h-4" style={{ color: "#8FCB7A" }} />
               </div>
               <div>
                 <h2 className="font-bold text-white text-sm">تواريخ المشروع</h2>
-                <p className="text-xs mt-0.5" style={{ color: "#7C6A9E" }}>حدد الجدول الزمني للمشروع</p>
+                <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>حدد الجدول الزمني للمشروع</p>
               </div>
             </div>
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#A78BFA" }}>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>
                   تاريخ البدء
                 </label>
                 <input
                   type="date"
                   className="w-full px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(124,58,237,0.3)", colorScheme: "dark" }}
+                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(0,127,92,0.3)", colorScheme: "dark" }}
                   value={editStart}
                   onChange={e => setEditStart(e.target.value)}
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#A78BFA" }}>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>
                   تاريخ الانتهاء
                 </label>
                 <input
                   type="date"
                   className="w-full px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(124,58,237,0.3)", colorScheme: "dark" }}
+                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(0,127,92,0.3)", colorScheme: "dark" }}
                   value={editEnd}
                   min={editStart || undefined}
                   onChange={e => setEditEnd(e.target.value)}
                 />
               </div>
               {editStart && editEnd && (
-                <div className="rounded-xl p-3" style={{ background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.2)" }}>
-                  <p className="text-xs" style={{ color: "#C4B5FD" }}>
+                <div className="rounded-xl p-3" style={{ background: "rgba(0,127,92,0.1)", border: "1px solid rgba(0,127,92,0.2)" }}>
+                  <p className="text-xs" style={{ color: "#A8DB98" }}>
                     مدة المشروع:{" "}
                     <strong className="text-white">
                       {Math.ceil((new Date(editEnd).getTime() - new Date(editStart).getTime()) / 86400000)} يوم
@@ -720,13 +720,13 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                 <button
                   onClick={saveDates}
                   className="flex-1 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:shadow-lg"
-                  style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                  style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                   حفظ التواريخ
                 </button>
                 <button
                   onClick={() => setShowDateEdit(false)}
                   className="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all hover:bg-white/5"
-                  style={{ border: "1px solid rgba(255,255,255,0.12)", color: "#A78BFA" }}>
+                  style={{ border: "1px solid rgba(255,255,255,0.12)", color: "#8FCB7A" }}>
                   إلغاء
                 </button>
               </div>
@@ -742,20 +742,20 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
           dir="rtl"
           onClick={e => { if (e.target === e.currentTarget) setShowTeam(false); }}>
           <div className="dark-modal rounded-2xl p-6 w-full max-w-sm mx-4 shadow-2xl"
-            style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.3)" }}>
+            style={{ background: "#0F2A1F", border: "1px solid rgba(0,127,92,0.3)" }}>
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                  style={{ background: "rgba(124,58,237,0.2)" }}>
-                  <Users className="w-4 h-4" style={{ color: "#A78BFA" }} />
+                  style={{ background: "rgba(0,127,92,0.2)" }}>
+                  <Users className="w-4 h-4" style={{ color: "#8FCB7A" }} />
                 </div>
                 <div>
                   <h2 className="font-bold text-white text-sm">فريق المشروع</h2>
-                  <p className="text-xs mt-0.5" style={{ color: "#7C6A9E" }}>يرى المشروع فقط الأدمن ومدير القسم وأعضاء الفريق</p>
+                  <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>يرى المشروع فقط الأدمن ومدير القسم وأعضاء الفريق</p>
                 </div>
               </div>
               <button onClick={() => setShowTeam(false)} className="p-1 rounded-lg hover:bg-white/5">
-                <X className="w-4 h-4" style={{ color: "#A78BFA" }} />
+                <X className="w-4 h-4" style={{ color: "#8FCB7A" }} />
               </button>
             </div>
 
@@ -765,7 +765,7 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                   style={{ background: "rgba(255,255,255,0.05)" }}>
                   <span className="text-sm text-white">
                     {m.name}
-                    {m.userId === currentUserId && <span className="text-xs" style={{ color: "#7C6A9E" }}> (أنت)</span>}
+                    {m.userId === currentUserId && <span className="text-xs" style={{ color: "#5C7A6C" }}> (أنت)</span>}
                   </span>
                   {canManageTeam && m.userId !== project.createdById && (
                     <button
@@ -777,7 +777,7 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                 </div>
               ))}
               {members.length === 0 && (
-                <p className="text-xs text-center py-4" style={{ color: "#7C6A9E" }}>لا يوجد أعضاء بعد</p>
+                <p className="text-xs text-center py-4" style={{ color: "#5C7A6C" }}>لا يوجد أعضاء بعد</p>
               )}
             </div>
 
@@ -787,17 +787,17 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                   value={addMemberId}
                   onChange={e => setAddMemberId(e.target.value)}
                   className="flex-1 px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none transition-all"
-                  style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(124,58,237,0.3)" }}>
-                  <option value="" style={{ color: "#1F1535", background: "#FFFFFF" }}>اختر عضواً لإضافته...</option>
+                  style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(0,127,92,0.3)" }}>
+                  <option value="" style={{ color: "#16241D", background: "#FFFFFF" }}>اختر عضواً لإضافته...</option>
                   {users.filter(u => !members.some(m => m.userId === u.id)).map(u => (
-                    <option key={u.id} value={u.id} style={{ color: "#1F1535", background: "#FFFFFF" }}>{u.name}</option>
+                    <option key={u.id} value={u.id} style={{ color: "#16241D", background: "#FFFFFF" }}>{u.name}</option>
                   ))}
                 </select>
                 <button
                   onClick={handleAddMember}
                   disabled={!addMemberId}
                   className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-40 transition-all"
-                  style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                  style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                   إضافة
                 </button>
               </div>
@@ -813,34 +813,34 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
           dir="rtl"
           onClick={e => { if (e.target === e.currentTarget) { setEditCard(null); setEditColId(null); } }}>
           <div className="dark-modal rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl"
-            style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.3)" }}>
+            style={{ background: "#0F2A1F", border: "1px solid rgba(0,127,92,0.3)" }}>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                style={{ background: "rgba(124,58,237,0.2)" }}>
-                <Edit3 className="w-4 h-4" style={{ color: "#A78BFA" }} />
+                style={{ background: "rgba(0,127,92,0.2)" }}>
+                <Edit3 className="w-4 h-4" style={{ color: "#8FCB7A" }} />
               </div>
               <div>
                 <h2 className="font-bold text-white text-sm">تفاصيل البطاقة</h2>
-                <p className="text-xs mt-0.5" style={{ color: "#7C6A9E" }}>تعديل بيانات المهمة</p>
+                <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>تعديل بيانات المهمة</p>
               </div>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#A78BFA" }}>العنوان</label>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>العنوان</label>
                 <input
                   className="w-full px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(124,58,237,0.3)" }}
+                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(0,127,92,0.3)" }}
                   value={editCard.title}
                   onChange={e => setEditCard(c => c ? { ...c, title: e.target.value } : c)}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#A78BFA" }}>الوصف</label>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>الوصف</label>
                 <textarea
                   className="w-full px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none transition-all"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(124,58,237,0.3)" }}
+                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(0,127,92,0.3)" }}
                   rows={3}
                   placeholder="أضف وصفاً للمهمة..."
                   value={editCard.description ?? ""}
@@ -850,24 +850,24 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#A78BFA" }}>الأولوية</label>
+                  <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>الأولوية</label>
                   <select
                     className="w-full px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none transition-all"
-                    style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(124,58,237,0.3)" }}
+                    style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(0,127,92,0.3)" }}
                     value={editCard.priority}
                     onChange={e => setEditCard(c => c ? { ...c, priority: e.target.value } : c)}>
-                    <option value="LOW"      style={{ color: "#1F1535", background: "#FFFFFF" }}>منخفضة</option>
-                    <option value="MEDIUM"   style={{ color: "#1F1535", background: "#FFFFFF" }}>متوسطة</option>
-                    <option value="HIGH"     style={{ color: "#1F1535", background: "#FFFFFF" }}>عالية</option>
-                    <option value="CRITICAL" style={{ color: "#1F1535", background: "#FFFFFF" }}>حرجة</option>
+                    <option value="LOW"      style={{ color: "#16241D", background: "#FFFFFF" }}>منخفضة</option>
+                    <option value="MEDIUM"   style={{ color: "#16241D", background: "#FFFFFF" }}>متوسطة</option>
+                    <option value="HIGH"     style={{ color: "#16241D", background: "#FFFFFF" }}>عالية</option>
+                    <option value="CRITICAL" style={{ color: "#16241D", background: "#FFFFFF" }}>حرجة</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#A78BFA" }}>الاستحقاق</label>
+                  <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>الاستحقاق</label>
                   <input
                     type="date"
                     className="w-full px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none transition-all"
-                    style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(124,58,237,0.3)", colorScheme: "dark" }}
+                    style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(0,127,92,0.3)", colorScheme: "dark" }}
                     value={editCard.dueDate ? editCard.dueDate.slice(0, 10) : ""}
                     onChange={e => setEditCard(c => c ? { ...c, dueDate: e.target.value || null } : c)}
                   />
@@ -875,14 +875,14 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
               </div>
 
               <div>
-                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#A78BFA" }}>المسؤول</label>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>المسؤول</label>
                 <select
                   className="w-full px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none transition-all"
-                  style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(124,58,237,0.3)" }}
+                  style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(0,127,92,0.3)" }}
                   value={editCard.assigneeId ?? ""}
                   onChange={e => setEditCard(c => c ? { ...c, assigneeId: e.target.value || null } : c)}>
-                  <option value="" style={{ color: "#1F1535", background: "#FFFFFF" }}>بدون مسؤول</option>
-                  {users.map(u => <option key={u.id} value={u.id} style={{ color: "#1F1535", background: "#FFFFFF" }}>{u.name}</option>)}
+                  <option value="" style={{ color: "#16241D", background: "#FFFFFF" }}>بدون مسؤول</option>
+                  {users.map(u => <option key={u.id} value={u.id} style={{ color: "#16241D", background: "#FFFFFF" }}>{u.name}</option>)}
                 </select>
               </div>
 
@@ -890,13 +890,13 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                 <button
                   onClick={handleSaveCard}
                   className="flex-1 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:shadow-lg"
-                  style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                  style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                   حفظ التغييرات
                 </button>
                 <button
                   onClick={() => { setEditCard(null); setEditColId(null); }}
                   className="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all hover:bg-white/5"
-                  style={{ border: "1px solid rgba(255,255,255,0.12)", color: "#A78BFA" }}>
+                  style={{ border: "1px solid rgba(255,255,255,0.12)", color: "#8FCB7A" }}>
                   إلغاء
                 </button>
               </div>

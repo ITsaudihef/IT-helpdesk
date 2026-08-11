@@ -9,7 +9,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (session.user.role !== "ADMIN") redirect("/dashboard");
 
   return (
-    <div className="min-h-screen" style={{ background: "#F5F3FF" }} dir="rtl">
+    <div className="min-h-screen" style={{ background: "#F3F7F1" }} dir="rtl">
       <Sidebar
         role={session.user.role}
         userName={session.user.name}

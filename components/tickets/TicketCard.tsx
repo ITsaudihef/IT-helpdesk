@@ -20,7 +20,7 @@ export default function TicketCard({ ticket, href }: TicketCardProps) {
       >
         {needsReply && (
           <div className="flex items-center gap-1.5 mb-2 text-xs font-semibold px-2 py-1 rounded-lg w-fit"
-            style={{ background: "rgba(124,58,237,0.12)", color: "#5B21B6" }}>
+            style={{ background: "rgba(0,127,92,0.12)", color: "#00543D" }}>
             <AlertCircle className="w-3 h-3" />
             بانتظار ردك
           </div>
@@ -28,7 +28,7 @@ export default function TicketCard({ ticket, href }: TicketCardProps) {
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex-1 min-w-0">
             <p className="text-xs text-purple-500 mb-1">{ticket.ticketNo}</p>
-            <h3 className="font-medium truncate" style={{ color: "#1F1535" }}>{ticket.title}</h3>
+            <h3 className="font-medium truncate" style={{ color: "#16241D" }}>{ticket.title}</h3>
           </div>
           <div className="flex flex-col items-end gap-1 flex-shrink-0">
             <span className={cn("text-xs px-2 py-0.5 rounded-full font-medium", statusBadge[ticket.status])}>
@@ -42,11 +42,11 @@ export default function TicketCard({ ticket, href }: TicketCardProps) {
 
         <p className="text-sm line-clamp-2 mb-3" style={{ color: "#6B6B8A" }}>{ticket.description}</p>
 
-        <div className="flex items-center justify-between text-xs" style={{ color: "#7C6A9E" }}>
+        <div className="flex items-center justify-between text-xs" style={{ color: "#5C7A6C" }}>
           <div className="flex items-center gap-3">
             <span className="px-2 py-0.5 rounded bg-purple-50 text-purple-700">{typeLabel[ticket.type]}</span>
             {ticket.assignedTo && (
-              <span className="flex items-center gap-1" style={{ color: "#7C3AED" }}>
+              <span className="flex items-center gap-1" style={{ color: "#007F5C" }}>
                 <UserCheck className="w-3 h-3" />
                 {ticket.assignedTo.name}
               </span>

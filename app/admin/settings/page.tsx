@@ -9,13 +9,13 @@ import SettingsToggles from "@/components/admin/SettingsToggles";
 import MaintenanceModeCard from "@/components/admin/MaintenanceModeCard";
 
 const ROLE_META: Record<string, { label: string; color: string; bg: string }> = {
-  ADMIN:        { label: "مدير النظام",              color: "#5B21B6", bg: "#EDE9FE" },
+  ADMIN:        { label: "مدير النظام",              color: "#00543D", bg: "#E3F2E0" },
   SUPPORT:      { label: "موظف الدعم الفني",         color: "#1D4ED8", bg: "#DBEAFE" },
   USER:         { label: "مستخدم",                   color: "#374151", bg: "#F3F4F6" },
 };
 
 const TYPE_META: Record<string, { label: string; icon: string; desc: string; color: string; bg: string }> = {
-  SUPPORT:            { label: "دعم فني",         icon: "🛠️", desc: "أجهزة، شبكة، برمجيات، صلاحيات",      color: "#5B21B6", bg: "#EDE9FE" },
+  SUPPORT:            { label: "دعم فني",         icon: "🛠️", desc: "أجهزة، شبكة، برمجيات، صلاحيات",      color: "#00543D", bg: "#E3F2E0" },
   SHIFA_SUPPORT:      { label: "دعم شفاء",        icon: "🏥", desc: "طلبات الدعم الموجهة لنظام شفاء",       color: "#1D4ED8", bg: "#DBEAFE" },
   DEVELOPMENT:        { label: "تطوير",            icon: "💻", desc: "طلبات تطوير أنظمة — يتطلب اعتماد",     color: "#7E22CE", bg: "#F3E8FF" },
 };
@@ -61,8 +61,8 @@ export default async function SettingsPage() {
       {/* ── Page header ── */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold" style={{ color: "#1F1535" }}>إعدادات النظام</h1>
-          <p className="text-sm mt-0.5" style={{ color: "#7C6A9E" }}>نظرة شاملة على إعدادات وحالة سند</p>
+          <h1 className="text-xl font-bold" style={{ color: "#16241D" }}>إعدادات النظام</h1>
+          <p className="text-sm mt-0.5" style={{ color: "#5C7A6C" }}>نظرة شاملة على إعدادات وحالة سند</p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold"
           style={{ background: "#D1FAE5", color: "#065F46", border: "1px solid #6EE7B7" }}>
@@ -74,7 +74,7 @@ export default async function SettingsPage() {
       {/* ── KPI strip ── */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "إجمالي المستخدمين", value: totalUsers,    icon: Users,        color: "#7C3AED", bg: "rgba(124,58,237,0.12)", href: "/admin/users" },
+          { label: "إجمالي المستخدمين", value: totalUsers,    icon: Users,        color: "#007F5C", bg: "rgba(0,127,92,0.12)", href: "/admin/users" },
           { label: "إجمالي التذاكر",    value: totalTickets,  icon: Ticket,       color: "#2563EB", bg: "rgba(37,99,235,0.1)",  href: "/admin/tickets" },
           { label: "تذاكر نشطة",        value: activeTickets, icon: Clock,        color: "#D97706", bg: "rgba(245,158,11,0.12)", href: "/admin/tickets?status=OPEN" },
           { label: "حرجة مفتوحة",       value: criticalOpen,  icon: AlertTriangle,color: "#DC2626", bg: "rgba(239,68,68,0.12)", href: "/admin/tickets?priority=CRITICAL" },
@@ -90,8 +90,8 @@ export default async function SettingsPage() {
                 </div>
                 <ChevronLeft className="w-3.5 h-3.5 text-purple-300" />
               </div>
-              <p className="text-2xl font-bold" style={{ color: "#1F1535" }}>{k.value}</p>
-              <p className="text-xs mt-0.5" style={{ color: "#7C6A9E" }}>{k.label}</p>
+              <p className="text-2xl font-bold" style={{ color: "#16241D" }}>{k.value}</p>
+              <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>{k.label}</p>
             </Link>
           );
         })}
@@ -103,17 +103,17 @@ export default async function SettingsPage() {
         <div className="lg:col-span-2 space-y-6">
 
           {/* Users by role */}
-          <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+          <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-2">
-                <div className="p-1.5 rounded-lg" style={{ background: "rgba(124,58,237,0.12)" }}>
-                  <Users className="w-4 h-4" style={{ color: "#7C3AED" }} />
+                <div className="p-1.5 rounded-lg" style={{ background: "rgba(0,127,92,0.12)" }}>
+                  <Users className="w-4 h-4" style={{ color: "#007F5C" }} />
                 </div>
-                <h2 className="font-bold" style={{ color: "#1F1535" }}>المستخدمون حسب الدور</h2>
+                <h2 className="font-bold" style={{ color: "#16241D" }}>المستخدمون حسب الدور</h2>
               </div>
               <Link href="/admin/users"
                 className="text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors hover:bg-purple-50"
-                style={{ color: "#7C3AED", border: "1px solid #E9E3FF" }}>
+                style={{ color: "#007F5C", border: "1px solid #DCEAD9" }}>
                 إدارة المستخدمين
               </Link>
             </div>
@@ -131,7 +131,7 @@ export default async function SettingsPage() {
                       <div className="h-full rounded-full transition-all"
                         style={{ width: `${pct}%`, background: meta.color }} />
                     </div>
-                    <span className="text-sm font-bold w-6 text-left" style={{ color: "#1F1535" }}>{count}</span>
+                    <span className="text-sm font-bold w-6 text-left" style={{ color: "#16241D" }}>{count}</span>
                   </div>
                 );
               })}
@@ -139,19 +139,19 @@ export default async function SettingsPage() {
 
             {/* Recent users */}
             <div className="mt-5 pt-4 border-t border-purple-100">
-              <p className="text-xs font-semibold mb-3" style={{ color: "#7C6A9E" }}>آخر المستخدمين المضافين</p>
+              <p className="text-xs font-semibold mb-3" style={{ color: "#5C7A6C" }}>آخر المستخدمين المضافين</p>
               <div className="space-y-2">
                 {recentUsers.map(u => {
                   const rm = ROLE_META[u.role] || ROLE_META["USER"];
                   return (
                     <div key={u.id} className="flex items-center gap-3 py-1.5">
                       <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
-                        style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                        style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                         {u.name.charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate" style={{ color: "#1F1535" }}>{u.name}</p>
-                        <p className="text-xs truncate" style={{ color: "#7C6A9E" }}>{u.email}</p>
+                        <p className="text-sm font-medium truncate" style={{ color: "#16241D" }}>{u.name}</p>
+                        <p className="text-xs truncate" style={{ color: "#5C7A6C" }}>{u.email}</p>
                       </div>
                       <span className="text-xs px-2 py-0.5 rounded-full flex-shrink-0"
                         style={{ background: rm.bg, color: rm.color }}>
@@ -165,12 +165,12 @@ export default async function SettingsPage() {
           </div>
 
           {/* Ticket types */}
-          <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+          <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
             <div className="flex items-center gap-2 mb-5">
-              <div className="p-1.5 rounded-lg" style={{ background: "rgba(124,58,237,0.12)" }}>
-                <Ticket className="w-4 h-4" style={{ color: "#7C3AED" }} />
+              <div className="p-1.5 rounded-lg" style={{ background: "rgba(0,127,92,0.12)" }}>
+                <Ticket className="w-4 h-4" style={{ color: "#007F5C" }} />
               </div>
-              <h2 className="font-bold" style={{ color: "#1F1535" }}>أنواع التذاكر</h2>
+              <h2 className="font-bold" style={{ color: "#16241D" }}>أنواع التذاكر</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {Object.entries(TYPE_META).map(([type, meta]) => {
@@ -182,7 +182,7 @@ export default async function SettingsPage() {
                     <span className="text-2xl flex-shrink-0">{meta.icon}</span>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold" style={{ color: meta.color }}>{meta.label}</p>
-                      <p className="text-xs mt-0.5 truncate" style={{ color: "#7C6A9E" }}>{meta.desc}</p>
+                      <p className="text-xs mt-0.5 truncate" style={{ color: "#5C7A6C" }}>{meta.desc}</p>
                     </div>
                     <div className="text-left flex-shrink-0">
                       <p className="text-xl font-bold" style={{ color: meta.color }}>{count}</p>
@@ -195,12 +195,12 @@ export default async function SettingsPage() {
           </div>
 
           {/* Priority levels */}
-          <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+          <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
             <div className="flex items-center gap-2 mb-5">
               <div className="p-1.5 rounded-lg" style={{ background: "rgba(239,68,68,0.1)" }}>
                 <Zap className="w-4 h-4 text-red-500" />
               </div>
-              <h2 className="font-bold" style={{ color: "#1F1535" }}>مستويات الأولوية وأهداف SLA</h2>
+              <h2 className="font-bold" style={{ color: "#16241D" }}>مستويات الأولوية وأهداف SLA</h2>
             </div>
             <div className="space-y-3">
               {PRIORITY_META.map(p => {
@@ -240,15 +240,15 @@ export default async function SettingsPage() {
           <MaintenanceModeCard initialEnabled={maintenanceMode} />
 
           {/* System info */}
-          <div className="rounded-2xl p-5" style={{ background: "linear-gradient(135deg,#7C3AED,#5B21B6)", color: "white" }}>
+          <div className="rounded-2xl p-5" style={{ background: "linear-gradient(135deg,#007F5C,#00543D)", color: "white" }}>
             <div className="flex items-center gap-2 mb-4">
               <Settings className="w-5 h-5 opacity-80" />
               <h2 className="font-bold text-sm">معلومات النظام</h2>
             </div>
             <div className="space-y-2.5">
               {[
-                { label: "اسم النظام",    value: "بوابة سند" },
-                { label: "المنظمة",       value: "كل تحدي وله سند" },
+                { label: "اسم النظام",    value: "بوابة الدعم لصندوق الوقف الصحي" },
+                { label: "المنظمة",       value: "صندوق الوقف الصحي" },
                 { label: "الإصدار",       value: "v1.0.0" },
                 { label: "المنصة",        value: "Next.js 14 / Prisma" },
                 { label: "قاعدة البيانات",value: "PostgreSQL" },
@@ -262,12 +262,12 @@ export default async function SettingsPage() {
           </div>
 
           {/* Email/SMTP */}
-          <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+          <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
             <div className="flex items-center gap-2 mb-4">
               <div className="p-1.5 rounded-lg" style={{ background: smtpConfigured ? "#D1FAE5" : "#FEF2F2" }}>
                 <Mail className="w-4 h-4" style={{ color: smtpConfigured ? "#16A34A" : "#DC2626" }} />
               </div>
-              <h2 className="font-bold" style={{ color: "#1F1535" }}>إعدادات البريد (SMTP)</h2>
+              <h2 className="font-bold" style={{ color: "#16241D" }}>إعدادات البريد (SMTP)</h2>
             </div>
             <div className="space-y-2.5">
               {[
@@ -277,9 +277,9 @@ export default async function SettingsPage() {
                 { key: "SMTP_PASS", label: "كلمة المرور", val: process.env.SMTP_PASS ? "••••••••" : null },
               ].map(item => (
                 <div key={item.key} className="flex items-center justify-between py-1.5 border-b border-purple-50 last:border-0">
-                  <span className="text-xs font-medium" style={{ color: "#7C6A9E" }}>{item.label}</span>
+                  <span className="text-xs font-medium" style={{ color: "#5C7A6C" }}>{item.label}</span>
                   {item.val ? (
-                    <span className="text-xs font-mono font-semibold" style={{ color: "#1F1535" }}>
+                    <span className="text-xs font-mono font-semibold" style={{ color: "#16241D" }}>
                       {item.val}
                     </span>
                   ) : (
@@ -304,12 +304,12 @@ export default async function SettingsPage() {
           </div>
 
           {/* Database */}
-          <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+          <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
             <div className="flex items-center gap-2 mb-4">
               <div className="p-1.5 rounded-lg" style={{ background: "#D1FAE5" }}>
                 <Database className="w-4 h-4 text-green-600" />
               </div>
-              <h2 className="font-bold" style={{ color: "#1F1535" }}>قاعدة البيانات</h2>
+              <h2 className="font-bold" style={{ color: "#16241D" }}>قاعدة البيانات</h2>
             </div>
             <div className="space-y-2.5">
               {[
@@ -319,7 +319,7 @@ export default async function SettingsPage() {
                 { label: "التذاكر",    value: `${totalTickets} سجل`,    ok: true  },
               ].map(row => (
                 <div key={row.label} className="flex items-center justify-between py-1.5 border-b border-purple-50 last:border-0">
-                  <span className="text-xs font-medium" style={{ color: "#7C6A9E" }}>{row.label}</span>
+                  <span className="text-xs font-medium" style={{ color: "#5C7A6C" }}>{row.label}</span>
                   <span className="text-xs font-semibold flex items-center gap-1"
                     style={{ color: row.ok ? "#16A34A" : "#DC2626" }}>
                     {row.ok && <CheckCircle2 className="w-3 h-3" />}
@@ -331,12 +331,12 @@ export default async function SettingsPage() {
           </div>
 
           {/* Quick links */}
-          <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+          <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
             <div className="flex items-center gap-2 mb-4">
-              <div className="p-1.5 rounded-lg" style={{ background: "rgba(124,58,237,0.12)" }}>
-                <BarChart3 className="w-4 h-4" style={{ color: "#7C3AED" }} />
+              <div className="p-1.5 rounded-lg" style={{ background: "rgba(0,127,92,0.12)" }}>
+                <BarChart3 className="w-4 h-4" style={{ color: "#007F5C" }} />
               </div>
-              <h2 className="font-bold" style={{ color: "#1F1535" }}>روابط سريعة</h2>
+              <h2 className="font-bold" style={{ color: "#16241D" }}>روابط سريعة</h2>
             </div>
             <div className="space-y-2">
               {[
@@ -349,10 +349,10 @@ export default async function SettingsPage() {
                 return (
                   <Link key={l.href} href={l.href}
                     className="flex items-center gap-3 p-2.5 rounded-xl transition-all hover:bg-purple-50 group">
-                    <div className="p-1.5 rounded-lg" style={{ background: "rgba(124,58,237,0.08)" }}>
-                      <Icon className="w-3.5 h-3.5" style={{ color: "#7C3AED" }} />
+                    <div className="p-1.5 rounded-lg" style={{ background: "rgba(0,127,92,0.08)" }}>
+                      <Icon className="w-3.5 h-3.5" style={{ color: "#007F5C" }} />
                     </div>
-                    <span className="text-sm flex-1" style={{ color: "#1F1535" }}>{l.label}</span>
+                    <span className="text-sm flex-1" style={{ color: "#16241D" }}>{l.label}</span>
                     <ChevronLeft className="w-3.5 h-3.5 text-purple-300 group-hover:text-purple-500 transition-colors" />
                   </Link>
                 );

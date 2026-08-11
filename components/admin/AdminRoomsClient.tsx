@@ -90,13 +90,13 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {[
-          { label: "إجمالي القاعات",   value: rooms.length,                              color: "#7C3AED" },
+          { label: "إجمالي القاعات",   value: rooms.length,                              color: "#007F5C" },
           { label: "قاعات نشطة",       value: rooms.filter(r => r.isActive).length,      color: "#16A34A" },
           { label: "حجوزات قادمة",     value: bookings.length,                           color: "#EA580C" },
         ].map(s => (
-          <div key={s.label} className="rounded-xl p-4 text-center" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+          <div key={s.label} className="rounded-xl p-4 text-center" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
             <p className="text-2xl font-bold" style={{ color: s.color }}>{s.value}</p>
-            <p className="text-xs mt-0.5" style={{ color: "#7C6A9E" }}>{s.label}</p>
+            <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>{s.label}</p>
           </div>
         ))}
       </div>
@@ -107,7 +107,7 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
           {[{ key: "rooms", label: "القاعات" }, { key: "bookings", label: "الحجوزات القادمة" }].map(t => (
             <button key={t.key} onClick={() => setTab(t.key as any)}
               className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
-              style={tab === t.key ? { background: "#7C3AED", color: "#fff" } : { background: "#F5F3FF", color: "#7C3AED" }}>
+              style={tab === t.key ? { background: "#007F5C", color: "#fff" } : { background: "#F3F7F1", color: "#007F5C" }}>
               {t.label}
             </button>
           ))}
@@ -115,7 +115,7 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
         {tab === "rooms" && (
           <button onClick={openCreate}
             className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm"
-            style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+            style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
             <Plus className="w-4 h-4" />قاعة جديدة
           </button>
         )}
@@ -127,11 +127,11 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
           {rooms.map(r => {
             const features = r.features ? r.features.split(",") : [];
             return (
-              <div key={r.id} className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: `1px solid ${r.isActive ? "#E9E3FF" : "#FEE2E2"}` }}>
+              <div key={r.id} className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: `1px solid ${r.isActive ? "#DCEAD9" : "#FEE2E2"}` }}>
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="font-bold" style={{ color: "#1F1535" }}>{r.name}</h3>
+                      <h3 className="font-bold" style={{ color: "#16241D" }}>{r.name}</h3>
                       {!r.isActive && (
                         <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: "#FEE2E2", color: "#DC2626" }}>
                           معطلة
@@ -145,7 +145,7 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
                   </div>
                   <div className="flex items-center gap-1 flex-shrink-0 mr-2">
                     <button onClick={() => openEdit(r)}
-                      className="p-1.5 rounded-lg hover:bg-purple-100 transition-colors" style={{ color: "#7C3AED" }}
+                      className="p-1.5 rounded-lg hover:bg-purple-100 transition-colors" style={{ color: "#007F5C" }}
                       title="تعديل">
                       <Pencil className="w-4 h-4" />
                     </button>
@@ -160,7 +160,7 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
                   <div className="flex flex-wrap gap-1">
                     {features.map(f => (
                       <span key={f} className="text-xs px-2 py-0.5 rounded-full"
-                        style={{ background: "#F5F3FF", color: "#7C3AED", border: "1px solid #E9E3FF" }}>
+                        style={{ background: "#F3F7F1", color: "#007F5C", border: "1px solid #DCEAD9" }}>
                         {f.trim()}
                       </span>
                     ))}
@@ -170,8 +170,8 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
             );
           })}
           {rooms.length === 0 && (
-            <div className="col-span-2 text-center py-16 rounded-2xl" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-              <p style={{ color: "#7C6A9E" }}>لا توجد قاعات — أضف قاعة جديدة</p>
+            <div className="col-span-2 text-center py-16 rounded-2xl" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
+              <p style={{ color: "#5C7A6C" }}>لا توجد قاعات — أضف قاعة جديدة</p>
             </div>
           )}
         </div>
@@ -179,25 +179,25 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
 
       {/* ── Bookings Tab ── */}
       {tab === "bookings" && (
-        <div className="rounded-2xl overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+        <div className="rounded-2xl overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
           {bookings.length === 0 ? (
             <div className="text-center py-16">
-              <CalendarDays className="w-10 h-10 mx-auto mb-3" style={{ color: "#D1C4FE" }} />
-              <p style={{ color: "#7C6A9E" }}>لا توجد حجوزات قادمة</p>
+              <CalendarDays className="w-10 h-10 mx-auto mb-3" style={{ color: "#BFE0B6" }} />
+              <p style={{ color: "#5C7A6C" }}>لا توجد حجوزات قادمة</p>
             </div>
           ) : (
             <table className="w-full text-sm">
-              <thead style={{ background: "#F5F3FF", borderBottom: "2px solid #E9E3FF" }}>
+              <thead style={{ background: "#F3F7F1", borderBottom: "2px solid #DCEAD9" }}>
                 <tr>
                   {["العنوان","القاعة","الحاجز","التاريخ","الوقت",""].map(h => (
-                    <th key={h} className="px-4 py-3 text-right text-xs font-semibold" style={{ color: "#6D28D9" }}>{h}</th>
+                    <th key={h} className="px-4 py-3 text-right text-xs font-semibold" style={{ color: "#00694A" }}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody className="divide-y divide-purple-50">
                 {bookings.map(b => (
                   <tr key={b.id} className="hover:bg-purple-50/40 transition-colors">
-                    <td className="px-4 py-3 font-semibold" style={{ color: "#1F1535" }}>{b.title}</td>
+                    <td className="px-4 py-3 font-semibold" style={{ color: "#16241D" }}>{b.title}</td>
                     <td className="px-4 py-3" style={{ color: "#6B6B8A" }}>{b.room.name}</td>
                     <td className="px-4 py-3" style={{ color: "#6B6B8A" }}>{b.user.name}</td>
                     <td className="px-4 py-3" style={{ color: "#6B6B8A" }}>
@@ -224,9 +224,9 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
       {/* ── Room Form Modal ── */}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" dir="rtl">
-          <div className="rounded-2xl w-full max-w-md shadow-xl" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+          <div className="rounded-2xl w-full max-w-md shadow-xl" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
             <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: "1px solid #F3F0FF" }}>
-              <h2 className="font-bold" style={{ color: "#1F1535" }}>
+              <h2 className="font-bold" style={{ color: "#16241D" }}>
                 {editRoom ? "تعديل القاعة" : "قاعة جديدة"}
               </h2>
               <button onClick={() => setShowForm(false)} className="p-1.5 rounded-lg hover:bg-purple-50">
@@ -246,7 +246,7 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
                     onChange={e => setForm(p => ({ ...p, [f.key]: e.target.value }))}
                     required={f.req} placeholder={f.placeholder}
                     className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-                    style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
+                    style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
                 </div>
               ))}
               <div className="flex items-center gap-2">
@@ -258,12 +258,12 @@ export default function AdminRoomsClient({ initialRooms, initialBookings }: Prop
               <div className="flex gap-3 pt-1">
                 <button type="submit" disabled={saving}
                   className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-50"
-                  style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                  style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                   {saving ? "جارٍ الحفظ..." : "حفظ"}
                 </button>
                 <button type="button" onClick={() => setShowForm(false)}
                   className="flex-1 py-2.5 rounded-xl text-sm font-semibold"
-                  style={{ border: "1px solid #E9E3FF", color: "#6D28D9" }}>
+                  style={{ border: "1px solid #DCEAD9", color: "#00694A" }}>
                   إلغاء
                 </button>
               </div>

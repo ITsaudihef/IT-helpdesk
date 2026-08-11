@@ -30,37 +30,37 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex" dir="rtl" style={{ background: "#080820" }}>
+    <div className="min-h-screen flex" dir="rtl" style={{ background: "#071711" }}>
       {/* Left panel — brand with gradient */}
       <div className="hidden lg:flex lg:w-1/2 flex-col items-center justify-center relative overflow-hidden"
-        style={{ background: "linear-gradient(160deg, #0d0728 0%, #1a0845 50%, #0d0728 100%)" }}>
+        style={{ background: "linear-gradient(160deg, #071711 0%, #0F2A1F 50%, #071711 100%)" }}>
         {/* Glow orbs */}
         <div className="absolute top-1/4 right-1/3 w-72 h-72 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(124,58,237,0.35) 0%, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, rgba(0,127,92,0.35) 0%, transparent 70%)" }} />
         <div className="absolute bottom-1/4 left-1/4 w-56 h-56 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(236,72,153,0.25) 0%, transparent 70%)" }} />
+          style={{ background: "radial-gradient(circle, rgba(111,180,73,0.25) 0%, transparent 70%)" }} />
         <div className="absolute top-1/2 left-1/2 w-40 h-40 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2"
           style={{ background: "radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)" }} />
 
         <div className="relative text-center text-white px-12 z-10">
-          <Image src={logoSrc} alt="بوابة سند" width={80} height={80} className="rounded-2xl object-cover mx-auto mb-6" />
-          <h1 className="text-3xl font-bold mb-1 gradient-text">بوابة سند</h1>
-          <p className="text-sm mb-3" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
+          <Image src={logoSrc} alt="بوابة الدعم لصندوق الوقف الصحي" width={80} height={80} className="rounded-2xl object-cover mx-auto mb-6" />
+          <h1 className="text-2xl font-bold mb-1 gradient-text leading-snug">بوابة الدعم لصندوق الوقف الصحي</h1>
+          <p className="text-sm mb-3" style={{ color: "#8FCB7A" }}>دعمكم أولويتنا</p>
           <div className="mt-10 grid grid-cols-3 gap-4 text-center">
             {[
               { n: "سريع", d: "حل مشاكلك بكفاءة" },
               { n: "آمن",  d: "بيانات محمية بالكامل" },
               { n: "سهل",  d: "واجهة بسيطة وواضحة" },
             ].map((f) => (
-              <div key={f.n} className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(124,58,237,0.2)" }}>
+              <div key={f.n} className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(0,127,92,0.2)" }}>
                 <p className="font-bold text-lg text-white">{f.n}</p>
-                <p className="text-xs mt-1" style={{ color: "#A78BFA" }}>{f.d}</p>
+                <p className="text-xs mt-1" style={{ color: "#8FCB7A" }}>{f.d}</p>
               </div>
             ))}
           </div>
 
-          <div className="mt-10 pt-6 flex flex-col items-center gap-2" style={{ borderTop: "1px solid rgba(124,58,237,0.2)" }}>
-            <p className="text-xs" style={{ color: "#A78BFA" }}>صنع بحب بواسطة</p>
+          <div className="mt-10 pt-6 flex flex-col items-center gap-2" style={{ borderTop: "1px solid rgba(0,127,92,0.2)" }}>
+            <p className="text-xs" style={{ color: "#8FCB7A" }}>صنع بحب بواسطة</p>
             <Image src={hefLogoSrc} alt="صندوق الوقف الصحي" width={220} height={52} className="object-contain" />
           </div>
         </div>
@@ -71,29 +71,29 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           {/* Mobile logo */}
           <div className="lg:hidden text-center mb-8">
-            <Image src={logoSrc} alt="بوابة سند" width={56} height={56} className="rounded-xl object-cover inline-block mb-3" />
-            <h1 className="text-xl font-bold gradient-text">بوابة سند</h1>
-            <p className="text-xs mt-1" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
+            <Image src={logoSrc} alt="بوابة الدعم لصندوق الوقف الصحي" width={56} height={56} className="rounded-xl object-cover inline-block mb-3" />
+            <h1 className="text-lg font-bold gradient-text leading-snug">بوابة الدعم لصندوق الوقف الصحي</h1>
+            <p className="text-xs mt-1" style={{ color: "#8FCB7A" }}>دعمكم أولويتنا</p>
           </div>
 
-          <div className="rounded-2xl p-8" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF", boxShadow: "0 20px 60px rgba(124,58,237,0.15)" }}>
-            <h2 className="text-xl font-bold mb-1" style={{ color: "#1F1535" }}>مرحباً بك</h2>
-            <p className="text-sm mb-6" style={{ color: "#7C6A9E" }}>سجّل دخولك للمتابعة</p>
+          <div className="rounded-2xl p-8" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9", boxShadow: "0 20px 60px rgba(0,127,92,0.15)" }}>
+            <h2 className="text-xl font-bold mb-1" style={{ color: "#16241D" }}>مرحباً بك</h2>
+            <p className="text-sm mb-6" style={{ color: "#5C7A6C" }}>سجّل دخولك للمتابعة</p>
 
             <form onSubmit={handleSubmit} className="space-y-4" aria-label="نموذج تسجيل الدخول">
               <div>
                 <label htmlFor="login-email" className="block text-sm font-medium mb-1.5" style={{ color: "#374151" }}>البريد الإلكتروني</label>
                 <div className="relative">
-                  <Mail className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: "#7C3AED" }} aria-hidden="true" />
+                  <Mail className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: "#007F5C" }} aria-hidden="true" />
                   <input
                     id="login-email"
                     type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
                     autoComplete="email"
                     placeholder="example@saudihef.org.sa"
                     className="w-full pr-10 pl-4 py-2.5 rounded-xl text-sm focus:outline-none transition-all"
-                    style={{ background: "#FAFAFA", border: "1px solid #D1C4FE", color: "#1F1535" }}
-                    onFocus={e => (e.target.style.borderColor = "#7C3AED")}
-                    onBlur={e => (e.target.style.borderColor = "#D1C4FE")}
+                    style={{ background: "#FAFAFA", border: "1px solid #BFE0B6", color: "#16241D" }}
+                    onFocus={e => (e.target.style.borderColor = "#007F5C")}
+                    onBlur={e => (e.target.style.borderColor = "#BFE0B6")}
                   />
                 </div>
               </div>
@@ -101,20 +101,20 @@ export default function LoginPage() {
               <div>
                 <label htmlFor="login-password" className="block text-sm font-medium mb-1.5" style={{ color: "#374151" }}>كلمة المرور</label>
                 <div className="relative">
-                  <Lock className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: "#7C3AED" }} aria-hidden="true" />
+                  <Lock className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: "#007F5C" }} aria-hidden="true" />
                   <input
                     id="login-password"
                     type={showPassword ? "text" : "password"} value={password}
                     onChange={(e) => setPassword(e.target.value)} required placeholder="••••••••"
                     autoComplete="current-password"
                     className="w-full pr-10 pl-10 py-2.5 rounded-xl text-sm focus:outline-none transition-all"
-                    style={{ background: "#FAFAFA", border: "1px solid #D1C4FE", color: "#1F1535" }}
-                    onFocus={e => (e.target.style.borderColor = "#7C3AED")}
-                    onBlur={e => (e.target.style.borderColor = "#D1C4FE")}
+                    style={{ background: "#FAFAFA", border: "1px solid #BFE0B6", color: "#16241D" }}
+                    onFocus={e => (e.target.style.borderColor = "#007F5C")}
+                    onBlur={e => (e.target.style.borderColor = "#BFE0B6")}
                   />
                   <button type="button" onClick={() => setShowPassword(!showPassword)}
                     aria-label={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
-                    className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#7C3AED" }}>
+                    className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#007F5C" }}>
                     {showPassword ? <EyeOff className="w-4 h-4" aria-hidden="true" /> : <Eye className="w-4 h-4" aria-hidden="true" />}
                   </button>
                 </div>
@@ -124,7 +124,7 @@ export default function LoginPage() {
                 aria-disabled={loading}
                 aria-busy={loading}
                 className="w-full text-white py-3 rounded-xl font-semibold transition-all disabled:opacity-50 mt-2"
-                style={{ background: loading ? "rgba(124,58,237,0.5)" : "linear-gradient(135deg, #7C3AED, #EC4899)", boxShadow: "0 8px 25px rgba(124,58,237,0.3)" }}>
+                style={{ background: loading ? "rgba(0,127,92,0.5)" : "linear-gradient(135deg, #007F5C, #6FB449)", boxShadow: "0 8px 25px rgba(0,127,92,0.3)" }}>
                 {loading ? "جارٍ التحقق..." : "دخول"}
               </button>
             </form>

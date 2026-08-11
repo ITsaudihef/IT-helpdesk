@@ -82,8 +82,8 @@ export default function Header({ title, role }: { title: string; role?: string }
 
   return (
     <header className="h-16 flex items-center justify-between pr-16 lg:pr-6 pl-6 sticky top-0 z-20"
-      style={{ background: "#FFFFFF", borderBottom: "1px solid #E9E3FF", backdropFilter: "blur(12px)" }}>
-      <h2 className="font-bold" style={{ color: "#1F1535" }}>{title}</h2>
+      style={{ background: "#FFFFFF", borderBottom: "1px solid #DCEAD9", backdropFilter: "blur(12px)" }}>
+      <h2 className="font-bold" style={{ color: "#16241D" }}>{title}</h2>
 
       <div className="relative flex items-center gap-2">
         {/* Live indicator dot */}
@@ -94,11 +94,11 @@ export default function Header({ title, role }: { title: string; role?: string }
         />
 
         <button onClick={markRead} className="relative p-2 rounded-xl transition-all"
-          style={{ background: "rgba(124,58,237,0.08)", border: "1px solid #E9E3FF" }}>
-          <Bell className="w-5 h-5" style={{ color: "#7C3AED" }} />
+          style={{ background: "rgba(0,127,92,0.08)", border: "1px solid #DCEAD9" }}>
+          <Bell className="w-5 h-5" style={{ color: "#007F5C" }} />
           {unread > 0 && (
             <span className="absolute -top-0.5 -right-0.5 h-4 w-4 text-white text-xs rounded-full flex items-center justify-center font-bold"
-              style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+              style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
               {unread > 9 ? "9+" : unread}
             </span>
           )}
@@ -106,11 +106,11 @@ export default function Header({ title, role }: { title: string; role?: string }
 
         {open && (
           <div className="absolute left-0 top-12 w-80 rounded-xl shadow-lg z-50 overflow-hidden"
-            style={{ background: "#FFFFFF", border: "1px solid #E9E3FF", boxShadow: "0 8px 30px rgba(124,58,237,0.12)" }}>
+            style={{ background: "#FFFFFF", border: "1px solid #DCEAD9", boxShadow: "0 8px 30px rgba(0,127,92,0.12)" }}>
             <div className="p-3 flex items-center justify-between" style={{ borderBottom: "1px solid #F3EEFF" }}>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full" style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }} />
-                <p className="text-sm font-semibold" style={{ color: "#1F1535" }}>الإشعارات</p>
+                <div className="w-2 h-2 rounded-full" style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }} />
+                <p className="text-sm font-semibold" style={{ color: "#16241D" }}>الإشعارات</p>
               </div>
               <span className="text-xs px-2 py-0.5 rounded-full"
                 style={{ background: live ? "rgba(34,197,94,0.1)" : "rgba(209,213,219,0.3)", color: live ? "#16a34a" : "#6b7280" }}>
@@ -121,17 +121,17 @@ export default function Header({ title, role }: { title: string; role?: string }
               {loadError ? (
                 <p className="text-sm p-4 text-center" style={{ color: "#DC2626" }}>تعذر تحميل الإشعارات — تحقق من اتصالك</p>
               ) : notifications.length === 0 ? (
-                <p className="text-sm p-4 text-center" style={{ color: "#7C6A9E" }}>لا توجد إشعارات</p>
+                <p className="text-sm p-4 text-center" style={{ color: "#5C7A6C" }}>لا توجد إشعارات</p>
               ) : (
                 notifications.map((n) => {
                   const body = (
                     <>
-                      <p style={{ color: "#1F1535" }}>{n.message}</p>
-                      {n.ticket  && <p className="text-xs mt-1" style={{ color: "#7C3AED" }}>{n.ticket.ticketNo}</p>}
-                      {n.project && <p className="text-xs mt-1" style={{ color: "#7C3AED" }}>{n.project.title}</p>}
+                      <p style={{ color: "#16241D" }}>{n.message}</p>
+                      {n.ticket  && <p className="text-xs mt-1" style={{ color: "#007F5C" }}>{n.ticket.ticketNo}</p>}
+                      {n.project && <p className="text-xs mt-1" style={{ color: "#007F5C" }}>{n.project.title}</p>}
                     </>
                   );
-                  const style = { borderBottom: "1px solid #F3EEFF", background: !n.read ? "rgba(124,58,237,0.05)" : "transparent" };
+                  const style = { borderBottom: "1px solid #F3EEFF", background: !n.read ? "rgba(0,127,92,0.05)" : "transparent" };
                   const ticketBase = role ? TICKET_BASE_PATH[role] : undefined;
                   const href = n.project
                     ? `/kanban/${n.project.id}`

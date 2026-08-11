@@ -15,7 +15,7 @@ const typeOptions = [
 
 const priorityOptions = [
   { value: "LOW",      label: "منخفضة", desc: "لا يوجد تأثير على العمل",  border: "#86efac", bg: "rgba(34,197,94,0.1)", fg: "#16A34A" },
-  { value: "MEDIUM",   label: "متوسطة", desc: "تأثير محدود على العمل",    border: "#7C3AED", bg: "rgba(124,58,237,0.12)", fg: "#5B21B6" },
+  { value: "MEDIUM",   label: "متوسطة", desc: "تأثير محدود على العمل",    border: "#007F5C", bg: "rgba(0,127,92,0.12)", fg: "#00543D" },
   { value: "HIGH",     label: "عالية",  desc: "يؤثر على الإنتاجية",       border: "#fb923c", bg: "rgba(249,115,22,0.1)", fg: "#EA580C" },
   { value: "CRITICAL", label: "حرجة",   desc: "توقف تام عن العمل",        border: "#f87171", bg: "rgba(239,68,68,0.1)", fg: "#DC2626" },
 ];
@@ -98,42 +98,42 @@ export default function NewTicketPage() {
             <div className={`flex items-center gap-2 ${i <= step ? "" : "opacity-40"}`}>
               <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all"
                 style={{
-                  background:  i < step ? "#7C3AED" : "#fff",
-                  borderColor: i <= step ? "#7C3AED" : "#d1d5db",
-                  color:       i < step ? "#fff" : i === step ? "#7C3AED" : "#9ca3af",
+                  background:  i < step ? "#007F5C" : "#fff",
+                  borderColor: i <= step ? "#007F5C" : "#d1d5db",
+                  color:       i < step ? "#fff" : i === step ? "#007F5C" : "#9ca3af",
                 }}>
                 {i < step ? <Check className="w-4 h-4" /> : i + 1}
               </div>
               <span className="text-sm font-medium hidden sm:block"
-                style={{ color: i <= step ? "#5B21B6" : "#9ca3af" }}>{s}</span>
+                style={{ color: i <= step ? "#00543D" : "#9ca3af" }}>{s}</span>
             </div>
             {i < steps.length - 1 && (
               <div className="flex-1 h-0.5 mx-3 transition-all"
-                style={{ background: i < step ? "#7C3AED" : "#e5e7eb" }} />
+                style={{ background: i < step ? "#007F5C" : "#e5e7eb" }} />
             )}
           </div>
         ))}
       </div>
 
-      <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+      <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
 
         {/* ── Step 1: Details ── */}
         {step === 0 && (
           <div className="space-y-5">
-            <h2 className="text-lg font-bold" style={{ color: "#1F1535" }}>تفاصيل التذكرة</h2>
+            <h2 className="text-lg font-bold" style={{ color: "#16241D" }}>تفاصيل التذكرة</h2>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">عنوان الطلب *</label>
               <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })}
                 placeholder="مثال: مشكلة في الوصول لنظام الحضور"
-                className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
+                className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">وصف الطلب *</label>
               <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
                 rows={4} placeholder="اشرح طلبك بالتفصيل..."
-                className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none" style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
+                className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none" style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
             </div>
 
             <div>
@@ -143,11 +143,11 @@ export default function NewTicketPage() {
                   <button key={t.value} type="button" onClick={() => setType(t.value)}
                     className="p-4 rounded-xl border-2 text-right transition-all"
                     style={{
-                      borderColor: form.type === t.value ? "#7C3AED" : "#e5e7eb",
-                      background:  form.type === t.value ? "rgba(124,58,237,0.12)" : "#fff",
+                      borderColor: form.type === t.value ? "#007F5C" : "#e5e7eb",
+                      background:  form.type === t.value ? "rgba(0,127,92,0.12)" : "#fff",
                     }}>
                     <div className="text-2xl mb-2">{t.icon}</div>
-                    <div className="font-semibold text-sm" style={{ color: form.type === t.value ? "#5B21B6" : "#111827" }}>
+                    <div className="font-semibold text-sm" style={{ color: form.type === t.value ? "#00543D" : "#111827" }}>
                       {t.label}
                     </div>
                     <div className="text-xs text-purple-600 mt-1">{t.desc}</div>
@@ -189,7 +189,7 @@ export default function NewTicketPage() {
         {/* ── Step 2: Attachments ── */}
         {step === 1 && (
           <div className="space-y-5">
-            <h2 className="text-lg font-bold" style={{ color: "#1F1535" }}>المرفقات (اختياري)</h2>
+            <h2 className="text-lg font-bold" style={{ color: "#16241D" }}>المرفقات (اختياري)</h2>
 
             {/* Drop zone */}
             <div
@@ -197,8 +197,8 @@ export default function NewTicketPage() {
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => { e.preventDefault(); addFiles(e.dataTransfer.files); }}
               className="border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-colors hover:bg-purple-50"
-              style={{ borderColor: "#7C3AED" }}>
-              <Upload className="w-10 h-10 mx-auto mb-3" style={{ color: "#7C3AED" }} />
+              style={{ borderColor: "#007F5C" }}>
+              <Upload className="w-10 h-10 mx-auto mb-3" style={{ color: "#007F5C" }} />
               <p className="text-sm font-medium text-gray-700">اسحب الملفات هنا أو اضغط للاختيار</p>
               <p className="text-xs text-purple-500 mt-1">
                 PNG، JPG، PDF، Word، Excel — حتى 10MB لكل ملف
@@ -213,9 +213,9 @@ export default function NewTicketPage() {
               <ul className="space-y-2">
                 {files.map((f, i) => (
                   <li key={i} className="flex items-center gap-3 p-3 rounded-lg border border-purple-100 bg-purple-50">
-                    <FileText className="w-5 h-5 flex-shrink-0" style={{ color: "#7C3AED" }} />
+                    <FileText className="w-5 h-5 flex-shrink-0" style={{ color: "#007F5C" }} />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate" style={{ color: "#1F1535" }}>{f.name}</p>
+                      <p className="text-sm font-medium truncate" style={{ color: "#16241D" }}>{f.name}</p>
                       <p className="text-xs text-purple-500">{formatSize(f.size)}</p>
                     </div>
                     <button type="button" onClick={() => removeFile(i)}
@@ -232,8 +232,8 @@ export default function NewTicketPage() {
         {/* ── Step 3: Review ── */}
         {step === 2 && (
           <div className="space-y-5">
-            <h2 className="text-lg font-bold" style={{ color: "#1F1535" }}>مراجعة وتأكيد</h2>
-            <div className="rounded-xl p-4 space-y-3" style={{ background: "#F5F3FF", border: "1px solid #E9E3FF" }}>
+            <h2 className="text-lg font-bold" style={{ color: "#16241D" }}>مراجعة وتأكيد</h2>
+            <div className="rounded-xl p-4 space-y-3" style={{ background: "#F3F7F1", border: "1px solid #DCEAD9" }}>
               {[
                 { label: "العنوان",   value: form.title },
                 { label: "النوع",     value: typeOptions.find((t) => t.value === form.type)?.label },
@@ -241,7 +241,7 @@ export default function NewTicketPage() {
               ].map((r) => (
                 <div key={r.label} className="flex justify-between text-sm">
                   <span className="text-purple-600">{r.label}</span>
-                  <span className="font-semibold" style={{ color: "#1F1535" }}>{r.value}</span>
+                  <span className="font-semibold" style={{ color: "#16241D" }}>{r.value}</span>
                 </div>
               ))}
               {form.requiresApproval && (
@@ -253,7 +253,7 @@ export default function NewTicketPage() {
               {files.length > 0 && (
                 <div className="flex justify-between text-sm">
                   <span className="text-purple-600">المرفقات</span>
-                  <span className="font-semibold" style={{ color: "#1F1535" }}>{files.length} ملف</span>
+                  <span className="font-semibold" style={{ color: "#16241D" }}>{files.length} ملف</span>
                 </div>
               )}
               <div className="pt-2 border-t border-purple-100">
@@ -275,13 +275,13 @@ export default function NewTicketPage() {
           {step < 2 ? (
             <button onClick={nextStep}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white mr-auto"
-              style={{ background: "#7C3AED" }}>
+              style={{ background: "#007F5C" }}>
               التالي<ChevronLeft className="w-4 h-4" />
             </button>
           ) : (
             <button onClick={submit} disabled={loading}
               className="flex items-center gap-2 px-6 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 mr-auto"
-              style={{ background: loading ? "#9dd274" : "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+              style={{ background: loading ? "#9dd274" : "linear-gradient(135deg,#007F5C,#6FB449)" }}>
               {loading ? "جارٍ الإرسال..." : "إرسال التذكرة ✓"}
             </button>
           )}

@@ -47,7 +47,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-bold" style={{ color: "#1F1535" }}>جميع التذاكر ({total})</h1>
+        <h1 className="text-lg font-bold" style={{ color: "#16241D" }}>جميع التذاكر ({total})</h1>
       </div>
 
       {/* Filters — auto-submit on select change */}
@@ -63,7 +63,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
             <Link key={t.id} href={`/admin/tickets/${t.id}`}
               className="flex flex-col gap-2 p-4 hover:bg-purple-50 transition-colors block">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold" style={{ color: "#7C3AED" }}>{t.ticketNo}</span>
+                <span className="font-mono text-xs font-bold" style={{ color: "#007F5C" }}>{t.ticketNo}</span>
                 <div className="flex gap-1">
                   <span className={cn("px-2 py-0.5 rounded-full text-xs font-semibold", statusBadge[t.status])}>
                     {statusLabel[t.status]}
@@ -73,8 +73,8 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
                   </span>
                 </div>
               </div>
-              <p className="text-sm font-medium" style={{ color: "#1F1535" }}>{t.title}</p>
-              <div className="flex items-center justify-between text-xs" style={{ color: "#7C6A9E" }}>
+              <p className="text-sm font-medium" style={{ color: "#16241D" }}>{t.title}</p>
+              <div className="flex items-center justify-between text-xs" style={{ color: "#5C7A6C" }}>
                 <span>{t.createdBy.name} · {t.createdBy.department}</span>
                 <span>{new Date(t.createdAt).toLocaleDateString("ar-SA", { calendar: "gregory" })}</span>
               </div>
@@ -85,7 +85,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
         {/* Desktop table */}
         <div className="hidden sm:block overflow-x-auto">
           <table className="w-full text-sm">
-            <thead style={{ background: "#F5F3FF", borderBottom: "2px solid #E9E3FF" }}>
+            <thead style={{ background: "#F3F7F1", borderBottom: "2px solid #DCEAD9" }}>
               <tr>
                 {["رقم التذكرة","العنوان","المُرسل / القسم","النوع","الأولوية","الحالة","المسند إلى","تاريخ الرفع",""].map(h => (
                   <th key={h} className="px-4 py-3 text-right text-xs font-semibold text-purple-600 whitespace-nowrap">{h}</th>
@@ -97,8 +97,8 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
                 <tr><td colSpan={9} className="text-center py-12 text-purple-500">لا توجد تذاكر</td></tr>
               ) : tickets.map(t => (
                 <tr key={t.id} className="hover:bg-purple-50 transition-colors">
-                  <td className="px-4 py-3 font-mono text-xs font-bold" style={{ color: "#7C3AED" }}>{t.ticketNo}</td>
-                  <td className="px-4 py-3 max-w-xs"><p className="font-medium truncate" style={{ color: "#1F1535" }}>{t.title}</p></td>
+                  <td className="px-4 py-3 font-mono text-xs font-bold" style={{ color: "#007F5C" }}>{t.ticketNo}</td>
+                  <td className="px-4 py-3 max-w-xs"><p className="font-medium truncate" style={{ color: "#16241D" }}>{t.title}</p></td>
                   <td className="px-4 py-3">
                     <p className="text-gray-700">{t.createdBy.name}</p>
                     <p className="text-xs text-purple-500">{t.createdBy.department}</p>
@@ -118,7 +118,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
                   <td className="px-4 py-3 text-purple-500 whitespace-nowrap">{new Date(t.createdAt).toLocaleDateString("ar-SA", { calendar: "gregory" })}</td>
                   <td className="px-4 py-3">
                     <Link href={`/admin/tickets/${t.id}`}
-                      className="text-xs font-semibold hover:underline" style={{ color: "#7C3AED" }}>
+                      className="text-xs font-semibold hover:underline" style={{ color: "#007F5C" }}>
                       عرض
                     </Link>
                   </td>

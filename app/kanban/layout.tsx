@@ -20,7 +20,7 @@ export default async function KanbanLayout({ children }: { children: React.React
   if (!kanbanEnabled) redirect("/dashboard");
 
   return (
-    <div className="min-h-screen" style={{ background: "#F5F3FF" }} dir="rtl">
+    <div className="min-h-screen" style={{ background: "#F3F7F1" }} dir="rtl">
       <Sidebar
         role={session.user.role}
         userName={session.user.name}

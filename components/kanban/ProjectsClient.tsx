@@ -20,7 +20,7 @@ interface Project {
 }
 
 const COLORS = [
-  "#7C3AED", "#EC4899", "#2563EB", "#16A34A",
+  "#007F5C", "#6FB449", "#2563EB", "#16A34A",
   "#D97706", "#DC2626", "#0891B2", "#0F766E",
 ];
 
@@ -133,10 +133,10 @@ export default function ProjectsClient({
       {/* ── Page header ──────────────────────────────────────────────────── */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight" style={{ color: "#1F1535" }}>
+          <h1 className="text-2xl font-bold tracking-tight" style={{ color: "#16241D" }}>
             لوحة المشاريع
           </h1>
-          <p className="text-sm mt-1" style={{ color: "#7C6A9E" }}>
+          <p className="text-sm mt-1" style={{ color: "#5C7A6C" }}>
             {projects.length > 0
               ? `${projects.length} مشروع — تتبع المهام والمشاريع بين الفرق`
               : "تتبع المهام والمشاريع بين الفرق"}
@@ -145,7 +145,7 @@ export default function ProjectsClient({
         <button
           onClick={() => setShowCreate(true)}
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
-          style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+          style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
           <Plus className="w-4 h-4" />
           مشروع جديد
         </button>
@@ -163,7 +163,7 @@ export default function ProjectsClient({
             {
               label: "إجمالي البطاقات",
               value: projects.reduce((s, p) => s + p.cardCount, 0),
-              color: "#7C3AED", bg: "#EDE9FE",
+              color: "#007F5C", bg: "#E3F2E0",
             },
             {
               label: "متأخرة",
@@ -172,12 +172,12 @@ export default function ProjectsClient({
             },
           ].map(k => (
             <div key={k.label} className="rounded-xl p-4 flex items-center gap-3"
-              style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+              style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
               <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                 style={{ background: k.bg }}>
                 <span className="text-lg font-bold" style={{ color: k.color }}>{k.value}</span>
               </div>
-              <p className="text-sm font-medium" style={{ color: "#7C6A9E" }}>{k.label}</p>
+              <p className="text-sm font-medium" style={{ color: "#5C7A6C" }}>{k.label}</p>
             </div>
           ))}
         </div>
@@ -185,17 +185,17 @@ export default function ProjectsClient({
 
       {/* ── Projects grid ────────────────────────────────────────────────── */}
       {projects.length === 0 ? (
-        <div className="text-center py-24 rounded-2xl" style={{ background: "#FFFFFF", border: "1px dashed #C4B5FD" }}>
+        <div className="text-center py-24 rounded-2xl" style={{ background: "#FFFFFF", border: "1px dashed #A8DB98" }}>
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
-            style={{ background: "rgba(124,58,237,0.08)" }}>
-            <LayoutGrid className="w-8 h-8" style={{ color: "#7C3AED" }} />
+            style={{ background: "rgba(0,127,92,0.08)" }}>
+            <LayoutGrid className="w-8 h-8" style={{ color: "#007F5C" }} />
           </div>
-          <p className="text-base font-semibold mb-1" style={{ color: "#1F1535" }}>لا توجد مشاريع بعد</p>
-          <p className="text-sm mb-5" style={{ color: "#7C6A9E" }}>أنشئ أول مشروع لبدء التتبع مع فريقك</p>
+          <p className="text-base font-semibold mb-1" style={{ color: "#16241D" }}>لا توجد مشاريع بعد</p>
+          <p className="text-sm mb-5" style={{ color: "#5C7A6C" }}>أنشئ أول مشروع لبدء التتبع مع فريقك</p>
           <button
             onClick={() => setShowCreate(true)}
             className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white inline-flex items-center gap-2"
-            style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+            style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
             <Plus className="w-4 h-4" />
             إنشاء أول مشروع
           </button>
@@ -212,7 +212,7 @@ export default function ProjectsClient({
             return (
               <Link key={p.id} href={`/kanban/${p.id}`}
                 className="group relative rounded-2xl overflow-hidden flex flex-col transition-all hover:shadow-xl hover:-translate-y-1"
-                style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+                style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
 
                 {/* Color bar */}
                 <div className="h-1.5 w-full" style={{ background: p.color }} />
@@ -227,7 +227,7 @@ export default function ProjectsClient({
                         <Layers className="w-5 h-5" style={{ color: p.color }} />
                       </div>
                       <div className="min-w-0">
-                        <h3 className="font-bold text-base leading-tight truncate" style={{ color: "#1F1535" }}>
+                        <h3 className="font-bold text-base leading-tight truncate" style={{ color: "#16241D" }}>
                           {p.title}
                         </h3>
                         <p className="text-xs mt-0.5" style={{ color: "#9CA3AF" }}>
@@ -254,7 +254,7 @@ export default function ProjectsClient({
 
                   {/* Description */}
                   {p.description && (
-                    <p className="text-sm mb-4 leading-relaxed line-clamp-2" style={{ color: "#7C6A9E" }}>
+                    <p className="text-sm mb-4 leading-relaxed line-clamp-2" style={{ color: "#5C7A6C" }}>
                       {p.description}
                     </p>
                   )}
@@ -265,13 +265,13 @@ export default function ProjectsClient({
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="flex items-center gap-4">
                           {p.startDate && (
-                            <div className="flex items-center gap-1 text-xs" style={{ color: "#7C6A9E" }}>
+                            <div className="flex items-center gap-1 text-xs" style={{ color: "#5C7A6C" }}>
                               <Calendar className="w-3 h-3" />
                               <span>بدأ {formatDate(p.startDate)}</span>
                             </div>
                           )}
                           {p.endDate && (
-                            <div className="flex items-center gap-1 text-xs" style={{ color: status === "overdue" ? "#DC2626" : "#7C6A9E" }}>
+                            <div className="flex items-center gap-1 text-xs" style={{ color: status === "overdue" ? "#DC2626" : "#5C7A6C" }}>
                               <Clock className="w-3 h-3" />
                               <span>
                                 {daysLeft !== null
@@ -310,14 +310,14 @@ export default function ProjectsClient({
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-1.5">
                       <div className="w-1.5 h-1.5 rounded-full" style={{ background: p.color }} />
-                      <span className="text-xs" style={{ color: "#7C6A9E" }}>
-                        <span className="font-semibold" style={{ color: "#1F1535" }}>{p.columnCount}</span> عمود
+                      <span className="text-xs" style={{ color: "#5C7A6C" }}>
+                        <span className="font-semibold" style={{ color: "#16241D" }}>{p.columnCount}</span> عمود
                       </span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                      <span className="text-xs" style={{ color: "#7C6A9E" }}>
-                        <span className="font-semibold" style={{ color: "#1F1535" }}>{p.cardCount}</span> بطاقة
+                      <span className="text-xs" style={{ color: "#5C7A6C" }}>
+                        <span className="font-semibold" style={{ color: "#16241D" }}>{p.cardCount}</span> بطاقة
                       </span>
                     </div>
                   </div>
@@ -337,29 +337,29 @@ export default function ProjectsClient({
           onClick={e => { if (e.target === e.currentTarget) { setShowCreate(false); resetForm(); } }}>
           <div
             className="dark-modal rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl"
-            style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.3)" }}>
+            style={{ background: "#0F2A1F", border: "1px solid rgba(0,127,92,0.3)" }}>
 
             {/* Modal header */}
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "rgba(124,58,237,0.2)" }}>
-                <LayoutGrid className="w-5 h-5" style={{ color: "#A78BFA" }} />
+                style={{ background: "rgba(0,127,92,0.2)" }}>
+                <LayoutGrid className="w-5 h-5" style={{ color: "#8FCB7A" }} />
               </div>
               <div>
                 <h2 className="font-bold text-white">مشروع جديد</h2>
-                <p className="text-xs mt-0.5" style={{ color: "#7C6A9E" }}>أضف تفاصيل المشروع</p>
+                <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>أضف تفاصيل المشروع</p>
               </div>
             </div>
 
             <form onSubmit={handleCreate} className="space-y-4">
               {/* Title */}
               <div>
-                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#A78BFA" }}>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>
                   اسم المشروع *
                 </label>
                 <input
                   className="w-full px-3 py-2.5 rounded-xl text-sm text-white placeholder-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(124,58,237,0.3)" }}
+                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(0,127,92,0.3)" }}
                   placeholder="مثال: تطوير الموقع الإلكتروني"
                   value={title}
                   onChange={e => setTitle(e.target.value)}
@@ -370,12 +370,12 @@ export default function ProjectsClient({
 
               {/* Description */}
               <div>
-                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#A78BFA" }}>
+                <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>
                   الوصف
                 </label>
                 <textarea
                   className="w-full px-3 py-2.5 rounded-xl text-sm text-white placeholder-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none transition-all"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(124,58,237,0.3)" }}
+                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(0,127,92,0.3)" }}
                   placeholder="وصف مختصر للمشروع وأهدافه..."
                   rows={2}
                   value={desc}
@@ -386,25 +386,25 @@ export default function ProjectsClient({
               {/* Dates */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#A78BFA" }}>
+                  <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>
                     تاريخ البدء
                   </label>
                   <input
                     type="date"
                     className="w-full px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
-                    style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(124,58,237,0.3)", colorScheme: "dark" }}
+                    style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(0,127,92,0.3)", colorScheme: "dark" }}
                     value={startDate}
                     onChange={e => setStartDate(e.target.value)}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#A78BFA" }}>
+                  <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>
                     تاريخ الانتهاء
                   </label>
                   <input
                     type="date"
                     className="w-full px-3 py-2.5 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
-                    style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(124,58,237,0.3)", colorScheme: "dark" }}
+                    style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(0,127,92,0.3)", colorScheme: "dark" }}
                     value={endDate}
                     min={startDate || undefined}
                     onChange={e => setEndDate(e.target.value)}
@@ -414,7 +414,7 @@ export default function ProjectsClient({
 
               {/* Color */}
               <div>
-                <label className="block text-xs font-semibold mb-2 uppercase tracking-wide" style={{ color: "#A78BFA" }}>
+                <label className="block text-xs font-semibold mb-2 uppercase tracking-wide" style={{ color: "#8FCB7A" }}>
                   لون المشروع
                 </label>
                 <div className="flex gap-2.5 flex-wrap">
@@ -447,14 +447,14 @@ export default function ProjectsClient({
                   type="submit"
                   disabled={saving || !title.trim()}
                   className="flex-1 py-2.5 rounded-xl text-sm font-bold text-white disabled:opacity-40 transition-all hover:shadow-lg"
-                  style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                  style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                   {saving ? "جارٍ الإنشاء..." : "إنشاء المشروع"}
                 </button>
                 <button
                   type="button"
                   onClick={() => { setShowCreate(false); resetForm(); }}
                   className="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all hover:bg-white/5"
-                  style={{ border: "1px solid rgba(255,255,255,0.12)", color: "#A78BFA" }}>
+                  style={{ border: "1px solid rgba(255,255,255,0.12)", color: "#8FCB7A" }}>
                   إلغاء
                 </button>
               </div>

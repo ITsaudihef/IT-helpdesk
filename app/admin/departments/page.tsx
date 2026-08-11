@@ -32,10 +32,10 @@ export default async function AdminDepartmentsPage() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold" style={{ color: "#1F1535" }}>إدارة الأقسام</h1>
+          <h1 className="text-lg font-bold" style={{ color: "#16241D" }}>إدارة الأقسام</h1>
           <p className="text-sm text-purple-500 mt-0.5">تعيين مدراء الأقسام وإدارة موظفيها</p>
         </div>
-        <div className="px-3 py-1.5 rounded-xl text-sm font-semibold" style={{ background: "rgba(124,58,237,0.1)", color: "#7C3AED" }}>
+        <div className="px-3 py-1.5 rounded-xl text-sm font-semibold" style={{ background: "rgba(0,127,92,0.1)", color: "#007F5C" }}>
           {departments.length} قسم
         </div>
       </div>

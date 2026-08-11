@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 import { UserPlus, Pencil, Trash2, Search, X } from "lucide-react";
 
 const roleLabel: Record<string,string> = { ADMIN: "مدير", SUPPORT: "موظف دعم", USER: "مستخدم", DEPT_MANAGER: "مدير قسم" };
-const roleBg:    Record<string,string> = { ADMIN: "#EDE9FE", SUPPORT: "#DDD6FE", USER: "#F1F5F9", DEPT_MANAGER: "#FEF3C7" };
-const roleFg:    Record<string,string> = { ADMIN: "#5B21B6", SUPPORT: "#6D28D9", USER: "#475569", DEPT_MANAGER: "#92400E" };
+const roleBg:    Record<string,string> = { ADMIN: "#E3F2E0", SUPPORT: "#CFE8C8", USER: "#F1F5F9", DEPT_MANAGER: "#FEF3C7" };
+const roleFg:    Record<string,string> = { ADMIN: "#00543D", SUPPORT: "#00694A", USER: "#475569", DEPT_MANAGER: "#92400E" };
 
 const DEPT_OPTIONS = [
   "الخدمات المشتركة","مكتب الرئيس التنفيذي","المالية","شفاء",
@@ -74,7 +74,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
             value={search} onChange={e => setSearch(e.target.value)}
             placeholder="بحث بالاسم أو البريد أو القسم..."
             className="w-full pr-9 pl-8 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-            style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }}
+            style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }}
           />
           {search && (
             <button onClick={() => setSearch("")} className="absolute left-2 top-1/2 -translate-y-1/2 text-purple-400 hover:text-purple-600">
@@ -85,7 +85,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
         <span className="text-xs text-purple-500 whitespace-nowrap">{filtered.length} / {users.length}</span>
         <button onClick={openCreate}
           className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white shadow-sm whitespace-nowrap"
-          style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+          style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
           <UserPlus className="w-4 h-4" />مستخدم جديد
         </button>
       </div>
@@ -93,8 +93,8 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
       {/* Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-            <h2 className="font-bold mb-4" style={{ color: "#1F1535" }}>{editUser ? "تعديل المستخدم" : "مستخدم جديد"}</h2>
+          <div className="rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
+            <h2 className="font-bold mb-4" style={{ color: "#16241D" }}>{editUser ? "تعديل المستخدم" : "مستخدم جديد"}</h2>
             <form onSubmit={submit} className="space-y-4">
               {[
                 { name:"name",     label:"الاسم",              type:"text",     req: true },
@@ -106,14 +106,14 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                   <input type={f.type} value={(form as any)[f.name]}
                     onChange={e => setForm({ ...form, [f.name]: e.target.value })} required={f.req}
                     className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-                    style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
+                    style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
                 </div>
               ))}
               <div>
                 <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>القسم</label>
                 <select value={form.department} onChange={e => setForm({ ...form, department: e.target.value })}
                   className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-                  style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }}>
+                  style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }}>
                   <option value="">— اختر القسم —</option>
                   {DEPT_OPTIONS.map(d => <option key={d} value={d}>{d}</option>)}
                 </select>
@@ -122,7 +122,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                 <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>الدور</label>
                 <select value={form.role} onChange={e => setForm({ ...form, role: e.target.value })}
                   className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-                  style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }}>
+                  style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }}>
                   <option value="USER">مستخدم</option>
                   <option value="DEPT_MANAGER">مدير قسم</option>
                   <option value="SUPPORT">موظف دعم</option>
@@ -132,12 +132,12 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
               <div className="flex gap-3 pt-2">
                 <button type="submit" disabled={loading}
                   className="flex-1 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50"
-                  style={{ background: "#7C3AED" }}>
+                  style={{ background: "#007F5C" }}>
                   {loading ? "جارٍ الحفظ..." : "حفظ"}
                 </button>
                 <button type="button" onClick={() => setShowForm(false)}
                   className="flex-1 py-2 rounded-lg text-sm font-semibold"
-                  style={{ border: "1px solid #E9E3FF", color: "#6D28D9" }}>
+                  style={{ border: "1px solid #DCEAD9", color: "#00694A" }}>
                   إلغاء
                 </button>
               </div>
@@ -152,15 +152,15 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
           <div key={u.id} className="rounded-xl p-4 border border-purple-100" style={{ background: "#FFFFFF" }}>
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
-                style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                 {u.name.charAt(0)}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold truncate" style={{ color: "#1F1535" }}>{u.name}</p>
+                <p className="font-semibold truncate" style={{ color: "#16241D" }}>{u.name}</p>
                 <p className="text-xs text-purple-500 truncate">{u.email}</p>
               </div>
               <div className="flex gap-1">
-                <button onClick={() => openEdit(u)} className="p-1.5 hover:bg-purple-100 rounded-lg" style={{ color: "#7C3AED" }}>
+                <button onClick={() => openEdit(u)} className="p-1.5 hover:bg-purple-100 rounded-lg" style={{ color: "#007F5C" }}>
                   <Pencil className="w-4 h-4" />
                 </button>
                 <button onClick={() => deleteUser(u.id)} className="p-1.5 hover:bg-red-50 rounded-lg text-red-500">
@@ -174,7 +174,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                 {roleLabel[u.role] || u.role}
               </span>
               {u.department && (
-                <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: "#F5F3FF", color: "#7C3AED" }}>
+                <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: "#F3F7F1", color: "#007F5C" }}>
                   {u.department}
                 </span>
               )}
@@ -190,17 +190,17 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
       {/* Desktop Table */}
       <div className="hidden sm:block rounded-xl overflow-hidden">
         <table className="w-full text-sm">
-          <thead style={{ background: "#F5F3FF", borderBottom: "2px solid #E9E3FF" }}>
+          <thead style={{ background: "#F3F7F1", borderBottom: "2px solid #DCEAD9" }}>
             <tr>
               {["الاسم","البريد","الدور","القسم","التذاكر","تاريخ الإنشاء",""].map(h => (
-                <th key={h} className="px-4 py-3 text-right text-xs font-semibold" style={{ color: "#6D28D9" }}>{h}</th>
+                <th key={h} className="px-4 py-3 text-right text-xs font-semibold" style={{ color: "#00694A" }}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody className="divide-y divide-purple-50">
             {filtered.map(u => (
               <tr key={u.id} className="hover:bg-purple-50/60 transition-colors bg-white">
-                <td className="px-4 py-3 font-semibold" style={{ color: "#1F1535" }}>{u.name}</td>
+                <td className="px-4 py-3 font-semibold" style={{ color: "#16241D" }}>{u.name}</td>
                 <td className="px-4 py-3" style={{ color: "#6B6B8A" }}>{u.email}</td>
                 <td className="px-4 py-3">
                   <span className="px-2 py-0.5 rounded-full text-xs font-semibold"
@@ -214,7 +214,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-1">
                     <button onClick={() => openEdit(u)}
-                      className="p-1.5 hover:bg-purple-100 rounded-lg transition-colors" style={{ color: "#7C3AED" }}>
+                      className="p-1.5 hover:bg-purple-100 rounded-lg transition-colors" style={{ color: "#007F5C" }}>
                       <Pencil className="w-4 h-4" />
                     </button>
                     <button onClick={() => deleteUser(u.id)}

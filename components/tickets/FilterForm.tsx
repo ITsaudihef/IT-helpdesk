@@ -28,7 +28,7 @@ export default function FilterForm({ searchParams, departments }: Props) {
           <input name="search" defaultValue={searchParams.search}
             placeholder="بحث برقم أو عنوان التذكرة..."
             className="w-full pr-9 pl-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-            style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
+            style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
         </div>
         {/* Filters row */}
         <div className="flex gap-2 flex-wrap">
@@ -36,7 +36,7 @@ export default function FilterForm({ searchParams, departments }: Props) {
             <select key={f.name} name={f.name} defaultValue={(searchParams as any)[f.name] || ""}
               onChange={submit}
               className="flex-1 min-w-0 px-2 py-2 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-              style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }}>
+              style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }}>
               <option value="">كل {f.label}</option>
               {f.opts.map(o => (
                 <option key={o} value={o}>
@@ -51,7 +51,7 @@ export default function FilterForm({ searchParams, departments }: Props) {
             <select name="department" defaultValue={searchParams.department || ""}
               onChange={submit}
               className="flex-1 min-w-0 px-2 py-2 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-              style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }}>
+              style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }}>
               <option value="">كل الأقسام</option>
               {departments.map(d => (
                 <option key={d} value={d}>{d}</option>
@@ -61,7 +61,7 @@ export default function FilterForm({ searchParams, departments }: Props) {
 
           <button type="submit"
             className="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white whitespace-nowrap"
-            style={{ background: "#7C3AED" }}>
+            style={{ background: "#007F5C" }}>
             بحث
           </button>
         </div>

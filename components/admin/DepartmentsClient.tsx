@@ -19,8 +19,8 @@ const PRESET_DEPTS = [
 ];
 
 const roleColor: Record<string, { bg: string; fg: string; label: string }> = {
-  ADMIN:        { bg: "#EDE9FE", fg: "#5B21B6", label: "مدير النظام" },
-  SUPPORT:      { bg: "#DDD6FE", fg: "#6D28D9", label: "موظف دعم" },
+  ADMIN:        { bg: "#E3F2E0", fg: "#00543D", label: "مدير النظام" },
+  SUPPORT:      { bg: "#CFE8C8", fg: "#00694A", label: "موظف دعم" },
   DEPT_MANAGER: { bg: "#FEF3C7", fg: "#92400E", label: "مدير القسم" },
   USER:         { bg: "#F1F5F9", fg: "#475569", label: "مستخدم" },
 };
@@ -104,7 +104,7 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
       {/* Quick stats row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { label: "عدد الأقسام",      value: depts.filter(d => d.name !== "بدون قسم").length, color: "#7C3AED" },
+          { label: "عدد الأقسام",      value: depts.filter(d => d.name !== "بدون قسم").length, color: "#007F5C" },
           { label: "إجمالي الموظفين",  value: allUsers.length,                                    color: "#3B82F6" },
           { label: "مدراء أقسام",      value: allUsers.filter(u => u.role === "DEPT_MANAGER").length, color: "#92400E" },
           { label: "بدون قسم",         value: allUsers.filter(u => !u.department).length,          color: "#6B7280" },
@@ -122,16 +122,16 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
           const isOpen = expanded === dept.name;
           const hasManager = dept.managers.length > 0;
           return (
-            <div key={dept.name} className="rounded-2xl overflow-hidden border" style={{ background: "#FFFFFF", borderColor: hasManager ? "#E9E3FF" : "#FEE2E2" }}>
+            <div key={dept.name} className="rounded-2xl overflow-hidden border" style={{ background: "#FFFFFF", borderColor: hasManager ? "#DCEAD9" : "#FEE2E2" }}>
               {/* Header */}
               <div className="flex items-center gap-4 px-5 py-4">
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{ background: hasManager ? "rgba(124,58,237,0.1)" : "rgba(239,68,68,0.08)" }}>
-                  <Building2 className="w-5 h-5" style={{ color: hasManager ? "#7C3AED" : "#DC2626" }} />
+                  style={{ background: hasManager ? "rgba(0,127,92,0.1)" : "rgba(239,68,68,0.08)" }}>
+                  <Building2 className="w-5 h-5" style={{ color: hasManager ? "#007F5C" : "#DC2626" }} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="font-bold" style={{ color: "#1F1535" }}>{dept.name}</h3>
+                    <h3 className="font-bold" style={{ color: "#16241D" }}>{dept.name}</h3>
                     {!hasManager && (
                       <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: "#FEE2E2", color: "#DC2626" }}>
                         بدون مدير
@@ -152,11 +152,11 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <button onClick={() => setModal({ dept })}
                     className="text-xs px-3 py-1.5 rounded-lg font-semibold transition-all"
-                    style={{ background: "rgba(124,58,237,0.1)", color: "#7C3AED" }}>
+                    style={{ background: "rgba(0,127,92,0.1)", color: "#007F5C" }}>
                     {hasManager ? "تغيير المدير" : "تعيين مدير"}
                   </button>
                   <button onClick={() => toggleExpand(dept.name)}
-                    className="p-1.5 rounded-lg hover:bg-purple-50 transition-colors" style={{ color: "#7C3AED" }}>
+                    className="p-1.5 rounded-lg hover:bg-purple-50 transition-colors" style={{ color: "#007F5C" }}>
                     {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </button>
                 </div>
@@ -177,11 +177,11 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
                       return (
                         <li key={emp.id} className="flex items-center gap-3 px-5 py-3 hover:bg-purple-50/50 transition-colors">
                           <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                            style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                            style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                             {emp.name.charAt(0)}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold truncate flex items-center gap-1.5" style={{ color: "#1F1535" }}>
+                            <p className="text-sm font-semibold truncate flex items-center gap-1.5" style={{ color: "#16241D" }}>
                               {emp.name}
                               {isManager && <Crown className="w-3 h-3 text-amber-500" />}
                             </p>
@@ -202,7 +202,7 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
                               ) : (
                                 <button onClick={() => assignManager(emp.id, dept.name)} disabled={saving}
                                   className="text-xs px-2 py-1 rounded-lg font-medium transition-all disabled:opacity-50"
-                                  style={{ background: "rgba(124,58,237,0.1)", color: "#7C3AED" }}>
+                                  style={{ background: "rgba(0,127,92,0.1)", color: "#007F5C" }}>
                                   تعيين مديراً
                                 </button>
                               )
@@ -222,14 +222,14 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
       {/* Assign Manager Modal */}
       {modal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" dir="rtl">
-          <div className="rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+          <div className="rounded-2xl p-6 w-full max-w-md mx-4 shadow-xl" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "rgba(124,58,237,0.1)" }}>
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "rgba(0,127,92,0.1)" }}>
                   <ShieldCheck className="w-5 h-5 text-purple-600" />
                 </div>
                 <div>
-                  <h2 className="font-bold" style={{ color: "#1F1535" }}>تعيين مدير القسم</h2>
+                  <h2 className="font-bold" style={{ color: "#16241D" }}>تعيين مدير القسم</h2>
                   <p className="text-xs text-purple-500">{modal.dept.name}</p>
                 </div>
               </div>
@@ -264,13 +264,13 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
                   <li key={emp.id}>
                     <button onClick={() => { assignManager(emp.id, modal.dept.name); setModal(null); }} disabled={saving}
                       className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-purple-50 transition-all text-right"
-                      style={{ border: "1px solid #E9E3FF" }}>
+                      style={{ border: "1px solid #DCEAD9" }}>
                       <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                        style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                        style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                         {emp.name.charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold" style={{ color: "#1F1535" }}>{emp.name}</p>
+                        <p className="text-sm font-semibold" style={{ color: "#16241D" }}>{emp.name}</p>
                         <p className="text-xs text-purple-500">{emp.email}</p>
                       </div>
                       <ShieldCheck className="w-4 h-4 text-purple-400" />
@@ -283,7 +283,7 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
             </ul>
 
             <button onClick={() => setModal(null)} className="mt-4 w-full py-2 rounded-xl text-sm font-semibold"
-              style={{ border: "1px solid #E9E3FF", color: "#6D28D9" }}>
+              style={{ border: "1px solid #DCEAD9", color: "#00694A" }}>
               إغلاق
             </button>
           </div>

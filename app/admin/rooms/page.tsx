@@ -22,8 +22,8 @@ export default async function AdminRoomsPage() {
   return (
     <div className="space-y-4">
       <div>
-        <h1 className="text-lg font-bold" style={{ color: "#1F1535" }}>إدارة القاعات</h1>
-        <p className="text-sm mt-0.5" style={{ color: "#7C6A9E" }}>إضافة وتعديل وحذف القاعات ومتابعة الحجوزات</p>
+        <h1 className="text-lg font-bold" style={{ color: "#16241D" }}>إدارة القاعات</h1>
+        <p className="text-sm mt-0.5" style={{ color: "#5C7A6C" }}>إضافة وتعديل وحذف القاعات ومتابعة الحجوزات</p>
       </div>
       <AdminRoomsClient
         initialRooms={rooms}

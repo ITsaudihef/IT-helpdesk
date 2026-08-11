@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --brand-primary:  #7C3AED;
-  --brand-dark:     #5B21B6;
-  --brand-light:    rgba(124,58,237,0.1);
-  --bg-base:        #F5F3FF;
+  --brand-primary:  #007F5C;
+  --brand-dark:     #00543D;
+  --brand-light:    rgba(0,127,92,0.1);
+  --bg-base:        #F3F7F1;
   --bg-card:        #FFFFFF;
-  --bg-sidebar:     #0a0525;
+  --bg-sidebar:     #0A1F16;
   --bg-header:      #FFFFFF;
-  --border:         #E9E3FF;
-  --text-primary:   #1F1535;
-  --text-secondary: #6D28D9;
-  --text-muted:     #7C6A9E;
-  --foreground:     #1F1535;
-  --background:     #F5F3FF;
+  --border:         #DCEAD9;
+  --text-primary:   #16241D;
+  --text-secondary: #00694A;
+  --text-muted:     #5C7A6C;
+  --foreground:     #16241D;
+  --background:     #F3F7F1;
 }
 
 body {
@@ -32,13 +32,13 @@ body {
 /* Lighten purple text so it's readable on white */
 .main-content .text-purple-200,
 .main-content .text-purple-300 {
-  color: #5B21B6 !important;
+  color: #00543D !important;
 }
 .main-content .text-purple-400 {
-  color: #6D28D9 !important;
+  color: #00694A !important;
 }
 .main-content .text-purple-500 {
-  color: #7C3AED !important;
+  color: #007F5C !important;
 }
 /* Keep white text on colored bg elements */
 .main-content button .text-white,
@@ -54,9 +54,9 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #F5F3FF; }
-::-webkit-scrollbar-thumb { background: #C4B5FD; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #7C3AED; }
+::-webkit-scrollbar-track { background: #F3F7F1; }
+::-webkit-scrollbar-thumb { background: #A8DB98; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #007F5C; }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
@@ -74,17 +74,17 @@ body {
   100% { background-position:  200% 0; }
 }
 .skeleton {
-  background: linear-gradient(90deg, #E9E3FF 25%, #D8B4FE 50%, #E9E3FF 75%);
+  background: linear-gradient(90deg, #DCEAD9 25%, #BBE8AE 50%, #DCEAD9 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
 /* Glow effects (used in sidebar/login only) */
 .glow-purple {
-  box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 0 20px rgba(0, 127, 92, 0.4);
 }
 .gradient-text {
-  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  background: linear-gradient(135deg, #007F5C, #6FB449);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -15,20 +15,20 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: "#080820" }}>
-      <div className="rounded-2xl p-8 max-w-md w-full text-center" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: "#071711" }}>
+      <div className="rounded-2xl p-8 max-w-md w-full text-center" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
         <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
           style={{ background: "rgba(239,68,68,0.1)" }}>
           <AlertTriangle className="w-8 h-8" style={{ color: "#DC2626" }} />
         </div>
-        <h1 className="text-xl font-bold mb-2" style={{ color: "#1F1535" }}>حدث خطأ غير متوقع</h1>
-        <p className="text-sm mb-6" style={{ color: "#7C6A9E" }}>
+        <h1 className="text-xl font-bold mb-2" style={{ color: "#16241D" }}>حدث خطأ غير متوقع</h1>
+        <p className="text-sm mb-6" style={{ color: "#5C7A6C" }}>
           نعتذر، حدث خطأ في تحميل الصفحة. يُرجى المحاولة مجدداً.
         </p>
         <button
           onClick={reset}
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white"
-          style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}
+          style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}
         >
           <RefreshCw className="w-4 h-4" />
           إعادة المحاولة

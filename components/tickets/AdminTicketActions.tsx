@@ -94,8 +94,8 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
         onCancel={() => setConfirm(null)}
       />
 
-      <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-        <h2 className="font-bold mb-4" style={{ color: "#1F1535" }}>إجراءات المدير</h2>
+      <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
+        <h2 className="font-bold mb-4" style={{ color: "#16241D" }}>إجراءات المدير</h2>
 
         {ticket.status === "PENDING_APPROVAL" && (
           <div className="mb-5 p-4 rounded-xl border" style={{ background: "rgba(245,158,11,0.08)", borderColor: "rgba(245,158,11,0.25)" }}>
@@ -105,7 +105,7 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
                 onClick={() => setConfirm({ type: "approve", label: "اعتماد", danger: false })}
                 disabled={loading}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50"
-                style={{ background: "#7C3AED" }}>
+                style={{ background: "#007F5C" }}>
                 <CheckCircle2 className="w-4 h-4" />اعتماد
               </button>
               <button
@@ -140,7 +140,7 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
               <label className="block text-sm font-medium text-gray-700 mb-1.5">{f.label}</label>
               <select value={f.value} onChange={(e) => f.onChange(e.target.value)}
                 className="w-full px-3 py-2 border border-purple-100 rounded-lg text-sm focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "#7C3AED" } as any}>
+                style={{ "--tw-ring-color": "#007F5C" } as any}>
                 {f.options.map((o) => <option key={o.v} value={o.v}>{o.l}</option>)}
               </select>
             </div>
@@ -150,7 +150,7 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
             <label className="block text-sm font-medium text-gray-700 mb-1.5">إسناد إلى</label>
             <select value={assignTo} onChange={(e) => setAssignTo(e.target.value)}
               className="w-full px-3 py-2 border border-purple-100 rounded-lg text-sm focus:outline-none focus:ring-2"
-              style={{ "--tw-ring-color": "#7C3AED" } as any}>
+              style={{ "--tw-ring-color": "#007F5C" } as any}>
               <option value="">غير مسندة</option>
               {supportUsers.map((u) => <option key={u.id} value={u.id}>{u.name}</option>)}
             </select>
@@ -161,7 +161,7 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
           onClick={() => setConfirm({ type: "save", label: "حفظ", danger: false })}
           disabled={loading}
           className="mt-4 px-6 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50"
-          style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+          style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
           {loading ? "جارٍ الحفظ..." : "حفظ التغييرات"}
         </button>
       </div>

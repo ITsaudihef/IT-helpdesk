@@ -26,8 +26,8 @@ export default function SettingsToggles({ roomsEnabled, kanbanEnabled }: Props) 
       label:   "حجز القاعات",
       desc:    "السماح للمستخدمين بحجز القاعات وعرض جدول الحجوزات",
       icon:    CalendarDays,
-      color:   "#7C3AED",
-      bg:      "rgba(124,58,237,0.1)",
+      color:   "#007F5C",
+      bg:      "rgba(0,127,92,0.1)",
       enabled: roomsEnabled,
     },
     {
@@ -63,12 +63,12 @@ export default function SettingsToggles({ roomsEnabled, kanbanEnabled }: Props) 
   };
 
   return (
-    <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+    <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
       <div className="flex items-center gap-2 mb-4">
-        <div className="p-1.5 rounded-lg" style={{ background: "rgba(124,58,237,0.12)" }}>
-          <ToggleRight className="w-4 h-4" style={{ color: "#7C3AED" }} />
+        <div className="p-1.5 rounded-lg" style={{ background: "rgba(0,127,92,0.12)" }}>
+          <ToggleRight className="w-4 h-4" style={{ color: "#007F5C" }} />
         </div>
-        <h2 className="font-bold" style={{ color: "#1F1535" }}>ميزات النظام</h2>
+        <h2 className="font-bold" style={{ color: "#16241D" }}>ميزات النظام</h2>
       </div>
 
       <div className="space-y-3">
@@ -77,15 +77,15 @@ export default function SettingsToggles({ roomsEnabled, kanbanEnabled }: Props) 
           return (
             <div key={t.key}
               className="flex items-center justify-between p-4 rounded-xl transition-all"
-              style={{ background: t.enabled ? t.bg : "#F9F7FF", border: `1px solid ${t.enabled ? t.color + "33" : "#E9E3FF"}` }}>
+              style={{ background: t.enabled ? t.bg : "#F9F7FF", border: `1px solid ${t.enabled ? t.color + "33" : "#DCEAD9"}` }}>
               <div className="flex items-center gap-3 min-w-0">
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
                   style={{ background: t.enabled ? t.bg : "#F3F0FF" }}>
                   <Icon className="w-4 h-4" style={{ color: t.enabled ? t.color : "#A0A0BA" }} />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold" style={{ color: "#1F1535" }}>{t.label}</p>
-                  <p className="text-xs mt-0.5" style={{ color: "#7C6A9E" }}>{t.desc}</p>
+                  <p className="text-sm font-semibold" style={{ color: "#16241D" }}>{t.label}</p>
+                  <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>{t.desc}</p>
                 </div>
               </div>
 

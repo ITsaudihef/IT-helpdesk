@@ -37,8 +37,8 @@ export default function DeptManagerActions({ ticketId }: Props) {
   };
 
   return (
-    <div className="rounded-2xl p-5 space-y-4" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-      <h3 className="font-bold" style={{ color: "#1F1535" }}>إجراء الاعتماد</h3>
+    <div className="rounded-2xl p-5 space-y-4" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
+      <h3 className="font-bold" style={{ color: "#16241D" }}>إجراء الاعتماد</h3>
 
       <div className="flex gap-3 flex-wrap">
         {/* Approve */}
@@ -74,7 +74,7 @@ export default function DeptManagerActions({ ticketId }: Props) {
             rows={3}
             placeholder="اكتب سبب إعادة الطلب بوضوح..."
             className="w-full px-3 py-2.5 rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-red-300"
-            style={{ border: "1px solid #FECACA", background: "#FFFFFF", color: "#1F1535" }}
+            style={{ border: "1px solid #FECACA", background: "#FFFFFF", color: "#16241D" }}
           />
           <button
             onClick={() => act("reject")}

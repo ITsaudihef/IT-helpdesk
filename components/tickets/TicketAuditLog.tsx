@@ -12,7 +12,7 @@ interface AuditEntry {
 }
 
 const ACTION_ICON: Record<string, { icon: string; color: string }> = {
-  "إنشاء التذكرة":  { icon: "🟢", color: "#5B21B6" },
+  "إنشاء التذكرة":  { icon: "🟢", color: "#00543D" },
   "تغيير الحالة":   { icon: "🔄", color: "#d97706" },
   "تغيير التكليف":  { icon: "👤", color: "#7c3aed" },
   "تغيير الأولوية": { icon: "⚡", color: "#dc2626" },
@@ -39,7 +39,7 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
   }, [open, ticketId, logs.length]);
 
   return (
-    <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+    <div className="rounded-2xl shadow-sm overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
       {/* Header — always visible, click to toggle */}
       <button
         onClick={() => setOpen(o => !o)}
@@ -47,9 +47,9 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
       >
         <div className="flex items-center gap-2">
           <ClipboardList className="w-4 h-4 text-purple-500" />
-          <span className="font-semibold text-sm" style={{ color: "#1F1535" }}>سجل الأحداث</span>
+          <span className="font-semibold text-sm" style={{ color: "#16241D" }}>سجل الأحداث</span>
           {logs.length > 0 && (
-            <span className="text-xs px-2 py-0.5 rounded-full font-medium text-gray-500" style={{ background: "rgba(124,58,237,0.12)" }}>
+            <span className="text-xs px-2 py-0.5 rounded-full font-medium text-gray-500" style={{ background: "rgba(0,127,92,0.12)" }}>
               {logs.length}
             </span>
           )}
@@ -81,7 +81,7 @@ export default function TicketAuditLog({ ticketId }: { ticketId: string }) {
                     />
                     <div className="flex flex-col gap-0.5">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-sm font-semibold" style={{ color: "#1F1535" }}>{log.action}</span>
+                        <span className="text-sm font-semibold" style={{ color: "#16241D" }}>{log.action}</span>
                         {log.actor && (
                           <span className="text-xs text-purple-500">— {log.actor.name}</span>
                         )}

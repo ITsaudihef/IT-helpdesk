@@ -120,17 +120,17 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
   };
 
   const sidebarContent = (
-    <div className="flex flex-col h-full w-64" style={{ background: "#0a0525", borderLeft: "1px solid rgba(255,255,255,0.06)" }}>
+    <div className="flex flex-col h-full w-64" style={{ background: "#0A1F16", borderLeft: "1px solid rgba(255,255,255,0.06)" }}>
       {/* Logo */}
       <div className="p-5 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="flex items-center gap-3">
-          <Image src={logoSrc} alt="بوابة سند" width={40} height={40} className="rounded-xl object-cover" />
+          <Image src={logoSrc} alt="بوابة الدعم لصندوق الوقف الصحي" width={40} height={40} className="rounded-xl object-cover" />
           <div>
-            <h1 className="font-bold text-sm text-white">بوابة سند</h1>
-            <p className="text-xs" style={{ color: "#A78BFA" }}>كل تحدي وله سند</p>
+            <h1 className="font-bold text-xs text-white leading-snug">بوابة الدعم لصندوق الوقف الصحي</h1>
+            <p className="text-xs" style={{ color: "#8FCB7A" }}>دعمكم أولويتنا</p>
           </div>
         </div>
-        <button className="lg:hidden p-1 rounded-lg" style={{ color: "#A78BFA" }} onClick={() => setMobileOpen(false)} aria-label="إغلاق القائمة">
+        <button className="lg:hidden p-1 rounded-lg" style={{ color: "#8FCB7A" }} onClick={() => setMobileOpen(false)} aria-label="إغلاق القائمة">
           <X className="w-5 h-5" aria-hidden="true" />
         </button>
       </div>
@@ -148,9 +148,9 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
               aria-current={isActive ? "page" : undefined}
               className={cn("flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all")}
               style={isActive
-                ? { background: "linear-gradient(135deg, #7C3AED, #EC4899)", color: "#fff", boxShadow: "0 4px 15px rgba(124,58,237,0.35)" }
-                : { color: "#A78BFA" }}
-              onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = "rgba(124,58,237,0.12)"; }}
+                ? { background: "linear-gradient(135deg, #007F5C, #6FB449)", color: "#fff", boxShadow: "0 4px 15px rgba(0,127,92,0.35)" }
+                : { color: "#8FCB7A" }}
+              onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = "rgba(0,127,92,0.12)"; }}
               onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = "transparent"; }}
             >
               <Icon className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
@@ -164,20 +164,20 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
       <div className="p-4" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="flex items-center gap-3 mb-3">
           <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
-            style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
+            style={{ background: "linear-gradient(135deg, #007F5C, #6FB449)" }}>
             {userName.charAt(0)}
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-white truncate">{userName}</p>
-            <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: "rgba(124,58,237,0.2)", color: "#C4B5FD" }}>
+            <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: "rgba(0,127,92,0.2)", color: "#A8DB98" }}>
               {roleLabel}
             </span>
           </div>
         </div>
         <button onClick={() => { setShowModal(true); setMobileOpen(false); }}
           className="flex items-center gap-2 w-full px-3 py-2 text-sm rounded-xl transition-all mb-1"
-          style={{ color: "#A78BFA" }}
-          onMouseEnter={e => (e.currentTarget.style.background = "rgba(124,58,237,0.12)")}
+          style={{ color: "#8FCB7A" }}
+          onMouseEnter={e => (e.currentTarget.style.background = "rgba(0,127,92,0.12)")}
           onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
           <KeyRound className="w-4 h-4" />
           تغيير كلمة المرور
@@ -208,7 +208,7 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
       {/* ── Mobile hamburger button ── */}
       <button
         className="lg:hidden fixed top-4 right-4 z-40 p-2 rounded-xl"
-        style={{ background: "#0a0525", border: "1px solid rgba(124,58,237,0.3)", boxShadow: "0 4px 15px rgba(124,58,237,0.25)" }}
+        style={{ background: "#0A1F16", border: "1px solid rgba(0,127,92,0.3)", boxShadow: "0 4px 15px rgba(0,127,92,0.25)" }}
         onClick={() => setMobileOpen(true)}
         aria-label="فتح القائمة"
       >
@@ -229,9 +229,9 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" dir="rtl"
           role="dialog" aria-modal="true" aria-labelledby="change-pw-title">
-          <div className="rounded-2xl p-6 w-full max-w-sm mx-4" style={{ background: "#100835", border: "1px solid rgba(124,58,237,0.25)", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}>
+          <div className="rounded-2xl p-6 w-full max-w-sm mx-4" style={{ background: "#0F2A1F", border: "1px solid rgba(0,127,92,0.25)", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}>
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(124,58,237,0.2)" }}>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(0,127,92,0.2)" }}>
                 <KeyRound className="w-5 h-5 text-purple-300" aria-hidden="true" />
               </div>
               <h2 id="change-pw-title" className="font-bold text-white">تغيير كلمة المرور</h2>
@@ -243,14 +243,14 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
                 { id: "conf-pw", label: "تأكيد كلمة المرور",   val: confirmPw, set: setConfirmPw, show: showCon, toggle: () => setShowCon(v => !v) },
               ].map(f => (
                 <div key={f.id}>
-                  <label htmlFor={f.id} className="block text-sm font-medium mb-1" style={{ color: "#A78BFA" }}>{f.label}</label>
+                  <label htmlFor={f.id} className="block text-sm font-medium mb-1" style={{ color: "#8FCB7A" }}>{f.label}</label>
                   <div className="relative">
                     <input id={f.id} type={f.show ? "text" : "password"} value={f.val} onChange={e => f.set(e.target.value)} required minLength={8}
                       className="w-full pr-3 pl-10 py-2 rounded-lg text-sm text-white focus:outline-none"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(124,58,237,0.3)" }} />
+                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(0,127,92,0.3)" }} />
                     <button type="button" onClick={f.toggle}
                       aria-label={f.show ? `إخفاء ${f.label}` : `إظهار ${f.label}`}
-                      className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#A78BFA" }}>
+                      className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#8FCB7A" }}>
                       {f.show ? <EyeOff className="w-4 h-4" aria-hidden="true" /> : <Eye className="w-4 h-4" aria-hidden="true" />}
                     </button>
                   </div>
@@ -258,11 +258,11 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
               ))}
               <div className="flex gap-3 pt-1">
                 <button type="submit" disabled={saving} className="flex-1 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-50"
-                  style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                  style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                   {saving ? "جارٍ الحفظ..." : "حفظ"}
                 </button>
                 <button type="button" onClick={closeModal} className="flex-1 py-2 rounded-xl text-sm font-semibold"
-                  style={{ border: "1px solid rgba(255,255,255,0.1)", color: "#A78BFA" }}>
+                  style={{ border: "1px solid rgba(255,255,255,0.1)", color: "#8FCB7A" }}>
                   إلغاء
                 </button>
               </div>

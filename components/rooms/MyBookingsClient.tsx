@@ -28,14 +28,14 @@ function BookingCard({ b, canCancel, onCancel }: { b: Booking; canCancel: boolea
   const d = new Date(b.date);
   const dayName = ["الأحد","الإثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"][d.getDay()];
   return (
-    <div className="rounded-xl p-4 flex items-start gap-4" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+    <div className="rounded-xl p-4 flex items-start gap-4" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
       <div className="flex-shrink-0 w-12 h-12 rounded-xl flex flex-col items-center justify-center"
-        style={{ background: canCancel ? "rgba(124,58,237,0.08)" : "#F5F3FF", border: "1px solid #E9E3FF" }}>
-        <span className="text-xs font-medium" style={{ color: "#7C3AED" }}>{MONTHS_AR[d.getMonth()].slice(0,3)}</span>
-        <span className="text-lg font-bold leading-none" style={{ color: "#1F1535" }}>{d.getDate()}</span>
+        style={{ background: canCancel ? "rgba(0,127,92,0.08)" : "#F3F7F1", border: "1px solid #DCEAD9" }}>
+        <span className="text-xs font-medium" style={{ color: "#007F5C" }}>{MONTHS_AR[d.getMonth()].slice(0,3)}</span>
+        <span className="text-lg font-bold leading-none" style={{ color: "#16241D" }}>{d.getDate()}</span>
       </div>
       <div className="flex-1 min-w-0">
-        <p className="font-semibold truncate mb-1" style={{ color: "#1F1535" }}>{b.title}</p>
+        <p className="font-semibold truncate mb-1" style={{ color: "#16241D" }}>{b.title}</p>
         <div className="flex flex-wrap gap-3 text-xs" style={{ color: "#6B6B8A" }}>
           <span className="flex items-center gap-1"><CalendarDays className="w-3 h-3" />{dayName} {formatArabicDate(b.date)}</span>
           <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{b.startTime} – {b.endTime}</span>
@@ -79,13 +79,13 @@ export default function MyBookingsClient({ upcoming, past }: Props) {
     <div className="space-y-4">
       {/* Stats */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="rounded-xl p-4 text-center" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-          <p className="text-2xl font-bold" style={{ color: "#7C3AED" }}>{upcoming.length}</p>
-          <p className="text-xs mt-0.5" style={{ color: "#7C6A9E" }}>حجوزات قادمة</p>
+        <div className="rounded-xl p-4 text-center" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
+          <p className="text-2xl font-bold" style={{ color: "#007F5C" }}>{upcoming.length}</p>
+          <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>حجوزات قادمة</p>
         </div>
-        <div className="rounded-xl p-4 text-center" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+        <div className="rounded-xl p-4 text-center" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
           <p className="text-2xl font-bold" style={{ color: "#6B7280" }}>{past.length}</p>
-          <p className="text-xs mt-0.5" style={{ color: "#7C6A9E" }}>حجوزات سابقة</p>
+          <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>حجوزات سابقة</p>
         </div>
       </div>
 
@@ -98,8 +98,8 @@ export default function MyBookingsClient({ upcoming, past }: Props) {
           <button key={t.key} onClick={() => setTab(t.key as any)}
             className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
             style={tab === t.key
-              ? { background: "#7C3AED", color: "#fff" }
-              : { background: "#F5F3FF", color: "#7C3AED" }}>
+              ? { background: "#007F5C", color: "#fff" }
+              : { background: "#F3F7F1", color: "#007F5C" }}>
             {t.label}
           </button>
         ))}
@@ -109,10 +109,10 @@ export default function MyBookingsClient({ upcoming, past }: Props) {
       <div className="space-y-3">
         {tab === "upcoming" && (
           upcoming.length === 0 ? (
-            <div className="text-center py-16 rounded-2xl" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-              <CalendarDays className="w-10 h-10 mx-auto mb-3" style={{ color: "#D1C4FE" }} />
-              <p className="font-medium" style={{ color: "#1F1535" }}>لا توجد حجوزات قادمة</p>
-              <p className="text-sm mt-1" style={{ color: "#7C6A9E" }}>احجز قاعة من صفحة الحجز</p>
+            <div className="text-center py-16 rounded-2xl" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
+              <CalendarDays className="w-10 h-10 mx-auto mb-3" style={{ color: "#BFE0B6" }} />
+              <p className="font-medium" style={{ color: "#16241D" }}>لا توجد حجوزات قادمة</p>
+              <p className="text-sm mt-1" style={{ color: "#5C7A6C" }}>احجز قاعة من صفحة الحجز</p>
             </div>
           ) : (
             upcoming.map(b => <BookingCard key={b.id} b={b} canCancel onCancel={handleCancel} />)
@@ -120,9 +120,9 @@ export default function MyBookingsClient({ upcoming, past }: Props) {
         )}
         {tab === "past" && (
           past.length === 0 ? (
-            <div className="text-center py-16 rounded-2xl" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-              <CheckCircle className="w-10 h-10 mx-auto mb-3" style={{ color: "#D1C4FE" }} />
-              <p className="font-medium" style={{ color: "#1F1535" }}>لا توجد حجوزات سابقة</p>
+            <div className="text-center py-16 rounded-2xl" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
+              <CheckCircle className="w-10 h-10 mx-auto mb-3" style={{ color: "#BFE0B6" }} />
+              <p className="font-medium" style={{ color: "#16241D" }}>لا توجد حجوزات سابقة</p>
             </div>
           ) : (
             past.map(b => <BookingCard key={b.id} b={b} canCancel={false} onCancel={handleCancel} />)

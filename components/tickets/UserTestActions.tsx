@@ -36,10 +36,10 @@ export default function UserTestActions({ ticketId }: Props) {
   };
 
   return (
-    <div className="rounded-2xl p-5 space-y-4" style={{ background: "rgba(124,58,237,0.06)", border: "1px solid rgba(124,58,237,0.25)" }}>
+    <div className="rounded-2xl p-5 space-y-4" style={{ background: "rgba(0,127,92,0.06)", border: "1px solid rgba(0,127,92,0.25)" }}>
       <div>
-        <h3 className="font-bold" style={{ color: "#1F1535" }}>اختبار قبل الإطلاق</h3>
-        <p className="text-sm mt-1" style={{ color: "#7C6A9E" }}>التطوير انتهى — جرّب التذكرة وأخبرنا بالنتيجة قبل ما نطلقها.</p>
+        <h3 className="font-bold" style={{ color: "#16241D" }}>اختبار قبل الإطلاق</h3>
+        <p className="text-sm mt-1" style={{ color: "#5C7A6C" }}>التطوير انتهى — جرّب التذكرة وأخبرنا بالنتيجة قبل ما نطلقها.</p>
       </div>
 
       <div className="flex gap-3 flex-wrap">
@@ -47,7 +47,7 @@ export default function UserTestActions({ ticketId }: Props) {
           onClick={() => act("pass")}
           disabled={!!loading}
           className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-50 transition-all"
-          style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+          style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
           {loading === "pass" ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
           تم الاختبار بنجاح
         </button>
@@ -73,7 +73,7 @@ export default function UserTestActions({ ticketId }: Props) {
             rows={3}
             placeholder="وش صار بالضبط وش المتوقع..."
             className="w-full px-3 py-2.5 rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-red-300"
-            style={{ border: "1px solid #FECACA", background: "#FFFFFF", color: "#1F1535" }}
+            style={{ border: "1px solid #FECACA", background: "#FFFFFF", color: "#16241D" }}
           />
           <button
             onClick={() => act("fail")}

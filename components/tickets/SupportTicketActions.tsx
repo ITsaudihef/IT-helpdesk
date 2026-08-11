@@ -68,8 +68,8 @@ export default function SupportTicketActions({ ticket, supportUsers, currentUser
         onCancel={() => setConfirm(null)}
       />
 
-      <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-        <h2 className="font-bold mb-4" style={{ color: "#1F1535" }}>الإجراءات</h2>
+      <div className="rounded-2xl p-6 shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
+        <h2 className="font-bold mb-4" style={{ color: "#16241D" }}>الإجراءات</h2>
         <div className="space-y-4">
           {transitions.length > 0 && (
             <div>
@@ -78,9 +78,9 @@ export default function SupportTicketActions({ ticket, supportUsers, currentUser
                 {transitions.map((s) => (
                   <button key={s} onClick={() => handleStatusClick(s)} disabled={loading}
                     className="px-3 py-1.5 rounded-lg text-sm font-medium border disabled:opacity-50 transition-colors"
-                    style={{ borderColor: "#7C3AED", color: "#5B21B6", background: "rgba(124,58,237,0.12)" }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#7C3AED"; (e.currentTarget as HTMLElement).style.color = "#fff"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(124,58,237,0.12)"; (e.currentTarget as HTMLElement).style.color = "#5B21B6"; }}>
+                    style={{ borderColor: "#007F5C", color: "#00543D", background: "rgba(0,127,92,0.12)" }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#007F5C"; (e.currentTarget as HTMLElement).style.color = "#fff"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(0,127,92,0.12)"; (e.currentTarget as HTMLElement).style.color = "#00543D"; }}>
                     → {statusLabel[s]}
                   </button>
                 ))}
@@ -93,7 +93,7 @@ export default function SupportTicketActions({ ticket, supportUsers, currentUser
             <div className="flex gap-2">
               <select value={assignTo} onChange={(e) => setAssignTo(e.target.value)}
                 className="flex-1 px-3 py-2 border border-purple-100 rounded-lg text-sm focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "#7C3AED" } as any}>
+                style={{ "--tw-ring-color": "#007F5C" } as any}>
                 <option value="">غير مسندة</option>
                 {supportUsers.map((u) => (
                   <option key={u.id} value={u.id}>{u.name}{u.id === currentUserId ? " (أنا)" : ""}</option>
@@ -101,7 +101,7 @@ export default function SupportTicketActions({ ticket, supportUsers, currentUser
               </select>
               <button onClick={() => updateTicket({ assignedToId: assignTo || null })} disabled={loading}
                 className="px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50"
-                style={{ background: "#7C3AED" }}>
+                style={{ background: "#007F5C" }}>
                 حفظ
               </button>
             </div>

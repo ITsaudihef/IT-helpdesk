@@ -27,13 +27,13 @@ export default function Pagination({ total, page, perPage }: Props) {
 
   return (
     <div className="flex items-center justify-between pt-4 border-t border-purple-100">
-      <span className="text-xs" style={{ color: "#7C6A9E" }}>
+      <span className="text-xs" style={{ color: "#5C7A6C" }}>
         {(page - 1) * perPage + 1}–{Math.min(page * perPage, total)} من {total}
       </span>
       <div className="flex items-center gap-1">
         <button onClick={() => go(page - 1)} disabled={page === 1}
           className="p-1.5 rounded-lg transition-colors disabled:opacity-30 hover:bg-purple-50"
-          style={{ color: "#7C3AED" }}>
+          style={{ color: "#007F5C" }}>
           <ChevronRight className="w-4 h-4" />
         </button>
         {pages.map((p, i) =>
@@ -43,7 +43,7 @@ export default function Pagination({ total, page, perPage }: Props) {
             <button key={p} onClick={() => go(p as number)}
               className="w-7 h-7 rounded-lg text-xs font-medium transition-colors"
               style={p === page
-                ? { background: "#7C3AED", color: "#fff" }
+                ? { background: "#007F5C", color: "#fff" }
                 : { color: "#374151" }}>
               {p}
             </button>
@@ -51,7 +51,7 @@ export default function Pagination({ total, page, perPage }: Props) {
         )}
         <button onClick={() => go(page + 1)} disabled={page === totalPages}
           className="p-1.5 rounded-lg transition-colors disabled:opacity-30 hover:bg-purple-50"
-          style={{ color: "#7C3AED" }}>
+          style={{ color: "#007F5C" }}>
           <ChevronLeft className="w-4 h-4" />
         </button>
       </div>

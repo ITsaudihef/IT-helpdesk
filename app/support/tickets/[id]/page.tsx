@@ -39,11 +39,11 @@ export default async function SupportTicketPage({ params }: { params: { id: stri
     <div className="max-w-3xl mx-auto space-y-6">
       <Breadcrumb crumbs={[{ label: "الرئيسية", href: "/support" }, { label: "التذاكر", href: "/support/tickets" }, { label: ticket.ticketNo }]} />
       {/* Header */}
-      <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+      <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
         <div className="flex items-start justify-between gap-4 mb-4">
           <div>
             <p className="text-sm text-purple-600 mb-1">{ticket.ticketNo}</p>
-            <h1 className="text-xl font-bold" style={{ color: "#1F1535" }}>{ticket.title}</h1>
+            <h1 className="text-xl font-bold" style={{ color: "#16241D" }}>{ticket.title}</h1>
           </div>
           <div className="flex flex-col items-end gap-2">
             <StatusBadge status={ticket.status} />

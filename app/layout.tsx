@@ -3,7 +3,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  title: "بوابة سند",
+  title: "بوابة الدعم لصندوق الوقف الصحي",
   description: "نظام إدارة تذاكر دعم تقنية المعلومات",
 };
 
@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ar" dir="rtl">
-      <body className="antialiased" style={{ background: "#080820" }}>
+      <body className="antialiased" style={{ background: "#071711" }}>
         {children}
         <Toaster
           position="top-right"
@@ -32,11 +32,11 @@ export default function RootLayout({
             },
             success: {
               style: {
-                background:  "rgba(124,58,237,0.12)",
-                color:       "#5B21B6",
-                border:      "1px solid #7C3AED",
+                background:  "rgba(0,127,92,0.12)",
+                color:       "#00543D",
+                border:      "1px solid #007F5C",
               },
-              iconTheme: { primary: "#7C3AED", secondary: "#fff" },
+              iconTheme: { primary: "#007F5C", secondary: "#fff" },
             },
             error: {
               style: {

@@ -148,7 +148,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <button onClick={() => changeDate(-1)}
             className="p-2 rounded-xl flex-shrink-0 transition-all hover:shadow-sm"
-            style={{ background: "#F5F3FF", border: "1px solid #D1C4FE", color: "#7C3AED" }}>
+            style={{ background: "#F3F7F1", border: "1px solid #BFE0B6", color: "#007F5C" }}>
             <ChevronRight className="w-4 h-4" />
           </button>
 
@@ -156,28 +156,28 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
             <div className="flex items-center justify-center gap-2">
               {isToday && (
                 <span className="hidden sm:inline text-xs px-2 py-0.5 rounded-full font-bold"
-                  style={{ background: "#7C3AED", color: "#fff" }}>اليوم</span>
+                  style={{ background: "#007F5C", color: "#fff" }}>اليوم</span>
               )}
               <input
                 type="date" value={date}
                 onChange={e => router.push(`/rooms?date=${e.target.value}`)}
                 className="bg-transparent text-sm font-bold focus:outline-none text-center cursor-pointer"
-                style={{ color: "#1F1535" }}
+                style={{ color: "#16241D" }}
               />
             </div>
-            <p className="text-xs mt-0.5 hidden sm:block" style={{ color: "#7C6A9E" }}>{fmtDate(date)}</p>
+            <p className="text-xs mt-0.5 hidden sm:block" style={{ color: "#5C7A6C" }}>{fmtDate(date)}</p>
           </div>
 
           <button onClick={() => changeDate(1)}
             className="p-2 rounded-xl flex-shrink-0 transition-all hover:shadow-sm"
-            style={{ background: "#F5F3FF", border: "1px solid #D1C4FE", color: "#7C3AED" }}>
+            style={{ background: "#F3F7F1", border: "1px solid #BFE0B6", color: "#007F5C" }}>
             <ChevronLeft className="w-4 h-4" />
           </button>
         </div>
 
         <button onClick={() => openModal()}
           className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm flex-shrink-0"
-          style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+          style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
           <Plus className="w-4 h-4" /><span>حجز جديد</span>
         </button>
       </div>
@@ -185,7 +185,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
       {/* ── Legend ── */}
       <div className="flex items-center gap-5 mb-4 flex-wrap">
         {[
-          { color: "#7C3AED", bg: "rgba(124,58,237,0.15)", label: "حجزي" },
+          { color: "#007F5C", bg: "rgba(0,127,92,0.15)", label: "حجزي" },
           { color: "#64748B", bg: "rgba(100,116,139,0.12)", label: "محجوز" },
           { color: "#16A34A", bg: "rgba(22,163,74,0.1)",   label: "متاحة" },
         ].map(l => (
@@ -201,12 +201,12 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
           DESKTOP  — Gantt timeline  (md and above)
       ════════════════════════════════════════════════ */}
       <div className="hidden md:block rounded-2xl overflow-hidden shadow-sm"
-        style={{ background: "#fff", border: "1px solid #E9E3FF" }}>
+        style={{ background: "#fff", border: "1px solid #DCEAD9" }}>
 
         {/* Hour header */}
-        <div className="flex items-center" style={{ borderBottom: "2px solid #E9E3FF", height: "32px" }}>
+        <div className="flex items-center" style={{ borderBottom: "2px solid #DCEAD9", height: "32px" }}>
           {/* spacer for room label column */}
-          <div className="flex-shrink-0" style={{ width: LABEL_COL, borderLeft: "1px solid #E9E3FF" }} />
+          <div className="flex-shrink-0" style={{ width: LABEL_COL, borderLeft: "1px solid #DCEAD9" }} />
           {/* hour labels – relative container, labels at % positions */}
           <div className="flex-1 relative">
             {HOURS.map((h, i) => (
@@ -237,7 +237,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
               {/* Room label */}
               <div className="flex-shrink-0 flex flex-col justify-center px-4 py-2"
                 style={{ width: LABEL_COL, background: "#FAFBFF", borderLeft: "1px solid #EEEBFF" }}>
-                <p className="text-xs font-bold truncate" style={{ color: "#1F1535" }}>{room.name}</p>
+                <p className="text-xs font-bold truncate" style={{ color: "#16241D" }}>{room.name}</p>
                 <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
                   <span className="text-xs flex items-center gap-0.5" style={{ color: "#A0A0BA" }}>
                     <Users className="w-2.5 h-2.5" />{room.capacity}
@@ -268,7 +268,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
 
                 {/* Hover tint */}
                 <div className="absolute inset-0 opacity-0 group-hover/row:opacity-100 transition-opacity pointer-events-none"
-                  style={{ background: "rgba(124,58,237,0.025)" }} />
+                  style={{ background: "rgba(0,127,92,0.025)" }} />
 
                 {/* Booking blocks */}
                 {rb.map(b => {
@@ -285,7 +285,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
                         width:      `${w}%`,
                         top:        "8px",
                         height:     "44px",
-                        background: isMe ? "rgba(124,58,237,0.14)" : "rgba(100,116,139,0.1)",
+                        background: isMe ? "rgba(0,127,92,0.14)" : "rgba(100,116,139,0.1)",
                         border:     `1.5px solid ${isMe ? "#8B5CF6" : "#94A3B8"}`,
                         cursor:     isMe ? "pointer" : "default",
                         zIndex:     1,
@@ -294,7 +294,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
                       <div className="flex flex-col justify-center h-full px-2 overflow-hidden">
                         {w > 6 && (
                           <span className="text-xs font-bold truncate leading-tight"
-                            style={{ color: isMe ? "#5B21B6" : "#475569" }}>
+                            style={{ color: isMe ? "#00543D" : "#475569" }}>
                             {isMe ? b.title : (
                               <span className="flex items-center gap-1">
                                 <Lock className="w-2.5 h-2.5" />محجوز
@@ -329,18 +329,18 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
 
           return (
             <div key={room.id} className="rounded-2xl overflow-hidden"
-              style={{ background: "#fff", border: "1px solid #E9E3FF" }}>
+              style={{ background: "#fff", border: "1px solid #DCEAD9" }}>
 
               {/* Card header */}
               <div className="flex items-center justify-between px-4 py-3"
                 style={{ background: "#FAFBFF", borderBottom: isFree ? "none" : "1px solid #F3F0FF" }}>
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: "rgba(124,58,237,0.1)" }}>
-                    <CalendarDays className="w-4 h-4" style={{ color: "#7C3AED" }} />
+                    style={{ background: "rgba(0,127,92,0.1)" }}>
+                    <CalendarDays className="w-4 h-4" style={{ color: "#007F5C" }} />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-bold text-sm truncate" style={{ color: "#1F1535" }}>{room.name}</p>
+                    <p className="font-bold text-sm truncate" style={{ color: "#16241D" }}>{room.name}</p>
                     <div className="flex items-center gap-2 text-xs mt-0.5" style={{ color: "#A0A0BA" }}>
                       <span className="flex items-center gap-0.5"><Users className="w-3 h-3" />{room.capacity}</span>
                       {room.location && <span className="flex items-center gap-0.5"><MapPin className="w-3 h-3" />{room.location}</span>}
@@ -357,7 +357,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
                   </span>
                   <button onClick={() => openModal(room.id)}
                     className="flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold text-white"
-                    style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                    style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                     <Plus className="w-3 h-3" />حجز
                   </button>
                 </div>
@@ -373,17 +373,17 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
                         onClick={() => isMe && setSelectedBooking(b)}
                         className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all"
                         style={{
-                          background: isMe ? "rgba(124,58,237,0.07)" : "rgba(100,116,139,0.05)",
-                          border:     `1px solid ${isMe ? "#C4B5FD" : "#E2E8F0"}`,
+                          background: isMe ? "rgba(0,127,92,0.07)" : "rgba(100,116,139,0.05)",
+                          border:     `1px solid ${isMe ? "#A8DB98" : "#E2E8F0"}`,
                           cursor:     isMe ? "pointer" : "default",
                         }}>
                         {/* color bar */}
                         <div className="w-1 h-9 rounded-full flex-shrink-0"
-                          style={{ background: isMe ? "#7C3AED" : "#94A3B8" }} />
+                          style={{ background: isMe ? "#007F5C" : "#94A3B8" }} />
                         {/* info */}
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-semibold truncate"
-                            style={{ color: isMe ? "#5B21B6" : "#64748B" }}>
+                            style={{ color: isMe ? "#00543D" : "#64748B" }}>
                             {isMe ? b.title : "محجوز"}
                           </p>
                           <p className="text-xs mt-0.5 flex items-center gap-1"
@@ -394,7 +394,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
                         {/* badge / lock */}
                         {isMe ? (
                           <span className="text-xs px-2 py-0.5 rounded-full flex-shrink-0 font-medium"
-                            style={{ background: "rgba(124,58,237,0.1)", color: "#7C3AED" }}>
+                            style={{ background: "rgba(0,127,92,0.1)", color: "#007F5C" }}>
                             حجزي
                           </span>
                         ) : (
@@ -420,19 +420,19 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
           <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40"
             onClick={() => setSelectedBooking(null)}>
             <div className="rounded-t-2xl sm:rounded-2xl w-full max-w-sm shadow-xl mx-0 sm:mx-4"
-              style={{ background: "#fff", border: "1px solid #E9E3FF" }}
+              style={{ background: "#fff", border: "1px solid #DCEAD9" }}
               onClick={e => e.stopPropagation()}>
 
               {/* handle bar (mobile) */}
               <div className="sm:hidden flex justify-center pt-3 pb-1">
-                <div className="w-10 h-1 rounded-full" style={{ background: "#E9E3FF" }} />
+                <div className="w-10 h-1 rounded-full" style={{ background: "#DCEAD9" }} />
               </div>
 
               <div className="flex items-start justify-between px-5 pt-4 pb-3"
                 style={{ borderBottom: "1px solid #F3F0FF" }}>
                 <div className="min-w-0">
-                  <p className="font-bold text-base truncate" style={{ color: "#1F1535" }}>{b.title}</p>
-                  {room && <p className="text-xs mt-0.5" style={{ color: "#7C6A9E" }}>{room.name}</p>}
+                  <p className="font-bold text-base truncate" style={{ color: "#16241D" }}>{b.title}</p>
+                  {room && <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>{room.name}</p>}
                 </div>
                 <button onClick={() => setSelectedBooking(null)}
                   className="flex-shrink-0 p-1.5 rounded-lg hover:bg-purple-50 mr-2">
@@ -442,16 +442,16 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
 
               <div className="px-5 py-4 space-y-3">
                 <div className="flex items-center gap-2 text-sm" style={{ color: "#374151" }}>
-                  <CalendarDays className="w-4 h-4 flex-shrink-0" style={{ color: "#7C3AED" }} />
+                  <CalendarDays className="w-4 h-4 flex-shrink-0" style={{ color: "#007F5C" }} />
                   {fmtDate(b.date)}
                 </div>
                 <div className="flex items-center gap-2 text-sm" style={{ color: "#374151" }}>
-                  <Clock className="w-4 h-4 flex-shrink-0" style={{ color: "#7C3AED" }} />
+                  <Clock className="w-4 h-4 flex-shrink-0" style={{ color: "#007F5C" }} />
                   {b.startTime} – {b.endTime}
                 </div>
                 {b.notes && (
                   <p className="text-sm rounded-xl px-3 py-2"
-                    style={{ background: "#F5F3FF", color: "#5B21B6" }}>{b.notes}</p>
+                    style={{ background: "#F3F7F1", color: "#00543D" }}>{b.notes}</p>
                 )}
                 <button onClick={() => cancelBooking(b.id)}
                   className="w-full py-2.5 rounded-xl text-sm font-semibold transition-all"
@@ -471,22 +471,22 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 p-0 sm:p-4"
           dir="rtl" onClick={() => setShowModal(false)}>
           <div className="rounded-t-2xl sm:rounded-2xl w-full max-w-md shadow-xl"
-            style={{ background: "#fff", border: "1px solid #E9E3FF" }}
+            style={{ background: "#fff", border: "1px solid #DCEAD9" }}
             onClick={e => e.stopPropagation()}>
 
             {/* handle bar */}
             <div className="sm:hidden flex justify-center pt-3 pb-1">
-              <div className="w-10 h-1 rounded-full" style={{ background: "#E9E3FF" }} />
+              <div className="w-10 h-1 rounded-full" style={{ background: "#DCEAD9" }} />
             </div>
 
             <div className="flex items-center justify-between px-6 py-4"
               style={{ borderBottom: "1px solid #F3F0FF" }}>
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                  style={{ background: "rgba(124,58,237,0.1)" }}>
-                  <CalendarDays className="w-5 h-5" style={{ color: "#7C3AED" }} />
+                  style={{ background: "rgba(0,127,92,0.1)" }}>
+                  <CalendarDays className="w-5 h-5" style={{ color: "#007F5C" }} />
                 </div>
-                <h2 className="font-bold text-base" style={{ color: "#1F1535" }}>حجز قاعة</h2>
+                <h2 className="font-bold text-base" style={{ color: "#16241D" }}>حجز قاعة</h2>
               </div>
               <button onClick={() => setShowModal(false)} className="p-1.5 rounded-lg hover:bg-purple-50">
                 <X className="w-4 h-4" style={{ color: "#9CA3AF" }} />
@@ -499,7 +499,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
                 <select value={form.roomId}
                   onChange={e => setForm(f => ({ ...f, roomId: e.target.value }))} required
                   className="w-full px-3 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-                  style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }}>
+                  style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }}>
                   {rooms.map(r => (
                     <option key={r.id} value={r.id}>{r.name} ({r.capacity} أشخاص)</option>
                   ))}
@@ -512,7 +512,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
                   onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
                   placeholder="مثال: اجتماع فريق التطوير"
                   className="w-full px-3 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-                  style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
+                  style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
               </Field>
 
               {/* Date */}
@@ -520,7 +520,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
                 <input type="date" value={form.date} required
                   onChange={e => setForm(f => ({ ...f, date: e.target.value }))}
                   className="w-full px-3 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-                  style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
+                  style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
               </Field>
 
               {/* Time row */}
@@ -529,13 +529,13 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
                   <input type="time" value={form.startTime} required
                     onChange={e => setForm(f => ({ ...f, startTime: e.target.value }))}
                     className="w-full px-3 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-                    style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
+                    style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
                 </Field>
                 <Field label="إلى">
                   <input type="time" value={form.endTime} required
                     onChange={e => setForm(f => ({ ...f, endTime: e.target.value }))}
                     className="w-full px-3 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-                    style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
+                    style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
                 </Field>
               </div>
 
@@ -546,7 +546,7 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
                   placeholder="تجهيزات مطلوبة، عدد الحضور..."
                   rows={2}
                   className="w-full px-3 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none"
-                  style={{ border: "1px solid #D1C4FE", background: "#FAFAFA", color: "#1F1535" }} />
+                  style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
               </Field>
 
               {/* Conflict error */}
@@ -560,12 +560,12 @@ export default function RoomTimeline({ rooms, bookings, date, currentUserId }: P
               <div className="flex gap-3 pt-1">
                 <button type="submit" disabled={saving}
                   className="flex-1 py-3 rounded-xl text-sm font-semibold text-white disabled:opacity-50 flex items-center justify-center gap-2"
-                  style={{ background: "linear-gradient(135deg,#7C3AED,#EC4899)" }}>
+                  style={{ background: "linear-gradient(135deg,#007F5C,#6FB449)" }}>
                   {saving ? "جارٍ الحجز…" : <><CheckCircle className="w-4 h-4" />تأكيد الحجز</>}
                 </button>
                 <button type="button" onClick={() => setShowModal(false)}
                   className="flex-1 py-3 rounded-xl text-sm font-semibold"
-                  style={{ border: "1px solid #E9E3FF", color: "#6D28D9" }}>
+                  style={{ border: "1px solid #DCEAD9", color: "#00694A" }}>
                   إلغاء
                 </button>
               </div>
@@ -591,7 +591,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 function EmptyRooms() {
   return (
     <div className="text-center py-16">
-      <CalendarDays className="w-10 h-10 mx-auto mb-3" style={{ color: "#D1C4FE" }} />
+      <CalendarDays className="w-10 h-10 mx-auto mb-3" style={{ color: "#BFE0B6" }} />
       <p style={{ color: "#6B6B8A" }}>لا توجد قاعات متاحة</p>
     </div>
   );

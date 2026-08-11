@@ -27,12 +27,12 @@ export default async function RoomsPage({ searchParams }: { searchParams: { date
     <div className="space-y-2">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h1 className="text-lg font-bold" style={{ color: "#1F1535" }}>حجز القاعات</h1>
-          <p className="text-sm mt-0.5" style={{ color: "#7C6A9E" }}>اعرض التوفر واحجز قاعتك</p>
+          <h1 className="text-lg font-bold" style={{ color: "#16241D" }}>حجز القاعات</h1>
+          <p className="text-sm mt-0.5" style={{ color: "#5C7A6C" }}>اعرض التوفر واحجز قاعتك</p>
         </div>
         <Link href="/rooms/my"
           className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold transition-all"
-          style={{ background: "#F5F3FF", border: "1px solid #D1C4FE", color: "#7C3AED" }}>
+          style={{ background: "#F3F7F1", border: "1px solid #BFE0B6", color: "#007F5C" }}>
           <CalendarDays className="w-4 h-4" />
           حجوزاتي
         </Link>

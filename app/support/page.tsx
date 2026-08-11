@@ -37,7 +37,7 @@ export default async function SupportDashboard() {
         {[
           { label: "مفتوحة",           value: open,        bg: "rgba(148,163,184,0.12)", fg: "#64748B" },
           { label: "قيد المعالجة",     value: inProgress,  bg: "rgba(245,158,11,0.15)",  fg: "#D97706" },
-          { label: "بانتظار معلومات",  value: waiting,     bg: "rgba(124,58,237,0.15)",  fg: "#7C3AED" },
+          { label: "بانتظار معلومات",  value: waiting,     bg: "rgba(0,127,92,0.15)",  fg: "#007F5C" },
           { label: "مغلقة (منجزة)",    value: closedCount, bg: "rgba(100,116,139,0.12)", fg: "#475569" },
         ].map(s => (
           <div key={s.label} className="rounded-xl border border-purple-100 p-4 text-center" style={{ background: "#FFFFFF" }}>
@@ -49,16 +49,16 @@ export default async function SupportDashboard() {
       </div>
 
       <div>
-        <h2 className="font-bold mb-4" style={{ color: "#1F1535" }}>
+        <h2 className="font-bold mb-4" style={{ color: "#16241D" }}>
           التذاكر المسندة إليّ ({sorted.length}) — مرتبة بالأولوية
         </h2>
 
         {sorted.length === 0 ? (
-          <div className="rounded-2xl p-12 text-center shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
-            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(124,58,237,0.12)" }}>
-              <HeadphonesIcon className="w-8 h-8" style={{ color: "#7C3AED" }} />
+          <div className="rounded-2xl p-12 text-center shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
+            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(0,127,92,0.12)" }}>
+              <HeadphonesIcon className="w-8 h-8" style={{ color: "#007F5C" }} />
             </div>
-            <h3 className="font-semibold" style={{ color: "#1F1535" }}>لا توجد تذاكر مسندة</h3>
+            <h3 className="font-semibold" style={{ color: "#16241D" }}>لا توجد تذاكر مسندة</h3>
             <p className="text-sm text-purple-600 mt-1">أنت متاح لاستقبال تذاكر جديدة</p>
           </div>
         ) : (

@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     data: {
       title: title.trim(),
       description: description?.trim() || null,
-      color: color || "#7C3AED",
+      color: color || "#007F5C",
       startDate: startDate ? new Date(startDate) : null,
       endDate:   endDate   ? new Date(endDate)   : null,
       createdById: session.user.id,

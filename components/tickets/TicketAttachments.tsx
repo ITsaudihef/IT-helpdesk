@@ -64,10 +64,10 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
   };
 
   return (
-    <div className="rounded-2xl p-5 shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+    <div className="rounded-2xl p-5 shadow-sm" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
       <div className="flex items-center gap-2 mb-4">
-        <Paperclip className="w-4 h-4" style={{ color: "#7C3AED" }} />
-        <h3 className="font-bold text-sm" style={{ color: "#1F1535" }}>
+        <Paperclip className="w-4 h-4" style={{ color: "#007F5C" }} />
+        <h3 className="font-bold text-sm" style={{ color: "#16241D" }}>
           المرفقات {list.length > 0 && <span className="text-purple-500 font-normal">({list.length})</span>}
         </h3>
       </div>
@@ -81,11 +81,11 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
           {list.map(a => (
             <li key={a.id}
               className="flex items-center gap-3 p-3 rounded-lg border border-purple-100 bg-purple-50 hover:bg-purple-50 transition-colors">
-              <span style={{ color: "#7C3AED" }}>{fileIcon(a.fileName)}</span>
+              <span style={{ color: "#007F5C" }}>{fileIcon(a.fileName)}</span>
               <span className="flex-1 text-sm text-purple-200 truncate">{a.fileName}</span>
               <a href={a.fileUrl} target="_blank" rel="noreferrer" download={a.fileName}
                 className="p-1.5 rounded-lg hover:bg-purple-900 transition-colors"
-                style={{ color: "#5B21B6" }}>
+                style={{ color: "#00543D" }}>
                 <Download className="w-4 h-4" />
               </a>
             </li>
@@ -102,8 +102,8 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
             onDragOver={e => e.preventDefault()}
             onDrop={e => { e.preventDefault(); addFiles(e.dataTransfer.files); }}
             className="border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-colors hover:bg-purple-50"
-            style={{ borderColor: "#7C3AED" }}>
-            <Upload className="w-6 h-6 mx-auto mb-1" style={{ color: "#7C3AED" }} />
+            style={{ borderColor: "#007F5C" }}>
+            <Upload className="w-6 h-6 mx-auto mb-1" style={{ color: "#007F5C" }} />
             <p className="text-xs text-gray-500">اسحب ملفات أو اضغط للاختيار</p>
             <p className="text-xs text-purple-500 mt-1">الحد الأقصى للملف: 2MB</p>
             <input ref={fileRef} type="file" multiple className="hidden" accept={ALLOWED}
@@ -129,7 +129,7 @@ export default function TicketAttachments({ ticketId, attachments: initial, canU
           {pending.length > 0 && (
             <button onClick={upload} disabled={uploading}
               className="w-full py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 transition-all"
-              style={{ background: uploading ? "#9dd274" : "#7C3AED" }}>
+              style={{ background: uploading ? "#9dd274" : "#007F5C" }}>
               {uploading ? "جارٍ الرفع..." : `رفع ${pending.length} ملف`}
             </button>
           )}

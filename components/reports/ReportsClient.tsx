@@ -7,7 +7,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from "recharts";
 
-const HEF_COLORS = ["#7C3AED", "#5B21B6", "#9dd274", "#c3e4a6", "#58a033", "#438026"];
+const HEF_COLORS = ["#007F5C", "#00543D", "#9dd274", "#c3e4a6", "#58a033", "#438026"];
 
 const ARABIC_TYPE: Record<string, string> = {
   SUPPORT: "دعم فني", SHIFA_SUPPORT: "دعم فني - شفاء", DEVELOPMENT: "تطوير",
@@ -20,18 +20,18 @@ const ARABIC_STATUS: Record<string, string> = {
 const STATUS_COLORS: Record<string, { bg: string; fg: string }> = {
   OPEN:             { bg: "#F1F5F9", fg: "#475569" },
   IN_PROGRESS:      { bg: "#FEF3C7", fg: "#92400E" },
-  WAITING_INFO:     { bg: "#EDE9FE", fg: "#5B21B6" },
+  WAITING_INFO:     { bg: "#E3F2E0", fg: "#00543D" },
   PENDING_APPROVAL: { bg: "#FEF3C7", fg: "#B45309" },
   RESOLVED:         { bg: "#D1FAE5", fg: "#065F46" },
   CLOSED:           { bg: "#F3F4F6", fg: "#374151" },
 };
 const TYPE_META: Record<string, { bg: string; fg: string; icon: string }> = {
-  SUPPORT:       { bg: "#EDE9FE", fg: "#5B21B6", icon: "🛠️" },
+  SUPPORT:       { bg: "#E3F2E0", fg: "#00543D", icon: "🛠️" },
   SHIFA_SUPPORT: { bg: "#DBEAFE", fg: "#1D4ED8", icon: "🏥" },
   DEVELOPMENT:   { bg: "#F3E8FF", fg: "#7E22CE", icon: "💻" },
 };
 const ARABIC_PRIORITY: Record<string, string> = { CRITICAL: "حرجة", HIGH: "عالية", MEDIUM: "متوسطة", LOW: "منخفضة" };
-const PRIORITY_COLORS: Record<string, string>  = { حرجة: "#ef4444", عالية: "#f97316", متوسطة: "#7C3AED", منخفضة: "#5B21B6" };
+const PRIORITY_COLORS: Record<string, string>  = { حرجة: "#ef4444", عالية: "#f97316", متوسطة: "#007F5C", منخفضة: "#00543D" };
 
 export default function ReportsClient() {
   const [period,  setPeriod]  = useState("monthly");
@@ -74,8 +74,8 @@ export default function ReportsClient() {
           <button key={p.value} onClick={() => setPeriod(p.value)}
             className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
             style={period === p.value
-              ? { background: "linear-gradient(135deg,#7C3AED,#EC4899)", color: "#fff" }
-              : { color: "#6D28D9", background: "transparent" }}>
+              ? { background: "linear-gradient(135deg,#007F5C,#6FB449)", color: "#fff" }
+              : { color: "#00694A", background: "transparent" }}>
             {p.label}
           </button>
         ))}
@@ -84,7 +84,7 @@ export default function ReportsClient() {
       {/* Top KPI row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: "إجمالي التذاكر",  value: summary.total,                    fg: "#5B21B6", bg: "#EDE9FE" },
+          { label: "إجمالي التذاكر",  value: summary.total,                    fg: "#00543D", bg: "#E3F2E0" },
           { label: "تذاكر حرجة",      value: summary.critical,                 fg: "#DC2626", bg: "#FEE2E2" },
           { label: "محلولة + مغلقة",  value: summary.resolved,                 fg: "#065F46", bg: "#D1FAE5" },
           { label: "متوسط وقت الحل",  value: `${summary.avgResolutionHours}س`, fg: "#92400E", bg: "#FEF3C7" },
@@ -98,7 +98,7 @@ export default function ReportsClient() {
 
       {/* ── Detailed Status Breakdown ── */}
       <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
-        <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>إحصائيات التذاكر حسب الحالة</h3>
+        <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>إحصائيات التذاكر حسب الحالة</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {STATUS_KEYS.map((key) => {
             const c   = STATUS_COLORS[key];
@@ -121,7 +121,7 @@ export default function ReportsClient() {
 
       {/* ── Detailed Type Breakdown ── */}
       <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
-        <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>إحصائيات التذاكر حسب النوع</h3>
+        <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>إحصائيات التذاكر حسب النوع</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {(["SUPPORT", "SHIFA_SUPPORT", "DEVELOPMENT"] as const).map((key) => {
             const meta = TYPE_META[key];
@@ -151,7 +151,7 @@ export default function ReportsClient() {
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Incoming vs Resolved */}
         <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
-          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>الواردة مقابل المحلولة</h3>
+          <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>الواردة مقابل المحلولة</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.dailyData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -159,15 +159,15 @@ export default function ReportsClient() {
               <YAxis tick={{ fontSize: 10 }} />
               <Tooltip />
               <Legend />
-              <Bar dataKey="created"  name="واردة"  fill="#7C3AED" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="resolved" name="محلولة" fill="#5B21B6" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="created"  name="واردة"  fill="#007F5C" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="resolved" name="محلولة" fill="#00543D" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         {/* Type pie */}
         <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
-          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>توزيع أنواع التذاكر</h3>
+          <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>توزيع أنواع التذاكر</h3>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie data={typeData} cx="50%" cy="50%" innerRadius={55} outerRadius={85}
@@ -182,7 +182,7 @@ export default function ReportsClient() {
 
         {/* Staff performance */}
         <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
-          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>أداء موظفي الدعم</h3>
+          <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>أداء موظفي الدعم</h3>
           {data.staffData.length === 0 ? (
             <p className="text-sm text-purple-500 text-center py-8">لا توجد بيانات بعد</p>
           ) : (
@@ -193,8 +193,8 @@ export default function ReportsClient() {
                 <YAxis type="category" dataKey="name" tick={{ fontSize: 10 }} width={80} />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="resolved"  name="محلولة"             fill="#7C3AED" radius={[0, 4, 4, 0]} />
-                <Bar dataKey="avgHours"  name="متوسط الحل (ساعة)" fill="#5B21B6" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="resolved"  name="محلولة"             fill="#007F5C" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="avgHours"  name="متوسط الحل (ساعة)" fill="#00543D" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
@@ -202,7 +202,7 @@ export default function ReportsClient() {
 
         {/* Priority distribution */}
         <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
-          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>توزيع الأولويات</h3>
+          <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>توزيع الأولويات</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={priorityData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -222,13 +222,13 @@ export default function ReportsClient() {
       {/* ── Monthly Trend (last 6 months) ── */}
       {summary.monthlyTrend && summary.monthlyTrend.length > 0 && (
         <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
-          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>الاتجاه الشهري — آخر 6 أشهر</h3>
+          <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>الاتجاه الشهري — آخر 6 أشهر</h3>
           <ResponsiveContainer width="100%" height={240}>
             <AreaChart data={summary.monthlyTrend}>
               <defs>
                 <linearGradient id="gradCreated" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#7C3AED" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#7C3AED" stopOpacity={0} />
+                  <stop offset="5%"  stopColor="#007F5C" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#007F5C" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="gradResolved" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%"  stopColor="#22c55e" stopOpacity={0.3} />
@@ -240,7 +240,7 @@ export default function ReportsClient() {
               <YAxis tick={{ fontSize: 10 }} />
               <Tooltip />
               <Legend />
-              <Area type="monotone" dataKey="created"  name="واردة"  stroke="#7C3AED" fill="url(#gradCreated)"  strokeWidth={2} />
+              <Area type="monotone" dataKey="created"  name="واردة"  stroke="#007F5C" fill="url(#gradCreated)"  strokeWidth={2} />
               <Area type="monotone" dataKey="resolved" name="محلولة" stroke="#22c55e" fill="url(#gradResolved)" strokeWidth={2} />
             </AreaChart>
           </ResponsiveContainer>
@@ -250,7 +250,7 @@ export default function ReportsClient() {
       {/* ── Department Breakdown ── */}
       {summary.departmentBreakdown && summary.departmentBreakdown.length > 0 && (
         <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
-          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>التذاكر حسب القسم</h3>
+          <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>التذاكر حسب القسم</h3>
           <ResponsiveContainer width="100%" height={Math.max(180, summary.departmentBreakdown.length * 36)}>
             <BarChart data={summary.departmentBreakdown} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -270,13 +270,13 @@ export default function ReportsClient() {
       {/* ── Agent Performance Table ── */}
       {summary.agentPerformance && summary.agentPerformance.length > 0 && (
         <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
-          <h3 className="font-bold mb-4" style={{ color: "#1F1535" }}>أداء موظفي الدعم</h3>
+          <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>أداء موظفي الدعم</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-sm" style={{ borderCollapse: "collapse" }}>
               <thead>
-                <tr style={{ borderBottom: "2px solid #E9E3FF" }}>
+                <tr style={{ borderBottom: "2px solid #DCEAD9" }}>
                   {["الموظف", "مُكلَّف", "محلولة", "متوسط الحل", "معدل الإنجاز"].map((h) => (
-                    <th key={h} className="text-right py-2 px-3 text-xs font-semibold" style={{ color: "#7C3AED" }}>{h}</th>
+                    <th key={h} className="text-right py-2 px-3 text-xs font-semibold" style={{ color: "#007F5C" }}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -284,7 +284,7 @@ export default function ReportsClient() {
                 {summary.agentPerformance.map((a: any, i: number) => (
                   <tr key={i} style={{ borderBottom: "1px solid #F3EEFF" }}
                     className="transition-colors hover:bg-purple-50">
-                    <td className="py-3 px-3 font-medium" style={{ color: "#1F1535" }}>{a.name}</td>
+                    <td className="py-3 px-3 font-medium" style={{ color: "#16241D" }}>{a.name}</td>
                     <td className="py-3 px-3 text-center" style={{ color: "#475569" }}>{a.assigned}</td>
                     <td className="py-3 px-3 text-center">
                       <span className="font-semibold" style={{ color: "#16a34a" }}>{a.resolved}</span>
@@ -294,7 +294,7 @@ export default function ReportsClient() {
                     </td>
                     <td className="py-3 px-3">
                       <div className="flex items-center gap-2">
-                        <div className="flex-1 h-2 rounded-full" style={{ background: "#E9E3FF" }}>
+                        <div className="flex-1 h-2 rounded-full" style={{ background: "#DCEAD9" }}>
                           <div className="h-2 rounded-full transition-all"
                             style={{ width: `${a.rate}%`, background: a.rate >= 75 ? "#22c55e" : a.rate >= 40 ? "#f59e0b" : "#ef4444" }} />
                         </div>

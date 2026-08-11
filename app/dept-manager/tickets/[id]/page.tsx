@@ -42,11 +42,11 @@ export default async function DeptManagerTicketDetail({ params }: { params: { id
       ]} />
 
       {/* Main card */}
-      <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #E9E3FF" }}>
+      <div className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9" }}>
         <div className="flex items-start justify-between gap-4 mb-4">
           <div>
             <p className="text-sm text-purple-600 mb-1">{ticket.ticketNo}</p>
-            <h1 className="text-xl font-bold" style={{ color: "#1F1535" }}>{ticket.title}</h1>
+            <h1 className="text-xl font-bold" style={{ color: "#16241D" }}>{ticket.title}</h1>
           </div>
           <div className="flex flex-col items-end gap-2">
             <StatusBadge status={ticket.status} />
@@ -59,20 +59,20 @@ export default async function DeptManagerTicketDetail({ params }: { params: { id
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-purple-100">
           <div>
             <p className="text-xs text-purple-500">المُرسل</p>
-            <p className="text-sm font-medium mt-0.5" style={{ color: "#1F1535" }}>{ticket.createdBy.name}</p>
+            <p className="text-sm font-medium mt-0.5" style={{ color: "#16241D" }}>{ticket.createdBy.name}</p>
             <p className="text-xs text-purple-600">{ticket.createdBy.department}</p>
           </div>
           <div>
             <p className="text-xs text-purple-500">النوع</p>
-            <p className="text-sm font-medium mt-0.5" style={{ color: "#1F1535" }}>{typeLabel[ticket.type]}</p>
+            <p className="text-sm font-medium mt-0.5" style={{ color: "#16241D" }}>{typeLabel[ticket.type]}</p>
           </div>
           <div>
             <p className="text-xs text-purple-500">الأولوية</p>
-            <p className="text-sm font-medium mt-0.5" style={{ color: "#1F1535" }}>{priorityLabel[ticket.priority]}</p>
+            <p className="text-sm font-medium mt-0.5" style={{ color: "#16241D" }}>{priorityLabel[ticket.priority]}</p>
           </div>
           <div>
             <p className="text-xs text-purple-500">تاريخ الرفع</p>
-            <p className="text-sm font-medium mt-0.5" style={{ color: "#1F1535" }}>{formatDate(ticket.createdAt)}</p>
+            <p className="text-sm font-medium mt-0.5" style={{ color: "#16241D" }}>{formatDate(ticket.createdAt)}</p>
           </div>
         </div>
       </div>
