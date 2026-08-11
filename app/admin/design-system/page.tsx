@@ -7,9 +7,9 @@ import toast from "react-hot-toast";
 // ── Design tokens — the actual values in production use, gathered from a codebase audit ──
 
 const BRAND = [
-  { name: "Primary Purple",  hex: "#007F5C", usage: "أزرار أساسية، روابط نشطة، لون العلامة الرئيسي" },
-  { name: "Dark Purple",     hex: "#00543D", usage: "نص مميز، لوحات معلوماتية، حالة hover الداكنة" },
-  { name: "Pink Accent",     hex: "#6FB449", usage: "الطرف الثاني لتدرّج الأزرار الأساسية" },
+  { name: "Spanish Viridian", hex: "#007F5C", usage: "أزرار أساسية، روابط نشطة، لون العلامة الرئيسي" },
+  { name: "Dark Viridian",    hex: "#00543D", usage: "نص مميز، لوحات معلوماتية، حالة hover الداكنة" },
+  { name: "Apple Accent",     hex: "#6FB449", usage: "الطرف الثاني لتدرّج الأزرار الأساسية" },
   { name: "Sidebar Dark",    hex: "#0A1F16", usage: "خلفية الشريط الجانبي فقط" },
   { name: "Modal Dark",      hex: "#0F2A1F", usage: "خلفية النوافذ المنبثقة الداكنة (dark-modal)" },
 ];
