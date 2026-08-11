@@ -127,7 +127,6 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
           <Image src={logoSrc} alt="بوابة الدعم لصندوق الوقف الصحي" width={40} height={40} className="rounded-xl object-cover" />
           <div>
             <h1 className="font-bold text-xs text-white leading-snug">بوابة الدعم لصندوق الوقف الصحي</h1>
-            <p className="text-xs" style={{ color: "#8FCB7A" }}>دعمكم أولويتنا</p>
           </div>
         </div>
         <button className="lg:hidden p-1 rounded-lg" style={{ color: "#8FCB7A" }} onClick={() => setMobileOpen(false)} aria-label="إغلاق القائمة">

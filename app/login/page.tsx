@@ -45,7 +45,6 @@ export default function LoginPage() {
         <div className="relative text-center text-white px-12 z-10">
           <Image src={logoSrc} alt="بوابة الدعم لصندوق الوقف الصحي" width={80} height={80} className="rounded-2xl object-cover mx-auto mb-6" />
           <h1 className="text-2xl font-bold mb-1 gradient-text leading-snug">بوابة الدعم لصندوق الوقف الصحي</h1>
-          <p className="text-sm mb-3" style={{ color: "#8FCB7A" }}>دعمكم أولويتنا</p>
           <div className="mt-10 grid grid-cols-3 gap-4 text-center">
             {[
               { n: "سريع", d: "حل مشاكلك بكفاءة" },
@@ -60,7 +59,6 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-10 pt-6 flex flex-col items-center gap-2" style={{ borderTop: "1px solid rgba(0,127,92,0.2)" }}>
-            <p className="text-xs" style={{ color: "#8FCB7A" }}>صنع بحب بواسطة</p>
             <Image src={hefLogoSrc} alt="صندوق الوقف الصحي" width={220} height={52} className="object-contain" />
           </div>
         </div>
@@ -73,7 +71,6 @@ export default function LoginPage() {
           <div className="lg:hidden text-center mb-8">
             <Image src={logoSrc} alt="بوابة الدعم لصندوق الوقف الصحي" width={56} height={56} className="rounded-xl object-cover inline-block mb-3" />
             <h1 className="text-lg font-bold gradient-text leading-snug">بوابة الدعم لصندوق الوقف الصحي</h1>
-            <p className="text-xs mt-1" style={{ color: "#8FCB7A" }}>دعمكم أولويتنا</p>
           </div>
 
           <div className="rounded-2xl p-8" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9", boxShadow: "0 20px 60px rgba(0,127,92,0.15)" }}>
