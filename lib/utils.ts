@@ -5,15 +5,18 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// -nu-latn pins Western digits so server-rendered HTML (Node's ICU) always
+// matches what the browser hydrates with — without it, the two can disagree
+// on digit script and trigger a React hydration mismatch.
 export function formatDate(date: Date | string) {
-  return new Intl.DateTimeFormat("ar-SA-u-ca-gregory", {
+  return new Intl.DateTimeFormat("ar-SA-u-ca-gregory-nu-latn", {
     dateStyle: "medium",
     timeStyle: "short",
   }).format(new Date(date));
 }
 
 export function formatDateShort(date: Date | string) {
-  return new Intl.DateTimeFormat("ar-SA-u-ca-gregory", {
+  return new Intl.DateTimeFormat("ar-SA-u-ca-gregory-nu-latn", {
     dateStyle: "short",
   }).format(new Date(date));
 }

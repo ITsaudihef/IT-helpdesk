@@ -55,7 +55,7 @@ function daysRemaining(endDate?: string | null): number | null {
 
 function formatDate(iso?: string | null) {
   if (!iso) return "";
-  return new Date(iso).toLocaleDateString("ar-SA", { day: "numeric", month: "short", year: "numeric", calendar: "gregory" });
+  return new Date(iso).toLocaleDateString("ar-SA-u-nu-latn", { day: "numeric", month: "short", year: "numeric", calendar: "gregory" });
 }
 
 const STATUS_META = {

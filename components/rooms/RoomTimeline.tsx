@@ -52,7 +52,7 @@ function fmtHour(h: number) {
   return h > 12 ? `${h - 12}م` : `${h}ص`;
 }
 function fmtDate(d: string) {
-  return new Date(d + "T00:00:00").toLocaleDateString("ar-SA", {
+  return new Date(d + "T00:00:00").toLocaleDateString("ar-SA-u-nu-latn", {
     weekday: "long", year: "numeric", month: "long", day: "numeric", calendar: "gregory",
   });
 }
