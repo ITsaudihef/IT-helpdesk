@@ -5,19 +5,23 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// -nu-latn pins Western digits so server-rendered HTML (Node's ICU) always
-// matches what the browser hydrates with — without it, the two can disagree
-// on digit script and trigger a React hydration mismatch.
+// -nu-latn pins Western digits, and timeZone pins the calendar day, so
+// server-rendered HTML (Node, which defaults to UTC on Railway) always
+// matches what the browser hydrates with (the visitor's local timezone) —
+// without both, a timestamp near midnight UTC can land on a different
+// calendar day server-side vs client-side and trigger a hydration mismatch.
 export function formatDate(date: Date | string) {
   return new Intl.DateTimeFormat("ar-SA-u-ca-gregory-nu-latn", {
     dateStyle: "medium",
     timeStyle: "short",
+    timeZone: "Asia/Riyadh",
   }).format(new Date(date));
 }
 
 export function formatDateShort(date: Date | string) {
   return new Intl.DateTimeFormat("ar-SA-u-ca-gregory-nu-latn", {
     dateStyle: "short",
+    timeZone: "Asia/Riyadh",
   }).format(new Date(date));
 }
 
