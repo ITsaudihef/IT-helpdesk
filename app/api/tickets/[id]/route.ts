@@ -5,6 +5,7 @@ import { sendStatusNotification } from "@/lib/email";
 import { statusLabel } from "@/lib/utils";
 import { logAudit } from "@/lib/audit";
 import { createNotification } from "@/lib/notify";
+import { canActOnTicket } from "@/lib/ticket-access";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await auth();
@@ -49,7 +50,8 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
   const updateData: any = {};
 
-  const isStaff = ["ADMIN","SUPPORT","DEPT_MANAGER"].includes(session.user.role);
+  const isStaff = ["ADMIN","SUPPORT","DEPT_MANAGER"].includes(session.user.role)
+    && canActOnTicket(session.user, ticket);
   const isAdmin = session.user.role === "ADMIN";
 
   if (status && isStaff) {
