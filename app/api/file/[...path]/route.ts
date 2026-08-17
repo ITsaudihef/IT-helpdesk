@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { canActOnTicket } from "@/lib/ticket-access";
 import { readFile } from "fs/promises";
 import { existsSync } from "fs";
 import path from "path";
@@ -16,6 +18,17 @@ const CONTENT_TYPES: Record<string, string> = {
 export async function GET(_req: NextRequest, { params }: { params: { path: string[] } }) {
   const session = await auth();
   if (!session) return new NextResponse("Unauthorized", { status: 401 });
+
+  const ticketId = params.path[0];
+  const ticket = ticketId
+    ? await prisma.ticket.findUnique({
+        where: { id: ticketId },
+        include: { createdBy: { select: { department: true } } },
+      })
+    : null;
+  if (!ticket) return new NextResponse("Not Found", { status: 404 });
+  if (!canActOnTicket({ id: session.user.id, role: session.user.role, department: session.user.department }, ticket))
+    return new NextResponse("Forbidden", { status: 403 });
 
   const UPLOAD_BASE = process.env.UPLOAD_DIR || path.join(process.cwd(), "public", "uploads");
   const filePath    = params.path.join("/");

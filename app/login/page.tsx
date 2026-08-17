@@ -42,7 +42,7 @@ export default function LoginPage() {
           style={{ background: "radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)" }} />
 
         <div className="relative text-center text-white px-12 z-10">
-          <h1 className="text-2xl font-bold mb-1 gradient-text leading-snug">بوابة الدعم الفني</h1>
+          <h1 className="text-2xl font-bold mb-1 leading-snug">بوابة الدعم الفني</h1>
           <div className="mt-10 grid grid-cols-3 gap-4 text-center">
             {[
               { n: "سريع", d: "حل مشاكلك بكفاءة" },
@@ -67,7 +67,7 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           {/* Mobile logo */}
           <div className="lg:hidden text-center mb-8">
-            <h1 className="text-lg font-bold gradient-text leading-snug">بوابة الدعم الفني</h1>
+            <h1 className="text-lg font-bold leading-snug text-white">بوابة الدعم الفني</h1>
           </div>
 
           <div className="rounded-2xl p-8" style={{ background: "#FFFFFF", border: "1px solid #DCEAD9", boxShadow: "0 20px 60px rgba(0,127,92,0.15)" }}>
