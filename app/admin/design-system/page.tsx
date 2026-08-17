@@ -80,7 +80,7 @@ export default function DesignSystemPage() {
           <Palette className="w-6 h-6 text-white" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-white">نظام التصميم — بوابة الدعم لصندوق الوقف الصحي</h1>
+          <h1 className="text-xl font-bold text-white">نظام التصميم — بوابة الدعم الفني</h1>
           <p className="text-sm text-white/80 mt-0.5">
             القيم الفعلية المستخدمة في الكود (تم استخراجها بتدقيق شامل) — مرجع جاهز للمشاركة مع مصممي UX/UI. اضغط أي لون لنسخ قيمته.
           </p>
