@@ -5,7 +5,6 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Lock, Mail, Eye, EyeOff } from "lucide-react";
-import logoSrc from "@/public/logo.png";
 import hefLogoSrc from "@/public/hef-logo-white.png";
 import toast from "react-hot-toast";
 
@@ -43,7 +42,6 @@ export default function LoginPage() {
           style={{ background: "radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)" }} />
 
         <div className="relative text-center text-white px-12 z-10">
-          <Image src={logoSrc} alt="بوابة الدعم لصندوق الوقف الصحي" width={80} height={80} className="rounded-2xl object-cover mx-auto mb-6" />
           <h1 className="text-2xl font-bold mb-1 gradient-text leading-snug">بوابة الدعم لصندوق الوقف الصحي</h1>
           <div className="mt-10 grid grid-cols-3 gap-4 text-center">
             {[
@@ -69,7 +67,6 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           {/* Mobile logo */}
           <div className="lg:hidden text-center mb-8">
-            <Image src={logoSrc} alt="بوابة الدعم لصندوق الوقف الصحي" width={56} height={56} className="rounded-xl object-cover inline-block mb-3" />
             <h1 className="text-lg font-bold gradient-text leading-snug">بوابة الدعم لصندوق الوقف الصحي</h1>
           </div>
 

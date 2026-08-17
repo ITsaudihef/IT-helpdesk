@@ -10,7 +10,6 @@ import {
   LayoutDashboard, Ticket, Users, BarChart3, Settings,
   LogOut, HeadphonesIcon, PlusCircle, List, KeyRound, Eye, EyeOff, Menu, X, ShieldCheck, CalendarDays, LayoutGrid, Palette,
 } from "lucide-react";
-import logoSrc from "@/public/logo.png";
 import hefLogoSrc from "@/public/hef-logo-white.png";
 import toast from "react-hot-toast";
 
@@ -124,10 +123,7 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
       {/* Logo */}
       <div className="p-5 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="flex items-center gap-3">
-          <Image src={logoSrc} alt="بوابة الدعم لصندوق الوقف الصحي" width={40} height={40} className="rounded-xl object-cover" />
-          <div>
-            <h1 className="font-bold text-xs text-white leading-snug">بوابة الدعم لصندوق الوقف الصحي</h1>
-          </div>
+          <h1 className="font-bold text-xs text-white leading-snug">بوابة الدعم لصندوق الوقف الصحي</h1>
         </div>
         <button className="lg:hidden p-1 rounded-lg" style={{ color: "#8FCB7A" }} onClick={() => setMobileOpen(false)} aria-label="إغلاق القائمة">
           <X className="w-5 h-5" aria-hidden="true" />
