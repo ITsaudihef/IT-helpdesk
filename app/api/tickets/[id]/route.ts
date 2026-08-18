@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { sendStatusNotification } from "@/lib/email";
-import { statusLabel } from "@/lib/utils";
+import { statusLabel, formatDateShort } from "@/lib/utils";
 import { logAudit } from "@/lib/audit";
 import { createNotification } from "@/lib/notify";
 import { canActOnTicket } from "@/lib/ticket-access";
@@ -39,7 +39,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await req.json();
-  const { status, assignedToId, priority, rating, title, description } = body;
+  const { status, assignedToId, priority, rating, title, description, dueDate } = body;
 
   const ticket = await prisma.ticket.findUnique({
     where: { id: params.id },
@@ -55,6 +55,14 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   const isAdmin = session.user.role === "ADMIN";
 
   if (status && isStaff) {
+    // "SCHEDULED" is controlled only by admin or the assigned support agent —
+    // isStaff already confirms a SUPPORT user is the assignee (via canActOnTicket),
+    // so excluding DEPT_MANAGER here is the only extra check needed.
+    const touchesScheduled = status === "SCHEDULED" || ticket.status === "SCHEDULED";
+    const canControlScheduled = session.user.role === "ADMIN" || session.user.role === "SUPPORT";
+    if (touchesScheduled && !canControlScheduled) {
+      return NextResponse.json({ error: "Forbidden — only admin or the assigned support agent can control the Scheduled status" }, { status: 403 });
+    }
     updateData.status = status;
     if (status === "RESOLVED") updateData.resolvedAt = new Date();
   }
@@ -65,6 +73,11 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
   if (priority && isAdmin) {
     updateData.priority = priority;
+  }
+
+  // Delivery date: set by admin or support only (not dept manager, not the requester)
+  if (dueDate !== undefined && isStaff && session.user.role !== "DEPT_MANAGER") {
+    updateData.dueDate = dueDate ? new Date(dueDate) : null;
   }
 
   if (rating && session.user.role === "USER" && ticket.createdById === session.user.id) {
@@ -106,6 +119,18 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       : null;
     auditTasks.push(
       logAudit(ticket.id, "تغيير التكليف", assignee ? `تم التكليف إلى ${assignee.name}` : "تم إلغاء التكليف", session.user.id)
+    );
+  }
+
+  if (dueDate !== undefined && updateData.dueDate !== undefined) {
+    const dueDateLabel = updateData.dueDate ? formatDateShort(updateData.dueDate) : "بدون تاريخ";
+    auditTasks.push(
+      logAudit(ticket.id, "تحديد تاريخ التسليم", dueDateLabel, session.user.id),
+      createNotification({
+        userId: ticket.createdById,
+        ticketId: ticket.id,
+        message: `تم تحديد تاريخ تسليم متوقع لتذكرتك ${ticket.ticketNo}: ${dueDateLabel}`,
+      })
     );
   }
 

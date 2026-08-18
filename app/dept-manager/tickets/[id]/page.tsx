@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import { statusLabel, typeLabel, priorityLabel, formatDate } from "@/lib/utils";
+import { statusLabel, typeLabel, priorityLabel, formatDate, formatDateShort } from "@/lib/utils";
 import { StatusBadge, PriorityBadge } from "@/components/tickets/StatusBadge";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import TicketComments from "@/components/tickets/TicketComments";
@@ -74,6 +74,12 @@ export default async function DeptManagerTicketDetail({ params }: { params: { id
             <p className="text-xs text-purple-500">تاريخ الرفع</p>
             <p className="text-sm font-medium mt-0.5" style={{ color: "#16241D" }}>{formatDate(ticket.createdAt)}</p>
           </div>
+          {ticket.dueDate && (
+            <div>
+              <p className="text-xs text-purple-500">تاريخ التسليم المتوقع</p>
+              <p className="text-sm font-medium mt-0.5" style={{ color: "#16241D" }}>{formatDateShort(ticket.dueDate)}</p>
+            </div>
+          )}
         </div>
       </div>
 

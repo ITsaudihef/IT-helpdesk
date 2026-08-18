@@ -14,11 +14,12 @@ import ConfirmDialog from "@/components/ui/ConfirmDialog";
 // once the requester passes their test (see /api/tickets/[id]/user-test).
 const STATUS_TRANSITIONS: Record<string, string[]> = {
   OPEN:                  ["OPEN", "IN_PROGRESS", "WAITING_INFO", "CLOSED"],
-  IN_PROGRESS:           ["IN_PROGRESS", "PENDING_USER_TEST", "WAITING_INFO", "RESOLVED", "CLOSED"],
+  IN_PROGRESS:           ["IN_PROGRESS", "SCHEDULED", "PENDING_USER_TEST", "WAITING_INFO", "RESOLVED", "CLOSED"],
+  SCHEDULED:             ["SCHEDULED", "IN_PROGRESS"],
   WAITING_INFO:          ["WAITING_INFO", "IN_PROGRESS", "RESOLVED", "CLOSED"],
   PENDING_DEPT_APPROVAL: ["PENDING_DEPT_APPROVAL", "PENDING_APPROVAL", "OPEN"],
   PENDING_APPROVAL:      ["PENDING_APPROVAL", "APPROVED", "CLOSED"],
-  APPROVED:              ["APPROVED", "IN_PROGRESS"],
+  APPROVED:              ["APPROVED", "IN_PROGRESS", "SCHEDULED"],
   PENDING_USER_TEST:     ["PENDING_USER_TEST", "IN_PROGRESS"],
   READY_TO_LAUNCH:       ["READY_TO_LAUNCH", "LAUNCHED"],
   LAUNCHED:              ["LAUNCHED", "CLOSED"],
@@ -28,12 +29,18 @@ const STATUS_TRANSITIONS: Record<string, string[]> = {
 const ALL_PRIORITIES = ["LOW","MEDIUM","HIGH","CRITICAL"];
 
 interface Props {
-  ticket: { id: string; status: string; priority: string; assignedToId: string | null; requiresApproval: boolean };
+  ticket: { id: string; status: string; priority: string; type: string; assignedToId: string | null; requiresApproval: boolean; dueDate?: string | Date | null };
   supportUsers: { id: string; name: string }[];
   currentUserId: string;
 }
 
 type ConfirmAction = { type: "approve" | "reject" | "save" | "launch"; label: string; danger: boolean };
+
+const toDateInputValue = (d?: string | Date | null) => {
+  if (!d) return "";
+  const date = new Date(d);
+  return date.toISOString().slice(0, 10);
+};
 
 export default function AdminTicketActions({ ticket, supportUsers }: Props) {
   const router = useRouter();
@@ -41,6 +48,7 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
   const [status,    setStatus]    = useState(ticket.status);
   const [priority,  setPriority]  = useState(ticket.priority);
   const [assignTo,  setAssignTo]  = useState(ticket.assignedToId || "");
+  const [dueDate,   setDueDate]   = useState(toDateInputValue(ticket.dueDate));
   const [confirm,   setConfirm]   = useState<ConfirmAction | null>(null);
 
   const update = async (data: object) => {
@@ -64,7 +72,7 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
     if (confirm.type === "approve") update({ status: "APPROVED" });
     else if (confirm.type === "reject") update({ status: "CLOSED" });
     else if (confirm.type === "launch") update({ status: "LAUNCHED" });
-    else update({ status, priority, assignedToId: assignTo || null });
+    else update({ status, priority, assignedToId: assignTo || null, dueDate: dueDate || null });
     setConfirm(null);
   };
 
@@ -155,6 +163,15 @@ export default function AdminTicketActions({ ticket, supportUsers }: Props) {
               {supportUsers.map((u) => <option key={u.id} value={u.id}>{u.name}</option>)}
             </select>
           </div>
+
+          {ticket.type === "DEVELOPMENT" && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">تاريخ التسليم المتوقع</label>
+              <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)}
+                className="w-full px-3 py-2 border border-purple-100 rounded-lg text-sm focus:outline-none focus:ring-2"
+                style={{ "--tw-ring-color": "#007F5C" } as any} />
+            </div>
+          )}
         </div>
 
         <button

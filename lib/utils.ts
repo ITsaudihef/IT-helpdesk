@@ -42,6 +42,7 @@ export const priorityBadge: Record<string, string> = {
 export const statusBadge: Record<string, string> = {
   OPEN:                  "bg-slate-100 text-slate-700",
   IN_PROGRESS:           "bg-blue-100 text-blue-700",
+  SCHEDULED:             "bg-indigo-100 text-indigo-700",
   PENDING_USER_TEST:     "bg-pink-100 text-pink-700",
   READY_TO_LAUNCH:       "bg-cyan-100 text-cyan-700",
   LAUNCHED:              "bg-emerald-100 text-emerald-700",
@@ -56,6 +57,7 @@ export const statusBadge: Record<string, string> = {
 export const statusLabel: Record<string, string> = {
   OPEN:                  "مفتوحة",
   IN_PROGRESS:           "قيد المعالجة",
+  SCHEDULED:             "مجدولة",
   PENDING_USER_TEST:     "اختبار قبل الإطلاق",
   READY_TO_LAUNCH:       "جاهزة للإطلاق",
   LAUNCHED:              "تم الإطلاق",

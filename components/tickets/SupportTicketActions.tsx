@@ -8,9 +8,10 @@ import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 const statusTransitions: Record<string, string[]> = {
   OPEN:              ["IN_PROGRESS", "WAITING_INFO", "CLOSED"],
-  IN_PROGRESS:       ["PENDING_USER_TEST", "RESOLVED", "WAITING_INFO", "CLOSED"],
+  IN_PROGRESS:       ["SCHEDULED", "PENDING_USER_TEST", "RESOLVED", "WAITING_INFO", "CLOSED"],
+  SCHEDULED:         ["IN_PROGRESS"],
   WAITING_INFO:      ["IN_PROGRESS", "RESOLVED", "CLOSED"],
-  APPROVED:          ["IN_PROGRESS"],
+  APPROVED:          ["IN_PROGRESS", "SCHEDULED"],
   RESOLVED:          ["CLOSED"],
   CLOSED:            [],
   PENDING_APPROVAL:  [],
@@ -19,8 +20,13 @@ const statusTransitions: Record<string, string[]> = {
   LAUNCHED:          [],
 };
 
+const toDateInputValue = (d?: string | Date | null) => {
+  if (!d) return "";
+  return new Date(d).toISOString().slice(0, 10);
+};
+
 interface Props {
-  ticket: { id: string; status: string; assignedToId: string | null };
+  ticket: { id: string; status: string; type: string; assignedToId: string | null; dueDate?: string | Date | null };
   supportUsers: { id: string; name: string }[];
   currentUserId: string;
 }
@@ -29,6 +35,7 @@ export default function SupportTicketActions({ ticket, supportUsers, currentUser
   const router = useRouter();
   const [loading,  setLoading]  = useState(false);
   const [assignTo, setAssignTo] = useState(ticket.assignedToId || "");
+  const [dueDate,  setDueDate]  = useState(toDateInputValue(ticket.dueDate));
   const [confirm,  setConfirm]  = useState<{ status: string } | null>(null);
   const transitions = statusTransitions[ticket.status] || [];
 
@@ -106,6 +113,22 @@ export default function SupportTicketActions({ ticket, supportUsers, currentUser
               </button>
             </div>
           </div>
+
+          {ticket.type === "DEVELOPMENT" && (
+            <div>
+              <p className="text-sm font-medium text-gray-700 mb-2">تاريخ التسليم المتوقع</p>
+              <div className="flex gap-2">
+                <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)}
+                  className="flex-1 px-3 py-2 border border-purple-100 rounded-lg text-sm focus:outline-none focus:ring-2"
+                  style={{ "--tw-ring-color": "#007F5C" } as any} />
+                <button onClick={() => updateTicket({ dueDate: dueDate || null })} disabled={loading}
+                  className="px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50"
+                  style={{ background: "#007F5C" }}>
+                  حفظ
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>
