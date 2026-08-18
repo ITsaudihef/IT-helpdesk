@@ -64,10 +64,14 @@ export async function POST(req: NextRequest) {
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await req.json();
-  const { title, description, type, priority, requiresApproval } = body;
+  const { title, description, type, priority, requiresApproval, approvalChainChange, approvalChainJustification, affectedScreen } = body;
 
   if (!title || !description || !type) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+  }
+
+  if (approvalChainChange && !String(approvalChainJustification || "").trim()) {
+    return NextResponse.json({ error: "يرجى كتابة مبرر تعديل سلسلة الاعتماد" }, { status: 400 });
   }
 
   const needsApproval = requiresApproval;
@@ -104,6 +108,9 @@ export async function POST(req: NextRequest) {
         requiresApproval: needsApproval,
         status: initialStatus,
         createdById: session.user.id,
+        approvalChainChange: !!approvalChainChange,
+        approvalChainJustification: approvalChainChange ? (approvalChainJustification || null) : null,
+        affectedScreen: affectedScreen || null,
       },
       include: {
         createdBy: { select: { id: true, name: true, email: true } },

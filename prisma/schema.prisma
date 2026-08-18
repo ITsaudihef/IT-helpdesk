@@ -74,6 +74,11 @@ model Ticket {
   requiresApproval Boolean  @default(false)
   rating           Int?
 
+  // Development-request specific fields (set at creation, relevant to approval chain)
+  approvalChainChange        Boolean @default(false)
+  approvalChainJustification String?
+  affectedScreen             String?
+
   createdById  String
   createdBy    User    @relation("TicketCreator", fields: [createdById], references: [id])
   assignedToId String?

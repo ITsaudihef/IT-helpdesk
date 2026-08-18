@@ -30,6 +30,7 @@ export default function NewTicketPage() {
   const [files,   setFiles]   = useState<File[]>([]);
   const [form,    setForm]    = useState({
     title: "", description: "", type: "", priority: "MEDIUM", requiresApproval: false,
+    approvalChainChange: false, approvalChainJustification: "", affectedScreen: "",
   });
 
   const setType = (val: string) =>
@@ -40,6 +41,9 @@ export default function NewTicketPage() {
       if (!form.title.trim())       { toast.error("الرجاء إدخال عنوان التذكرة"); return; }
       if (!form.description.trim()) { toast.error("الرجاء وصف المشكلة"); return; }
       if (!form.type)               { toast.error("الرجاء اختيار نوع التذكرة"); return; }
+      if (form.type === "DEVELOPMENT" && form.approvalChainChange && !form.approvalChainJustification.trim()) {
+        toast.error("الرجاء كتابة مبرر تعديل سلسلة الاعتماد"); return;
+      }
     }
     setStep((s) => Math.min(s + 1, 2));
   };
@@ -183,6 +187,49 @@ export default function NewTicketPage() {
                 ))}
               </div>
             </div>
+
+            {/* Development-only fields */}
+            {form.type === "DEVELOPMENT" && (
+              <>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">هل يوجد تعديل في سلسلة اعتماد؟ *</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[{ v: true, l: "نعم" }, { v: false, l: "لا" }].map((o) => (
+                      <button key={String(o.v)} type="button"
+                        onClick={() => setForm({ ...form, approvalChainChange: o.v, approvalChainJustification: o.v ? form.approvalChainJustification : "" })}
+                        className="p-3 rounded-xl border-2 text-sm font-semibold transition-all"
+                        style={{
+                          borderColor: form.approvalChainChange === o.v ? "#007F5C" : "#e5e7eb",
+                          background:  form.approvalChainChange === o.v ? "rgba(0,127,92,0.12)" : "#fff",
+                          color:       form.approvalChainChange === o.v ? "#00543D" : "#374151",
+                        }}>
+                        {o.l}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {form.approvalChainChange && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">مبرر تعديل سلسلة الاعتماد *</label>
+                    <textarea value={form.approvalChainJustification}
+                      onChange={(e) => setForm({ ...form, approvalChainJustification: e.target.value })}
+                      rows={3} placeholder="اشرح سبب الحاجة لتعديل سلسلة الاعتماد..."
+                      className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none"
+                      style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
+                  </div>
+                )}
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">الشاشة والصلاحية المتأثرة</label>
+                  <input value={form.affectedScreen}
+                    onChange={(e) => setForm({ ...form, affectedScreen: e.target.value })}
+                    placeholder="مثال: شاشة إدارة المستخدمين — صلاحية الاعتماد"
+                    className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
+                </div>
+              </>
+            )}
           </div>
         )}
 
@@ -248,6 +295,24 @@ export default function NewTicketPage() {
                 <div className="flex justify-between text-sm">
                   <span className="text-purple-600">الاعتماد</span>
                   <span className="font-semibold" style={{ color: "#B45309" }}>يتطلب اعتماد الإدارة</span>
+                </div>
+              )}
+              {form.type === "DEVELOPMENT" && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-purple-600">تعديل سلسلة الاعتماد</span>
+                  <span className="font-semibold" style={{ color: "#16241D" }}>{form.approvalChainChange ? "نعم" : "لا"}</span>
+                </div>
+              )}
+              {form.approvalChainChange && form.approvalChainJustification && (
+                <div className="pt-2 border-t border-purple-100">
+                  <p className="text-xs text-purple-500 mb-1">مبرر تعديل سلسلة الاعتماد</p>
+                  <p className="text-sm text-gray-700">{form.approvalChainJustification}</p>
+                </div>
+              )}
+              {form.affectedScreen && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-purple-600">الشاشة والصلاحية المتأثرة</span>
+                  <span className="font-semibold" style={{ color: "#16241D" }}>{form.affectedScreen}</span>
                 </div>
               )}
               {files.length > 0 && (

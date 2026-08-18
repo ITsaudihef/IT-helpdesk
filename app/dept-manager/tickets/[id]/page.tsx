@@ -81,6 +81,29 @@ export default async function DeptManagerTicketDetail({ params }: { params: { id
             </div>
           )}
         </div>
+
+        {(ticket.approvalChainChange || ticket.affectedScreen) && (
+          <div className="mt-4 pt-4 border-t border-purple-100 space-y-3">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-purple-600">تعديل في سلسلة الاعتماد</span>
+              <span className="font-semibold" style={{ color: ticket.approvalChainChange ? "#B45309" : "#16241D" }}>
+                {ticket.approvalChainChange ? "نعم" : "لا"}
+              </span>
+            </div>
+            {ticket.approvalChainChange && ticket.approvalChainJustification && (
+              <div>
+                <p className="text-xs text-purple-500 mb-1">المبرر</p>
+                <p className="text-sm text-gray-700">{ticket.approvalChainJustification}</p>
+              </div>
+            )}
+            {ticket.affectedScreen && (
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-purple-600">الشاشة والصلاحية المتأثرة</span>
+                <span className="font-semibold" style={{ color: "#16241D" }}>{ticket.affectedScreen}</span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Approval actions — only shown when pending dept approval */}
