@@ -28,7 +28,7 @@ export default async function DeptManagerLayout({ children }: { children: React.
         kanbanEnabled={kanbanEnabled}
       />
       <div className="lg:mr-64 overflow-x-hidden">
-        <Header title="بوابة مدير القسم" role={session.user.role} />
+        <Header title="بوابة مدير الإدارة" role={session.user.role} />
         <main className="p-4 sm:p-6 main-content">{children}</main>
       </div>
     </div>

@@ -18,7 +18,7 @@ export default async function AdminDepartmentsPage() {
   const deptMap: Record<string, { employees: typeof users; managers: typeof users }> = {};
 
   for (const u of users) {
-    const dept = u.department || "بدون قسم";
+    const dept = u.department || "بدون إدارة";
     if (!deptMap[dept]) deptMap[dept] = { employees: [], managers: [] };
     deptMap[dept].employees.push(u);
     if (u.role === "DEPT_MANAGER") deptMap[dept].managers.push(u);
@@ -32,11 +32,11 @@ export default async function AdminDepartmentsPage() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold" style={{ color: "#16241D" }}>إدارة الأقسام</h1>
-          <p className="text-sm text-purple-500 mt-0.5">تعيين مدراء الأقسام وإدارة موظفيها</p>
+          <h1 className="text-lg font-bold" style={{ color: "#16241D" }}>الإدارات</h1>
+          <p className="text-sm text-purple-500 mt-0.5">تعيين مدراء الإدارات وإدارة موظفيها</p>
         </div>
         <div className="px-3 py-1.5 rounded-xl text-sm font-semibold" style={{ background: "rgba(0,127,92,0.1)", color: "#007F5C" }}>
-          {departments.length} قسم
+          {departments.length} إدارة
         </div>
       </div>
 

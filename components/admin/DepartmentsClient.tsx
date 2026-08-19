@@ -21,7 +21,7 @@ const PRESET_DEPTS = [
 const roleColor: Record<string, { bg: string; fg: string; label: string }> = {
   ADMIN:        { bg: "#E3F2E0", fg: "#00543D", label: "مدير النظام" },
   SUPPORT:      { bg: "#CFE8C8", fg: "#00694A", label: "موظف دعم" },
-  DEPT_MANAGER: { bg: "#FEF3C7", fg: "#92400E", label: "مدير القسم" },
+  DEPT_MANAGER: { bg: "#FEF3C7", fg: "#92400E", label: "مدير الإدارة" },
   USER:         { bg: "#F1F5F9", fg: "#475569", label: "مستخدم" },
 };
 
@@ -50,7 +50,7 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
         const managers = employees.filter(u => u.role === "DEPT_MANAGER");
         return { ...d, employees, managers };
       }));
-      toast.success(`تم تعيين ${updated.name} مديراً للقسم`);
+      toast.success(`تم تعيين ${updated.name} مديراً للإدارة`);
     } catch {
       toast.error("حدث خطأ أثناء التعيين");
     } finally {
@@ -73,7 +73,7 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
         const managers = employees.filter(u => u.role === "DEPT_MANAGER");
         return { ...d, employees, managers };
       }));
-      toast.success("تم إزالة صلاحيات مدير القسم");
+      toast.success("تم إزالة صلاحيات مدير الإدارة");
     } catch {
       toast.error("حدث خطأ");
     } finally {
@@ -104,10 +104,10 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
       {/* Quick stats row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { label: "عدد الأقسام",      value: depts.filter(d => d.name !== "بدون قسم").length, color: "#007F5C" },
+          { label: "عدد الإدارات",     value: depts.filter(d => d.name !== "بدون إدارة").length, color: "#007F5C" },
           { label: "إجمالي الموظفين",  value: allUsers.length,                                    color: "#3B82F6" },
-          { label: "مدراء أقسام",      value: allUsers.filter(u => u.role === "DEPT_MANAGER").length, color: "#92400E" },
-          { label: "بدون قسم",         value: allUsers.filter(u => !u.department).length,          color: "#6B7280" },
+          { label: "مدراء إدارات",     value: allUsers.filter(u => u.role === "DEPT_MANAGER").length, color: "#92400E" },
+          { label: "بدون إدارة",       value: allUsers.filter(u => !u.department).length,          color: "#6B7280" },
         ].map(s => (
           <div key={s.label} className="rounded-xl p-4 border border-purple-100" style={{ background: "#FFFFFF" }}>
             <p className="text-2xl font-bold" style={{ color: s.color }}>{s.value}</p>
@@ -166,11 +166,11 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
               {isOpen && (
                 <div className="border-t border-purple-100">
                   <div className="px-5 py-3 flex items-center justify-between">
-                    <p className="text-xs font-semibold text-purple-500">موظفو القسم ({dept.employees.length})</p>
+                    <p className="text-xs font-semibold text-purple-500">موظفو الإدارة ({dept.employees.length})</p>
                   </div>
                   <ul className="divide-y divide-purple-50">
                     {dept.employees.length === 0 ? (
-                      <li className="px-5 py-4 text-sm text-purple-400 text-center">لا يوجد موظفون في هذا القسم</li>
+                      <li className="px-5 py-4 text-sm text-purple-400 text-center">لا يوجد موظفون في هذه الإدارة</li>
                     ) : dept.employees.map(emp => {
                       const rc = roleColor[emp.role] || roleColor["USER"];
                       const isManager = emp.role === "DEPT_MANAGER";
@@ -192,7 +192,7 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
                               style={{ background: rc.bg, color: rc.fg }}>
                               {rc.label}
                             </span>
-                            {dept.name !== "بدون قسم" && (
+                            {dept.name !== "بدون إدارة" && (
                               isManager ? (
                                 <button onClick={() => demoteManager(emp.id, dept.name)} disabled={saving}
                                   className="text-xs px-2 py-1 rounded-lg font-medium transition-all disabled:opacity-50"
@@ -229,7 +229,7 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
                   <ShieldCheck className="w-5 h-5 text-purple-600" />
                 </div>
                 <div>
-                  <h2 className="font-bold" style={{ color: "#16241D" }}>تعيين مدير القسم</h2>
+                  <h2 className="font-bold" style={{ color: "#16241D" }}>تعيين مدير الإدارة</h2>
                   <p className="text-xs text-purple-500">{modal.dept.name}</p>
                 </div>
               </div>
@@ -256,7 +256,7 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
               </div>
             )}
 
-            <p className="text-sm text-purple-600 mb-3">اختر موظفاً من القسم لتعيينه مديراً:</p>
+            <p className="text-sm text-purple-600 mb-3">اختر موظفاً من الإدارة لتعيينه مديراً:</p>
             <ul className="space-y-2 max-h-60 overflow-y-auto">
               {modal.dept.employees
                 .filter(u => u.role !== "DEPT_MANAGER" && u.role !== "ADMIN")
@@ -278,7 +278,7 @@ export default function DepartmentsClient({ departments, allUsers }: { departmen
                   </li>
                 ))}
               {modal.dept.employees.filter(u => u.role !== "DEPT_MANAGER" && u.role !== "ADMIN").length === 0 && (
-                <p className="text-sm text-center text-purple-400 py-4">لا يوجد موظفون آخرون في هذا القسم</p>
+                <p className="text-sm text-center text-purple-400 py-4">لا يوجد موظفون آخرون في هذه الإدارة</p>
               )}
             </ul>
 

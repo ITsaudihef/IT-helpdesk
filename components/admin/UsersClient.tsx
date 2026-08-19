@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import toast from "react-hot-toast";
 import { UserPlus, Pencil, Trash2, Search, X } from "lucide-react";
 
-const roleLabel: Record<string,string> = { ADMIN: "مدير", SUPPORT: "موظف دعم", USER: "مستخدم", DEPT_MANAGER: "مدير قسم" };
+const roleLabel: Record<string,string> = { ADMIN: "مدير", SUPPORT: "موظف دعم", USER: "مستخدم", DEPT_MANAGER: "مدير إدارة" };
 const roleBg:    Record<string,string> = { ADMIN: "#E3F2E0", SUPPORT: "#CFE8C8", USER: "#F1F5F9", DEPT_MANAGER: "#FEF3C7" };
 const roleFg:    Record<string,string> = { ADMIN: "#00543D", SUPPORT: "#00694A", USER: "#475569", DEPT_MANAGER: "#92400E" };
 
@@ -72,7 +72,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
           <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-400" />
           <input
             value={search} onChange={e => setSearch(e.target.value)}
-            placeholder="بحث بالاسم أو البريد أو القسم..."
+            placeholder="بحث بالاسم أو البريد أو الإدارة..."
             className="w-full pr-9 pl-8 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
             style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }}
           />
@@ -110,11 +110,11 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                 </div>
               ))}
               <div>
-                <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>القسم</label>
+                <label className="block text-sm font-medium mb-1" style={{ color: "#374151" }}>الإدارة</label>
                 <select value={form.department} onChange={e => setForm({ ...form, department: e.target.value })}
                   className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
                   style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }}>
-                  <option value="">— اختر القسم —</option>
+                  <option value="">— اختر الإدارة —</option>
                   {DEPT_OPTIONS.map(d => <option key={d} value={d}>{d}</option>)}
                 </select>
               </div>
@@ -124,7 +124,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                   className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
                   style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }}>
                   <option value="USER">مستخدم</option>
-                  <option value="DEPT_MANAGER">مدير قسم</option>
+                  <option value="DEPT_MANAGER">مدير إدارة</option>
                   <option value="SUPPORT">موظف دعم</option>
                   <option value="ADMIN">مدير النظام</option>
                 </select>
@@ -192,7 +192,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
         <table className="w-full text-sm">
           <thead style={{ background: "#F3F7F1", borderBottom: "2px solid #DCEAD9" }}>
             <tr>
-              {["الاسم","البريد","الدور","القسم","التذاكر","تاريخ الإنشاء",""].map(h => (
+              {["الاسم","البريد","الدور","الإدارة","التذاكر","تاريخ الإنشاء",""].map(h => (
                 <th key={h} className="px-4 py-3 text-right text-xs font-semibold" style={{ color: "#00694A" }}>{h}</th>
               ))}
             </tr>

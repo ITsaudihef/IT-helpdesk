@@ -46,9 +46,9 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-bold" style={{ color: "#16241D" }}>
-          طلبات تطوير القسم ({total})
+          طلبات تطوير الإدارة ({total})
         </h1>
-        <p className="text-sm text-purple-500">القسم: {dept}</p>
+        <p className="text-sm text-purple-500">الإدارة: {dept}</p>
       </div>
 
       {/* Status tabs */}

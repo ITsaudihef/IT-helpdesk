@@ -751,7 +751,7 @@ export default function KanbanBoard({ project, users, currentUserId, isAdmin, ca
                 </div>
                 <div>
                   <h2 className="font-bold text-white text-sm">فريق المشروع</h2>
-                  <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>يرى المشروع فقط الأدمن ومدير القسم وأعضاء الفريق</p>
+                  <p className="text-xs mt-0.5" style={{ color: "#5C7A6C" }}>يرى المشروع فقط الأدمن ومدير الإدارة وأعضاء الفريق</p>
                 </div>
               </div>
               <button onClick={() => setShowTeam(false)} className="p-1 rounded-lg hover:bg-white/5">

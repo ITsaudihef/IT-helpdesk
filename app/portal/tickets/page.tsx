@@ -80,7 +80,7 @@ export default async function MyTicketsPage({
         <div className="rounded-xl p-3 flex items-center justify-between"
           style={{ background: "rgba(234,88,12,0.07)", border: "1px solid #FED7AA" }}>
           <p className="text-sm font-semibold" style={{ color: "#C2410C" }}>
-            🕐 {deptPendingCount} طلب بانتظار اعتماد مدير القسم
+            🕐 {deptPendingCount} طلب بانتظار اعتماد مدير الإدارة
           </p>
           <Link href="?status=PENDING_DEPT_APPROVAL"
             className="text-xs font-bold px-3 py-1.5 rounded-lg text-white whitespace-nowrap"

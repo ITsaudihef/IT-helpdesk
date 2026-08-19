@@ -250,7 +250,7 @@ export default function ReportsClient() {
       {/* ── Department Breakdown ── */}
       {summary.departmentBreakdown && summary.departmentBreakdown.length > 0 && (
         <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
-          <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>التذاكر حسب القسم</h3>
+          <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>التذاكر حسب الإدارة</h3>
           <ResponsiveContainer width="100%" height={Math.max(180, summary.departmentBreakdown.length * 36)}>
             <BarChart data={summary.departmentBreakdown} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />

@@ -34,8 +34,8 @@ export default async function DeptManagerPage() {
           <ShieldCheck className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h1 className="font-bold text-lg" style={{ color: "#16241D" }}>لوحة مدير القسم</h1>
-          <p className="text-sm text-purple-500">القسم: {dept || "غير محدد"}</p>
+          <h1 className="font-bold text-lg" style={{ color: "#16241D" }}>لوحة مدير الإدارة</h1>
+          <p className="text-sm text-purple-500">الإدارة: {dept || "غير محدد"}</p>
         </div>
       </div>
 

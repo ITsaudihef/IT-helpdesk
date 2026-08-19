@@ -24,7 +24,7 @@ const adminNav: NavItem[] = [
   { href: "/admin/tickets",       label: "جميع التذاكر", icon: Ticket },
   { href: "/admin/reports",       label: "التقارير",      icon: BarChart3 },
   { href: "/admin/users",         label: "المستخدمون",   icon: Users },
-  { href: "/admin/departments",   label: "الأقسام",       icon: ShieldCheck },
+  { href: "/admin/departments",   label: "الإدارات",      icon: ShieldCheck },
   { href: "/admin/rooms",         label: "القاعات",       icon: CalendarDays },
   { href: "/admin/settings",      label: "الإعدادات",    icon: Settings },
   { href: "/admin/design-system", label: "نظام التصميم", icon: Palette },
@@ -46,7 +46,7 @@ const userNav: NavItem[] = [
 const deptManagerNav: NavItem[] = [
   { href: "/dept-manager",         label: "لوحة التحكم",  icon: LayoutDashboard },
   { href: "/portal/new",           label: "تذكرة جديدة",  icon: PlusCircle },
-  { href: "/dept-manager/tickets", label: "تذاكر القسم",  icon: Ticket },
+  { href: "/dept-manager/tickets", label: "تذاكر الإدارة", icon: Ticket },
   roomsLink,
   kanbanLink,
 ];
@@ -78,7 +78,7 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
     ADMIN:        "مدير النظام",
     SUPPORT:      "موظف الدعم",
     USER:         "مستخدم",
-    DEPT_MANAGER: "مدير القسم",
+    DEPT_MANAGER: "مدير الإدارة",
   };
   const roleLabel = roleLabelMap[role] ?? "مستخدم";
 

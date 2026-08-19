@@ -87,7 +87,7 @@ export default async function AdminTicketsPage({ searchParams }: Props) {
           <table className="w-full text-sm">
             <thead style={{ background: "#F3F7F1", borderBottom: "2px solid #DCEAD9" }}>
               <tr>
-                {["رقم التذكرة","العنوان","المُرسل / القسم","النوع","الأولوية","الحالة","المسند إلى","تاريخ الرفع",""].map(h => (
+                {["رقم التذكرة","العنوان","المُرسل / الإدارة","النوع","الأولوية","الحالة","المسند إلى","تاريخ الرفع",""].map(h => (
                   <th key={h} className="px-4 py-3 text-right text-xs font-semibold text-purple-600 whitespace-nowrap">{h}</th>
                 ))}
               </tr>

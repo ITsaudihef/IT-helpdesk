@@ -52,7 +52,7 @@ export default function FilterForm({ searchParams, departments }: Props) {
               onChange={submit}
               className="flex-1 min-w-0 px-2 py-2 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
               style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }}>
-              <option value="">كل الأقسام</option>
+              <option value="">كل الإدارات</option>
               {departments.map(d => (
                 <option key={d} value={d}>{d}</option>
               ))}

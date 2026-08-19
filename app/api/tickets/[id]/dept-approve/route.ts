@@ -40,11 +40,11 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     });
 
     await Promise.all([
-      logAudit(params.id, "اعتماد مدير القسم", `اعتمد ${session.user.name} الطلب وأُرسل للفريق التقني`, session.user.id),
+      logAudit(params.id, "اعتماد مدير الإدارة", `اعتمد ${session.user.name} الطلب وأُرسل للفريق التقني`, session.user.id),
       createNotification({
         userId: ticket.createdBy.id,
         ticketId: ticket.id,
-        message: `تم اعتماد طلبك ${ticket.ticketNo} من مدير القسم وهو الآن بانتظار اعتماد الفريق التقني`,
+        message: `تم اعتماد طلبك ${ticket.ticketNo} من مدير الإدارة وهو الآن بانتظار اعتماد الفريق التقني`,
       }),
     ]);
   } else {
@@ -55,13 +55,13 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     });
 
     await Promise.all([
-      logAudit(params.id, "إعادة من مدير القسم", note || "تم إعادة الطلب من مدير القسم", session.user.id),
+      logAudit(params.id, "إعادة من مدير الإدارة", note || "تم إعادة الطلب من مدير الإدارة", session.user.id),
       ...(note
         ? [prisma.comment.create({
             data: {
               ticketId: ticket.id,
               authorId: session.user.id,
-              body: `**إعادة الطلب من مدير القسم:**\n${note}`,
+              body: `**إعادة الطلب من مدير الإدارة:**\n${note}`,
               isInternal: false,
             },
           })]
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       createNotification({
         userId: ticket.createdBy.id,
         ticketId: ticket.id,
-        message: `تم إعادة طلبك ${ticket.ticketNo} من مدير القسم${note ? `: ${note}` : ""}`,
+        message: `تم إعادة طلبك ${ticket.ticketNo} من مدير الإدارة${note ? `: ${note}` : ""}`,
       }),
     ]);
   }

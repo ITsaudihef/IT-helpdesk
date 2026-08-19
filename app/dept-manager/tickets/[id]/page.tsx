@@ -37,7 +37,7 @@ export default async function DeptManagerTicketDetail({ params }: { params: { id
     <div className="max-w-3xl mx-auto space-y-6">
       <Breadcrumb crumbs={[
         { label: "لوحة التحكم",  href: "/dept-manager" },
-        { label: "تذاكر القسم", href: "/dept-manager/tickets" },
+        { label: "تذاكر الإدارة", href: "/dept-manager/tickets" },
         { label: ticket.ticketNo },
       ]} />
 

@@ -92,5 +92,5 @@ export const roleLabel: Record<string, string> = {
   ADMIN:        "مدير النظام",
   SUPPORT:      "موظف الدعم",
   USER:         "مستخدم",
-  DEPT_MANAGER: "مدير القسم",
+  DEPT_MANAGER: "مدير الإدارة",
 };
