@@ -54,6 +54,8 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     && canActOnTicket(session.user, ticket);
   const isAdmin = session.user.role === "ADMIN";
 
+  let autoAssignedId: string | null = null;
+
   if (status && isStaff) {
     // "SCHEDULED" is controlled only by admin or the assigned support agent —
     // isStaff already confirms a SUPPORT user is the assignee (via canActOnTicket),
@@ -65,6 +67,26 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     }
     updateData.status = status;
     if (status === "RESOLVED") updateData.resolvedAt = new Date();
+
+    // Once the IT admin approves a ticket, route it automatically to whichever
+    // support agent currently has the fewest open tickets — unless this same
+    // request already assigns someone explicitly.
+    if (status === "APPROVED" && !ticket.assignedToId && assignedToId === undefined) {
+      const supportAgents = await prisma.user.findMany({
+        where: { role: "SUPPORT" },
+        select: {
+          id: true,
+          _count: { select: { ticketsAssigned: { where: { status: { notIn: ["RESOLVED", "CLOSED", "LAUNCHED"] } } } } },
+        },
+      });
+      if (supportAgents.length > 0) {
+        const leastBusy = supportAgents.reduce((min, u) =>
+          u._count.ticketsAssigned < min._count.ticketsAssigned ? u : min
+        );
+        updateData.assignedToId = leastBusy.id;
+        autoAssignedId = leastBusy.id;
+      }
+    }
   }
 
   if (assignedToId !== undefined && isStaff) {
@@ -119,6 +141,18 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       : null;
     auditTasks.push(
       logAudit(ticket.id, "تغيير التكليف", assignee ? `تم التكليف إلى ${assignee.name}` : "تم إلغاء التكليف", session.user.id)
+    );
+  }
+
+  if (autoAssignedId) {
+    const assignee = await prisma.user.findUnique({ where: { id: autoAssignedId }, select: { name: true } });
+    auditTasks.push(
+      logAudit(ticket.id, "تكليف تلقائي", assignee ? `وُجّهت التذكرة تلقائياً إلى ${assignee.name} بعد الاعتماد` : "تكليف تلقائي بعد الاعتماد", session.user.id),
+      createNotification({
+        userId: autoAssignedId,
+        ticketId: ticket.id,
+        message: `تم إسناد تذكرة جديدة إليك تلقائياً بعد الاعتماد: ${ticket.ticketNo}`,
+      })
     );
   }
 
