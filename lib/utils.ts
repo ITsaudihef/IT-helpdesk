@@ -80,12 +80,18 @@ export const typeLabel: Record<string, string> = {
   SUPPORT:              "دعم فني",
   SHIFA_SUPPORT:        "دعم فني - شفاء",
   DEVELOPMENT:          "تطوير",
+  PERMISSIONS:          "الصلاحيات",
   // legacy values kept for existing tickets
   HARDWARE: "أجهزة",
   SOFTWARE: "برمجيات",
   NETWORK:  "شبكة",
   ACCESS:   "صلاحيات",
   OTHER:    "أخرى",
+};
+
+export const permissionActionLabel: Record<string, string> = {
+  DELETE: "حذف",
+  CANCEL: "إلغاء",
 };
 
 export const roleLabel: Record<string, string> = {

@@ -18,6 +18,7 @@ const TYPE_META: Record<string, { label: string; icon: string; desc: string; col
   SUPPORT:            { label: "دعم فني",         icon: "🛠️", desc: "أجهزة، شبكة، برمجيات، صلاحيات",      color: "#00543D", bg: "#E3F2E0" },
   SHIFA_SUPPORT:      { label: "دعم شفاء",        icon: "🏥", desc: "طلبات الدعم الموجهة لنظام شفاء",       color: "#1D4ED8", bg: "#DBEAFE" },
   DEVELOPMENT:        { label: "تطوير",            icon: "💻", desc: "طلبات تطوير أنظمة — يتطلب اعتماد",     color: "#7E22CE", bg: "#F3E8FF" },
+  PERMISSIONS:        { label: "الصلاحيات",        icon: "🔑", desc: "حذف أو إلغاء صلاحية مستخدم — يتطلب اعتماد", color: "#B45309", bg: "#FEF3C7" },
 };
 
 const PRIORITY_META = [

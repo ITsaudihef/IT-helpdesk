@@ -121,6 +121,7 @@ export async function GET() {
       SUPPORT:       tm["SUPPORT"]       || 0,
       SHIFA_SUPPORT: tm["SHIFA_SUPPORT"] || 0,
       DEVELOPMENT:   tm["DEVELOPMENT"]   || 0,
+      PERMISSIONS:   tm["PERMISSIONS"]   || 0,
     },
     departmentBreakdown,
     monthlyTrend,

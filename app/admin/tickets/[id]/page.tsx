@@ -2,7 +2,7 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { notFound } from "next/navigation";
-import { statusLabel, typeLabel, priorityLabel, formatDate } from "@/lib/utils";
+import { statusLabel, typeLabel, priorityLabel, formatDate, permissionActionLabel } from "@/lib/utils";
 import { StatusBadge, PriorityBadge } from "@/components/tickets/StatusBadge";
 import TicketComments from "@/components/tickets/TicketComments";
 import AdminTicketActions from "@/components/tickets/AdminTicketActions";
@@ -90,6 +90,25 @@ export default async function AdminTicketDetail({ params }: { params: { id: stri
                 <span className="font-semibold" style={{ color: "#16241D" }}>{ticket.affectedScreen}</span>
               </div>
             )}
+          </div>
+        )}
+
+        {ticket.type === "PERMISSIONS" && (
+          <div className="mt-4 pt-4 border-t border-purple-100 space-y-3">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-purple-600">الإجراء</span>
+              <span className="font-semibold" style={{ color: "#B45309" }}>{permissionActionLabel[ticket.permissionAction || ""]}</span>
+            </div>
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-purple-600">اسم الصلاحية</span>
+              <span className="font-semibold" style={{ color: "#16241D" }}>{ticket.permissionName}</span>
+            </div>
+            <div className="pt-2 border-t border-purple-100">
+              <p className="text-xs text-purple-500 mb-1">صاحب الصلاحية</p>
+              <p className="text-sm text-gray-700">
+                {ticket.permissionHolderName} — {ticket.permissionHolderPhone} — {ticket.permissionHolderEmail}
+              </p>
+            </div>
           </div>
         )}
       </div>

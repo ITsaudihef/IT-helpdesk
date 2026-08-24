@@ -9,20 +9,22 @@ export default async function DeptManagerPage() {
   const session = await auth();
   const dept = session!.user.department as string;
 
+  const approvalTypes = ["DEVELOPMENT", "PERMISSIONS"];
+
   const [pending, approved, returned, total] = await Promise.all([
     prisma.ticket.findMany({
-      where: { type: "DEVELOPMENT", status: "PENDING_DEPT_APPROVAL", createdBy: { department: dept } },
+      where: { type: { in: approvalTypes }, status: "PENDING_DEPT_APPROVAL", createdBy: { department: dept } },
       include: { createdBy: { select: { name: true, department: true } } },
       orderBy: { createdAt: "asc" },
     }),
     prisma.ticket.count({
-      where: { type: "DEVELOPMENT", status: { in: ["PENDING_APPROVAL", "IN_PROGRESS", "RESOLVED", "CLOSED"] }, createdBy: { department: dept } },
+      where: { type: { in: approvalTypes }, status: { in: ["PENDING_APPROVAL", "IN_PROGRESS", "RESOLVED", "CLOSED"] }, createdBy: { department: dept } },
     }),
     prisma.ticket.count({
-      where: { type: "DEVELOPMENT", status: "OPEN", createdBy: { department: dept } },
+      where: { type: { in: approvalTypes }, status: "OPEN", createdBy: { department: dept } },
     }),
     prisma.ticket.count({
-      where: { type: "DEVELOPMENT", createdBy: { department: dept } },
+      where: { type: { in: approvalTypes }, createdBy: { department: dept } },
     }),
   ]);
 
@@ -67,7 +69,7 @@ export default async function DeptManagerPage() {
           { label: "بانتظار اعتمادك",  value: pending.length, color: "#EA580C", bg: "rgba(234,88,12,0.1)",    icon: Clock },
           { label: "تم الاعتماد",       value: approved,        color: "#16A34A", bg: "rgba(22,163,74,0.1)",    icon: CheckCircle },
           { label: "مُعادة / مفتوحة",   value: returned,        color: "#6B7280", bg: "rgba(107,114,128,0.1)", icon: XCircle },
-          { label: "إجمالي طلبات التطوير", value: total,        color: "#007F5C", bg: "rgba(0,127,92,0.1)", icon: ShieldCheck },
+          { label: "إجمالي طلبات الاعتماد", value: total,        color: "#007F5C", bg: "rgba(0,127,92,0.1)", icon: ShieldCheck },
         ].map(s => {
           const Icon = s.icon;
           return (
@@ -90,7 +92,7 @@ export default async function DeptManagerPage() {
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-orange-400 animate-pulse" />
             <h2 className="font-bold" style={{ color: "#16241D" }}>
-              طلبات التطوير — بانتظار اعتمادك ({pending.length})
+              الطلبات — بانتظار اعتمادك ({pending.length})
             </h2>
           </div>
           <Link href="/dept-manager/tickets"

@@ -11,6 +11,12 @@ const typeOptions = [
   { value: "SUPPORT",       label: "دعم فني",         icon: "🛠️", desc: "مشاكل تقنية، أجهزة، شبكة، صلاحيات" },
   { value: "SHIFA_SUPPORT", label: "دعم فني - شفاء",  icon: "🏥", desc: "طلبات الدعم الموجهة لفريق شفاء" },
   { value: "DEVELOPMENT",   label: "تطوير",            icon: "💻", desc: "طلبات تطوير أنظمة أو برمجيات — يتطلب اعتماد" },
+  { value: "PERMISSIONS",   label: "الصلاحيات",        icon: "🔑", desc: "حذف أو إلغاء صلاحية مستخدم — يتطلب اعتماد" },
+];
+
+const permissionActionOptions = [
+  { value: "DELETE", label: "حذف" },
+  { value: "CANCEL", label: "إلغاء" },
 ];
 
 const priorityOptions = [
@@ -31,10 +37,11 @@ export default function NewTicketPage() {
   const [form,    setForm]    = useState({
     title: "", description: "", type: "", priority: "MEDIUM", requiresApproval: false,
     approvalChainChange: false, approvalChainJustification: "", affectedScreen: "",
+    permissionAction: "", permissionName: "", permissionHolderName: "", permissionHolderPhone: "", permissionHolderEmail: "",
   });
 
   const setType = (val: string) =>
-    setForm({ ...form, type: val, requiresApproval: val === "DEVELOPMENT" });
+    setForm({ ...form, type: val, requiresApproval: val === "DEVELOPMENT" || val === "PERMISSIONS" });
 
   const nextStep = () => {
     if (step === 0) {
@@ -43,6 +50,13 @@ export default function NewTicketPage() {
       if (!form.type)               { toast.error("الرجاء اختيار نوع التذكرة"); return; }
       if (form.type === "DEVELOPMENT" && form.approvalChainChange && !form.approvalChainJustification.trim()) {
         toast.error("الرجاء كتابة مبرر تعديل سلسلة الاعتماد"); return;
+      }
+      if (form.type === "PERMISSIONS") {
+        if (!form.permissionAction)              { toast.error("الرجاء اختيار حذف أو إلغاء"); return; }
+        if (!form.permissionName.trim())         { toast.error("الرجاء إدخال اسم الصلاحية"); return; }
+        if (!form.permissionHolderName.trim())   { toast.error("الرجاء إدخال اسم صاحب الصلاحية"); return; }
+        if (!form.permissionHolderPhone.trim())  { toast.error("الرجاء إدخال رقم جوال صاحب الصلاحية"); return; }
+        if (!form.permissionHolderEmail.trim())  { toast.error("الرجاء إدخال إيميل صاحب الصلاحية"); return; }
       }
     }
     setStep((s) => Math.min(s + 1, 2));
@@ -155,7 +169,7 @@ export default function NewTicketPage() {
                       {t.label}
                     </div>
                     <div className="text-xs text-purple-600 mt-1">{t.desc}</div>
-                    {t.value === "DEVELOPMENT" && (
+                    {(t.value === "DEVELOPMENT" || t.value === "PERMISSIONS") && (
                       <span className="inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium"
                         style={{ background: "#FEF3C7", color: "#92400E" }}>
                         يتطلب اعتماد
@@ -227,6 +241,68 @@ export default function NewTicketPage() {
                     placeholder="مثال: شاشة إدارة المستخدمين — صلاحية الاعتماد"
                     className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
                     style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
+                </div>
+              </>
+            )}
+
+            {/* Permissions-only fields */}
+            {form.type === "PERMISSIONS" && (
+              <>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">الإجراء المطلوب *</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {permissionActionOptions.map((o) => (
+                      <button key={o.value} type="button"
+                        onClick={() => setForm({ ...form, permissionAction: o.value })}
+                        className="p-3 rounded-xl border-2 text-sm font-semibold transition-all"
+                        style={{
+                          borderColor: form.permissionAction === o.value ? "#007F5C" : "#e5e7eb",
+                          background:  form.permissionAction === o.value ? "rgba(0,127,92,0.12)" : "#fff",
+                          color:       form.permissionAction === o.value ? "#00543D" : "#374151",
+                        }}>
+                        {o.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">اسم الصلاحية *</label>
+                  <input value={form.permissionName}
+                    onChange={(e) => setForm({ ...form, permissionName: e.target.value })}
+                    placeholder="مثال: صلاحية اعتماد الحجوزات"
+                    className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    style={{ border: "1px solid #BFE0B6", background: "#FAFAFA", color: "#16241D" }} />
+                </div>
+
+                <div className="rounded-xl p-4" style={{ background: "#F3F7F1", border: "1px solid #DCEAD9" }}>
+                  <p className="text-sm font-medium text-gray-700 mb-3">بيانات صاحب الصلاحية</p>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1">الاسم *</label>
+                      <input value={form.permissionHolderName}
+                        onChange={(e) => setForm({ ...form, permissionHolderName: e.target.value })}
+                        placeholder="اسم صاحب الصلاحية"
+                        className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                        style={{ border: "1px solid #BFE0B6", background: "#FFFFFF", color: "#16241D" }} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1">رقم الجوال *</label>
+                      <input type="tel" value={form.permissionHolderPhone}
+                        onChange={(e) => setForm({ ...form, permissionHolderPhone: e.target.value })}
+                        placeholder="05xxxxxxxx"
+                        className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                        style={{ border: "1px solid #BFE0B6", background: "#FFFFFF", color: "#16241D" }} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1">الإيميل *</label>
+                      <input type="email" value={form.permissionHolderEmail}
+                        onChange={(e) => setForm({ ...form, permissionHolderEmail: e.target.value })}
+                        placeholder="example@saudihef.org.sa"
+                        className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                        style={{ border: "1px solid #BFE0B6", background: "#FFFFFF", color: "#16241D" }} />
+                    </div>
+                  </div>
                 </div>
               </>
             )}
@@ -314,6 +390,26 @@ export default function NewTicketPage() {
                   <span className="text-purple-600">الشاشة والصلاحية المتأثرة</span>
                   <span className="font-semibold" style={{ color: "#16241D" }}>{form.affectedScreen}</span>
                 </div>
+              )}
+              {form.type === "PERMISSIONS" && (
+                <>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-purple-600">الإجراء</span>
+                    <span className="font-semibold" style={{ color: "#16241D" }}>
+                      {permissionActionOptions.find((o) => o.value === form.permissionAction)?.label}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-purple-600">اسم الصلاحية</span>
+                    <span className="font-semibold" style={{ color: "#16241D" }}>{form.permissionName}</span>
+                  </div>
+                  <div className="pt-2 border-t border-purple-100">
+                    <p className="text-xs text-purple-500 mb-1">صاحب الصلاحية</p>
+                    <p className="text-sm text-gray-700">
+                      {form.permissionHolderName} — {form.permissionHolderPhone} — {form.permissionHolderEmail}
+                    </p>
+                  </div>
+                </>
               )}
               {files.length > 0 && (
                 <div className="flex justify-between text-sm">

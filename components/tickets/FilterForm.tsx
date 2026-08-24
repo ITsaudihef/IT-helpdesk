@@ -7,7 +7,7 @@ import { statusLabel, priorityLabel, typeLabel } from "@/lib/utils";
 const FILTERS = [
   { name: "status",   label: "الحالة",   opts: ["OPEN","IN_PROGRESS","SCHEDULED","PENDING_USER_TEST","READY_TO_LAUNCH","LAUNCHED","PENDING_DEPT_APPROVAL","PENDING_APPROVAL","WAITING_INFO","RESOLVED","CLOSED"] },
   { name: "priority", label: "الأولوية", opts: ["CRITICAL","HIGH","MEDIUM","LOW"] },
-  { name: "type",     label: "النوع",    opts: ["SUPPORT","SHIFA_SUPPORT","DEVELOPMENT"] },
+  { name: "type",     label: "النوع",    opts: ["SUPPORT","SHIFA_SUPPORT","DEVELOPMENT","PERMISSIONS"] },
 ];
 
 interface Props {

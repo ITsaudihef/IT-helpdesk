@@ -10,7 +10,7 @@ import {
 const HEF_COLORS = ["#007F5C", "#00543D", "#9dd274", "#c3e4a6", "#58a033", "#438026"];
 
 const ARABIC_TYPE: Record<string, string> = {
-  SUPPORT: "دعم فني", SHIFA_SUPPORT: "دعم فني - شفاء", DEVELOPMENT: "تطوير",
+  SUPPORT: "دعم فني", SHIFA_SUPPORT: "دعم فني - شفاء", DEVELOPMENT: "تطوير", PERMISSIONS: "الصلاحيات",
   HARDWARE: "أجهزة", SOFTWARE: "برمجيات", NETWORK: "شبكة", ACCESS: "صلاحيات", OTHER: "أخرى",
 };
 const ARABIC_STATUS: Record<string, string> = {
@@ -29,6 +29,7 @@ const TYPE_META: Record<string, { bg: string; fg: string; icon: string }> = {
   SUPPORT:       { bg: "#E3F2E0", fg: "#00543D", icon: "🛠️" },
   SHIFA_SUPPORT: { bg: "#DBEAFE", fg: "#1D4ED8", icon: "🏥" },
   DEVELOPMENT:   { bg: "#F3E8FF", fg: "#7E22CE", icon: "💻" },
+  PERMISSIONS:   { bg: "#FEF3C7", fg: "#B45309", icon: "🔑" },
 };
 const ARABIC_PRIORITY: Record<string, string> = { CRITICAL: "حرجة", HIGH: "عالية", MEDIUM: "متوسطة", LOW: "منخفضة" };
 const PRIORITY_COLORS: Record<string, string>  = { حرجة: "#ef4444", عالية: "#f97316", متوسطة: "#007F5C", منخفضة: "#00543D" };
@@ -62,7 +63,7 @@ export default function ReportsClient() {
 
   const sb = summary.statusBreakdown || {};
   const tb = summary.typeBreakdown   || {};
-  const typeTotal = Math.max((tb.SUPPORT || 0) + (tb.SHIFA_SUPPORT || 0) + (tb.DEVELOPMENT || 0), 1);
+  const typeTotal = Math.max((tb.SUPPORT || 0) + (tb.SHIFA_SUPPORT || 0) + (tb.DEVELOPMENT || 0) + (tb.PERMISSIONS || 0), 1);
 
   const STATUS_KEYS = ["OPEN", "IN_PROGRESS", "WAITING_INFO", "PENDING_APPROVAL", "RESOLVED", "CLOSED"] as const;
 
@@ -122,8 +123,8 @@ export default function ReportsClient() {
       {/* ── Detailed Type Breakdown ── */}
       <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
         <h3 className="font-bold mb-4" style={{ color: "#16241D" }}>إحصائيات التذاكر حسب النوع</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {(["SUPPORT", "SHIFA_SUPPORT", "DEVELOPMENT"] as const).map((key) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {(["SUPPORT", "SHIFA_SUPPORT", "DEVELOPMENT", "PERMISSIONS"] as const).map((key) => {
             const meta = TYPE_META[key];
             const val  = tb[key] || 0;
             const pct  = Math.round((val / typeTotal) * 100);

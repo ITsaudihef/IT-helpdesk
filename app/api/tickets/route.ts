@@ -64,7 +64,11 @@ export async function POST(req: NextRequest) {
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await req.json();
-  const { title, description, type, priority, requiresApproval, approvalChainChange, approvalChainJustification, affectedScreen } = body;
+  const {
+    title, description, type, priority, requiresApproval,
+    approvalChainChange, approvalChainJustification, affectedScreen,
+    permissionAction, permissionName, permissionHolderName, permissionHolderPhone, permissionHolderEmail,
+  } = body;
 
   if (!title || !description || !type) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -74,11 +78,21 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "يرجى كتابة مبرر تعديل سلسلة الاعتماد" }, { status: 400 });
   }
 
+  if (type === "PERMISSIONS") {
+    if (!["DELETE", "CANCEL"].includes(permissionAction)) {
+      return NextResponse.json({ error: "يرجى اختيار حذف أو إلغاء" }, { status: 400 });
+    }
+    if (!String(permissionName || "").trim())         return NextResponse.json({ error: "يرجى إدخال اسم الصلاحية" }, { status: 400 });
+    if (!String(permissionHolderName || "").trim())   return NextResponse.json({ error: "يرجى إدخال اسم صاحب الصلاحية" }, { status: 400 });
+    if (!String(permissionHolderPhone || "").trim())  return NextResponse.json({ error: "يرجى إدخال رقم جوال صاحب الصلاحية" }, { status: 400 });
+    if (!String(permissionHolderEmail || "").trim())  return NextResponse.json({ error: "يرجى إدخال إيميل صاحب الصلاحية" }, { status: 400 });
+  }
+
   const needsApproval = requiresApproval;
 
-  // For DEVELOPMENT tickets: route through dept manager first if one exists in the same department
+  // DEVELOPMENT and PERMISSIONS tickets route through the dept manager first if one exists in the same department
   let initialStatus = needsApproval ? "PENDING_APPROVAL" : "OPEN";
-  if (type === "DEVELOPMENT") {
+  if (type === "DEVELOPMENT" || type === "PERMISSIONS") {
     const creator = await prisma.user.findUnique({
       where: { id: session.user.id },
       select: { department: true },
@@ -111,6 +125,11 @@ export async function POST(req: NextRequest) {
         approvalChainChange: !!approvalChainChange,
         approvalChainJustification: approvalChainChange ? (approvalChainJustification || null) : null,
         affectedScreen: affectedScreen || null,
+        permissionAction: type === "PERMISSIONS" ? permissionAction : null,
+        permissionName: type === "PERMISSIONS" ? permissionName : null,
+        permissionHolderName: type === "PERMISSIONS" ? permissionHolderName : null,
+        permissionHolderPhone: type === "PERMISSIONS" ? permissionHolderPhone : null,
+        permissionHolderEmail: type === "PERMISSIONS" ? permissionHolderEmail : null,
       },
       include: {
         createdBy: { select: { id: true, name: true, email: true } },
@@ -130,9 +149,10 @@ export async function POST(req: NextRequest) {
         where: { role: "DEPT_MANAGER", department: creator.department, id: { not: session.user.id } },
         select: { id: true },
       });
+      const typeNoun = type === "PERMISSIONS" ? "طلب صلاحيات" : "طلب تطوير";
       deptManagers.forEach(dm => {
         notifyDeptManager.push(
-          createNotification({ userId: dm.id, ticketId: ticket.id, message: `طلب تطوير جديد يحتاج اعتمادك: ${ticketNo}` })
+          createNotification({ userId: dm.id, ticketId: ticket.id, message: `${typeNoun} جديد يحتاج اعتمادك: ${ticketNo}` })
         );
       });
     }

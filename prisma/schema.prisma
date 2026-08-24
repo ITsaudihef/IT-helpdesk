@@ -79,6 +79,13 @@ model Ticket {
   approvalChainJustification String?
   affectedScreen             String?
 
+  // Permissions-request specific fields (type = PERMISSIONS)
+  permissionAction      String? // "DELETE" | "CANCEL"
+  permissionName        String?
+  permissionHolderName  String?
+  permissionHolderPhone String?
+  permissionHolderEmail String?
+
   createdById  String
   createdBy    User    @relation("TicketCreator", fields: [createdById], references: [id])
   assignedToId String?

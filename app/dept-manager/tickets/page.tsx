@@ -14,7 +14,7 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
   const page = Math.max(1, parseInt(searchParams.page || "1"));
 
   const where: any = {
-    type: "DEVELOPMENT",
+    type: { in: ["DEVELOPMENT", "PERMISSIONS"] },
     createdBy: { department: dept },
   };
   if (searchParams.status) where.status = searchParams.status;
@@ -46,7 +46,7 @@ export default async function DeptManagerTicketsPage({ searchParams }: Props) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-bold" style={{ color: "#16241D" }}>
-          طلبات تطوير الإدارة ({total})
+          طلبات الإدارة ({total})
         </h1>
         <p className="text-sm text-purple-500">الإدارة: {dept}</p>
       </div>
