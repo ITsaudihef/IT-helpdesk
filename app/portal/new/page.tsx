@@ -3,7 +3,9 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { ChevronLeft, ChevronRight, Check, Upload, X, FileText } from "lucide-react";
+import { ChevronLeft, ChevronRight, Check, Upload, X, FileText, HelpCircle } from "lucide-react";
+
+const GUIDE_URL = "https://claude.ai/code/artifact/08f373bc-7f51-438c-8c7d-dc29bf7d8860";
 
 const steps = ["تفاصيل التذكرة", "المرفقات", "التأكيد"];
 
@@ -109,6 +111,16 @@ export default function NewTicketPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
+      {/* Guide link */}
+      <div className="flex justify-end mb-4">
+        <a href={GUIDE_URL} target="_blank" rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold hover:underline"
+          style={{ color: "#007F5C" }}>
+          <HelpCircle className="w-3.5 h-3.5" />
+          وركفلو التذاكر
+        </a>
+      </div>
+
       {/* Stepper */}
       <div className="flex items-center mb-8">
         {steps.map((s, i) => (
