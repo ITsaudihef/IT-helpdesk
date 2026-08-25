@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { ChevronLeft, ChevronRight, Check, Upload, X, FileText, HelpCircle } from "lucide-react";
 
-const GUIDE_URL = "https://claude.ai/code/artifact/08f373bc-7f51-438c-8c7d-dc29bf7d8860";
+const GUIDE_URL = "/user-guide.pdf";
 
 const steps = ["تفاصيل التذكرة", "المرفقات", "التأكيد"];
 
@@ -114,10 +114,10 @@ export default function NewTicketPage() {
       {/* Guide link */}
       <div className="flex justify-end mb-4">
         <a href={GUIDE_URL} target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold hover:underline"
-          style={{ color: "#007F5C" }}>
-          <HelpCircle className="w-3.5 h-3.5" />
-          وركفلو التذاكر
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all hover:shadow-sm"
+          style={{ background: "rgba(0,127,92,0.1)", color: "#00543D", border: "1px solid #BFE0B6" }}>
+          <HelpCircle className="w-4 h-4" style={{ color: "#007F5C" }} />
+          دليل المستخدم
         </a>
       </div>
 
