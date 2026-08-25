@@ -123,7 +123,7 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
       {/* Logo */}
       <div className="p-5 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="flex items-center gap-3">
-          <h1 className="font-bold text-xs text-white leading-snug">بوابة الدعم الفني</h1>
+          <h1 className="font-bold text-xs text-white leading-snug">بوابة سند للدعم الفني</h1>
         </div>
         <button className="lg:hidden p-1 rounded-lg" style={{ color: "#8FCB7A" }} onClick={() => setMobileOpen(false)} aria-label="إغلاق القائمة">
           <X className="w-5 h-5" aria-hidden="true" />

@@ -10,7 +10,7 @@ export default function MaintenanceModeCard({ initialEnabled }: { initialEnabled
 
   const toggle = async () => {
     const next = !enabled;
-    if (next && !confirm("سيتم إيقاف وصول جميع المستخدمين (عدا مدراء النظام) عن بوابة الدعم الفني فوراً. هل تريد المتابعة؟")) return;
+    if (next && !confirm("سيتم إيقاف وصول جميع المستخدمين (عدا مدراء النظام) عن بوابة سند للدعم الفني فوراً. هل تريد المتابعة؟")) return;
 
     setSaving(true);
     setEnabled(next);
