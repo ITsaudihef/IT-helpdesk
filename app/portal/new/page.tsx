@@ -117,7 +117,7 @@ export default function NewTicketPage() {
           className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all hover:shadow-sm"
           style={{ background: "rgba(0,127,92,0.1)", color: "#00543D", border: "1px solid #BFE0B6" }}>
           <HelpCircle className="w-4 h-4" style={{ color: "#007F5C" }} />
-          دليل المستخدم
+          دليل إنشاء التذاكر
         </a>
       </div>
 
