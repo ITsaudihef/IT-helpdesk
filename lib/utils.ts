@@ -90,8 +90,8 @@ export const typeLabel: Record<string, string> = {
 };
 
 export const permissionActionLabel: Record<string, string> = {
+  ADD: "إضافة",
   DELETE: "حذف",
-  CANCEL: "إلغاء",
 };
 
 export const roleLabel: Record<string, string> = {

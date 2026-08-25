@@ -13,12 +13,12 @@ const typeOptions = [
   { value: "SUPPORT",       label: "دعم فني",         icon: "🛠️", desc: "مشاكل تقنية، أجهزة، شبكة، صلاحيات" },
   { value: "SHIFA_SUPPORT", label: "دعم فني - شفاء",  icon: "🏥", desc: "طلبات الدعم الموجهة لفريق شفاء" },
   { value: "DEVELOPMENT",   label: "تطوير",            icon: "💻", desc: "طلبات تطوير أنظمة أو برمجيات — يتطلب اعتماد" },
-  { value: "PERMISSIONS",   label: "الصلاحيات",        icon: "🔑", desc: "حذف أو إلغاء صلاحية مستخدم — يتطلب اعتماد" },
+  { value: "PERMISSIONS",   label: "الصلاحيات",        icon: "🔑", desc: "إضافة أو حذف صلاحية مستخدم — يتطلب اعتماد" },
 ];
 
 const permissionActionOptions = [
+  { value: "ADD", label: "إضافة" },
   { value: "DELETE", label: "حذف" },
-  { value: "CANCEL", label: "إلغاء" },
 ];
 
 const priorityOptions = [
@@ -54,7 +54,7 @@ export default function NewTicketPage() {
         toast.error("الرجاء كتابة مبرر تعديل سلسلة الاعتماد"); return;
       }
       if (form.type === "PERMISSIONS") {
-        if (!form.permissionAction)              { toast.error("الرجاء اختيار حذف أو إلغاء"); return; }
+        if (!form.permissionAction)              { toast.error("الرجاء اختيار إضافة أو حذف"); return; }
         if (!form.permissionName.trim())         { toast.error("الرجاء إدخال اسم الصلاحية"); return; }
         if (!form.permissionHolderName.trim())   { toast.error("الرجاء إدخال اسم صاحب الصلاحية"); return; }
         if (!form.permissionHolderPhone.trim())  { toast.error("الرجاء إدخال رقم جوال صاحب الصلاحية"); return; }

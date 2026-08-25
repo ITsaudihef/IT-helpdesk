@@ -79,8 +79,8 @@ export async function POST(req: NextRequest) {
   }
 
   if (type === "PERMISSIONS") {
-    if (!["DELETE", "CANCEL"].includes(permissionAction)) {
-      return NextResponse.json({ error: "يرجى اختيار حذف أو إلغاء" }, { status: 400 });
+    if (!["ADD", "DELETE"].includes(permissionAction)) {
+      return NextResponse.json({ error: "يرجى اختيار إضافة أو حذف" }, { status: 400 });
     }
     if (!String(permissionName || "").trim())         return NextResponse.json({ error: "يرجى إدخال اسم الصلاحية" }, { status: 400 });
     if (!String(permissionHolderName || "").trim())   return NextResponse.json({ error: "يرجى إدخال اسم صاحب الصلاحية" }, { status: 400 });
