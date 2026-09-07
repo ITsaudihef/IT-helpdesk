@@ -50,6 +50,9 @@ const deptManagerNav: NavItem[] = [
   roomsLink,
   kanbanLink,
 ];
+const ceoNav: NavItem[] = [
+  { href: "/ceo", label: "التقارير", icon: BarChart3 },
+];
 
 interface SidebarProps {
   role: string;
@@ -72,13 +75,15 @@ export default function Sidebar({ role, userName, userEmail, roomsEnabled = true
   const nav = filterFeatures(
     role === "ADMIN"        ? adminNav        :
     role === "SUPPORT"      ? supportNav      :
-    role === "DEPT_MANAGER" ? deptManagerNav  : userNav
+    role === "DEPT_MANAGER" ? deptManagerNav  :
+    role === "CEO"          ? ceoNav          : userNav
   );
   const roleLabelMap: Record<string,string> = {
     ADMIN:        "مدير النظام",
     SUPPORT:      "موظف الدعم",
     USER:         "مستخدم",
     DEPT_MANAGER: "مدير الإدارة",
+    CEO:          "الرئيس التنفيذي",
   };
   const roleLabel = roleLabelMap[role] ?? "مستخدم";
 

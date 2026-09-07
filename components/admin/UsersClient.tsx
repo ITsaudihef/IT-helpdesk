@@ -4,9 +4,9 @@ import { useState, useMemo } from "react";
 import toast from "react-hot-toast";
 import { UserPlus, Pencil, Trash2, Search, X } from "lucide-react";
 
-const roleLabel: Record<string,string> = { ADMIN: "مدير", SUPPORT: "موظف دعم", USER: "مستخدم", DEPT_MANAGER: "مدير إدارة" };
-const roleBg:    Record<string,string> = { ADMIN: "#E3F2E0", SUPPORT: "#CFE8C8", USER: "#F1F5F9", DEPT_MANAGER: "#FEF3C7" };
-const roleFg:    Record<string,string> = { ADMIN: "#00543D", SUPPORT: "#00694A", USER: "#475569", DEPT_MANAGER: "#92400E" };
+const roleLabel: Record<string,string> = { ADMIN: "مدير", SUPPORT: "موظف دعم", USER: "مستخدم", DEPT_MANAGER: "مدير إدارة", CEO: "الرئيس التنفيذي" };
+const roleBg:    Record<string,string> = { ADMIN: "#E3F2E0", SUPPORT: "#CFE8C8", USER: "#F1F5F9", DEPT_MANAGER: "#FEF3C7", CEO: "#DBEAFE" };
+const roleFg:    Record<string,string> = { ADMIN: "#00543D", SUPPORT: "#00694A", USER: "#475569", DEPT_MANAGER: "#92400E", CEO: "#1D4ED8" };
 
 const DEPT_OPTIONS = [
   "الخدمات المشتركة","مكتب الرئيس التنفيذي","المالية","شفاء",
@@ -126,6 +126,7 @@ export default function UsersClient({ initialUsers }: { initialUsers: User[] }) 
                   <option value="USER">مستخدم</option>
                   <option value="DEPT_MANAGER">مدير إدارة</option>
                   <option value="SUPPORT">موظف دعم</option>
+                  <option value="CEO">الرئيس التنفيذي</option>
                   <option value="ADMIN">مدير النظام</option>
                 </select>
               </div>

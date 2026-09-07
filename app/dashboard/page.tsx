@@ -9,5 +9,6 @@ export default async function DashboardPage() {
   if (role === "ADMIN")        redirect("/admin");
   if (role === "SUPPORT")      redirect("/support");
   if (role === "DEPT_MANAGER") redirect("/dept-manager");
+  if (role === "CEO")          redirect("/ceo");
   redirect("/portal");
 }
