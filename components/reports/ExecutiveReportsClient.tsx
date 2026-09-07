@@ -15,6 +15,24 @@ interface DeptRow {
   critical: number;
 }
 
+interface ProjectRow {
+  id: string;
+  title: string;
+  progressPct: number;
+  cardTotal: number;
+  cardDone: number;
+  startDate: string | null;
+  endDate: string | null;
+  status: "متأخر" | "قادم" | "نشط";
+  memberCount: number;
+}
+
+interface ProjectDeptGroup {
+  name: string;
+  projects: ProjectRow[];
+  avgProgress: number;
+}
+
 interface ExecutiveSummary {
   total: number;
   critical: number;
@@ -23,7 +41,15 @@ interface ExecutiveSummary {
   statusBreakdown: Record<string, number>;
   departments: DeptRow[];
   monthlyTrend: { month: string; created: number; resolved: number }[];
+  projectCount: number;
+  projectsByDepartment: ProjectDeptGroup[];
 }
+
+const PROJECT_STATUS_STYLE: Record<string, { bg: string; fg: string }> = {
+  "نشط":   { bg: "#E3F2E0", fg: "#00543D" },
+  "متأخر": { bg: "#FEE2E2", fg: "#DC2626" },
+  "قادم":  { bg: "#F1F5F9", fg: "#475569" },
+};
 
 export default function ExecutiveReportsClient() {
   const [summary, setSummary] = useState<ExecutiveSummary | null>(null);
@@ -63,12 +89,13 @@ export default function ExecutiveReportsClient() {
   return (
     <div className="space-y-6">
       {/* Top KPI row */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         {[
           { label: "إجمالي التذاكر",     value: summary.total,                    fg: "#00543D", bg: "#E3F2E0" },
           { label: "حرجة وغير محلولة",   value: summary.critical,                 fg: "#DC2626", bg: "#FEE2E2" },
           { label: "متوسط وقت الحل",     value: `${summary.avgResolutionHours}س`, fg: "#92400E", bg: "#FEF3C7" },
           { label: "عدد الإدارات",       value: summary.departmentCount,          fg: "#1D4ED8", bg: "#DBEAFE" },
+          { label: "إجمالي المشاريع",    value: summary.projectCount,             fg: "#7E22CE", bg: "#F3E8FF" },
         ].map((k) => (
           <div key={k.label} className="rounded-xl border border-purple-100 p-4" style={{ background: "#FFFFFF" }}>
             <p className="text-2xl font-bold" style={{ color: k.fg }}>{k.value}</p>
@@ -168,6 +195,59 @@ export default function ExecutiveReportsClient() {
                 })}
               </tbody>
             </table>
+          </div>
+        )}
+      </div>
+
+      {/* ── Projects by Department ── */}
+      <div className="rounded-xl border border-purple-100 p-5" style={{ background: "#FFFFFF" }}>
+        <h3 className="font-bold mb-1" style={{ color: "#16241D" }}>المشاريع حسب الإدارة</h3>
+        <p className="text-xs text-purple-400 mb-4">مستوى التقدم محسوب من نسبة المهام المكتملة في كل مشروع</p>
+        {summary.projectsByDepartment.length === 0 ? (
+          <p className="text-sm text-purple-500 text-center py-8">لا توجد مشاريع بعد</p>
+        ) : (
+          <div className="space-y-5">
+            {summary.projectsByDepartment.map((dept) => (
+              <div key={dept.name} className="rounded-xl border p-4" style={{ borderColor: "#DCEAD9", background: "#FBFCFA" }}>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-sm" style={{ color: "#16241D" }}>{dept.name}</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full font-semibold" style={{ background: "#E3F2E0", color: "#00543D" }}>
+                      {dept.projects.length} مشروع
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs" style={{ color: "#55705F" }}>متوسط التقدم</span>
+                    <span className="text-sm font-bold" style={{ color: "#007F5C" }}>{dept.avgProgress}%</span>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  {dept.projects.map((p) => {
+                    const st = PROJECT_STATUS_STYLE[p.status];
+                    return (
+                      <div key={p.id} className="rounded-lg p-3" style={{ background: "#FFFFFF", border: "1px solid #F3EEFF" }}>
+                        <div className="flex items-center justify-between gap-3 mb-1.5">
+                          <span className="text-sm font-medium truncate" style={{ color: "#16241D" }}>{p.title}</span>
+                          <span className="text-xs px-2 py-0.5 rounded-full font-semibold flex-shrink-0" style={{ background: st.bg, color: st.fg }}>
+                            {p.status}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="flex-1 h-2 rounded-full" style={{ background: "#DCEAD9" }}>
+                            <div className="h-2 rounded-full transition-all"
+                              style={{ width: `${p.progressPct}%`, background: p.progressPct >= 100 ? "#22c55e" : "#007F5C" }} />
+                          </div>
+                          <span className="text-xs font-semibold w-10 text-left" style={{ color: "#475569" }}>{p.progressPct}%</span>
+                        </div>
+                        <p className="text-xs mt-1.5" style={{ color: "#94A3B8" }}>
+                          {p.cardDone}/{p.cardTotal} مهمة مكتملة · {p.memberCount} أعضاء
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </div>
